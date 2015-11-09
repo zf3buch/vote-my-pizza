@@ -66,7 +66,7 @@ class HomePageAction
         }
 
         return new HtmlResponse(
-            $this->template->render('app::home-page', $data)
+            $this->template->render('application::home-page', $data)
         );
     }
 }
