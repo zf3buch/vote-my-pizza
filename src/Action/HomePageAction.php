@@ -2,24 +2,24 @@
 /**
  * ZF3 book Vote my Pizza Example Application
  *
- * @package    Application
  * @author     Ralf Eggert <ralf@travello.de>
  * @link       https://github.com/zf3buch/vote-my-pizza
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace App\Action;
+namespace Application\Action;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
  * Class HomePageAction
  *
- * @package App\Action
+ * @package Application\Action
  */
 class HomePageAction
 {
@@ -57,7 +57,13 @@ class HomePageAction
         ServerRequestInterface $request, ResponseInterface $response,
         callable $next = null
     ) {
-        $data = [];
+        $data = [
+            'welcome' => 'Willkommen zu Vote My Pizza!'
+        ];
+
+        if (!$this->template) {
+            return new JsonResponse($data);
+        }
 
         return new HtmlResponse(
             $this->template->render('app::home-page', $data)

@@ -1,12 +1,15 @@
 {
-    "name": "zendframework/zend-expressive-skeleton",
+    "name": "zf3buch/vote-my-pizza",
+    "description": "Vote My Pizza! Example Application for the Zend Framework 3",
     "type": "project",
-    "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
-    "license": "BSD-3-CLAUSE",
+    "homepage": "https://github.com/zf3buch/vote-my-pizza",
+    "license": "The MIT License (MIT)",
     "authors": [
         {
-            "name": "Geert Eltink",
-            "homepage": "https://xtreamwayz.github.io/"
+            "name": "Ralf Eggert",
+            "email": "ralf@travello.de",
+            "homepage": "http://www.travello.de",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -26,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Application\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AppTest\\": "test/"
+            "ApplicationTest\\": "test/"
         }
     },
     "scripts": {
