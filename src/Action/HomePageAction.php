@@ -13,7 +13,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
@@ -24,11 +23,6 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 class HomePageAction
 {
     /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
      * @var TemplateRendererInterface
      */
     private $template;
@@ -36,13 +30,11 @@ class HomePageAction
     /**
      * HomePageAction constructor.
      *
-     * @param RouterInterface                $router
-     * @param TemplateRendererInterface|null $template
+     * @param TemplateRendererInterface $template
      */
     public function __construct(
-        RouterInterface $router, TemplateRendererInterface $template = null
+        TemplateRendererInterface $template = null
     ) {
-        $this->router = $router;
         $this->template = $template;
     }
 
