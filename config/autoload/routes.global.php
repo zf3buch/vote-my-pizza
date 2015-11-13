@@ -23,9 +23,15 @@ return [
             'allowed_methods' => ['GET'],
         ],
         [
-            'name' => 'voting',
-            'path' => '/voting[/:pos[/:neg]]',
-            'middleware' => Application\Action\VotingAction::class,
+            'name' => 'show-voting',
+            'path' => '/voting',
+            'middleware' => Application\Action\ShowVotingAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name' => 'handle-voting',
+            'path' => '/voting/:pos/:neg',
+            'middleware' => Application\Action\HandleVotingAction::class,
             'allowed_methods' => ['GET'],
         ],
     ],

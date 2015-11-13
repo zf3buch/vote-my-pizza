@@ -12,25 +12,24 @@ namespace Application\Action;
 use Application\Model\Repository\PizzaRepository;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class VotingFactory
+ * Class HandleVotingFactory
  *
  * @package Application\Action
  */
-class VotingFactory
+class HandleVotingFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return VotingAction
+     * @return HandleVotingAction
      */
     public function __invoke(ContainerInterface $container)
     {
-        $template   = $container->get(TemplateRendererInterface::class);
+        $router     = $container->get(RouterInterface::class);
         $repository = $container->get(PizzaRepository::class);
 
-        return new VotingAction($template, $repository);
+        return new HandleVotingAction($router, $repository);
     }
 }

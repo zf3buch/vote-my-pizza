@@ -12,12 +12,14 @@ return [
         'factories' => [
             Application\Action\HomePageAction::class =>
                 Application\Action\HomePageFactory::class,
-            Application\Action\VotingAction::class =>
-                Application\Action\VotingFactory::class,
-            Application\Action\CommentAction::class =>
-                Application\Action\CommentFactory::class,
+            Application\Action\ShowVotingAction::class =>
+                Application\Action\ShowVotingFactory::class,
+            Application\Action\HandleVotingAction::class =>
+                Application\Action\HandleVotingFactory::class,
+
             Application\Model\Repository\PizzaRepository::class =>
                 Application\Model\Repository\PizzaRepositoryFactory::class,
+
             Zend\Expressive\Application::class =>
                 Zend\Expressive\Container\ApplicationFactory::class,
         ]

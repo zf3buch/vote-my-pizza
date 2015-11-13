@@ -9,17 +9,18 @@
 
 namespace Application\Action;
 
+use Application\Model\Repository\PizzaRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class CommentAction
+ * Class ShowVotingAction
  *
  * @package Application\Action
  */
-class CommentAction
+class ShowVotingAction
 {
     /**
      * @var TemplateRendererInterface
@@ -27,14 +28,22 @@ class CommentAction
     private $template;
 
     /**
-     * CommentAction constructor.
+     * @var PizzaRepositoryInterface
+     */
+    private $pizzaRepository;
+
+    /**
+     * ShowVotingAction constructor.
      *
      * @param TemplateRendererInterface $template
+     * @param PizzaRepositoryInterface  $pizzaRepository
      */
     public function __construct(
-        TemplateRendererInterface $template = null
+        TemplateRendererInterface $template,
+        PizzaRepositoryInterface $pizzaRepository
     ) {
-        $this->template = $template;
+        $this->template        = $template;
+        $this->pizzaRepository = $pizzaRepository;
     }
 
     /**
@@ -45,15 +54,19 @@ class CommentAction
      * @return HtmlResponse
      */
     public function __invoke(
-        ServerRequestInterface $request, ResponseInterface $response,
+        ServerRequestInterface $request,
+        ResponseInterface $response,
         callable $next = null
     ) {
+        $votingPizzas = $this->pizzaRepository->getPizzasForVoting();
+
         $data = [
-            'title' => 'Was möchtest du zu dieser Pizza sagen?'
+            'title'  => 'Welche Pizza gefällt dir besser?',
+            'pizzas' => $votingPizzas,
         ];
 
         return new HtmlResponse(
-            $this->template->render('application::comment', $data)
+            $this->template->render('application::show-voting', $data)
         );
     }
 }

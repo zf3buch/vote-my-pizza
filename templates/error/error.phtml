@@ -9,13 +9,14 @@
 ?>
 <?php $this->headTitle(sprintf('%d %s', $this->status, $this->reason)); ?>
 
-<h1>Oops!</h1>
-<h2>This is awkward.</h2>
-<p>We encountered a <?php echo $this->escapeHtml(sprintf('%d %s', $this->status, $this->reason)); ?> error.</p>
+<h1>Huch!</h1>
+<h2>Das ist echt unangenehm.</h2>
+<p>Wir sind auf einen "<?php echo $this->escapeHtml(sprintf('%d %s', $this->status, $this->reason)); ?>" Fehler gestossen.</p>
 <?php if ($this->status == 404) : ?>
     <p>
-        You are looking for something that doesn't exist or may have moved. Check out one of the links on this page
-        or head back to <a href="/">Home</a>.
+        Du suchst etwas, das hier nicht existiert oder verschoben wurde.
+        Du kannst gerne zurück auf die
+        <a href="<?php echo $this->url('home') ?>">Startseite</a> wechseln.
     </p>
 <?php else : ?>
     <pre><code><?php var_dump($this->error); ?></code></pre>

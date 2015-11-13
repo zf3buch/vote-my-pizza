@@ -8,14 +8,14 @@
  */
 
 $urlLeft  = $this->url(
-    'voting',
+    'handle-voting',
     [
         'pos' => $this->pizzas['left']['id'],
         'neg' => $this->pizzas['right']['id']
     ]
 );
 $urlRight = $this->url(
-    'voting',
+    'handle-voting',
     [
         'pos' => $this->pizzas['right']['id'],
         'neg' => $this->pizzas['left']['id']

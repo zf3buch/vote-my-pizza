@@ -9,25 +9,27 @@
 
 namespace Application\Action;
 
+use Application\Model\Repository\PizzaRepository;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class CommentFactory
+ * Class ShowVotingFactory
  *
  * @package Application\Action
  */
-class CommentFactory
+class ShowVotingFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return CommentAction
+     * @return ShowVotingAction
      */
     public function __invoke(ContainerInterface $container)
     {
-        $template = $container->get(TemplateRendererInterface::class);
+        $template   = $container->get(TemplateRendererInterface::class);
+        $repository = $container->get(PizzaRepository::class);
 
-        return new CommentAction($template);
+        return new ShowVotingAction($template, $repository);
     }
 }

@@ -14,19 +14,19 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
- * Class VotingAction
+ * Class HandleVotingAction
  *
  * @package Application\Action
  */
-class VotingAction
+class HandleVotingAction
 {
     /**
-     * @var TemplateRendererInterface
+     * @var RouterInterface
      */
-    private $template;
+    private $router;
 
     /**
      * @var PizzaRepositoryInterface
@@ -34,16 +34,15 @@ class VotingAction
     private $pizzaRepository;
 
     /**
-     * VotingAction constructor.
+     * HandleVotingAction constructor.
      *
-     * @param TemplateRendererInterface $template
-     * @param PizzaRepositoryInterface  $pizzaRepository
+     * @param RouterInterface          $router
+     * @param PizzaRepositoryInterface $pizzaRepository
      */
     public function __construct(
-        TemplateRendererInterface $template,
-        PizzaRepositoryInterface $pizzaRepository
+        RouterInterface $router, PizzaRepositoryInterface $pizzaRepository
     ) {
-        $this->template        = $template;
+        $this->router          = $router;
         $this->pizzaRepository = $pizzaRepository;
     }
 
@@ -59,23 +58,15 @@ class VotingAction
         ResponseInterface $response,
         callable $next = null
     ) {
+        // get params
         $posParam = $request->getAttribute('pos');
         $negParam = $request->getAttribute('neg');
 
-        if ($posParam || $negParam) {
-            // TODO: add voting counts here
-            return new RedirectResponse('/voting');
-        }
+        // TODO: add voting counts here
 
-        $votingPizzas = $this->pizzaRepository->getPizzasForVoting();
 
-        $data = [
-            'title'  => 'Welche Pizza gefällt dir besser?',
-            'pizzas' => $votingPizzas,
-        ];
-
-        return new HtmlResponse(
-            $this->template->render('application::voting', $data)
+        return new RedirectResponse(
+            $this->router->generateUri('show-voting')
         );
     }
 }
