@@ -12,6 +12,12 @@ return [
         'factories' => [
             Application\Action\HomePageAction::class =>
                 Application\Action\HomePageFactory::class,
+            Application\Action\VotingAction::class =>
+                Application\Action\VotingFactory::class,
+            Application\Action\CommentAction::class =>
+                Application\Action\CommentFactory::class,
+            Application\Model\Repository\PizzaRepository::class =>
+                Application\Model\Repository\PizzaRepositoryFactory::class,
             Zend\Expressive\Application::class =>
                 Zend\Expressive\Container\ApplicationFactory::class,
         ]

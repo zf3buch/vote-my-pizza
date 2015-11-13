@@ -13,14 +13,15 @@ use Application\Model\Repository\PizzaRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class HomePageAction
+ * Class VotingAction
  *
  * @package Application\Action
  */
-class HomePageAction
+class VotingAction
 {
     /**
      * @var TemplateRendererInterface
@@ -33,7 +34,7 @@ class HomePageAction
     private $pizzaRepository;
 
     /**
-     * HomePageAction constructor.
+     * VotingAction constructor.
      *
      * @param TemplateRendererInterface $template
      * @param PizzaRepositoryInterface  $pizzaRepository
@@ -54,20 +55,27 @@ class HomePageAction
      * @return HtmlResponse
      */
     public function __invoke(
-        ServerRequestInterface $request, ResponseInterface $response,
+        ServerRequestInterface $request,
+        ResponseInterface $response,
         callable $next = null
     ) {
-        $topPizzas  = $this->pizzaRepository->getTopPizzas();
-        $flopPizzas = $this->pizzaRepository->getFlopPizzas();
+        $posParam = $request->getAttribute('pos');
+        $negParam = $request->getAttribute('neg');
+
+        if ($posParam || $negParam) {
+            // TODO: add voting counts here
+            return new RedirectResponse('/voting');
+        }
+
+        $votingPizzas = $this->pizzaRepository->getPizzasForVoting();
 
         $data = [
-            'welcome'    => 'Willkommen zu Vote My Pizza!',
-            'topPizzas'  => $topPizzas,
-            'flopPizzas' => $flopPizzas,
+            'title'  => 'Welche Pizza gefällt dir besser?',
+            'pizzas' => $votingPizzas,
         ];
 
         return new HtmlResponse(
-            $this->template->render('application::home-page', $data)
+            $this->template->render('application::voting', $data)
         );
     }
 }

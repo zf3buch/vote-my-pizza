@@ -1,0 +1,91 @@
+<?php
+/**
+ * ZF3 book Vote my Pizza Example Application
+ *
+ * @author     Ralf Eggert <ralf@travello.de>
+ * @link       https://github.com/zf3buch/vote-my-pizza
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+$urlLeft  = $this->url(
+    'voting',
+    [
+        'pos' => $this->pizzas['left']['id'],
+        'neg' => $this->pizzas['right']['id']
+    ]
+);
+$urlRight = $this->url(
+    'voting',
+    [
+        'pos' => $this->pizzas['right']['id'],
+        'neg' => $this->pizzas['left']['id']
+    ]
+);
+$this->inlineScript()->appendScript(
+    "
+    $('#stars-left').raty({
+        readOnly: true,
+        score   : " . round($this->pizzas['left']['rate'], 1) * 5 . ",
+        half    : true,
+        starOff : '/assets/vendor/raty-2.7.0/images/star-off.png',
+        starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
+        starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
+    });
+    $('#stars-right').raty({
+        readOnly: true,
+        score   : " . round($this->pizzas['right']['rate'], 1) * 5 . ",
+        half    : true,
+        starOff : '/assets/vendor/raty-2.7.0/images/star-off.png',
+        starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
+        starHalf: '/assets/vendor/raty-2.7.0/images/star-half.png'
+    });
+    "
+);
+?>
+<h1><?php echo $this->title; ?></h1>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="thumbnail text-center">
+            <a href="<?php echo $urlLeft; ?>">
+                <img src="<?php echo $this->pizzas['left']['image'] ?>"
+                     title="<?php echo $this->pizzas['left']['name'] ?>">
+            </a>
+
+            <div class="caption">
+                <h4><?php echo $this->pizzas['left']['name'] ?></h4>
+
+                <div class="label label-danger pull-left">
+                    <i class="fa fa-thumbs-down"></i>
+                    <?php echo $this->pizzas['left']['neg'] ?>
+                </div>
+                <div class="label label-success pull-right">
+                    <i class="fa fa-thumbs-up"></i>
+                    <?php echo $this->pizzas['left']['pos'] ?>
+                </div>
+                <div id="stars-left"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="thumbnail text-center">
+            <a href="<?php echo $urlRight; ?>">
+                <img src="<?php echo $this->pizzas['right']['image'] ?>"
+                     title="<?php echo $this->pizzas['right']['name'] ?>">
+            </a>
+
+            <div class="caption">
+                <h4><?php echo $this->pizzas['right']['name'] ?></h4>
+
+                <div class="label label-danger pull-left">
+                    <i class="fa fa-thumbs-down"></i>
+                    <?php echo $this->pizzas['right']['neg'] ?>
+                </div>
+                <div class="label label-success pull-right">
+                    <i class="fa fa-thumbs-up"></i>
+                    <?php echo $this->pizzas['right']['pos'] ?>
+                </div>
+                <div id="stars-right"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,5 +22,11 @@ return [
             'middleware' => Application\Action\HomePageAction::class,
             'allowed_methods' => ['GET'],
         ],
+        [
+            'name' => 'voting',
+            'path' => '/voting[/:pos[/:neg]]',
+            'middleware' => Application\Action\VotingAction::class,
+            'allowed_methods' => ['GET'],
+        ],
     ],
 ];

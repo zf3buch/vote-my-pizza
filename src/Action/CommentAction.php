@@ -9,18 +9,17 @@
 
 namespace Application\Action;
 
-use Application\Model\Repository\PizzaRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class HomePageAction
+ * Class CommentAction
  *
  * @package Application\Action
  */
-class HomePageAction
+class CommentAction
 {
     /**
      * @var TemplateRendererInterface
@@ -28,22 +27,14 @@ class HomePageAction
     private $template;
 
     /**
-     * @var PizzaRepositoryInterface
-     */
-    private $pizzaRepository;
-
-    /**
-     * HomePageAction constructor.
+     * CommentAction constructor.
      *
      * @param TemplateRendererInterface $template
-     * @param PizzaRepositoryInterface  $pizzaRepository
      */
     public function __construct(
-        TemplateRendererInterface $template,
-        PizzaRepositoryInterface $pizzaRepository
+        TemplateRendererInterface $template = null
     ) {
-        $this->template        = $template;
-        $this->pizzaRepository = $pizzaRepository;
+        $this->template = $template;
     }
 
     /**
@@ -57,17 +48,12 @@ class HomePageAction
         ServerRequestInterface $request, ResponseInterface $response,
         callable $next = null
     ) {
-        $topPizzas  = $this->pizzaRepository->getTopPizzas();
-        $flopPizzas = $this->pizzaRepository->getFlopPizzas();
-
         $data = [
-            'welcome'    => 'Willkommen zu Vote My Pizza!',
-            'topPizzas'  => $topPizzas,
-            'flopPizzas' => $flopPizzas,
+            'title' => 'Was möchtest du zu dieser Pizza sagen?'
         ];
 
         return new HtmlResponse(
-            $this->template->render('application::home-page', $data)
+            $this->template->render('application::comment', $data)
         );
     }
 }

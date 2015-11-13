@@ -8,12 +8,99 @@
  */
 ?>
 <h1><?php echo $this->welcome; ?></h1>
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Top Pizzen</h3>
+
+        <div class="row">
+            <?php foreach ($this->topPizzas as $pizza) : ?>
+                <?php
+                $this->inlineScript()->appendScript(
+                    "
+    $('#stars-" . $pizza['id'] . "').raty({
+        readOnly: true,
+        score   : " . round($pizza['rate'], 1) * 5 . ",
+        half    : true,
+        starOff : '/assets/vendor/raty-2.7.0/images/star-off.png',
+        starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
+        starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
+    });
+    "
+                );?>
+                <div class="col-md-4">
+                    <div class="thumbnail text-center">
+                        <img src="<?php echo $pizza['image'] ?>"
+                             title="<?php echo $pizza['name'] ?>">
+
+                        <div class="caption">
+                            <p class="small">
+                                <?php echo $pizza['name'] ?>
+                            </p>
+
+                            <div class="label label-danger">
+                                <i class="fa fa-thumbs-down"></i>
+                                <?php echo $pizza['neg'] ?>
+                            </div>
+                            &nbsp;
+                            <div class="label label-success">
+                                <i class="fa fa-thumbs-up"></i>
+                                <?php echo $pizza['pos'] ?>
+                            </div>
+                            <div id="stars-<?php echo $pizza['id'] ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h3>Flop Pizzen</h3>
+        <div class="row">
+            <?php foreach ($this->flopPizzas as $pizza) : ?>
+                <?php
+                $this->inlineScript()->appendScript(
+                    "
+    $('#stars-" . $pizza['id'] . "').raty({
+        readOnly: true,
+        score   : " . round($pizza['rate'], 1) * 5 . ",
+        half    : true,
+        starOff : '/assets/vendor/raty-2.7.0/images/star-off.png',
+        starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
+        starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
+    });
+    "
+                );?><div class="col-md-4">
+                    <div class="thumbnail text-center">
+                        <img src="<?php echo $pizza['image'] ?>"
+                             title="<?php echo $pizza['name'] ?>">
+
+                        <div class="caption">
+                            <p class="small">
+                                <?php echo $pizza['name'] ?>
+                            </p>
+
+                            <div class="label label-danger">
+                                <i class="fa fa-thumbs-down"></i>
+                                <?php echo $pizza['neg'] ?>
+                            </div>
+                            &nbsp;
+                            <div class="label label-success">
+                                <i class="fa fa-thumbs-up"></i>
+                                <?php echo $pizza['pos'] ?>
+                            </div>
+                            <div id="stars-<?php echo $pizza['id'] ?>"></div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>
 <div class="well text-center">
-    <h3>
-        <i class="fa fa-hourglass fa-spin"></i>
-        &nbsp;
-        In Kürze mehr...
-        &nbsp;
-        <i class="fa fa-hourglass fa-spin"></i>
-    </h3>
+    <h2>Jetzt selber abstimmen!</h2>
+    <p>
+        <a href="/voting" class="btn btn-success">
+            <i class="fa fa-star"></i> Abstimmen
+        </a>
+    </p>
 </div>
