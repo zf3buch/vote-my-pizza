@@ -33,6 +33,12 @@ return [
             'path' => '/voting/:pos/:neg',
             'middleware' => Application\Action\HandleVotingAction::class,
             'allowed_methods' => ['GET'],
+            'options' => [
+                'constraints' => [
+                    'pos' => '[0-9]*',
+                    'neg' => '[0-9]*',
+                ],
+            ],
         ],
     ],
 ];
