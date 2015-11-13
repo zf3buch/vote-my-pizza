@@ -35,8 +35,8 @@ return [
             'allowed_methods' => ['GET'],
             'options' => [
                 'constraints' => [
-                    'pos' => '[0-9]*',
-                    'neg' => '[0-9]*',
+                    'pos' => '[0-9]+',
+                    'neg' => '[0-9]+',
                 ],
             ],
         ],
