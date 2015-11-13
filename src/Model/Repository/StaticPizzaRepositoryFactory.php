@@ -12,21 +12,21 @@ namespace Application\Model\Repository;
 use Interop\Container\ContainerInterface;
 
 /**
- * Class PizzaRepositoryFactory
+ * Class StaticPizzaRepositoryFactory
  *
  * @package Application\Model\Repository
  */
-class PizzaRepositoryFactory
+class StaticPizzaRepositoryFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return PizzaRepository
+     * @return StaticPizzaRepository
      */
     public function __invoke(ContainerInterface $container)
     {
         $pizzaList = include APPLICATION_ROOT . '/data/pizza-list.php';
 
-        return new PizzaRepository($pizzaList);
+        return new StaticPizzaRepository($pizzaList);
     }
 }

@@ -10,11 +10,11 @@
 namespace Application\Model\Repository;
 
 /**
- * Class PizzaRepository
+ * Class StaticPizzaRepository
  *
  * @package Application\Model\Repository
  */
-class PizzaRepository implements PizzaRepositoryInterface
+class StaticPizzaRepository implements PizzaRepositoryInterface
 {
     /**
      * @var array
@@ -56,7 +56,7 @@ class PizzaRepository implements PizzaRepositoryInterface
     }
 
     /**
-     * PizzaRepository constructor.
+     * StaticPizzaRepository constructor.
      *
      * @param array $pizzaList
      */
@@ -94,7 +94,7 @@ class PizzaRepository implements PizzaRepositoryInterface
         usort(
             $topPizzas,
             array(
-                'Application\Model\Repository\PizzaRepository',
+                'Application\Model\Repository\StaticPizzaRepository',
                 'sortAscByRate'
             )
         );
@@ -114,7 +114,7 @@ class PizzaRepository implements PizzaRepositoryInterface
         usort(
             $flopPizzas,
             array(
-                'Application\Model\Repository\PizzaRepository',
+                'Application\Model\Repository\StaticPizzaRepository',
                 'sortDescByRate'
             )
         );
