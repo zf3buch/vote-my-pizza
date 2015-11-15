@@ -9,7 +9,7 @@
 
 namespace Application\Action;
 
-use Application\Model\Repository\PizzaRepository;
+use Application\Model\Repository\PizzaRepositoryInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 
@@ -28,7 +28,7 @@ class HandleVotingFactory
     public function __invoke(ContainerInterface $container)
     {
         $router     = $container->get(RouterInterface::class);
-        $repository = $container->get(PizzaRepository::class);
+        $repository = $container->get(PizzaRepositoryInterface::class);
 
         return new HandleVotingAction($router, $repository);
     }

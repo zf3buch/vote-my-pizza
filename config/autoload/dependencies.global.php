@@ -17,7 +17,7 @@ return [
             Application\Action\HandleVotingAction::class =>
                 Application\Action\HandleVotingFactory::class,
 
-            Application\Model\Repository\PizzaRepository::class =>
+            Application\Model\Repository\PizzaRepositoryInterface::class =>
                 Application\Model\Repository\StaticPizzaRepositoryFactory::class,
 
             Zend\Expressive\Application::class =>
