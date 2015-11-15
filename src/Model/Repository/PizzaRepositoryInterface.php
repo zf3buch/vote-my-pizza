@@ -36,4 +36,14 @@ interface PizzaRepositoryInterface
      * @return array
      */
     public function getFlopPizzas();
+
+    /**
+     * Save voting
+     *
+     * @param $pos
+     * @param $neg
+     *
+     * @return boolean
+     */
+    public function saveVoting($pos, $neg);
 }

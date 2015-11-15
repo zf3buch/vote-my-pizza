@@ -62,8 +62,7 @@ class HandleVotingAction
         $posParam = $request->getAttribute('pos');
         $negParam = $request->getAttribute('neg');
 
-        // TODO: add voting counts here
-
+        $this->pizzaRepository->saveVoting($posParam, $negParam);
 
         return new RedirectResponse(
             $this->router->generateUri('show-voting')

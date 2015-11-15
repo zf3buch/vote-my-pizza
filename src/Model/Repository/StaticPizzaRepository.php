@@ -22,14 +22,14 @@ class StaticPizzaRepository implements PizzaRepositoryInterface
     private $pizzaList = [];
 
     /**
-     * Sort ascending by rate
+     * Sort descending by rate
      *
      * @param $a
      * @param $b
      *
      * @return int
      */
-    private function sortAscByRate($a, $b)
+    private function sortDescByRate($a, $b)
     {
         if ($a['rate'] == $b['rate']) {
             return 0;
@@ -39,14 +39,14 @@ class StaticPizzaRepository implements PizzaRepositoryInterface
     }
 
     /**
-     * Sort descending by rate
+     * Sort ascending by rate
      *
      * @param $a
      * @param $b
      *
      * @return int
      */
-    private function sortDescByRate($a, $b)
+    private function sortAscByRate($a, $b)
     {
         if ($a['rate'] == $b['rate']) {
             return 0;
@@ -95,7 +95,7 @@ class StaticPizzaRepository implements PizzaRepositoryInterface
             $topPizzas,
             array(
                 'Application\Model\Repository\StaticPizzaRepository',
-                'sortAscByRate'
+                'sortDescByRate'
             )
         );
 
@@ -115,10 +115,23 @@ class StaticPizzaRepository implements PizzaRepositoryInterface
             $flopPizzas,
             array(
                 'Application\Model\Repository\StaticPizzaRepository',
-                'sortDescByRate'
+                'sortAscByRate'
             )
         );
 
         return array_slice($flopPizzas, 0, 3);
+    }
+
+    /**
+     * Save voting
+     *
+     * @param $pos
+     * @param $neg
+     *
+     * @return boolean
+     */
+    public function saveVoting($pos, $neg)
+    {
+        return true;
     }
 }
