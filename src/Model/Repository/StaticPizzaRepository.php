@@ -134,4 +134,17 @@ class StaticPizzaRepository implements PizzaRepositoryInterface
     {
         return true;
     }
+
+    /**
+     * Save restaurant
+     *
+     * @param integer $id
+     * @param array   $data
+     *
+     * @return boolean
+     */
+    public function saveRestaurant($id, $data)
+    {
+        return true;
+    }
 }

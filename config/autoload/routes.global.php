@@ -40,5 +40,16 @@ return [
                 ],
             ],
         ],
+        [
+            'name' => 'handle-restaurant',
+            'path' => '/restaurant/:id',
+            'middleware' => Application\Action\HandleRestaurantAction::class,
+            'allowed_methods' => ['GET'],
+            'options' => [
+                'constraints' => [
+                    'id' => '[0-9]+',
+                ],
+            ],
+        ],
     ],
 ];

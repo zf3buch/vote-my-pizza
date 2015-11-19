@@ -7,20 +7,33 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-$urlLeft  = $this->url(
+$urlVoteLeft   = $this->url(
     'handle-voting',
     [
         'pos' => $this->pizzas['left']['id'],
         'neg' => $this->pizzas['right']['id']
     ]
 );
-$urlRight = $this->url(
+$urlRestaurantLeft  = $this->url(
+    'handle-restaurant',
+    [
+        'id' => $this->pizzas['left']['id'],
+    ]
+);
+$urlVoteRight  = $this->url(
     'handle-voting',
     [
         'pos' => $this->pizzas['right']['id'],
         'neg' => $this->pizzas['left']['id']
     ]
 );
+$urlRestaurantRight = $this->url(
+    'handle-restaurant',
+    [
+        'id' => $this->pizzas['right']['id'],
+    ]
+);
+
 $this->inlineScript()->appendScript(
     "
     $('#stars-left').raty({
@@ -46,7 +59,7 @@ $this->inlineScript()->appendScript(
 <div class="row">
     <div class="col-sm-6">
         <div class="thumbnail text-center">
-            <a href="<?php echo $urlLeft; ?>">
+            <a href="<?php echo $urlVoteLeft; ?>">
                 <img src="<?php echo $this->pizzas['left']['image'] ?>"
                      title="<?php echo $this->pizzas['left']['name'] ?>">
             </a>
@@ -65,10 +78,30 @@ $this->inlineScript()->appendScript(
                 <div id="stars-left"></div>
             </div>
         </div>
+        <?php foreach ($this->pizzas['left']['restaurants'] as $restaurant)
+            : ?>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Restaurant
+                    <?php echo $restaurant['name']; ?>
+                </div>
+                <div class="panel-body">
+                    <?php echo $this->pizzas['left']['name']; ?>
+                    kostet nur
+                    <strong><?php echo $restaurant['price']; ?></strong>
+                    Euro (Stand: <?php echo $restaurant['date']; ?>).
+                </div>
+            </div>
+        <?php endforeach ?>
+        <p class="text-center">
+            <a href="<?php echo $urlRestaurantLeft; ?>" class="btn btn-success">
+                Neuen Restaurant Preis nennen
+            </a>
+        </p>
     </div>
     <div class="col-sm-6">
         <div class="thumbnail text-center">
-            <a href="<?php echo $urlRight; ?>">
+            <a href="<?php echo $urlVoteRight; ?>">
                 <img src="<?php echo $this->pizzas['right']['image'] ?>"
                      title="<?php echo $this->pizzas['right']['name'] ?>">
             </a>
@@ -87,5 +120,26 @@ $this->inlineScript()->appendScript(
                 <div id="stars-right"></div>
             </div>
         </div>
+        <?php foreach ($this->pizzas['left']['restaurants'] as $restaurant)
+            : ?>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Restaurant
+                    <?php echo $restaurant['name']; ?>
+                </div>
+                <div class="panel-body">
+                    <?php echo $this->pizzas['left']['name']; ?>
+                    kostet nur
+                    <strong><?php echo $restaurant['price']; ?></strong>
+                    Euro (Stand: <?php echo $restaurant['date']; ?>).
+                </div>
+            </div>
+        <?php endforeach ?>
+        <p class="text-center">
+            <a href="<?php echo $urlRestaurantRight; ?>"
+               class="btn btn-success">
+                Neuen Restaurant Preis nennen
+            </a>
+        </p>
     </div>
 </div>
