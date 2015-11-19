@@ -1,3 +1,4 @@
 *
 !.gitignore
+!db
 !db/mysql.dump
