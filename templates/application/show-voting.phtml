@@ -120,7 +120,7 @@ $this->inlineScript()->appendScript(
                 <div id="stars-right"></div>
             </div>
         </div>
-        <?php foreach ($this->pizzas['left']['restaurants'] as $restaurant)
+        <?php foreach ($this->pizzas['right']['restaurants'] as $restaurant)
             : ?>
             <div class="panel panel-success">
                 <div class="panel-heading">
@@ -128,7 +128,7 @@ $this->inlineScript()->appendScript(
                     <?php echo $restaurant['name']; ?>
                 </div>
                 <div class="panel-body">
-                    <?php echo $this->pizzas['left']['name']; ?>
+                    <?php echo $this->pizzas['right']['name']; ?>
                     kostet nur
                     <strong><?php echo $restaurant['price']; ?></strong>
                     Euro (Stand: <?php echo $restaurant['date']; ?>).
