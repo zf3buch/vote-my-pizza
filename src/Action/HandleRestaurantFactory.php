@@ -9,7 +9,7 @@
 
 namespace Application\Action;
 
-use Application\Model\Repository\PizzaRepositoryInterface;
+use Application\Model\Service\PizzaServiceInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 
@@ -28,7 +28,7 @@ class HandleRestaurantFactory
     public function __invoke(ContainerInterface $container)
     {
         $router     = $container->get(RouterInterface::class);
-        $repository = $container->get(PizzaRepositoryInterface::class);
+        $repository = $container->get(PizzaServiceInterface::class);
 
         return new HandleRestaurantAction($router, $repository);
     }

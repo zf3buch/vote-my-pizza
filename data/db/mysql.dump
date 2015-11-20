@@ -18,7 +18,7 @@ INSERT INTO `pizza` (`id`, `name`, `image`, `pos`, `neg`, `rate`) VALUES
 (1, 'Pizza Mista', '/assets/custom/pizza/001.jpg', 10, 3, 0.7692),
 (2, 'Pizza Oliva', '/assets/custom/pizza/002.jpg', 12, 5, 0.7059),
 (3, 'Pizza Margherita', '/assets/custom/pizza/003.jpg', 5, 8, 0.3846),
-(4, 'Pizza Gambero', '/assets/custom/pizza/004.jpg', 3, 11, 0.0824),
+(4, 'Pizza Gambero', '/assets/custom/pizza/004.jpg', 3, 11, 0.2143),
 (5, 'Pizza Verdura', '/assets/custom/pizza/005.jpg', 6, 7, 0.4615),
 (6, 'Pizza Peperone', '/assets/custom/pizza/006.jpg', 2, 9, 0.1818),
 (7, 'Pizza Vegetariana', '/assets/custom/pizza/007.jpg', 4, 13, 0.2353),

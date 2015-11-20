@@ -7,29 +7,27 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Model\Repository;
+namespace Application\Model\Table;
 
-use Application\Model\TableGateway\PizzaTableGatewayInterface;
 use Interop\Container\ContainerInterface;
+use Zend\Db\Adapter\AdapterInterface;
 
 /**
- * Class DbPizzaRepositoryFactory
+ * Class RestaurantTableFactory
  *
- * @package Application\Model\Repository
+ * @package Application\Model\Table
  */
-class DbPizzaRepositoryFactory
+class RestaurantTableFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return DbPizzaRepository
+     * @return RestaurantTable
      */
     public function __invoke(ContainerInterface $container)
     {
-        $pizzaTableGateway = $container->get(
-            PizzaTableGatewayInterface::class
-        );
+        $adapter = $container->get(AdapterInterface::class);
 
-        return new DbPizzaRepository($pizzaTableGateway);
+        return new RestaurantTable($adapter);
     }
 }

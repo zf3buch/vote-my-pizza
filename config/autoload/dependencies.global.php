@@ -19,11 +19,13 @@ return [
             Application\Action\HandleRestaurantAction::class =>
                 Application\Action\HandleRestaurantFactory::class,
 
-            Application\Model\TableGateway\PizzaTableGatewayInterface::class =>
-                Application\Model\TableGateway\PizzaTableGatewayFactory::class,
+            Application\Model\Table\PizzaTableInterface::class =>
+                Application\Model\Table\PizzaTableFactory::class,
+            Application\Model\Table\RestaurantTableInterface::class =>
+                Application\Model\Table\RestaurantTableFactory::class,
 
-            Application\Model\Repository\PizzaRepositoryInterface::class =>
-                Application\Model\Repository\DbPizzaRepositoryFactory::class,
+            Application\Model\Service\PizzaServiceInterface::class =>
+                Application\Model\Service\DbPizzaServiceFactory::class,
 
             Zend\Expressive\Application::class =>
                 Zend\Expressive\Container\ApplicationFactory::class,

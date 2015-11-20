@@ -7,26 +7,27 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Model\Repository;
+namespace Application\Model\Table;
 
 use Interop\Container\ContainerInterface;
+use Zend\Db\Adapter\AdapterInterface;
 
 /**
- * Class StaticPizzaRepositoryFactory
+ * Class PizzaTableFactory
  *
- * @package Application\Model\Repository
+ * @package Application\Model\Table
  */
-class StaticPizzaRepositoryFactory
+class PizzaTableFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return StaticPizzaRepository
+     * @return PizzaTable
      */
     public function __invoke(ContainerInterface $container)
     {
-        $pizzaList = include APPLICATION_ROOT . '/data/pizza-list.php';
+        $adapter = $container->get(AdapterInterface::class);
 
-        return new StaticPizzaRepository($pizzaList);
+        return new PizzaTable($adapter);
     }
 }
