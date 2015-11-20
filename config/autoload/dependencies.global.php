@@ -19,8 +19,11 @@ return [
             Application\Action\HandleRestaurantAction::class =>
                 Application\Action\HandleRestaurantFactory::class,
 
+            Application\Model\TableGateway\PizzaTableGatewayInterface::class =>
+                Application\Model\TableGateway\PizzaTableGatewayFactory::class,
+
             Application\Model\Repository\PizzaRepositoryInterface::class =>
-                Application\Model\Repository\StaticPizzaRepositoryFactory::class,
+                Application\Model\Repository\DbPizzaRepositoryFactory::class,
 
             Zend\Expressive\Application::class =>
                 Zend\Expressive\Container\ApplicationFactory::class,
