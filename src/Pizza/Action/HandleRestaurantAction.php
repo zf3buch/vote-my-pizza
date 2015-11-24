@@ -7,9 +7,9 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Action;
+namespace Pizza\Action;
 
-use Application\Model\Service\PizzaServiceInterface;
+use Pizza\Model\Service\PizzaServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -17,11 +17,11 @@ use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router\RouterInterface;
 
 /**
- * Class HandleVotingAction
+ * Class HandleRestaurantAction
  *
- * @package Application\Action
+ * @package Pizza\Action
  */
-class HandleVotingAction
+class HandleRestaurantAction
 {
     /**
      * @var RouterInterface
@@ -34,7 +34,7 @@ class HandleVotingAction
     private $pizzaService;
 
     /**
-     * HandleVotingAction constructor.
+     * HandleRestaurantAction constructor.
      *
      * @param RouterInterface          $router
      * @param PizzaServiceInterface $pizzaService
@@ -59,10 +59,12 @@ class HandleVotingAction
         callable $next = null
     ) {
         // get params
-        $posParam = $request->getAttribute('pos');
-        $negParam = $request->getAttribute('neg');
+        $id = $request->getAttribute('id');
 
-        $this->pizzaService->saveVoting($posParam, $negParam);
+        // prepare restaurant data
+        $restaurantData = [];
+
+        $this->pizzaService->saveRestaurant($id, $restaurantData);
 
         return new RedirectResponse(
             $this->router->generateUri('show-voting')

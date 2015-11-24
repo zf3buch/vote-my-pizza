@@ -12,15 +12,16 @@ return [
         'factories' => [
             Application\Action\HomePageAction::class =>
                 Application\Action\HomePageFactory::class,
-            Application\Action\ShowVotingAction::class =>
-                Application\Action\ShowVotingFactory::class,
-            Application\Action\HandleVotingAction::class =>
-                Application\Action\HandleVotingFactory::class,
-            Application\Action\HandleRestaurantAction::class =>
-                Application\Action\HandleRestaurantFactory::class,
 
-            Application\Model\Service\PizzaServiceInterface::class =>
-                Application\Model\Service\StaticPizzaServiceFactory::class,
+            Pizza\Action\ShowVotingAction::class =>
+                Pizza\Action\ShowVotingFactory::class,
+            Pizza\Action\HandleVotingAction::class =>
+                Pizza\Action\HandleVotingFactory::class,
+            Pizza\Action\HandleRestaurantAction::class =>
+                Pizza\Action\HandleRestaurantFactory::class,
+
+            Pizza\Model\Service\PizzaServiceInterface::class =>
+                Pizza\Model\Service\StaticPizzaServiceFactory::class,
 
             Zend\Expressive\Application::class =>
                 Zend\Expressive\Container\ApplicationFactory::class,
