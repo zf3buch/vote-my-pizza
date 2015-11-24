@@ -12,20 +12,21 @@ return [
         'factories' => [
             Application\Action\HomePageAction::class =>
                 Application\Action\HomePageFactory::class,
-            Application\Action\ShowVotingAction::class =>
-                Application\Action\ShowVotingFactory::class,
-            Application\Action\HandleVotingAction::class =>
-                Application\Action\HandleVotingFactory::class,
-            Application\Action\HandleRestaurantAction::class =>
-                Application\Action\HandleRestaurantFactory::class,
 
-            Application\Model\Table\PizzaTableInterface::class =>
-                Application\Model\Table\PizzaTableFactory::class,
-            Application\Model\Table\RestaurantTableInterface::class =>
-                Application\Model\Table\RestaurantTableFactory::class,
+            Pizza\Action\ShowVotingAction::class =>
+                Pizza\Action\ShowVotingFactory::class,
+            Pizza\Action\HandleVotingAction::class =>
+                Pizza\Action\HandleVotingFactory::class,
+            Pizza\Action\HandleRestaurantAction::class =>
+                Pizza\Action\HandleRestaurantFactory::class,
 
-            Application\Model\Service\PizzaServiceInterface::class =>
-                Application\Model\Service\DbPizzaServiceFactory::class,
+            Pizza\Model\Table\PizzaTableInterface::class =>
+                Pizza\Model\Table\PizzaTableFactory::class,
+            Pizza\Model\Table\RestaurantTableInterface::class =>
+                Pizza\Model\Table\RestaurantTableFactory::class,
+
+            Pizza\Model\Service\PizzaServiceInterface::class =>
+                Pizza\Model\Service\DbPizzaServiceFactory::class,
 
             Zend\Expressive\Application::class =>
                 Zend\Expressive\Container\ApplicationFactory::class,

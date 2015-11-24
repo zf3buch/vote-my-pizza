@@ -25,13 +25,13 @@ return [
         [
             'name' => 'show-voting',
             'path' => '/voting',
-            'middleware' => Application\Action\ShowVotingAction::class,
+            'middleware' => Pizza\Action\ShowVotingAction::class,
             'allowed_methods' => ['GET'],
         ],
         [
             'name' => 'handle-voting',
             'path' => '/voting/:pos/:neg',
-            'middleware' => Application\Action\HandleVotingAction::class,
+            'middleware' => Pizza\Action\HandleVotingAction::class,
             'allowed_methods' => ['GET'],
             'options' => [
                 'constraints' => [
@@ -43,7 +43,7 @@ return [
         [
             'name' => 'handle-restaurant',
             'path' => '/restaurant/:id',
-            'middleware' => Application\Action\HandleRestaurantAction::class,
+            'middleware' => Pizza\Action\HandleRestaurantAction::class,
             'allowed_methods' => ['GET'],
             'options' => [
                 'constraints' => [

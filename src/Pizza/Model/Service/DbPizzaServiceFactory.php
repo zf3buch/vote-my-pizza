@@ -7,16 +7,16 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Model\Service;
+namespace Pizza\Model\Service;
 
-use Application\Model\Table\PizzaTableInterface;
-use Application\Model\Table\RestaurantTableInterface;
+use Pizza\Model\Table\PizzaTableInterface;
+use Pizza\Model\Table\RestaurantTableInterface;
 use Interop\Container\ContainerInterface;
 
 /**
  * Class DbPizzaServiceFactory
  *
- * @package Application\Model\Service
+ * @package Pizza\Model\Service
  */
 class DbPizzaServiceFactory
 {

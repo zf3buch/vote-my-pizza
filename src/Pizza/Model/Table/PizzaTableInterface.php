@@ -7,14 +7,14 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Model\Table;
+namespace Pizza\Model\Table;
 
 use Zend\Db\TableGateway\TableGatewayInterface;
 
 /**
  * Interface PizzaTableInterface
  *
- * @package Application\Model\Table
+ * @package Pizza\Model\Table
  */
 interface PizzaTableInterface extends TableGatewayInterface
 {

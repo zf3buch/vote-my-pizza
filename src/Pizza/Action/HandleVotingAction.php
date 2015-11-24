@@ -7,25 +7,26 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Action;
+namespace Pizza\Action;
 
-use Application\Model\Service\PizzaServiceInterface;
+use Pizza\Model\Service\PizzaServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
- * Class ShowVotingAction
+ * Class HandleVotingAction
  *
- * @package Application\Action
+ * @package Pizza\Action
  */
-class ShowVotingAction
+class HandleVotingAction
 {
     /**
-     * @var TemplateRendererInterface
+     * @var RouterInterface
      */
-    private $template;
+    private $router;
 
     /**
      * @var PizzaServiceInterface
@@ -33,16 +34,15 @@ class ShowVotingAction
     private $pizzaService;
 
     /**
-     * ShowVotingAction constructor.
+     * HandleVotingAction constructor.
      *
-     * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface  $pizzaService
+     * @param RouterInterface          $router
+     * @param PizzaServiceInterface $pizzaService
      */
     public function __construct(
-        TemplateRendererInterface $template,
-        PizzaServiceInterface $pizzaService
+        RouterInterface $router, PizzaServiceInterface $pizzaService
     ) {
-        $this->template        = $template;
+        $this->router          = $router;
         $this->pizzaService = $pizzaService;
     }
 
@@ -58,15 +58,14 @@ class ShowVotingAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        $votingPizzas = $this->pizzaService->getPizzasForVoting();
+        // get params
+        $posParam = $request->getAttribute('pos');
+        $negParam = $request->getAttribute('neg');
 
-        $data = [
-            'title'  => 'Welche Pizza gefällt dir besser?',
-            'pizzas' => $votingPizzas,
-        ];
+        $this->pizzaService->saveVoting($posParam, $negParam);
 
-        return new HtmlResponse(
-            $this->template->render('application::show-voting', $data)
+        return new RedirectResponse(
+            $this->router->generateUri('show-voting')
         );
     }
 }
