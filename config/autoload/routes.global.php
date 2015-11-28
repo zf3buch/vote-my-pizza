@@ -16,11 +16,5 @@ return [
     ],
 
     'routes' => [
-        [
-            'name' => 'home',
-            'path' => '/',
-            'middleware' => Application\Action\HomePageAction::class,
-            'allowed_methods' => ['GET'],
-        ],
     ],
 ];
