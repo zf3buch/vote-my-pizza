@@ -22,34 +22,5 @@ return [
             'middleware' => Application\Action\HomePageAction::class,
             'allowed_methods' => ['GET'],
         ],
-        [
-            'name' => 'show-voting',
-            'path' => '/voting',
-            'middleware' => Pizza\Action\ShowVotingAction::class,
-            'allowed_methods' => ['GET'],
-        ],
-        [
-            'name' => 'handle-voting',
-            'path' => '/voting/:pos/:neg',
-            'middleware' => Pizza\Action\HandleVotingAction::class,
-            'allowed_methods' => ['GET'],
-            'options' => [
-                'constraints' => [
-                    'pos' => '[0-9]+',
-                    'neg' => '[0-9]+',
-                ],
-            ],
-        ],
-        [
-            'name' => 'handle-restaurant',
-            'path' => '/restaurant/:id',
-            'middleware' => Pizza\Action\HandleRestaurantAction::class,
-            'allowed_methods' => ['GET'],
-            'options' => [
-                'constraints' => [
-                    'id' => '[0-9]+',
-                ],
-            ],
-        ],
     ],
 ];
