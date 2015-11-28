@@ -10,6 +10,12 @@
 return [
     'routes' => [
         [
+            'name' => 'home',
+            'path' => '/',
+            'middleware' => Pizza\Action\HomePageAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
             'name'            => 'show-voting',
             'path'            => '/voting',
             'middleware'      => Pizza\Action\ShowVotingAction::class,
@@ -42,9 +48,11 @@ return [
 
     'dependencies' => [
         'factories' => [
-            Pizza\Action\ShowVotingAction::class =>
+            Pizza\Action\HomePageAction::class         =>
+                Pizza\Action\HomePageFactory::class,
+            Pizza\Action\ShowVotingAction::class       =>
                 Pizza\Action\ShowVotingFactory::class,
-            Pizza\Action\HandleVotingAction::class =>
+            Pizza\Action\HandleVotingAction::class     =>
                 Pizza\Action\HandleVotingFactory::class,
             Pizza\Action\HandleRestaurantAction::class =>
                 Pizza\Action\HandleRestaurantFactory::class,
@@ -60,7 +68,7 @@ return [
     ],
 
     'templates' => [
-        'paths'  => [
+        'paths' => [
             'pizza' => ['modules/Pizza/templates/pizza'],
         ]
     ]
