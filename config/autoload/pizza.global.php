@@ -69,7 +69,7 @@ return [
 
     'templates' => [
         'paths' => [
-            'pizza' => ['modules/Pizza/templates/pizza'],
+            'pizza' => ['modules/Pizza/templates'],
         ]
     ]
 ];
