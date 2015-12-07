@@ -60,6 +60,26 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
     }
 
     /**
+     * Fetch pizza by id
+     *
+     * @param integer $id
+     *
+     * @return array
+     */
+    public function fetchPizzaById($id)
+    {
+        // select pizzas
+        $select = $this->getSql()->select();
+        $select->where->equalTo('id', $id);
+
+        /** @var ResultSet $resultSet */
+        $resultSet = $this->selectWith($select);
+
+        // return data
+        return $resultSet->current();
+    }
+
+    /**
      * Fetch pizzas sorted by rate
      *
      * @param integer $count

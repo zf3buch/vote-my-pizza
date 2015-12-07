@@ -34,10 +34,21 @@ return [
             ],
         ],
         [
+            'name'            => 'show-restaurant',
+            'path'            => '/restaurant/:id',
+            'middleware'      => Pizza\Action\ShowRestaurantAction::class,
+            'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'id' => '[0-9]+',
+                ],
+            ],
+        ],
+        [
             'name'            => 'handle-restaurant',
             'path'            => '/restaurant/:id',
             'middleware'      => Pizza\Action\HandleRestaurantAction::class,
-            'allowed_methods' => ['GET'],
+            'allowed_methods' => ['POST'],
             'options'         => [
                 'constraints' => [
                     'id' => '[0-9]+',
@@ -54,6 +65,8 @@ return [
                 Pizza\Action\ShowVotingFactory::class,
             Pizza\Action\HandleVotingAction::class     =>
                 Pizza\Action\HandleVotingFactory::class,
+            Pizza\Action\ShowRestaurantAction::class       =>
+                Pizza\Action\ShowRestaurantFactory::class,
             Pizza\Action\HandleRestaurantAction::class =>
                 Pizza\Action\HandleRestaurantFactory::class,
 

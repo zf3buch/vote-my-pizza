@@ -67,6 +67,26 @@ class DbPizzaService implements PizzaServiceInterface
     }
 
     /**
+     * Get single pizza
+     *
+     * @param integer $id
+     *
+     * @return array
+     */
+    public function getSinglePizza($id)
+    {
+        $pizza = $this->pizzaTable->fetchPizzaById($id);
+
+        if (!$pizza) {
+            return false;
+        }
+
+        $pizza['restaurants'] = $this->restaurantTable->fetchRestaurantsByPizza($id);
+
+        return $pizza;
+    }
+
+    /**
      * Get three top pizzas
      *
      * @return array

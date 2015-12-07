@@ -24,6 +24,15 @@ interface PizzaServiceInterface
     public function getPizzasForVoting();
 
     /**
+     * Get single pizza
+     *
+     * @param integer $id
+     *
+     * @return array
+     */
+    public function getSinglePizza($id);
+
+    /**
      * Get three top pizzas
      *
      * @return array

@@ -13,14 +13,15 @@
         }
     ],
     "require": {
-        "roave/security-advisories": "dev-master",
         "zendframework/zend-db": "^2.5",
         "zendframework/zend-expressive": "^0.5",
-        "zendframework/zend-stdlib": "~2.7",
         "zendframework/zend-expressive-zendrouter": "^0.1",
+        "zendframework/zend-expressive-zendviewrenderer": "^0.1.2",
+        "zendframework/zend-form": "^2.5",
         "zendframework/zend-servicemanager": "^2.5",
+        "zendframework/zend-stdlib": "~2.7",
         "ocramius/proxy-manager": "^1.0",
-        "zendframework/zend-expressive-zendviewrenderer": "^0.1.2"
+        "roave/security-advisories": "dev-master"
     },
     "require-dev": {
         "composer/composer": ">=1.0.0-alpha10",

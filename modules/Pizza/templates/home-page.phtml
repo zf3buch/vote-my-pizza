@@ -26,11 +26,18 @@
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
     "
-                );?>
+                );
+
+                $urlRestaurant = $this->url(
+                    'handle-restaurant', ['id' => $pizza['id']]
+                );
+                ?>
                 <div class="col-md-4">
                     <div class="thumbnail text-center">
-                        <img src="<?php echo $pizza['image'] ?>"
-                             title="<?php echo $pizza['name'] ?>">
+                        <a href="<?php echo $urlRestaurant ?>">
+                            <img src="<?php echo $pizza['image'] ?>"
+                                 title="<?php echo $pizza['name'] ?>">
+                        </a>
 
                         <div class="caption">
                             <p class="small">
@@ -55,6 +62,7 @@
     </div>
     <div class="col-sm-6">
         <h3>Flop Pizzen</h3>
+
         <div class="row">
             <?php foreach ($this->flopPizzas as $pizza) : ?>
                 <?php
@@ -69,10 +77,18 @@
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
     "
-                );?><div class="col-md-4">
+                );
+
+                $urlRestaurant = $this->url(
+                    'handle-restaurant', ['id' => $pizza['id']]
+                );
+                ?>
+                <div class="col-md-4">
                     <div class="thumbnail text-center">
-                        <img src="<?php echo $pizza['image'] ?>"
-                             title="<?php echo $pizza['name'] ?>">
+                        <a href="<?php echo $urlRestaurant ?>">
+                            <img src="<?php echo $pizza['image'] ?>"
+                                 title="<?php echo $pizza['name'] ?>">
+                        </a>
 
                         <div class="caption">
                             <p class="small">
@@ -99,7 +115,8 @@
 <div class="well text-center">
     <h2>Jetzt selber abstimmen!</h2>
     <p>
-        <a href="<?php echo $this->url('show-voting') ?>" class="btn btn-success">
+        <a href="<?php echo $this->url('show-voting') ?>"
+           class="btn btn-success">
             <i class="fa fa-star"></i> Abstimmen
         </a>
     </p>
