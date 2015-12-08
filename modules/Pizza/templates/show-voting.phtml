@@ -7,6 +7,16 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+var_dump($this->url(
+    'handle-voting',
+    [
+        'pos' => $this->pizzas['left']['id'],
+//        'neg' => $this->pizzas['right']['id']
+    ]
+));
+exit;
+
+
 $urlVoteLeft   = $this->url(
     'handle-voting',
     [

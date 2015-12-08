@@ -9,6 +9,7 @@
 
 namespace Pizza\Action;
 
+use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\Service\PizzaServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -33,17 +34,25 @@ class ShowRestaurantAction
     private $pizzaService;
 
     /**
+     * @var RestaurantPriceForm
+     */
+    private $restaurantPriceForm;
+
+    /**
      * ShowRestaurantAction constructor.
      *
      * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface  $pizzaService
+     * @param PizzaServiceInterface     $pizzaService
+     * @param RestaurantPriceForm       $restaurantPriceForm
      */
     public function __construct(
         TemplateRendererInterface $template,
-        PizzaServiceInterface $pizzaService
+        PizzaServiceInterface $pizzaService,
+        RestaurantPriceForm $restaurantPriceForm
     ) {
-        $this->template        = $template;
-        $this->pizzaService = $pizzaService;
+        $this->template            = $template;
+        $this->pizzaService        = $pizzaService;
+        $this->restaurantPriceForm = $restaurantPriceForm;
     }
 
     /**
@@ -63,7 +72,8 @@ class ShowRestaurantAction
         $pizza = $this->pizzaService->getSinglePizza($id);
 
         $data = [
-            'pizza' => $pizza,
+            'pizza'               => $pizza,
+            'restaurantPriceForm' => $this->restaurantPriceForm,
         ];
 
         return new HtmlResponse(

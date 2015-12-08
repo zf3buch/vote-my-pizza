@@ -9,6 +9,7 @@
 
 namespace Pizza\Action;
 
+use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\Service\PizzaServiceInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
@@ -29,7 +30,8 @@ class ShowRestaurantFactory
     {
         $template   = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(PizzaServiceInterface::class);
+        $form       = $container->get(RestaurantPriceForm::class);
 
-        return new ShowRestaurantAction($template, $repository);
+        return new ShowRestaurantAction($template, $repository, $form);
     }
 }

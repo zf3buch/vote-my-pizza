@@ -10,9 +10,9 @@
 return [
     'routes' => [
         [
-            'name' => 'home',
-            'path' => '/',
-            'middleware' => Pizza\Action\HomePageAction::class,
+            'name'            => 'home',
+            'path'            => '/',
+            'middleware'      => Pizza\Action\HomePageAction::class,
             'allowed_methods' => ['GET'],
         ],
         [
@@ -23,7 +23,7 @@ return [
         ],
         [
             'name'            => 'handle-voting',
-            'path'            => '/voting/:pos/:neg',
+            'path'            => '/voting/:pos[/:neg]',
             'middleware'      => Pizza\Action\HandleVotingAction::class,
             'allowed_methods' => ['GET'],
             'options'         => [
@@ -65,18 +65,21 @@ return [
                 Pizza\Action\ShowVotingFactory::class,
             Pizza\Action\HandleVotingAction::class     =>
                 Pizza\Action\HandleVotingFactory::class,
-            Pizza\Action\ShowRestaurantAction::class       =>
+            Pizza\Action\ShowRestaurantAction::class   =>
                 Pizza\Action\ShowRestaurantFactory::class,
             Pizza\Action\HandleRestaurantAction::class =>
                 Pizza\Action\HandleRestaurantFactory::class,
 
-            Pizza\Model\Table\PizzaTableInterface::class =>
+            Pizza\Model\Table\PizzaTableInterface::class      =>
                 Pizza\Model\Table\PizzaTableFactory::class,
             Pizza\Model\Table\RestaurantTableInterface::class =>
                 Pizza\Model\Table\RestaurantTableFactory::class,
 
             Pizza\Model\Service\PizzaServiceInterface::class =>
                 Pizza\Model\Service\DbPizzaServiceFactory::class,
+
+            Pizza\Form\RestaurantPriceForm::class =>
+                Pizza\Form\RestaurantPriceFactory::class,
         ]
     ],
 

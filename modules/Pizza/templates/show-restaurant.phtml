@@ -7,7 +7,8 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-$urlRestaurant = $this->url('handle-restaurant', ['id' => $this->pizza['id']]);
+$urlRestaurant  = $this->url('handle-restaurant', ['id' => $this->pizza['id']]);
+$restaurantForm = $this->restaurantPriceForm;
 ?>
 <h1><?php echo $this->pizza['name']; ?></h1>
 <div class="row">
@@ -53,6 +54,7 @@ $urlRestaurant = $this->url('handle-restaurant', ['id' => $this->pizza['id']]);
                 </div>
             </div>
         <?php endforeach ?>
+<!--        --><?php //echo $this->form($restaurantForm); ?>
         <p class="text-center">
             <a href="<?php echo $urlRestaurant; ?>" class="btn btn-success">
                 Neuen Restaurant Preis speichern

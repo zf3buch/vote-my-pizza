@@ -14,9 +14,10 @@
     ],
     "require": {
         "zendframework/zend-db": "^2.5",
-        "zendframework/zend-expressive": "^0.5",
-        "zendframework/zend-expressive-zendrouter": "^0.1",
-        "zendframework/zend-expressive-zendviewrenderer": "^0.1.2",
+        "zendframework/zend-expressive": "~1.0.0@rc || ^1.0",
+        "zendframework/zend-expressive-zendrouter": "^1.0",
+        "zendframework/zend-expressive-zendviewrenderer": "^1.0",
+        "zendframework/zend-expressive-helpers": "^1.1",
         "zendframework/zend-form": "^2.5",
         "zendframework/zend-servicemanager": "^2.5",
         "zendframework/zend-stdlib": "~2.7",
