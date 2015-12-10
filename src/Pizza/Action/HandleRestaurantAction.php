@@ -13,19 +13,20 @@ use Pizza\Model\Service\PizzaServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
- * Class ShowIntroAction
+ * Class HandleRestaurantAction
  *
- * @package Application\Action
+ * @package Pizza\Action
  */
-class ShowIntroAction
+class HandleRestaurantAction
 {
     /**
-     * @var TemplateRendererInterface
+     * @var RouterInterface
      */
-    private $template;
+    private $router;
 
     /**
      * @var PizzaServiceInterface
@@ -33,16 +34,15 @@ class ShowIntroAction
     private $pizzaService;
 
     /**
-     * ShowIntroAction constructor.
+     * HandleRestaurantAction constructor.
      *
-     * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface  $pizzaService
+     * @param RouterInterface          $router
+     * @param PizzaServiceInterface $pizzaService
      */
     public function __construct(
-        TemplateRendererInterface $template,
-        PizzaServiceInterface $pizzaService
+        RouterInterface $router, PizzaServiceInterface $pizzaService
     ) {
-        $this->template        = $template;
+        $this->router          = $router;
         $this->pizzaService = $pizzaService;
     }
 
@@ -54,20 +54,20 @@ class ShowIntroAction
      * @return HtmlResponse
      */
     public function __invoke(
-        ServerRequestInterface $request, ResponseInterface $response,
+        ServerRequestInterface $request,
+        ResponseInterface $response,
         callable $next = null
     ) {
-        $topPizzas  = $this->pizzaService->getTopPizzas();
-        $flopPizzas = $this->pizzaService->getFlopPizzas();
+        // get params
+        $id = $request->getAttribute('id');
 
-        $data = [
-            'welcome'    => 'Willkommen zu Vote My Pizza!',
-            'topPizzas'  => $topPizzas,
-            'flopPizzas' => $flopPizzas,
-        ];
+        // prepare restaurant data
+        $restaurantData = [];
 
-        return new HtmlResponse(
-            $this->template->render('pizza::home-page', $data)
+        $this->pizzaService->saveRestaurant($id, $restaurantData);
+
+        return new RedirectResponse(
+            $this->router->generateUri('pizza-voting')
         );
     }
 }
