@@ -9,6 +9,7 @@
 
 namespace Pizza\Action;
 
+use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\Service\PizzaServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,11 +17,11 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class HomePageAction
+ * Class ShowPizzaAction
  *
  * @package Application\Action
  */
-class HomePageAction
+class ShowPizzaAction
 {
     /**
      * @var TemplateRendererInterface
@@ -33,17 +34,25 @@ class HomePageAction
     private $pizzaService;
 
     /**
-     * HomePageAction constructor.
+     * @var RestaurantPriceForm
+     */
+    private $restaurantPriceForm;
+
+    /**
+     * ShowPizzaAction constructor.
      *
      * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface  $pizzaService
+     * @param PizzaServiceInterface     $pizzaService
+     * @param RestaurantPriceForm       $restaurantPriceForm
      */
     public function __construct(
         TemplateRendererInterface $template,
-        PizzaServiceInterface $pizzaService
+        PizzaServiceInterface $pizzaService,
+        RestaurantPriceForm $restaurantPriceForm
     ) {
-        $this->template        = $template;
+        $this->template = $template;
         $this->pizzaService = $pizzaService;
+        $this->restaurantPriceForm = $restaurantPriceForm;
     }
 
     /**
@@ -54,20 +63,21 @@ class HomePageAction
      * @return HtmlResponse
      */
     public function __invoke(
-        ServerRequestInterface $request, ResponseInterface $response,
+        ServerRequestInterface $request,
+        ResponseInterface $response,
         callable $next = null
     ) {
-        $topPizzas  = $this->pizzaService->getTopPizzas();
-        $flopPizzas = $this->pizzaService->getFlopPizzas();
+        $id = $request->getAttribute('id');
+
+        $pizza = $this->pizzaService->getSinglePizza($id);
 
         $data = [
-            'welcome'    => 'Willkommen zu Vote My Pizza!',
-            'topPizzas'  => $topPizzas,
-            'flopPizzas' => $flopPizzas,
+            'pizza'               => $pizza,
+            'restaurantPriceForm' => $this->restaurantPriceForm,
         ];
 
         return new HtmlResponse(
-            $this->template->render('pizza::home-page', $data)
+            $this->template->render('pizza::show', $data)
         );
     }
 }

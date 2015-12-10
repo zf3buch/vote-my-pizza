@@ -15,16 +15,16 @@ use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class ShowRestaurantFactory
+ * Class ShowPizzaFactory
  *
- * @package Pizza\Action
+ * @package Application\Action
  */
-class ShowRestaurantFactory
+class ShowPizzaFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return ShowRestaurantAction
+     * @return ShowPizzaAction
      */
     public function __invoke(ContainerInterface $container)
     {
@@ -32,6 +32,6 @@ class ShowRestaurantFactory
         $repository = $container->get(PizzaServiceInterface::class);
         $form       = $container->get(RestaurantPriceForm::class);
 
-        return new ShowRestaurantAction($template, $repository, $form);
+        return new ShowPizzaAction($template, $repository, $form);
     }
 }

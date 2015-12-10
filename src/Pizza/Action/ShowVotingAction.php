@@ -9,7 +9,6 @@
 
 namespace Pizza\Action;
 
-use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\Service\PizzaServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -17,11 +16,11 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class ShowRestaurantAction
+ * Class ShowVotingAction
  *
  * @package Pizza\Action
  */
-class ShowRestaurantAction
+class ShowVotingAction
 {
     /**
      * @var TemplateRendererInterface
@@ -34,25 +33,17 @@ class ShowRestaurantAction
     private $pizzaService;
 
     /**
-     * @var RestaurantPriceForm
-     */
-    private $restaurantPriceForm;
-
-    /**
-     * ShowRestaurantAction constructor.
+     * ShowVotingAction constructor.
      *
      * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface     $pizzaService
-     * @param RestaurantPriceForm       $restaurantPriceForm
+     * @param PizzaServiceInterface  $pizzaService
      */
     public function __construct(
         TemplateRendererInterface $template,
-        PizzaServiceInterface $pizzaService,
-        RestaurantPriceForm $restaurantPriceForm
+        PizzaServiceInterface $pizzaService
     ) {
-        $this->template            = $template;
-        $this->pizzaService        = $pizzaService;
-        $this->restaurantPriceForm = $restaurantPriceForm;
+        $this->template        = $template;
+        $this->pizzaService = $pizzaService;
     }
 
     /**
@@ -67,17 +58,15 @@ class ShowRestaurantAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        $id = $request->getAttribute('id');
-
-        $pizza = $this->pizzaService->getSinglePizza($id);
+        $votingPizzas = $this->pizzaService->getPizzasForVoting();
 
         $data = [
-            'pizza'               => $pizza,
-            'restaurantPriceForm' => $this->restaurantPriceForm,
+            'title'  => 'Welche Pizza gefällt dir besser?',
+            'pizzas' => $votingPizzas,
         ];
 
         return new HtmlResponse(
-            $this->template->render('pizza::show-restaurant', $data)
+            $this->template->render('pizza::voting', $data)
         );
     }
 }

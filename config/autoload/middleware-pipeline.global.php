@@ -8,17 +8,22 @@
  */
 
 return [
-    'dependencies'        => [
+    'dependencies' => [
         'factories' => [
             Zend\Expressive\Helper\ServerUrlMiddleware::class =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
+            Zend\Expressive\Helper\UrlHelperMiddleware::class =>
+                Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
         ],
     ],
+
     'middleware_pipeline' => [
         'pre_routing' => [
             [
-                'middleware' =>
-                    Zend\Expressive\Helper\ServerUrlMiddleware::class
+                'middleware' => [
+                    Zend\Expressive\Helper\ServerUrlMiddleware::class,
+                    Zend\Expressive\Helper\UrlHelperMiddleware::class,
+                ],
             ],
         ],
 

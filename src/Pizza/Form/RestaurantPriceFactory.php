@@ -26,6 +26,9 @@ class RestaurantPriceFactory extends Form
      */
     public function __invoke(ContainerInterface $container)
     {
-        return new RestaurantPriceForm();
+        $form = new RestaurantPriceForm();
+        $form->init();
+
+        return $form;
     }
 }

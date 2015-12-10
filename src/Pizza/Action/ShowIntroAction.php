@@ -16,11 +16,11 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class ShowVotingAction
+ * Class ShowIntroAction
  *
- * @package Pizza\Action
+ * @package Application\Action
  */
-class ShowVotingAction
+class ShowIntroAction
 {
     /**
      * @var TemplateRendererInterface
@@ -33,7 +33,7 @@ class ShowVotingAction
     private $pizzaService;
 
     /**
-     * ShowVotingAction constructor.
+     * ShowIntroAction constructor.
      *
      * @param TemplateRendererInterface $template
      * @param PizzaServiceInterface  $pizzaService
@@ -54,19 +54,20 @@ class ShowVotingAction
      * @return HtmlResponse
      */
     public function __invoke(
-        ServerRequestInterface $request,
-        ResponseInterface $response,
+        ServerRequestInterface $request, ResponseInterface $response,
         callable $next = null
     ) {
-        $votingPizzas = $this->pizzaService->getPizzasForVoting();
+        $topPizzas  = $this->pizzaService->getTopPizzas();
+        $flopPizzas = $this->pizzaService->getFlopPizzas();
 
         $data = [
-            'title'  => 'Welche Pizza gefällt dir besser?',
-            'pizzas' => $votingPizzas,
+            'welcome'    => 'Willkommen zu Vote My Pizza!',
+            'topPizzas'  => $topPizzas,
+            'flopPizzas' => $flopPizzas,
         ];
 
         return new HtmlResponse(
-            $this->template->render('pizza::show-voting', $data)
+            $this->template->render('pizza::intro', $data)
         );
     }
 }

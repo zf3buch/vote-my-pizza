@@ -58,16 +58,14 @@ class HandleRestaurantAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        // get params
         $id = $request->getAttribute('id');
 
-        // prepare restaurant data
         $restaurantData = [];
 
         $this->pizzaService->saveRestaurant($id, $restaurantData);
 
         return new RedirectResponse(
-            $this->router->generateUri('show-voting')
+            $this->router->generateUri('pizza-show', ['id' => $id])
         );
     }
 }
