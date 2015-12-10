@@ -14,22 +14,22 @@ use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class HomePageFactory
+ * Class ShowPizzaFactory
  *
  * @package Application\Action
  */
-class HomePageFactory
+class ShowPizzaFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return HomePageAction
+     * @return ShowPizzaAction
      */
     public function __invoke(ContainerInterface $container)
     {
-        $template = $container->get(TemplateRendererInterface::class);
+        $template   = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(PizzaServiceInterface::class);
 
-        return new HomePageAction($template, $repository);
+        return new ShowPizzaAction($template, $repository);
     }
 }

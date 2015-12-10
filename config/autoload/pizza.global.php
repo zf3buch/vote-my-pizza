@@ -8,50 +8,14 @@
  */
 
 return [
-    'routes' => [
-        [
-            'name' => 'home',
-            'path' => '/',
-            'middleware' => Pizza\Action\HomePageAction::class,
-            'allowed_methods' => ['GET'],
-        ],
-        [
-            'name'            => 'show-voting',
-            'path'            => '/voting',
-            'middleware'      => Pizza\Action\ShowVotingAction::class,
-            'allowed_methods' => ['GET'],
-        ],
-        [
-            'name'            => 'handle-voting',
-            'path'            => '/voting/:pos/:neg',
-            'middleware'      => Pizza\Action\HandleVotingAction::class,
-            'allowed_methods' => ['GET'],
-            'options'         => [
-                'constraints' => [
-                    'pos' => '[0-9]+',
-                    'neg' => '[0-9]+',
-                ],
-            ],
-        ],
-        [
-            'name'            => 'handle-restaurant',
-            'path'            => '/restaurant/:id',
-            'middleware'      => Pizza\Action\HandleRestaurantAction::class,
-            'allowed_methods' => ['GET'],
-            'options'         => [
-                'constraints' => [
-                    'id' => '[0-9]+',
-                ],
-            ],
-        ],
-    ],
-
     'dependencies' => [
         'factories' => [
-            Pizza\Action\HomePageAction::class         =>
-                Pizza\Action\HomePageFactory::class,
+            Pizza\Action\ShowIntroAction::class        =>
+                Pizza\Action\ShowIntroFactory::class,
             Pizza\Action\ShowVotingAction::class       =>
                 Pizza\Action\ShowVotingFactory::class,
+            Pizza\Action\ShowPizzaAction::class        =>
+                Pizza\Action\ShowPizzaFactory::class,
             Pizza\Action\HandleVotingAction::class     =>
                 Pizza\Action\HandleVotingFactory::class,
             Pizza\Action\HandleRestaurantAction::class =>
@@ -67,9 +31,58 @@ return [
         ]
     ],
 
+    'routes' => [
+        [
+            'name'            => 'pizza-intro',
+            'path'            => '/pizza',
+            'middleware'      => Pizza\Action\ShowIntroAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name'            => 'pizza-voting',
+            'path'            => '/pizza/voting',
+            'middleware'      => Pizza\Action\ShowVotingAction::class,
+            'allowed_methods' => ['GET'],
+        ],
+        [
+            'name'            => 'pizza-show',
+            'path'            => '/pizza/show/:id',
+            'middleware'      => Pizza\Action\ShowPizzaAction::class,
+            'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'id' => '[1-9][0-9]*',
+                ],
+            ],
+        ],
+        [
+            'name'            => 'pizza-handle-voting',
+            'path'            => '/pizza/voting/:pos/:neg',
+            'middleware'      => Pizza\Action\HandleVotingAction::class,
+            'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'pos' => '[1-9][0-9]*',
+                    'neg' => '[1-9][0-9]*',
+                ],
+            ],
+        ],
+        [
+            'name'            => 'pizza-handle-restaurant',
+            'path'            => '/pizza/restaurant/:id',
+            'middleware'      => Pizza\Action\HandleRestaurantAction::class,
+            'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'id' => '[1-9][0-9]*',
+                ],
+            ],
+        ],
+    ],
+
     'templates' => [
         'paths' => [
-            'pizza' => ['modules/Pizza/templates'],
+            'pizza' => ['templates/pizza'],
         ]
     ]
 ];

@@ -28,6 +28,15 @@ interface PizzaTableInterface extends TableGatewayInterface
     public function fetchRandomPizzas($count);
 
     /**
+     * Fetch pizza by id
+     *
+     * @param integer $id
+     *
+     * @return array
+     */
+    public function fetchPizzaById($id);
+
+    /**
      * Fetch pizzas sorted by rate
      *
      * @param integer $count

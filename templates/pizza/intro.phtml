@@ -26,25 +26,31 @@
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
     "
-                );?>
+                );
+                $urlShow = $this->url(
+                    'pizza-show', ['id' => $pizza['id']]
+                );
+                ?>
                 <div class="col-md-4">
                     <div class="thumbnail text-center">
-                        <img src="<?php echo $pizza['image'] ?>"
-                             title="<?php echo $pizza['name'] ?>">
+                        <a href="<?php echo $urlShow; ?>">
+                            <img src="<?php echo $pizza['image'] ?>"
+                                 title="<?php echo $pizza['name'] ?>">
+                        </a>
 
                         <div class="caption">
                             <p class="small">
                                 <?php echo $pizza['name'] ?>
                             </p>
 
-                            <div class="label label-danger">
-                                <i class="fa fa-thumbs-down"></i>
-                                <?php echo $pizza['neg'] ?>
-                            </div>
-                            &nbsp;
                             <div class="label label-success">
                                 <i class="fa fa-thumbs-up"></i>
                                 <?php echo $pizza['pos'] ?>
+                            </div>
+                            &nbsp;
+                            <div class="label label-danger">
+                                <i class="fa fa-thumbs-down"></i>
+                                <?php echo $pizza['neg'] ?>
                             </div>
                             <div id="stars-<?php echo $pizza['id'] ?>"></div>
                         </div>
@@ -69,24 +75,31 @@
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
     "
-                );?><div class="col-md-4">
+                );
+                $urlShow = $this->url(
+                    'pizza-show', ['id' => $pizza['id']]
+                );
+                ?>
+                <div class="col-md-4">
                     <div class="thumbnail text-center">
-                        <img src="<?php echo $pizza['image'] ?>"
-                             title="<?php echo $pizza['name'] ?>">
+                        <a href="<?php echo $urlShow; ?>">
+                            <img src="<?php echo $pizza['image'] ?>"
+                                 title="<?php echo $pizza['name'] ?>">
+                        </a>
 
                         <div class="caption">
                             <p class="small">
                                 <?php echo $pizza['name'] ?>
                             </p>
 
-                            <div class="label label-danger">
-                                <i class="fa fa-thumbs-down"></i>
-                                <?php echo $pizza['neg'] ?>
-                            </div>
-                            &nbsp;
                             <div class="label label-success">
                                 <i class="fa fa-thumbs-up"></i>
                                 <?php echo $pizza['pos'] ?>
+                            </div>
+                            &nbsp;
+                            <div class="label label-danger">
+                                <i class="fa fa-thumbs-down"></i>
+                                <?php echo $pizza['neg'] ?>
                             </div>
                             <div id="stars-<?php echo $pizza['id'] ?>"></div>
                         </div>
@@ -99,7 +112,7 @@
 <div class="well text-center">
     <h2>Jetzt selber abstimmen!</h2>
     <p>
-        <a href="<?php echo $this->url('show-voting') ?>" class="btn btn-success">
+        <a href="<?php echo $this->url('pizza-voting') ?>" class="btn btn-success">
             <i class="fa fa-star"></i> Abstimmen
         </a>
     </p>

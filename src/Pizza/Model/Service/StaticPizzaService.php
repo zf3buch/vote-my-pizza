@@ -83,6 +83,22 @@ class StaticPizzaService implements PizzaServiceInterface
     }
 
     /**
+     * Get single pizza
+     *
+     * @param integer $id
+     *
+     * @return array|boolean
+     */
+    public function getSinglePizza($id)
+    {
+        if (!isset($this->pizzaList[$id])) {
+            return false;
+        }
+
+        return $this->pizzaList[$id];
+    }
+
+    /**
      * Get three top pizzas
      *
      * @return array

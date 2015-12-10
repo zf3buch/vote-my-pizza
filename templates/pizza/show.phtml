@@ -1,0 +1,68 @@
+<?php
+/**
+ * ZF3 book Pin Your Pizza Example Application
+ *
+ * @author     Ralf Eggert <ralf@travello.de>
+ * @link       https://github.com/zf3buch/pin-your-pizza
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+$urlRestaurant  = $this->url('pizza-handle-restaurant', ['id' => $this->pizza['id']]);
+?>
+<h1><?php echo $this->pizza['name']; ?></h1>
+<div class="row">
+    <?php
+    $this->inlineScript()->appendScript(
+        "
+    $('#stars-" . $this->pizza['id'] . "').raty({
+        readOnly: true,
+        score   : " . round($this->pizza['rate'], 1) * 5 . ",
+        half    : true,
+        starOff : '/assets/vendor/raty-2.7.0/images/star-off.png',
+        starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
+        starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
+    });
+    "
+    ); ?>
+    <div class="col-md-6">
+        <div class="thumbnail text-center">
+            <img src="<?php echo $this->pizza['image'] ?>"
+                 title="<?php echo $this->pizza['name'] ?>">
+
+            <div class="caption">
+                <p id="stars-<?php echo $this->pizza['id'] ?>"></p>
+                <p>
+                    <?php echo $this->pizza['name'] ?>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <?php foreach ($this->pizza['restaurants'] as $restaurant)
+            : ?>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Restaurant
+                    <?php echo $restaurant['name']; ?>
+                </div>
+                <div class="panel-body">
+                    <?php echo $this->pizza['name']; ?>
+                    kostet nur
+                    <strong><?php echo $restaurant['price']; ?></strong>
+                    Euro (Stand: <?php echo $restaurant['date']; ?>).
+                </div>
+            </div>
+        <?php endforeach ?>
+        <p class="text-center">
+            <a href="<?php echo $urlRestaurant; ?>" class="btn btn-success">
+                Neuen Restaurant Preis speichern
+            </a>
+        </p>
+    </div>
+</div>
+<div class="row">
+    <p class="text-center">
+        <a href="<?php echo $this->url('pizza-intro') ?>" class="btn btn-success">
+            Zurück zur Pizza-Seite
+        </a>
+    </p>
+</div>

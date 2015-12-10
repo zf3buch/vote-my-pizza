@@ -8,27 +8,27 @@
  */
 
 $urlVoteLeft   = $this->url(
-    'handle-voting',
+    'pizza-handle-voting',
     [
         'pos' => $this->pizzas['left']['id'],
         'neg' => $this->pizzas['right']['id']
     ]
 );
-$urlRestaurantLeft  = $this->url(
-    'handle-restaurant',
+$urlShowLeft  = $this->url(
+    'pizza-show',
     [
         'id' => $this->pizzas['left']['id'],
     ]
 );
 $urlVoteRight  = $this->url(
-    'handle-voting',
+    'pizza-handle-voting',
     [
         'pos' => $this->pizzas['right']['id'],
         'neg' => $this->pizzas['left']['id']
     ]
 );
-$urlRestaurantRight = $this->url(
-    'handle-restaurant',
+$urlShowRight = $this->url(
+    'pizza-show',
     [
         'id' => $this->pizzas['right']['id'],
     ]
@@ -67,17 +67,22 @@ $this->inlineScript()->appendScript(
             <div class="caption">
                 <h4><?php echo $this->pizzas['left']['name'] ?></h4>
 
-                <div class="label label-danger pull-left">
-                    <i class="fa fa-thumbs-down"></i>
-                    <?php echo $this->pizzas['left']['neg'] ?>
-                </div>
-                <div class="label label-success pull-right">
+                <div class="label label-success pull-left">
                     <i class="fa fa-thumbs-up"></i>
                     <?php echo $this->pizzas['left']['pos'] ?>
+                </div>
+                <div class="label label-danger pull-right">
+                    <i class="fa fa-thumbs-down"></i>
+                    <?php echo $this->pizzas['left']['neg'] ?>
                 </div>
                 <div id="stars-left"></div>
             </div>
         </div>
+        <p class="text-center">
+            <a href="<?php echo $urlShowLeft; ?>" class="btn btn-success">
+                Pizza anzeigen
+            </a>
+        </p>
         <?php foreach ($this->pizzas['left']['restaurants'] as $restaurant)
             : ?>
             <div class="panel panel-success">
@@ -93,11 +98,6 @@ $this->inlineScript()->appendScript(
                 </div>
             </div>
         <?php endforeach ?>
-        <p class="text-center">
-            <a href="<?php echo $urlRestaurantLeft; ?>" class="btn btn-success">
-                Neuen Restaurant Preis nennen
-            </a>
-        </p>
     </div>
     <div class="col-sm-6">
         <div class="thumbnail text-center">
@@ -109,17 +109,22 @@ $this->inlineScript()->appendScript(
             <div class="caption">
                 <h4><?php echo $this->pizzas['right']['name'] ?></h4>
 
-                <div class="label label-danger pull-left">
-                    <i class="fa fa-thumbs-down"></i>
-                    <?php echo $this->pizzas['right']['neg'] ?>
-                </div>
-                <div class="label label-success pull-right">
+                <div class="label label-success pull-left">
                     <i class="fa fa-thumbs-up"></i>
                     <?php echo $this->pizzas['right']['pos'] ?>
+                </div>
+                <div class="label label-danger pull-right">
+                    <i class="fa fa-thumbs-down"></i>
+                    <?php echo $this->pizzas['right']['neg'] ?>
                 </div>
                 <div id="stars-right"></div>
             </div>
         </div>
+        <p class="text-center">
+            <a href="<?php echo $urlShowRight; ?>" class="btn btn-success">
+                Pizza anzeigen
+            </a>
+        </p>
         <?php foreach ($this->pizzas['right']['restaurants'] as $restaurant)
             : ?>
             <div class="panel panel-success">
@@ -135,11 +140,5 @@ $this->inlineScript()->appendScript(
                 </div>
             </div>
         <?php endforeach ?>
-        <p class="text-center">
-            <a href="<?php echo $urlRestaurantRight; ?>"
-               class="btn btn-success">
-                Neuen Restaurant Preis nennen
-            </a>
-        </p>
     </div>
 </div>
