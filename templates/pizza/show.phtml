@@ -29,10 +29,17 @@ $urlRestaurant  = $this->url('pizza-handle-restaurant', ['id' => $this->pizza['i
                  title="<?php echo $this->pizza['name'] ?>">
 
             <div class="caption">
-                <p id="stars-<?php echo $this->pizza['id'] ?>"></p>
-                <p>
-                    <?php echo $this->pizza['name'] ?>
-                </p>
+                <h4><?php echo $this->pizza['name'] ?></h4>
+
+                <div class="label label-success pull-left">
+                    <i class="fa fa-thumbs-up"></i>
+                    <?php echo $this->pizza['pos'] ?>
+                </div>
+                <div class="label label-danger pull-right">
+                    <i class="fa fa-thumbs-down"></i>
+                    <?php echo $this->pizza['neg'] ?>
+                </div>
+                <div id="stars-<?php echo $this->pizza['id'] ?>"></div>
             </div>
         </div>
     </div>
