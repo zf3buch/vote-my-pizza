@@ -7,9 +7,8 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Pizza\Action;
+namespace Application\Action;
 
-use Pizza\Model\Service\PizzaServiceInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
@@ -28,8 +27,7 @@ class HomePageFactory
     public function __invoke(ContainerInterface $container)
     {
         $template = $container->get(TemplateRendererInterface::class);
-        $repository = $container->get(PizzaServiceInterface::class);
 
-        return new HomePageAction($template, $repository);
+        return new HomePageAction($template);
     }
 }

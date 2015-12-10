@@ -16,11 +16,11 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class HomePageAction
+ * Class ShowIntroAction
  *
  * @package Application\Action
  */
-class HomePageAction
+class ShowIntroAction
 {
     /**
      * @var TemplateRendererInterface
@@ -33,7 +33,7 @@ class HomePageAction
     private $pizzaService;
 
     /**
-     * HomePageAction constructor.
+     * ShowIntroAction constructor.
      *
      * @param TemplateRendererInterface $template
      * @param PizzaServiceInterface  $pizzaService
