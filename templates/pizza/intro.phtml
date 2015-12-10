@@ -26,11 +26,17 @@
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
     "
-                );?>
+                );
+                $urlShow = $this->url(
+                    'pizza-show', ['id' => $pizza['id']]
+                );
+                ?>
                 <div class="col-md-4">
                     <div class="thumbnail text-center">
-                        <img src="<?php echo $pizza['image'] ?>"
-                             title="<?php echo $pizza['name'] ?>">
+                        <a href="<?php echo $urlShow; ?>">
+                            <img src="<?php echo $pizza['image'] ?>"
+                                 title="<?php echo $pizza['name'] ?>">
+                        </a>
 
                         <div class="caption">
                             <p class="small">
@@ -69,10 +75,17 @@
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
     "
-                );?><div class="col-md-4">
+                );
+                $urlShow = $this->url(
+                    'pizza-show', ['id' => $pizza['id']]
+                );
+                ?>
+                <div class="col-md-4">
                     <div class="thumbnail text-center">
-                        <img src="<?php echo $pizza['image'] ?>"
-                             title="<?php echo $pizza['name'] ?>">
+                        <a href="<?php echo $urlShow; ?>">
+                            <img src="<?php echo $pizza['image'] ?>"
+                                 title="<?php echo $pizza['name'] ?>">
+                        </a>
 
                         <div class="caption">
                             <p class="small">

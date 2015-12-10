@@ -14,6 +14,8 @@ return [
                 Pizza\Action\ShowIntroFactory::class,
             Pizza\Action\ShowVotingAction::class       =>
                 Pizza\Action\ShowVotingFactory::class,
+            Pizza\Action\ShowPizzaAction::class        =>
+                Pizza\Action\ShowPizzaFactory::class,
             Pizza\Action\HandleVotingAction::class     =>
                 Pizza\Action\HandleVotingFactory::class,
             Pizza\Action\HandleRestaurantAction::class =>
@@ -38,14 +40,25 @@ return [
             'allowed_methods' => ['GET'],
         ],
         [
+            'name'            => 'pizza-show',
+            'path'            => '/pizza/show/:id',
+            'middleware'      => Pizza\Action\ShowPizzaAction::class,
+            'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'id' => '[1-9][0-9]*',
+                ],
+            ],
+        ],
+        [
             'name'            => 'pizza-handle-voting',
             'path'            => '/pizza/voting/:pos/:neg',
             'middleware'      => Pizza\Action\HandleVotingAction::class,
             'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
-                    'pos' => '[0-9]+',
-                    'neg' => '[0-9]+',
+                    'pos' => '[1-9][0-9]*',
+                    'neg' => '[1-9][0-9]*',
                 ],
             ],
         ],
@@ -56,7 +69,7 @@ return [
             'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
-                    'id' => '[0-9]+',
+                    'id' => '[1-9][0-9]*',
                 ],
             ],
         ],

@@ -13,20 +13,19 @@ use Pizza\Model\Service\PizzaServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Router\RouterInterface;
+use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
- * Class HandleVotingAction
+ * Class ShowPizzaAction
  *
- * @package Pizza\Action
+ * @package Application\Action
  */
-class HandleVotingAction
+class ShowPizzaAction
 {
     /**
-     * @var RouterInterface
+     * @var TemplateRendererInterface
      */
-    private $router;
+    private $template;
 
     /**
      * @var PizzaServiceInterface
@@ -34,15 +33,16 @@ class HandleVotingAction
     private $pizzaService;
 
     /**
-     * HandleVotingAction constructor.
+     * ShowPizzaAction constructor.
      *
-     * @param RouterInterface          $router
-     * @param PizzaServiceInterface $pizzaService
+     * @param TemplateRendererInterface $template
+     * @param PizzaServiceInterface  $pizzaService
      */
     public function __construct(
-        RouterInterface $router, PizzaServiceInterface $pizzaService
+        TemplateRendererInterface $template,
+        PizzaServiceInterface $pizzaService
     ) {
-        $this->router          = $router;
+        $this->template        = $template;
         $this->pizzaService = $pizzaService;
     }
 
@@ -54,17 +54,19 @@ class HandleVotingAction
      * @return HtmlResponse
      */
     public function __invoke(
-        ServerRequestInterface $request,
-        ResponseInterface $response,
+        ServerRequestInterface $request, ResponseInterface $response,
         callable $next = null
     ) {
-        $posParam = $request->getAttribute('pos');
-        $negParam = $request->getAttribute('neg');
+        $id = $request->getAttribute('id');
 
-        $this->pizzaService->saveVoting($posParam, $negParam);
+        $pizza = $this->pizzaService->getSinglePizza($id);
 
-        return new RedirectResponse(
-            $this->router->generateUri('pizza-voting')
+        $data = [
+            'pizza' => $pizza,
+        ];
+
+        return new HtmlResponse(
+            $this->template->render('pizza::show', $data)
         );
     }
 }
