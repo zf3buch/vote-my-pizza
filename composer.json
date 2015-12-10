@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "src/"
+            "Application\\": "src/Application/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ApplicationTest\\": "test/"
+            "ApplicationTest\\": "test/ApplicationTest/"
         }
     },
     "scripts": {
