@@ -25,12 +25,18 @@ class RestaurantPriceForm extends Form
      */
     public function init()
     {
+        $this->setName('restaurant_price_form');
+        $this->setAttribute('class', 'form-horizontal');
+
         $this->add(
             [
                 'name'       => 'name',
                 'type'       => 'text',
                 'options'    => [
                     'label' => 'Name des Restaurants',
+                    'label_attributes' => [
+                        'class' => 'col-sm-4 control-label',
+                    ],
                 ],
                 'attributes' => [
                     'class' => 'form-control',
@@ -44,6 +50,9 @@ class RestaurantPriceForm extends Form
                 'type'       => 'text',
                 'options'    => [
                     'label' => 'Preis der Pizza',
+                    'label_attributes' => [
+                        'class' => 'col-sm-4 control-label',
+                    ],
                 ],
                 'attributes' => [
                     'class' => 'form-control',
@@ -55,10 +64,10 @@ class RestaurantPriceForm extends Form
             [
                 'name'       => 'save_price',
                 'type'       => 'submit',
-                'options'    => [
-                ],
                 'attributes' => [
-                    'value' => 'Restaurant Preis speichern',
+                    'class' => 'btn btn-success',
+                    'value' => 'Neuen Restaurant Preis speichern',
+                    'id'    => 'save_price',
                 ],
             ]
         );

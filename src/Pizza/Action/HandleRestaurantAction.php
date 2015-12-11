@@ -60,9 +60,9 @@ class HandleRestaurantAction
     ) {
         $id = $request->getAttribute('id');
 
-        $restaurantData = [];
+        $postData = $request->getParsedBody();
 
-        $this->pizzaService->saveRestaurant($id, $restaurantData);
+        $this->pizzaService->saveRestaurant($id, $postData);
 
         return new RedirectResponse(
             $this->router->generateUri('pizza-show', ['id' => $id])

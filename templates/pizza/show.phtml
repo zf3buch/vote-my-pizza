@@ -6,7 +6,15 @@
  * @link       https://github.com/zf3buch/pin-your-pizza
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-$urlRestaurant  = $this->url('pizza-handle-restaurant', ['id' => $this->pizza['id']]);
+use Pizza\Form\RestaurantPriceForm;
+
+$urlRestaurant = $this->url('pizza-handle-restaurant',
+    ['id' => $this->pizza['id']]);
+
+/** @var RestaurantPriceForm $form */
+$form = $this->restaurantPriceForm;
+$form->setAttribute('action', $urlRestaurant);
+
 ?>
 <h1><?php echo $this->pizza['name']; ?></h1>
 <div class="row">
@@ -59,17 +67,48 @@ $urlRestaurant  = $this->url('pizza-handle-restaurant', ['id' => $this->pizza['i
                 </div>
             </div>
         <?php endforeach ?>
-        <?php echo $this->form($this->restaurantPriceForm); ?>
-        <p class="text-center">
-            <a href="<?php echo $urlRestaurant; ?>" class="btn btn-success">
-                Neuen Restaurant Preis speichern
-            </a>
-        </p>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Neuen Restaurant Preis für
+                <strong><?php echo $this->pizza['name'] ?></strong>
+                speichern
+            </div>
+            <div class="panel-body">
+                <?php echo $this->form()->openTag($form); ?>
+                <div class="form-group">
+                    <?php echo $this->formLabel($form->get('name')); ?>
+                    <div class="col-sm-8">
+                        <?php
+                        echo $this->formElement($form->get('name'));
+                        echo $this->formElementErrors($form->get('name'));
+                        ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <?php echo $this->formLabel($form->get('price')); ?>
+                    <div class="col-sm-8">
+                        <?php
+                        echo $this->formElement($form->get('price'));
+                        echo $this->formElementErrors($form->get('price'));
+                        ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <?php
+                        echo $this->formElement($form->get('save_price'));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <?php echo $this->form()->closeTag(); ?>
+        </div>
     </div>
 </div>
 <div class="row">
     <p class="text-center">
-        <a href="<?php echo $this->url('pizza-intro') ?>" class="btn btn-success">
+        <a href="<?php echo $this->url('pizza-intro') ?>"
+           class="btn btn-success">
             Zurück zur Pizza-Seite
         </a>
     </p>

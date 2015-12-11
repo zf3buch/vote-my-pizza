@@ -18,8 +18,6 @@ return [
                 Pizza\Action\ShowPizzaFactory::class,
             Pizza\Action\HandleVotingAction::class     =>
                 Pizza\Action\HandleVotingFactory::class,
-            Pizza\Action\ShowRestaurantAction::class   =>
-                Pizza\Action\ShowRestaurantFactory::class,
             Pizza\Action\HandleRestaurantAction::class =>
                 Pizza\Action\HandleRestaurantFactory::class,
 
@@ -76,7 +74,7 @@ return [
             'name'            => 'pizza-handle-restaurant',
             'path'            => '/pizza/restaurant/:id',
             'middleware'      => Pizza\Action\HandleRestaurantAction::class,
-            'allowed_methods' => ['GET'],
+            'allowed_methods' => ['POST'],
             'options'         => [
                 'constraints' => [
                     'id' => '[1-9][0-9]*',
