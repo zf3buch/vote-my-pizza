@@ -39,7 +39,7 @@ class DbPizzaService implements PizzaServiceInterface
         PizzaTableInterface $pizzaTable,
         RestaurantTableInterface $restaurantTable
     ) {
-        $this->pizzaTable      = $pizzaTable;
+        $this->pizzaTable = $pizzaTable;
         $this->restaurantTable = $restaurantTable;
     }
 
@@ -138,7 +138,7 @@ class DbPizzaService implements PizzaServiceInterface
             'pizza' => $id,
             'date'  => date('Y-m-d H:i:s'),
             'name'  => isset($data['name']) ? $data['name'] : 'unbekannt',
-            'price' => isset($data['price']) ? $data['name'] : 0.00,
+            'price' => isset($data['price']) ? $data['price'] : 0.00,
         ];
 
         return $this->restaurantTable->insert($insertData);
