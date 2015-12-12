@@ -48,7 +48,7 @@ class RestaurantTable extends TableGateway
         $select->order(['date' => 'ASC']);
 
         // initialize data
-        $data = array();
+        $data = [];
 
         // loop through rows
         foreach ($this->selectWith($select) as $row) {

@@ -9,8 +9,8 @@
 
 namespace Pizza\Action;
 
-use Pizza\Model\Service\PizzaServiceInterface;
 use Interop\Container\ContainerInterface;
+use Pizza\Model\Service\PizzaServiceInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
@@ -27,7 +27,7 @@ class ShowIntroFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $template = $container->get(TemplateRendererInterface::class);
+        $template   = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(PizzaServiceInterface::class);
 
         return new ShowIntroAction($template, $repository);

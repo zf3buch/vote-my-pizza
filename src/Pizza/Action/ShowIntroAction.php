@@ -36,13 +36,13 @@ class ShowIntroAction
      * ShowIntroAction constructor.
      *
      * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface  $pizzaService
+     * @param PizzaServiceInterface     $pizzaService
      */
     public function __construct(
         TemplateRendererInterface $template,
         PizzaServiceInterface $pizzaService
     ) {
-        $this->template        = $template;
+        $this->template     = $template;
         $this->pizzaService = $pizzaService;
     }
 
@@ -54,7 +54,8 @@ class ShowIntroAction
      * @return HtmlResponse
      */
     public function __invoke(
-        ServerRequestInterface $request, ResponseInterface $response,
+        ServerRequestInterface $request,
+        ResponseInterface $response,
         callable $next = null
     ) {
         $topPizzas  = $this->pizzaService->getTopPizzas();

@@ -48,7 +48,7 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
         $select->limit($count);
 
         // initialize data
-        $data = array();
+        $data = [];
 
         // loop through rows
         foreach ($this->selectWith($select) as $row) {
@@ -95,7 +95,7 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
         $select->limit($count);
 
         // initialize data
-        $data = array();
+        $data = [];
 
         // loop through rows
         foreach ($this->selectWith($select) as $row) {
@@ -148,7 +148,7 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
         $update = $this->getSql()->update();
         $update->set(
             [
-                $recalcColumn => new Expression($recalcColumn . ' + 1')
+                $recalcColumn => new Expression($recalcColumn . ' + 1'),
             ]
         );
         $update->where->equalTo('id', $id);
@@ -161,7 +161,7 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
             [
                 'rate' => new Expression(
                     $posColumn . '/(' . $posColumn . '+' . $negColumn . ')'
-                )
+                ),
             ]
         );
         $update->where->equalTo('id', $id);

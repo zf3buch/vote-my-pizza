@@ -9,9 +9,9 @@
 
 namespace Pizza\Model\Service;
 
+use Interop\Container\ContainerInterface;
 use Pizza\Model\Table\PizzaTableInterface;
 use Pizza\Model\Table\RestaurantTableInterface;
-use Interop\Container\ContainerInterface;
 
 /**
  * Class DbPizzaServiceFactory

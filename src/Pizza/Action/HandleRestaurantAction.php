@@ -36,13 +36,14 @@ class HandleRestaurantAction
     /**
      * HandleRestaurantAction constructor.
      *
-     * @param RouterInterface          $router
+     * @param RouterInterface       $router
      * @param PizzaServiceInterface $pizzaService
      */
     public function __construct(
-        RouterInterface $router, PizzaServiceInterface $pizzaService
+        RouterInterface $router,
+        PizzaServiceInterface $pizzaService
     ) {
-        $this->router          = $router;
+        $this->router       = $router;
         $this->pizzaService = $pizzaService;
     }
 
