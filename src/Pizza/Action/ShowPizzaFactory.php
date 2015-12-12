@@ -12,7 +12,6 @@ namespace Pizza\Action;
 use Interop\Container\ContainerInterface;
 use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\Service\PizzaServiceInterface;
-use Pizza\Model\Service\PizzaServiceInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
