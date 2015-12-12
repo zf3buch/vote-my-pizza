@@ -20,6 +20,16 @@ use Pizza\Model\Table\RestaurantTableInterface;
 class DbPizzaService implements PizzaServiceInterface
 {
     /**
+     * @var PizzaTableInterface
+     */
+    private $pizzaTable;
+
+    /**
+     * @var RestaurantTableInterface
+     */
+    private $restaurantTable;
+
+    /**
      * DbPizzaService constructor.
      *
      * @param PizzaTableInterface      $pizzaTable
@@ -135,13 +145,4 @@ class DbPizzaService implements PizzaServiceInterface
 
         return $this->restaurantTable->insert($insertData);
     }
-
-    /**
-     * @var PizzaTableInterface
-     */
-    private $pizzaTable;
-    /**
-     * @var RestaurantTableInterface
-     */
-    private $restaurantTable;
 }
