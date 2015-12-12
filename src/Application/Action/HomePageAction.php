@@ -45,11 +45,12 @@ class HomePageAction
      * @return HtmlResponse
      */
     public function __invoke(
-        ServerRequestInterface $request, ResponseInterface $response,
+        ServerRequestInterface $request,
+        ResponseInterface $response,
         callable $next = null
     ) {
         $data = [
-            'welcome' => 'Willkommen zu Vote My Pizza!'
+            'welcome' => 'Willkommen zu Vote My Pizza!',
         ];
 
         return new HtmlResponse(
