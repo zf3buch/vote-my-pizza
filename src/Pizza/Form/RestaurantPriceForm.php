@@ -33,7 +33,7 @@ class RestaurantPriceForm extends Form
                 'name'       => 'name',
                 'type'       => 'text',
                 'options'    => [
-                    'label' => 'Name des Restaurants',
+                    'label'            => 'Name des Restaurants',
                     'label_attributes' => [
                         'class' => 'col-sm-4 control-label',
                     ],
@@ -49,7 +49,7 @@ class RestaurantPriceForm extends Form
                 'name'       => 'price',
                 'type'       => 'text',
                 'options'    => [
-                    'label' => 'Preis der Pizza',
+                    'label'            => 'Preis der Pizza',
                     'label_attributes' => [
                         'class' => 'col-sm-4 control-label',
                     ],

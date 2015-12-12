@@ -50,8 +50,8 @@ class ShowPizzaAction
         PizzaServiceInterface $pizzaService,
         RestaurantPriceForm $restaurantPriceForm
     ) {
-        $this->template = $template;
-        $this->pizzaService = $pizzaService;
+        $this->template            = $template;
+        $this->pizzaService        = $pizzaService;
         $this->restaurantPriceForm = $restaurantPriceForm;
     }
 

@@ -36,13 +36,13 @@ class ShowVotingAction
      * ShowVotingAction constructor.
      *
      * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface  $pizzaService
+     * @param PizzaServiceInterface     $pizzaService
      */
     public function __construct(
         TemplateRendererInterface $template,
         PizzaServiceInterface $pizzaService
     ) {
-        $this->template        = $template;
+        $this->template     = $template;
         $this->pizzaService = $pizzaService;
     }
 

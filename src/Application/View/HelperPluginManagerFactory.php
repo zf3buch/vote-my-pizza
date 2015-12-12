@@ -28,8 +28,10 @@ class HelperPluginManagerFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $config  = $container->has('config') ? $container->get('config') : [];
-        $config  = isset($config['view_helpers'])
+        $config = $container->has('config') ? $container->get(
+            'config'
+        ) : [];
+        $config = isset($config['view_helpers'])
             ? $config['view_helpers']
             : [];
 
