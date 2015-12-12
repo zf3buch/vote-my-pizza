@@ -9,8 +9,8 @@
 
 namespace Pizza\Action;
 
-use Pizza\Model\Service\PizzaServiceInterface;
 use Interop\Container\ContainerInterface;
+use Pizza\Model\Service\PizzaServiceInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**

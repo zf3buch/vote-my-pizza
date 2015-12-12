@@ -17,45 +17,6 @@ namespace Pizza\Model\Service;
 class StaticPizzaService implements PizzaServiceInterface
 {
     /**
-     * @var array
-     */
-    private $pizzaList = [];
-
-    /**
-     * Sort descending by rate
-     *
-     * @param $a
-     * @param $b
-     *
-     * @return int
-     */
-    private function sortDescByRate($a, $b)
-    {
-        if ($a['rate'] == $b['rate']) {
-            return 0;
-        }
-
-        return ($a['rate'] < $b['rate']) ? +1 : -1;
-    }
-
-    /**
-     * Sort ascending by rate
-     *
-     * @param $a
-     * @param $b
-     *
-     * @return int
-     */
-    private function sortAscByRate($a, $b)
-    {
-        if ($a['rate'] == $b['rate']) {
-            return 0;
-        }
-
-        return ($a['rate'] > $b['rate']) ? +1 : -1;
-    }
-
-    /**
      * StaticPizzaService constructor.
      *
      * @param array $pizzaList
@@ -109,10 +70,10 @@ class StaticPizzaService implements PizzaServiceInterface
 
         usort(
             $topPizzas,
-            array(
+            [
                 'Pizza\Model\Service\StaticPizzaService',
-                'sortDescByRate'
-            )
+                'sortDescByRate',
+            ]
         );
 
         return array_slice($topPizzas, 0, 3);
@@ -129,10 +90,10 @@ class StaticPizzaService implements PizzaServiceInterface
 
         usort(
             $flopPizzas,
-            array(
+            [
                 'Pizza\Model\Service\StaticPizzaService',
-                'sortAscByRate'
-            )
+                'sortAscByRate',
+            ]
         );
 
         return array_slice($flopPizzas, 0, 3);
@@ -163,4 +124,42 @@ class StaticPizzaService implements PizzaServiceInterface
     {
         return true;
     }
+
+    /**
+     * Sort descending by rate
+     *
+     * @param $a
+     * @param $b
+     *
+     * @return int
+     */
+    private function sortDescByRate($a, $b)
+    {
+        if ($a['rate'] == $b['rate']) {
+            return 0;
+        }
+
+        return ($a['rate'] < $b['rate']) ? +1 : -1;
+    }
+
+    /**
+     * Sort ascending by rate
+     *
+     * @param $a
+     * @param $b
+     *
+     * @return int
+     */
+    private function sortAscByRate($a, $b)
+    {
+        if ($a['rate'] == $b['rate']) {
+            return 0;
+        }
+
+        return ($a['rate'] > $b['rate']) ? +1 : -1;
+    }
+    /**
+     * @var array
+     */
+    private $pizzaList = [];
 }
