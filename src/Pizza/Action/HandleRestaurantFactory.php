@@ -9,8 +9,9 @@
 
 namespace Pizza\Action;
 
-use Pizza\Model\Service\PizzaServiceInterface;
 use Interop\Container\ContainerInterface;
+use Pizza\Form\RestaurantPriceForm;
+use Pizza\Model\Service\PizzaServiceInterface;
 use Zend\Expressive\Router\RouterInterface;
 
 /**
@@ -29,7 +30,11 @@ class HandleRestaurantFactory
     {
         $router     = $container->get(RouterInterface::class);
         $repository = $container->get(PizzaServiceInterface::class);
+        $form       = $container->get(RestaurantPriceForm::class);
+        $nextAction = $container->get(ShowPizzaAction::class);
 
-        return new HandleRestaurantAction($router, $repository);
+        return new HandleRestaurantAction(
+            $router, $repository, $form, $nextAction
+        );
     }
 }

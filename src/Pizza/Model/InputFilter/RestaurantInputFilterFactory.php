@@ -7,32 +7,27 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Pizza\Form;
+namespace Pizza\Model\InputFilter;
 
 use Interop\Container\ContainerInterface;
-use Pizza\Model\InputFilter\RestaurantInputFilter;
-use Zend\Form\Form;
 
 /**
- * Class RestaurantPriceFactory
+ * Class RestaurantInputFilterFactory
  *
- * @package Pizza\Form
+ * @package Pizza\Model\InputFilter
  */
-class RestaurantPriceFactory extends Form
+class RestaurantInputFilterFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return RestaurantPriceForm
+     * @return RestaurantInputFilter
      */
     public function __invoke(ContainerInterface $container)
     {
-        $inputFilter = $container->get(RestaurantInputFilter::class);
+        $inputFilter = new RestaurantInputFilter();
+        $inputFilter->init();
 
-        $form = new RestaurantPriceForm();
-        $form->setInputFilter($inputFilter);
-        $form->init();
-
-        return $form;
+        return $inputFilter;
     }
 }

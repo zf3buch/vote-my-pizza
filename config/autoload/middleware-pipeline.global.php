@@ -7,9 +7,14 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+
 return [
     'dependencies' => [
-        'factories' => [
+        'invokables' => [
+            Application\I18n\LocalizationMiddleware::class =>
+                Application\I18n\LocalizationMiddleware::class,
+        ],
+        'factories'  => [
             Zend\Expressive\Helper\ServerUrlMiddleware::class =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
             Zend\Expressive\Helper\UrlHelperMiddleware::class =>
@@ -23,6 +28,7 @@ return [
                 'middleware' => [
                     Zend\Expressive\Helper\ServerUrlMiddleware::class,
                     Zend\Expressive\Helper\UrlHelperMiddleware::class,
+                    Application\I18n\LocalizationMiddleware::class,
                 ],
             ],
         ],

@@ -9,6 +9,7 @@
 
 namespace Pizza\Action;
 
+use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\Service\PizzaServiceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -34,16 +35,33 @@ class HandleRestaurantAction
     private $pizzaService;
 
     /**
+     * @var RestaurantPriceForm
+     */
+    private $restaurantPriceForm;
+
+    /**
+     * @var ShowPizzaAction
+     */
+    private $showPizzaAction;
+
+    /**
      * HandleRestaurantAction constructor.
      *
-     * @param RouterInterface          $router
+     * @param RouterInterface       $router
      * @param PizzaServiceInterface $pizzaService
+     * @param RestaurantPriceForm   $restaurantPriceForm
+     * @param ShowPizzaAction       $showPizzaAction
      */
     public function __construct(
-        RouterInterface $router, PizzaServiceInterface $pizzaService
+        RouterInterface $router,
+        PizzaServiceInterface $pizzaService,
+        RestaurantPriceForm $restaurantPriceForm,
+        ShowPizzaAction $showPizzaAction
     ) {
-        $this->router          = $router;
-        $this->pizzaService = $pizzaService;
+        $this->router              = $router;
+        $this->pizzaService        = $pizzaService;
+        $this->restaurantPriceForm = $restaurantPriceForm;
+        $this->showPizzaAction     = $showPizzaAction;
     }
 
     /**
@@ -62,10 +80,21 @@ class HandleRestaurantAction
 
         $postData = $request->getParsedBody();
 
-        $this->pizzaService->saveRestaurant($id, $postData);
+        $this->restaurantPriceForm->setData($postData);
 
-        return new RedirectResponse(
-            $this->router->generateUri('pizza-show', ['id' => $id])
-        );
+        if ($this->restaurantPriceForm->isValid()) {
+            $this->pizzaService->saveRestaurant(
+                $id, $this->restaurantPriceForm->getData()
+            );
+
+            return new RedirectResponse(
+                $this->router->generateUri('pizza-show', ['id' => $id])
+            );
+        }
+
+        $failureAction = $this->showPizzaAction;
+
+        return $failureAction($request, $response, $next);
+
     }
 }

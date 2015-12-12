@@ -29,6 +29,9 @@ return [
             Pizza\Model\Service\PizzaServiceInterface::class =>
                 Pizza\Model\Service\DbPizzaServiceFactory::class,
 
+            Pizza\Model\InputFilter\RestaurantInputFilter::class =>
+                Pizza\Model\InputFilter\RestaurantInputFilterFactory::class,
+
             Pizza\Form\RestaurantPriceForm::class =>
                 Pizza\Form\RestaurantPriceFactory::class,
         ]
