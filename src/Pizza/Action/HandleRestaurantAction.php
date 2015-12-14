@@ -40,28 +40,20 @@ class HandleRestaurantAction
     private $restaurantPriceForm;
 
     /**
-     * @var ShowPizzaAction
-     */
-    private $showPizzaAction;
-
-    /**
      * HandleRestaurantAction constructor.
      *
      * @param RouterInterface       $router
      * @param PizzaServiceInterface $pizzaService
      * @param RestaurantPriceForm   $restaurantPriceForm
-     * @param ShowPizzaAction       $showPizzaAction
      */
     public function __construct(
         RouterInterface $router,
         PizzaServiceInterface $pizzaService,
-        RestaurantPriceForm $restaurantPriceForm,
-        ShowPizzaAction $showPizzaAction
+        RestaurantPriceForm $restaurantPriceForm
     ) {
         $this->router              = $router;
         $this->pizzaService        = $pizzaService;
         $this->restaurantPriceForm = $restaurantPriceForm;
-        $this->showPizzaAction     = $showPizzaAction;
     }
 
     /**
@@ -92,9 +84,6 @@ class HandleRestaurantAction
             );
         }
 
-        $failureAction = $this->showPizzaAction;
-
-        return $failureAction($request, $response, $next);
-
+        return $next($request, $response);
     }
 }

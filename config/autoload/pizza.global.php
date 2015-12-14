@@ -76,7 +76,10 @@ return [
         [
             'name'            => 'pizza-handle-restaurant',
             'path'            => '/pizza/restaurant/:id',
-            'middleware'      => Pizza\Action\HandleRestaurantAction::class,
+            'middleware'      => [
+                Pizza\Action\HandleRestaurantAction::class,
+                Pizza\Action\ShowPizzaAction::class,
+            ],
             'allowed_methods' => ['POST'],
             'options'         => [
                 'constraints' => [

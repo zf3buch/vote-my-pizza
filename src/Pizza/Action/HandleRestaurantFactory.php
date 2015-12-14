@@ -31,10 +31,9 @@ class HandleRestaurantFactory
         $router     = $container->get(RouterInterface::class);
         $repository = $container->get(PizzaServiceInterface::class);
         $form       = $container->get(RestaurantPriceForm::class);
-        $nextAction = $container->get(ShowPizzaAction::class);
 
         return new HandleRestaurantAction(
-            $router, $repository, $form, $nextAction
+            $router, $repository, $form
         );
     }
 }
