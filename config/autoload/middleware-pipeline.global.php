@@ -10,10 +10,6 @@
 
 return [
     'dependencies' => [
-        'invokables' => [
-            Application\I18n\LocalizationMiddleware::class =>
-                Application\I18n\LocalizationMiddleware::class,
-        ],
         'factories'  => [
             Zend\Expressive\Helper\ServerUrlMiddleware::class =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
@@ -28,7 +24,6 @@ return [
                 'middleware' => [
                     Zend\Expressive\Helper\ServerUrlMiddleware::class,
                     Zend\Expressive\Helper\UrlHelperMiddleware::class,
-                    Application\I18n\LocalizationMiddleware::class,
                 ],
             ],
         ],
