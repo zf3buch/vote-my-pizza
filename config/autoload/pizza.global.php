@@ -10,72 +10,84 @@
 return [
     'dependencies' => [
         'factories' => [
-            Pizza\Action\ShowIntroAction::class        =>
+            Pizza\Action\ShowIntroAction::class                  =>
                 Pizza\Action\ShowIntroFactory::class,
-            Pizza\Action\ShowVotingAction::class       =>
+            Pizza\Action\ShowVotingAction::class                 =>
                 Pizza\Action\ShowVotingFactory::class,
-            Pizza\Action\ShowPizzaAction::class        =>
+            Pizza\Action\ShowPizzaAction::class                  =>
                 Pizza\Action\ShowPizzaFactory::class,
-            Pizza\Action\HandleVotingAction::class     =>
+            Pizza\Action\HandleVotingAction::class               =>
                 Pizza\Action\HandleVotingFactory::class,
-            Pizza\Action\HandleRestaurantAction::class =>
+            Pizza\Action\HandleRestaurantAction::class           =>
                 Pizza\Action\HandleRestaurantFactory::class,
 
-            Pizza\Model\Table\PizzaTableInterface::class      =>
+            Pizza\Model\Table\PizzaTableInterface::class         =>
                 Pizza\Model\Table\PizzaTableFactory::class,
-            Pizza\Model\Table\RestaurantTableInterface::class =>
+            Pizza\Model\Table\RestaurantTableInterface::class    =>
                 Pizza\Model\Table\RestaurantTableFactory::class,
 
-            Pizza\Model\Service\PizzaServiceInterface::class =>
+            Pizza\Model\Service\PizzaServiceInterface::class     =>
                 Pizza\Model\Service\DbPizzaServiceFactory::class,
 
             Pizza\Model\InputFilter\RestaurantInputFilter::class =>
                 Pizza\Model\InputFilter\RestaurantInputFilterFactory::class,
 
-            Pizza\Form\RestaurantPriceForm::class =>
+            Pizza\Form\RestaurantPriceForm::class                =>
                 Pizza\Form\RestaurantPriceFactory::class,
         ]
     ],
 
-    'routes' => [
+    'routes'       => [
         [
             'name'            => 'pizza-intro',
-            'path'            => '/pizza',
+            'path'            => '/:lang/pizza',
             'middleware'      => Pizza\Action\ShowIntroAction::class,
             'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'lang' => '(de|en)',
+                ],
+            ],
         ],
         [
             'name'            => 'pizza-voting',
-            'path'            => '/pizza/voting',
+            'path'            => '/:lang/pizza/voting',
             'middleware'      => Pizza\Action\ShowVotingAction::class,
             'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'lang' => '(de|en)',
+                ],
+            ],
         ],
         [
             'name'            => 'pizza-show',
-            'path'            => '/pizza/show/:id',
+            'path'            => '/:lang/pizza/show/:id',
             'middleware'      => Pizza\Action\ShowPizzaAction::class,
             'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
-                    'id' => '[1-9][0-9]*',
+                    'id'   => '[1-9][0-9]*',
+                    'lang' => '(de|en)',
                 ],
             ],
         ],
         [
             'name'            => 'pizza-handle-voting',
-            'path'            => '/pizza/voting/:pos/:neg',
+            'path'            => '/:lang/pizza/voting/:pos/:neg',
             'middleware'      => Pizza\Action\HandleVotingAction::class,
             'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
-                    'pos' => '[1-9][0-9]*',
-                    'neg' => '[1-9][0-9]*',
+                    'pos'  => '[1-9][0-9]*',
+                    'neg'  => '[1-9][0-9]*',
+                    'lang' => '(de|en)',
                 ],
             ],
         ],
         [
             'name'            => 'pizza-handle-restaurant',
-            'path'            => '/pizza/restaurant/:id',
+            'path'            => '/:lang/pizza/restaurant/:id',
             'middleware'      => [
                 Pizza\Action\HandleRestaurantAction::class,
                 Pizza\Action\ShowPizzaAction::class,
@@ -83,13 +95,14 @@ return [
             'allowed_methods' => ['POST'],
             'options'         => [
                 'constraints' => [
-                    'id' => '[1-9][0-9]*',
+                    'id'   => '[1-9][0-9]*',
+                    'lang' => '(de|en)',
                 ],
             ],
         ],
     ],
 
-    'templates' => [
+    'templates'    => [
         'paths' => [
             'pizza' => ['templates/pizza'],
         ]

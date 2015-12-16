@@ -64,6 +64,7 @@ class HandleVotingAction
 
         $this->pizzaService->saveVoting($posParam, $negParam);
 
+
         return new RedirectResponse(
             $this->router->generateUri('pizza-voting')
         );

@@ -9,7 +9,11 @@
 use Pizza\Form\RestaurantPriceForm;
 
 $urlRestaurant = $this->url('pizza-handle-restaurant',
-    ['id' => $this->pizza['id']]);
+    [
+        'id' => $this->pizza['id'],
+        'lang' => 'de',
+    ]
+);
 
 /** @var RestaurantPriceForm $form */
 $form = $this->restaurantPriceForm;
@@ -107,7 +111,7 @@ $form->setAttribute('action', $urlRestaurant);
 </div>
 <div class="row">
     <p class="text-center">
-        <a href="<?php echo $this->url('pizza-intro') ?>"
+        <a href="<?php echo $this->url('pizza-intro', ['lang' => 'de']) ?>"
            class="btn btn-success">
             Zurück zur Pizza-Seite
         </a>
