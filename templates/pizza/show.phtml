@@ -9,10 +9,7 @@
 use Pizza\Form\RestaurantPriceForm;
 
 $urlRestaurant = $this->url('pizza-handle-restaurant',
-    [
-        'id' => $this->pizza['id'],
-    ]
-);
+    ['id' => $this->pizza['id']]);
 
 /** @var RestaurantPriceForm $form */
 $form = $this->restaurantPriceForm;
