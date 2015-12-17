@@ -79,8 +79,13 @@ class HandleRestaurantAction
                 $id, $this->restaurantPriceForm->getData()
             );
 
+            $routeParams = [
+                'id'   => $id,
+                'lang' => $request->getAttribute('lang'),
+            ];
+
             return new RedirectResponse(
-                $this->router->generateUri('pizza-show', ['id' => $id])
+                $this->router->generateUri('pizza-show', $routeParams)
             );
         }
 

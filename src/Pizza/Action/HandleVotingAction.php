@@ -64,9 +64,12 @@ class HandleVotingAction
 
         $this->pizzaService->saveVoting($posParam, $negParam);
 
+        $routeParams = [
+            'lang' => $request->getAttribute('lang'),
+        ];
 
         return new RedirectResponse(
-            $this->router->generateUri('pizza-voting')
+            $this->router->generateUri('pizza-voting', $routeParams)
         );
     }
 }
