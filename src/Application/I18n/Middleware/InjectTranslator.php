@@ -7,7 +7,7 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\I18n;
+namespace Application\I18n\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -16,11 +16,11 @@ use Zend\I18n\Translator\Translator;
 use Zend\I18n\View\Helper\Translate;
 
 /**
- * Class InjectTranslatorMiddleware
+ * Class InjectTranslator
  *
- * @package Application\I18n
+ * @package Application\I18n\Middleware
  */
-class InjectTranslatorMiddleware
+class InjectTranslator
 {
     /**
      * @var Translator
@@ -58,8 +58,7 @@ class InjectTranslatorMiddleware
         ResponseInterface $response,
         callable $next = null
     ) {
-        var_dump($this->translator);
-        var_dump($this->translateHelper);
+        $this->translateHelper->setTranslator($this->translator);
 
         return $next($request, $response);
     }

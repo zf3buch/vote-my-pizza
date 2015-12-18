@@ -7,18 +7,18 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\I18n;
+namespace Application\I18n\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\RedirectResponse;
 
 /**
- * Class CheckLanguageMiddleware
+ * Class CheckLanguage
  *
- * @package Application\I18n
+ * @package Application\I18n\Middleware
  */
-class CheckLanguageMiddleware
+class CheckLanguage
 {
     /**
      * @param ServerRequestInterface $request

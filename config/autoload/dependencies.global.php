@@ -12,8 +12,8 @@ return [
         'invokables' => [
             Zend\Expressive\Helper\ServerUrlHelper::class =>
                 Zend\Expressive\Helper\ServerUrlHelper::class,
-            Application\I18n\SetLanguageObserver::class =>
-                Application\I18n\SetLanguageObserver::class,
+            Application\I18n\Observer\SetLanguageObserver::class =>
+                Application\I18n\Observer\SetLanguageObserver::class,
         ],
 
         'factories' => [
@@ -21,6 +21,8 @@ return [
                 Application\Expressive\ApplicationFactory::class,
             Zend\Expressive\Helper\UrlHelper::class =>
                 Application\View\Helper\UrlHelperFactory::class,
+            Zend\I18n\Translator\Translator::class =>
+                Application\I18n\Translator\TranslatorFactory::class,
         ],
     ]
 ];
