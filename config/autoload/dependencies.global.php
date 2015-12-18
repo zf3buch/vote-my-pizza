@@ -12,11 +12,13 @@ return [
         'invokables' => [
             Zend\Expressive\Helper\ServerUrlHelper::class =>
                 Zend\Expressive\Helper\ServerUrlHelper::class,
+            Application\I18n\SetLanguageObserver::class =>
+                Application\I18n\SetLanguageObserver::class,
         ],
 
         'factories' => [
             Zend\Expressive\Application::class =>
-                Zend\Expressive\Container\ApplicationFactory::class,
+                Application\Expressive\ApplicationFactory::class,
             Zend\Expressive\Helper\UrlHelper::class =>
                 Application\View\Helper\UrlHelperFactory::class,
         ],
