@@ -15,10 +15,12 @@ return [
                 Application\I18n\CheckLanguageMiddleware::class,
         ],
         'factories'  => [
-            Zend\Expressive\Helper\ServerUrlMiddleware::class =>
+            Zend\Expressive\Helper\ServerUrlMiddleware::class  =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
-            Zend\Expressive\Helper\UrlHelperMiddleware::class =>
+            Zend\Expressive\Helper\UrlHelperMiddleware::class  =>
                 Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
+            Application\I18n\InjectTranslatorMiddleware::class =>
+                Application\I18n\InjectTranslatorMiddlewareFactory::class,
         ],
     ],
 
@@ -29,6 +31,7 @@ return [
                     Application\I18n\CheckLanguageMiddleware::class,
                     Zend\Expressive\Helper\ServerUrlMiddleware::class,
                     Zend\Expressive\Helper\UrlHelperMiddleware::class,
+                    Application\I18n\InjectTranslatorMiddleware::class,
                 ],
             ],
         ],
