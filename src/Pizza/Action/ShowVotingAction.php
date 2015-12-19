@@ -61,7 +61,7 @@ class ShowVotingAction
         $votingPizzas = $this->pizzaService->getPizzasForVoting();
 
         $data = [
-            'title'  => 'Welche Pizza gefällt dir besser?',
+            'title'  => 'pizza_heading_voting',
             'pizzas' => $votingPizzas,
         ];
 

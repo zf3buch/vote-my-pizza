@@ -10,7 +10,6 @@
 namespace Application\I18n\Translator;
 
 use Interop\Container\ContainerInterface;
-use Zend\I18n\Translator\Translator;
 
 /**
  * Class TranslatorFactory

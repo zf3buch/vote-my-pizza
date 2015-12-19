@@ -12,8 +12,6 @@ return [
         'invokables' => [
             Zend\Expressive\Helper\ServerUrlHelper::class =>
                 Zend\Expressive\Helper\ServerUrlHelper::class,
-            Application\I18n\Observer\SetLanguageObserver::class =>
-                Application\I18n\Observer\SetLanguageObserver::class,
         ],
 
         'factories' => [
@@ -23,6 +21,19 @@ return [
                 Application\View\Helper\UrlHelperFactory::class,
             Zend\I18n\Translator\Translator::class =>
                 Application\I18n\Translator\TranslatorFactory::class,
+            Application\I18n\Observer\SetLanguageObserver::class =>
+                Application\I18n\Observer\SetLanguageObserverFactory::class,
         ],
-    ]
+    ],
+
+    'translate' => [
+        'translation_file_patterns' => [
+            [
+                'type'         => 'phpArray',
+                'base_dir'     => APPLICATION_ROOT . '/language/application',
+                'pattern'      => '%s.php',
+                'text_domain'  => 'default',
+            ],
+        ],
+    ],
 ];

@@ -62,7 +62,7 @@ class ShowIntroAction
         $flopPizzas = $this->pizzaService->getFlopPizzas();
 
         $data = [
-            'welcome'    => 'Willkommen zu Vote My Pizza!',
+            'welcome'    => 'pizza_heading_welcome',
             'topPizzas'  => $topPizzas,
             'flopPizzas' => $flopPizzas,
         ];

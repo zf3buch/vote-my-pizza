@@ -9,11 +9,14 @@
 ?>
 <?php $this->headTitle('404 Not Found'); ?>
 
-<h1>Huch!</h1>
-<h2>Das ist echt unangenehm.</h2>
-<p>Wir sind auf einen "404 Not Found" Fehler gestossen.</p>
+<h1><?php echo $this->translate('application_heading_oops'); ?></h1>
+<h2><?php echo $this->translate('application_heading_awkward'); ?></h2>
 <p>
-    Du suchst etwas, das hier nicht existiert oder verschoben wurde.
-    Du kannst gerne zurück auf die
-    <a href="<?php echo $this->url('home') ?>">Startseite</a> wechseln.
+    <?php echo $this->translate('application_message_encountered_404'); ?>
+</p>
+<p>
+    <?php echo sprintf(
+        $this->translate('application_message_not_found_404'),
+        $this->url('home')
+    ); ?>
 </p>

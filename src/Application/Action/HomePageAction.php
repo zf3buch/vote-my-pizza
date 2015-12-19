@@ -50,7 +50,7 @@ class HomePageAction
         callable $next = null
     ) {
         $data = [
-            'welcome' => 'Willkommen zu Vote My Pizza!',
+            'welcome' => 'application_heading_welcome',
         ];
 
         return new HtmlResponse(

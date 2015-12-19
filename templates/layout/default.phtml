@@ -67,7 +67,7 @@ $this->inlineScript()->prependFile(
                     data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">
-                    Toggle navigation
+                    <?php echo $this->translate('application_action_toggle_navigation'); ?>
                 </span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -78,17 +78,32 @@ $this->inlineScript()->prependFile(
             <ul class="nav navbar-nav">
                 <li>
                     <a href="<?php echo $this->url('home') ?>">
-                        <i class="fa fa-home"></i> Home
+                        <i class="fa fa-home"></i>
+                        <?php echo $this->translate('application_navigation_home'); ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo $this->url('pizza-intro') ?>">
-                        <i class="fa fa-thumbs-up"></i> Pizza Intro
+                        <i class="fa fa-thumbs-up"></i>
+                        <?php echo $this->translate('pizza_navigation_intro'); ?>
                     </a>
                 </li>
                 <li>
                     <a href="<?php echo $this->url('pizza-voting') ?>">
-                        <i class="fa fa-star"></i> Abstimmen
+                        <i class="fa fa-star"></i>
+                        <?php echo $this->translate('pizza_navigation_vote'); ?>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="<?php echo $this->url('home', ['lang' => 'de']) ?>">
+                        <?php echo $this->translate('application_navigation_german'); ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->url('home', ['lang' => 'en']) ?>">
+                        <?php echo $this->translate('application_navigation_english'); ?>
                     </a>
                 </li>
             </ul>

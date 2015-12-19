@@ -33,7 +33,7 @@ class RestaurantPriceForm extends Form
                 'name'       => 'name',
                 'type'       => 'text',
                 'options'    => [
-                    'label'            => 'Name des Restaurants',
+                    'label'            => 'pizza_label_restaurant',
                     'label_attributes' => [
                         'class' => 'col-sm-4 control-label',
                     ],
@@ -49,7 +49,7 @@ class RestaurantPriceForm extends Form
                 'name'       => 'price',
                 'type'       => 'text',
                 'options'    => [
-                    'label'            => 'Preis der Pizza',
+                    'label'            => 'pizza_label_price',
                     'label_attributes' => [
                         'class' => 'col-sm-4 control-label',
                     ],
@@ -66,7 +66,7 @@ class RestaurantPriceForm extends Form
                 'type'       => 'submit',
                 'attributes' => [
                     'class' => 'btn btn-success',
-                    'value' => 'Neuen Restaurant Preis speichern',
+                    'value' => 'pizza_action_new_price',
                     'id'    => 'save_price',
                 ],
             ]

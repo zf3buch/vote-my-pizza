@@ -55,7 +55,7 @@ $this->inlineScript()->appendScript(
     "
 );
 ?>
-<h1><?php echo $this->title; ?></h1>
+<h1><?php echo $this->translate($this->title); ?></h1>
 <div class="row">
     <div class="col-sm-6">
         <div class="thumbnail text-center">
@@ -80,21 +80,29 @@ $this->inlineScript()->appendScript(
         </div>
         <p class="text-center">
             <a href="<?php echo $urlShowLeft; ?>" class="btn btn-success">
-                Pizza anzeigen
+                <?php echo $this->translate('pizza_action_show_pizza'); ?>
             </a>
         </p>
         <?php foreach ($this->pizzas['left']['restaurants'] as $restaurant)
             : ?>
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    Restaurant
-                    <?php echo $restaurant['name']; ?>
+                    <?php
+                    echo sprintf(
+                        $this->translate('pizza_message_restaurant'),
+                        $restaurant['name']
+                    );
+                    ?>
                 </div>
                 <div class="panel-body">
-                    <?php echo $this->pizzas['left']['name']; ?>
-                    kostet nur
-                    <strong><?php echo $restaurant['price']; ?></strong>
-                    Euro (Stand: <?php echo $restaurant['date']; ?>).
+                    <?php
+                    echo sprintf(
+                        $this->translate('pizza_message_costs'),
+                        $this->pizzas['left']['name'],
+                        $restaurant['price'],
+                        $restaurant['date']
+                    );
+                    ?>
                 </div>
             </div>
         <?php endforeach ?>
@@ -122,21 +130,29 @@ $this->inlineScript()->appendScript(
         </div>
         <p class="text-center">
             <a href="<?php echo $urlShowRight; ?>" class="btn btn-success">
-                Pizza anzeigen
+                <?php echo $this->translate('pizza_action_show_pizza'); ?>
             </a>
         </p>
         <?php foreach ($this->pizzas['right']['restaurants'] as $restaurant)
             : ?>
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    Restaurant
-                    <?php echo $restaurant['name']; ?>
+                    <?php
+                    echo sprintf(
+                        $this->translate('pizza_message_restaurant'),
+                        $restaurant['name']
+                    );
+                    ?>
                 </div>
                 <div class="panel-body">
-                    <?php echo $this->pizzas['right']['name']; ?>
-                    kostet nur
-                    <strong><?php echo $restaurant['price']; ?></strong>
-                    Euro (Stand: <?php echo $restaurant['date']; ?>).
+                    <?php
+                    echo sprintf(
+                        $this->translate('pizza_message_costs'),
+                        $this->pizzas['right']['name'],
+                        $restaurant['price'],
+                        $restaurant['date']
+                    );
+                    ?>
                 </div>
             </div>
         <?php endforeach ?>

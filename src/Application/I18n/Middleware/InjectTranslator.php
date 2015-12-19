@@ -13,7 +13,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\I18n\Translator\Translator;
-use Zend\I18n\View\Helper\Translate;
+use Zend\Validator\AbstractValidator;
+use Zend\View\HelperPluginManager;
 
 /**
  * Class InjectTranslator
@@ -28,22 +29,22 @@ class InjectTranslator
     private $translator;
 
     /**
-     * @var Translate
+     * @var HelperPluginManager
      */
-    private $translateHelper;
+    private $helperPluginManager;
 
     /**
-     * InjectTranslatorMiddleware constructor.
+     * InjectTranslator constructor.
      *
-     * @param Translator $translator
-     * @param Translate  $translateHelper
+     * @param Translator          $translator
+     * @param HelperPluginManager $helperPluginManager
      */
     public function __construct(
         Translator $translator,
-        Translate $translateHelper
+        HelperPluginManager $helperPluginManager
     ) {
-        $this->translator = $translator;
-        $this->translateHelper = $translateHelper;
+        $this->translator          = $translator;
+        $this->helperPluginManager = $helperPluginManager;
     }
 
     /**
@@ -58,7 +59,16 @@ class InjectTranslator
         ResponseInterface $response,
         callable $next = null
     ) {
-        $this->translateHelper->setTranslator($this->translator);
+        $translateHelper = $this->helperPluginManager->get('translate');
+        $translateHelper->setTranslator($this->translator);
+
+        $formSubmitHelper = $this->helperPluginManager->get('formSubmit');
+        $formSubmitHelper->setTranslator($this->translator);
+
+        $formLabelHelper = $this->helperPluginManager->get('formLabel');
+        $formLabelHelper->setTranslator($this->translator);
+
+        AbstractValidator::setDefaultTranslator($this->translator);
 
         return $next($request, $response);
     }

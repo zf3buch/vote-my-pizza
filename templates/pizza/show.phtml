@@ -8,8 +8,10 @@
  */
 use Pizza\Form\RestaurantPriceForm;
 
-$urlRestaurant = $this->url('pizza-handle-restaurant',
-    ['id' => $this->pizza['id']]);
+$urlRestaurant = $this->url(
+    'pizza-handle-restaurant',
+    ['id' => $this->pizza['id']]
+);
 
 /** @var RestaurantPriceForm $form */
 $form = $this->restaurantPriceForm;
@@ -56,22 +58,33 @@ $form->setAttribute('action', $urlRestaurant);
             : ?>
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    Restaurant
-                    <?php echo $restaurant['name']; ?>
+                    <?php
+                    echo sprintf(
+                        $this->translate('pizza_message_restaurant'),
+                        $restaurant['name']
+                    );
+                    ?>
                 </div>
                 <div class="panel-body">
-                    <?php echo $this->pizza['name']; ?>
-                    kostet nur
-                    <strong><?php echo $restaurant['price']; ?></strong>
-                    Euro (Stand: <?php echo $restaurant['date']; ?>).
+                    <?php
+                    echo sprintf(
+                        $this->translate('pizza_message_costs'),
+                        $this->pizza['name'],
+                        $restaurant['price'],
+                        $restaurant['date']
+                    );
+                    ?>
                 </div>
             </div>
         <?php endforeach ?>
         <div class="panel panel-success">
             <div class="panel-heading">
-                Neuen Restaurant Preis für
-                <strong><?php echo $this->pizza['name'] ?></strong>
-                speichern
+                <?php
+                echo sprintf(
+                    $this->translate('pizza_heading_new_price'),
+                    $this->pizza['name']
+                );
+                ?>
             </div>
             <div class="panel-body">
                 <?php echo $this->form()->openTag($form); ?>
@@ -109,7 +122,7 @@ $form->setAttribute('action', $urlRestaurant);
     <p class="text-center">
         <a href="<?php echo $this->url('pizza-intro') ?>"
            class="btn btn-success">
-            Zurück zur Pizza-Seite
+            <?php echo $this->translate('pizza_action_back_intro'); ?>
         </a>
     </p>
 </div>

@@ -41,7 +41,7 @@ class RestaurantInputFilter extends InputFilter
                         'name'                   => 'NotEmpty',
                         'break_chain_on_failure' => true,
                         'options'                => [
-                            'message' => 'Bitte Restaurantnamen eingeben!',
+                            'message' => 'pizza_validator_restaurant_notempty',
                         ],
                     ],
                     [
@@ -50,7 +50,7 @@ class RestaurantInputFilter extends InputFilter
                             'encoding' => 'UTF-8',
                             'min'      => 3,
                             'max'      => 64,
-                            'message'  => 'Nur %min%-%max% Zeichen erlaubt!',
+                            'message'  => 'pizza_validator_restaurant_length',
                         ],
                     ],
                 ],
@@ -81,14 +81,14 @@ class RestaurantInputFilter extends InputFilter
                         'name'                   => 'NotEmpty',
                         'break_chain_on_failure' => true,
                         'options'                => [
-                            'message' => 'Bitte Pizzapreis eingeben!',
+                            'message' => 'pizza_validator_price_notempty',
                         ],
                     ],
                     [
                         'name'    => 'IsFloat',
                         'options' => [
                             'min'     => 0,
-                            'message' => 'Nur Preisangaben erlaubt!',
+                            'message' => 'pizza_validator_price_float',
                         ],
                     ],
                 ],
