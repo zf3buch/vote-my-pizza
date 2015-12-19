@@ -26,8 +26,8 @@ return [
             Pizza\Model\Table\RestaurantTableInterface::class =>
                 Pizza\Model\Table\RestaurantTableFactory::class,
 
-            Pizza\Model\Service\PizzaServiceInterface::class =>
-                Pizza\Model\Service\DbPizzaServiceFactory::class,
+            Pizza\Model\Repository\PizzaRepositoryInterface::class =>
+                Pizza\Model\Repository\DbPizzaRepositoryFactory::class,
         ]
     ],
 

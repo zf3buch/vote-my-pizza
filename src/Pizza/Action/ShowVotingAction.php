@@ -9,7 +9,7 @@
 
 namespace Pizza\Action;
 
-use Pizza\Model\Service\PizzaServiceInterface;
+use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -28,22 +28,22 @@ class ShowVotingAction
     private $template;
 
     /**
-     * @var PizzaServiceInterface
+     * @var PizzaRepositoryInterface
      */
-    private $pizzaService;
+    private $pizzaRepository;
 
     /**
      * ShowVotingAction constructor.
      *
      * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface     $pizzaService
+     * @param PizzaRepositoryInterface  $pizzaRepository
      */
     public function __construct(
         TemplateRendererInterface $template,
-        PizzaServiceInterface $pizzaService
+        PizzaRepositoryInterface $pizzaRepository
     ) {
-        $this->template     = $template;
-        $this->pizzaService = $pizzaService;
+        $this->template        = $template;
+        $this->pizzaRepository = $pizzaRepository;
     }
 
     /**
@@ -58,7 +58,7 @@ class ShowVotingAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        $votingPizzas = $this->pizzaService->getPizzasForVoting();
+        $votingPizzas = $this->pizzaRepository->getPizzasForVoting();
 
         $data = [
             'title'  => 'Welche Pizza gefällt dir besser?',
