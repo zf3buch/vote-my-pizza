@@ -21,8 +21,8 @@ return [
             Pizza\Action\HandleRestaurantAction::class =>
                 Pizza\Action\HandleRestaurantFactory::class,
 
-            Pizza\Model\Service\PizzaServiceInterface::class =>
-                Pizza\Model\Service\StaticPizzaServiceFactory::class,
+            Pizza\Model\Repository\PizzaRepositoryInterface::class =>
+                Pizza\Model\Repository\StaticPizzaRepositoryFactory::class,
         ]
     ],
 

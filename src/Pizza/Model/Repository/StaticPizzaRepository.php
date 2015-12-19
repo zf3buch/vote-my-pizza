@@ -7,17 +7,17 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Pizza\Model\Service;
+namespace Pizza\Model\Repository;
 
 /**
- * Class StaticPizzaService
+ * Class StaticPizzaRepository
  *
- * @package Pizza\Model\Service
+ * @package Pizza\Model\Repository
  */
-class StaticPizzaService implements PizzaServiceInterface
+class StaticPizzaRepository implements PizzaRepositoryInterface
 {
     /**
-     * StaticPizzaService constructor.
+     * StaticPizzaRepository constructor.
      *
      * @param array $pizzaList
      */
@@ -71,7 +71,7 @@ class StaticPizzaService implements PizzaServiceInterface
         usort(
             $topPizzas,
             [
-                'Pizza\Model\Service\StaticPizzaService',
+                'Pizza\Model\Repository\StaticPizzaRepository',
                 'sortDescByRate',
             ]
         );
@@ -91,7 +91,7 @@ class StaticPizzaService implements PizzaServiceInterface
         usort(
             $flopPizzas,
             [
-                'Pizza\Model\Service\StaticPizzaService',
+                'Pizza\Model\Repository\StaticPizzaRepository',
                 'sortAscByRate',
             ]
         );
@@ -158,6 +158,7 @@ class StaticPizzaService implements PizzaServiceInterface
 
         return ($a['rate'] > $b['rate']) ? +1 : -1;
     }
+
     /**
      * @var array
      */
