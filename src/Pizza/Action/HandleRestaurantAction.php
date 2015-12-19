@@ -10,7 +10,7 @@
 namespace Pizza\Action;
 
 use Pizza\Form\RestaurantPriceForm;
-use Pizza\Model\Service\PizzaServiceInterface;
+use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -30,9 +30,9 @@ class HandleRestaurantAction
     private $router;
 
     /**
-     * @var PizzaServiceInterface
+     * @var PizzaRepositoryInterface
      */
-    private $pizzaService;
+    private $pizzaRepository;
 
     /**
      * @var RestaurantPriceForm
@@ -42,17 +42,17 @@ class HandleRestaurantAction
     /**
      * HandleRestaurantAction constructor.
      *
-     * @param RouterInterface       $router
-     * @param PizzaServiceInterface $pizzaService
-     * @param RestaurantPriceForm   $restaurantPriceForm
+     * @param RouterInterface          $router
+     * @param PizzaRepositoryInterface $pizzaRepository
+     * @param RestaurantPriceForm      $restaurantPriceForm
      */
     public function __construct(
         RouterInterface $router,
-        PizzaServiceInterface $pizzaService,
+        PizzaRepositoryInterface $pizzaRepository,
         RestaurantPriceForm $restaurantPriceForm
     ) {
         $this->router              = $router;
-        $this->pizzaService        = $pizzaService;
+        $this->pizzaRepository     = $pizzaRepository;
         $this->restaurantPriceForm = $restaurantPriceForm;
     }
 
@@ -75,7 +75,7 @@ class HandleRestaurantAction
         $this->restaurantPriceForm->setData($postData);
 
         if ($this->restaurantPriceForm->isValid()) {
-            $this->pizzaService->saveRestaurant(
+            $this->pizzaRepository->saveRestaurant(
                 $id, $this->restaurantPriceForm->getData()
             );
 
