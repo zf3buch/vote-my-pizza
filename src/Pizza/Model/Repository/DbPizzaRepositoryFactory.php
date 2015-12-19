@@ -7,23 +7,23 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Pizza\Model\Service;
+namespace Pizza\Model\Repository;
 
 use Interop\Container\ContainerInterface;
 use Pizza\Model\Table\PizzaTableInterface;
 use Pizza\Model\Table\RestaurantTableInterface;
 
 /**
- * Class DbPizzaServiceFactory
+ * Class DbPizzaRepositoryFactory
  *
- * @package Pizza\Model\Service
+ * @package Pizza\Model\Repository
  */
-class DbPizzaServiceFactory
+class DbPizzaRepositoryFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return DbPizzaService
+     * @return DbPizzaRepository
      */
     public function __invoke(ContainerInterface $container)
     {
@@ -33,6 +33,6 @@ class DbPizzaServiceFactory
             RestaurantTableInterface::class
         );
 
-        return new DbPizzaService($pizzaTable, $restaurantTable);
+        return new DbPizzaRepository($pizzaTable, $restaurantTable);
     }
 }

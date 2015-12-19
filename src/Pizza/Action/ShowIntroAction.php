@@ -9,7 +9,7 @@
 
 namespace Pizza\Action;
 
-use Pizza\Model\Service\PizzaServiceInterface;
+use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -28,22 +28,22 @@ class ShowIntroAction
     private $template;
 
     /**
-     * @var PizzaServiceInterface
+     * @var PizzaRepositoryInterface
      */
-    private $pizzaService;
+    private $pizzaRepository;
 
     /**
      * ShowIntroAction constructor.
      *
      * @param TemplateRendererInterface $template
-     * @param PizzaServiceInterface     $pizzaService
+     * @param PizzaRepositoryInterface  $pizzaRepository
      */
     public function __construct(
         TemplateRendererInterface $template,
-        PizzaServiceInterface $pizzaService
+        PizzaRepositoryInterface $pizzaRepository
     ) {
-        $this->template     = $template;
-        $this->pizzaService = $pizzaService;
+        $this->template        = $template;
+        $this->pizzaRepository = $pizzaRepository;
     }
 
     /**
@@ -58,8 +58,8 @@ class ShowIntroAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        $topPizzas  = $this->pizzaService->getTopPizzas();
-        $flopPizzas = $this->pizzaService->getFlopPizzas();
+        $topPizzas  = $this->pizzaRepository->getTopPizzas();
+        $flopPizzas = $this->pizzaRepository->getFlopPizzas();
 
         $data = [
             'welcome'    => 'Willkommen zu Vote My Pizza!',
