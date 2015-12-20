@@ -54,8 +54,7 @@ $form->setAttribute('action', $urlRestaurant);
         </div>
     </div>
     <div class="col-md-6">
-        <?php foreach ($this->pizza['restaurants'] as $restaurant)
-            : ?>
+        <?php foreach ($this->pizza['restaurants'] as $restaurant) : ?>
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <?php
@@ -70,8 +69,15 @@ $form->setAttribute('action', $urlRestaurant);
                     echo sprintf(
                         $this->translate('pizza_message_costs'),
                         $this->pizza['name'],
-                        $restaurant['price'],
-                        $restaurant['date']
+                        $this->currencyFormat(
+                            $restaurant['price'],
+                            'EUR'
+                        ),
+                        $this->dateFormat(
+                            strtotime($restaurant['date']),
+                            IntlDateFormatter::LONG,
+                            IntlDateFormatter::MEDIUM
+                        )
                     );
                     ?>
                 </div>

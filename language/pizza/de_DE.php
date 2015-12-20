@@ -24,7 +24,7 @@ return [
     'pizza_action_new_price'  => 'Neuen Restaurant Preis speichern',
 
     'pizza_message_restaurant' => 'Restaurant %1$s',
-    'pizza_message_costs'      => '%1$s kostet nur <strong>%2$s</strong> Euro (Stand: %3$s)',
+    'pizza_message_costs'      => '%1$s kostet nur <strong>%2$s</strong> (Stand: %3$s)',
 
     'pizza_validator_restaurant_notempty' => 'Bitte Restaurantnamen eingeben!',
     'pizza_validator_restaurant_length'   => 'Nur %min%-%max% Zeichen erlaubt!',

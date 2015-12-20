@@ -99,8 +99,15 @@ $this->inlineScript()->appendScript(
                     echo sprintf(
                         $this->translate('pizza_message_costs'),
                         $this->pizzas['left']['name'],
-                        $restaurant['price'],
-                        $restaurant['date']
+                        $this->currencyFormat(
+                            $restaurant['price'],
+                            'EUR'
+                        ),
+                        $this->dateFormat(
+                            strtotime($restaurant['date']),
+                            IntlDateFormatter::LONG,
+                            IntlDateFormatter::MEDIUM
+                        )
                     );
                     ?>
                 </div>
@@ -149,8 +156,15 @@ $this->inlineScript()->appendScript(
                     echo sprintf(
                         $this->translate('pizza_message_costs'),
                         $this->pizzas['right']['name'],
-                        $restaurant['price'],
-                        $restaurant['date']
+                        $this->currencyFormat(
+                            $restaurant['price'],
+                            'EUR'
+                        ),
+                        $this->dateFormat(
+                            strtotime($restaurant['date']),
+                            IntlDateFormatter::LONG,
+                            IntlDateFormatter::MEDIUM
+                        )
                     );
                     ?>
                 </div>

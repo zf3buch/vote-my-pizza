@@ -24,7 +24,7 @@ return [
     'pizza_action_new_price'  => 'Save new restaurant price',
 
     'pizza_message_restaurant' => 'Restaurant %1$s',
-    'pizza_message_costs'      => '%1$s costs only <strong>%2$s</strong> Euro (Date: %3$s)',
+    'pizza_message_costs'      => '%1$s costs only <strong>%2$s</strong> (Date: %3$s)',
 
     'pizza_validator_restaurant_notempty' => 'Please enter restaurant name!',
     'pizza_validator_restaurant_length'   => 'Only %min%-%max% chars allowed!',
