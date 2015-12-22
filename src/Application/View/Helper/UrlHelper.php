@@ -47,15 +47,17 @@ class UrlHelper extends ExpressiveUrlHelper
      *                                    result match present.
      * @throws RuntimeException if no route provided, and result
      *                                    match is a routing failure.
-     * @throws MissingRouterException if router cannot generate URI for given
-     *                         route.
+     * @throws MissingRouterException if router cannot generate URI for
+     *                                given route.
      */
     public function __invoke($route = null, array $params = [])
     {
         $matchedParams = $this->result->getMatchedParams();
 
         if (isset($matchedParams['lang'])) {
-            $params = array_merge(['lang' => $matchedParams['lang']], $params);
+            $params = array_merge(
+                ['lang' => $matchedParams['lang']], $params
+            );
         }
 
         return parent::__invoke(
