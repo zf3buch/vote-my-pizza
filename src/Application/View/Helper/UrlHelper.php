@@ -32,6 +32,8 @@ class UrlHelper extends ExpressiveUrlHelper
     public function update(RouteResult $result)
     {
         $this->result = $result;
+
+        parent::update($result);
     }
 
     /**
