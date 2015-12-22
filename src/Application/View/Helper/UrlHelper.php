@@ -52,9 +52,11 @@ class UrlHelper extends ExpressiveUrlHelper
      */
     public function __invoke($route = null, array $params = [])
     {
-        $lang = $this->result->getMatchedParams()['lang'];
+        $matchedParams = $this->result->getMatchedParams();
 
-        $params = array_merge(['lang' => $lang], $params);
+        if (isset($matchedParams['lang'])) {
+            $params = array_merge(['lang' => $matchedParams['lang']], $params);
+        }
 
         return parent::__invoke(
             $route, $params
