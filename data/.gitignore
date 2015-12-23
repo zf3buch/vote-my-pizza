@@ -2,3 +2,4 @@
 !.gitignore
 !db
 !db/pizza.mysql.sql
+!db/user.mysql.sql

@@ -37,5 +37,4 @@ class ApplicationFactory extends ExpressiveApplicationFactory
 
         return $application;
     }
-
 }
