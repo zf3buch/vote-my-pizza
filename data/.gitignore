@@ -1,4 +1,4 @@
 *
 !.gitignore
 !db
-!db/mysql.dump
+!db/pizza.mysql.sql
