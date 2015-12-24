@@ -39,7 +39,8 @@
     "autoload": {
         "psr-4": {
             "Application\\": "src/Application/",
-            "Pizza\\": "src/Pizza/"
+            "Pizza\\": "src/Pizza/",
+            "User\\": "src/User/"
         }
     },
     "autoload-dev": {

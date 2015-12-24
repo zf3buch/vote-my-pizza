@@ -7,14 +7,14 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Permissions;
+namespace User\Permissions;
 
 use Zend\Permissions\Rbac\AbstractRole;
 
 /**
  * Class GuestRole
  *
- * @package Application\Permissions
+ * @package User\Permissions
  */
 class GuestRole extends AbstractRole
 {

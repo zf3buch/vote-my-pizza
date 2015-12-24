@@ -7,31 +7,29 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Permissions;
+namespace User\Permissions;
 
 use Zend\Permissions\Rbac\AbstractRole;
 
 /**
- * Class MemberRole
+ * Class AdminRole
  *
- * @package Application\Permissions
+ * @package User\Permissions
  */
-class MemberRole extends AbstractRole
+class AdminRole extends AbstractRole
 {
     /**
      * @var string
      */
-    protected $name = 'member';
+    protected $name = 'admin';
 
     /**
-     * MemberRole constructor.
+     * AdminRole constructor.
      */
     public function __construct()
     {
-        $this->addChild(new GuestRole());
+        $this->addChild(new MemberRole());
 
-        $this->addPermission('pizza-voting');
-        $this->addPermission('pizza-handle-voting');
-        $this->addPermission('pizza-handle-restaurant');
+        $this->addPermission('pizza-delete-restaurant');
     }
 }

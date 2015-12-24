@@ -17,6 +17,7 @@ return [
     'application_navigation_english' => 'English',
 
     'application_action_toggle_navigation' => 'Toogle navigation',
+    'application_action_back_home'         => 'Back to homepage',
 
     'application_message_soon_more'       => 'More to come in the near future...',
     'application_message_encountered_404' => 'We encountered a "404 Not Found" error.',

@@ -17,6 +17,7 @@ return [
     'application_navigation_english' => 'Englisch',
 
     'application_action_toggle_navigation' => 'Navigation umschalten',
+    'application_action_back_home'         => 'Zurück zur Startseite',
 
     'application_message_soon_more'       => 'In Kürze mehr...',
     'application_message_encountered_404' => 'Wir sind auf einen "404 Not Found" Fehler gestossen.',
