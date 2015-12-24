@@ -11,39 +11,40 @@ namespace User\Action;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use User\Form\LoginForm;
+use User\Form\RegisterForm;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
- * Class ShowLoginAction
+ * Class HandleRegisterAction
  *
  * @package User\Action
  */
-class ShowLoginAction
+class HandleRegisterAction
 {
     /**
-     * @var TemplateRendererInterface
+     * @var RouterInterface
      */
-    private $template;
+    private $router;
 
     /**
-     * @var LoginForm
+     * @var RegisterForm
      */
-    private $loginForm;
+    private $loginFormForm;
 
     /**
-     * ShowLoginAction constructor.
+     * HandleRegisterAction constructor.
      *
-     * @param TemplateRendererInterface $template
-     * @param LoginForm                 $loginForm
+     * @param RouterInterface $router
+     * @param RegisterForm    $loginFormForm
      */
     public function __construct(
-        TemplateRendererInterface $template,
-        LoginForm $loginForm
+        RouterInterface $router,
+        RegisterForm $loginFormForm
     ) {
-        $this->template  = $template;
-        $this->loginForm = $loginForm;
+        $this->router        = $router;
+        $this->loginFormForm = $loginFormForm;
     }
 
     /**
@@ -58,12 +59,12 @@ class ShowLoginAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        $data = [
-            'loginForm' => $this->loginForm,
+        $routeParams = [
+            'lang' => $request->getAttribute('lang'),
         ];
 
-        return new HtmlResponse(
-            $this->template->render('user::login', $data)
+        return new RedirectResponse(
+            $this->router->generateUri('home', $routeParams)
         );
     }
 }

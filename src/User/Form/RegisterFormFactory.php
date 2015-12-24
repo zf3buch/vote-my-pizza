@@ -7,29 +7,32 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace User\Action;
+namespace User\Form;
 
 use Interop\Container\ContainerInterface;
-use User\Form\LoginForm;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use User\Model\InputFilter\RegisterInputFilter;
+use Zend\Form\Form;
 
 /**
- * Class ShowLoginFactory
+ * Class RegisterFormFactory
  *
- * @package User\Action
+ * @package User\Form
  */
-class ShowLoginFactory
+class RegisterFormFactory extends Form
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return ShowLoginAction
+     * @return RegisterForm
      */
     public function __invoke(ContainerInterface $container)
     {
-        $template = $container->get(TemplateRendererInterface::class);
-        $form     = $container->get(LoginForm::class);
+        $inputFilter = $container->get(RegisterInputFilter::class);
 
-        return new ShowLoginAction($template, $form);
+        $form = new RegisterForm();
+        $form->setInputFilter($inputFilter);
+        $form->init();
+
+        return $form;
     }
 }

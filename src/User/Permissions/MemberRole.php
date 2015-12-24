@@ -19,11 +19,6 @@ use Zend\Permissions\Rbac\AbstractRole;
 class MemberRole extends AbstractRole
 {
     /**
-     * @var string
-     */
-    protected $name = 'member';
-
-    /**
      * MemberRole constructor.
      */
     public function __construct()
@@ -34,4 +29,8 @@ class MemberRole extends AbstractRole
         $this->addPermission('pizza-handle-voting');
         $this->addPermission('pizza-handle-restaurant');
     }
+    /**
+     * @var string
+     */
+    protected $name = 'member';
 }

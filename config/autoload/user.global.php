@@ -10,16 +10,22 @@
 return [
     'dependencies' => [
         'factories' => [
-            User\Action\ShowLoginAction::class   =>
-                User\Action\ShowLoginFactory::class,
-//            User\Action\HandleLoginAction::class =>
-//                User\Action\HandleLoginFactory::class,
+            User\Action\ShowIntroAction::class   =>
+                User\Action\ShowIntroFactory::class,
+            User\Action\HandleLoginAction::class =>
+                User\Action\HandleLoginFactory::class,
+            User\Action\HandleRegisterAction::class =>
+                User\Action\HandleRegisterFactory::class,
 
             User\Model\InputFilter\LoginInputFilter::class =>
                 User\Model\InputFilter\LoginInputFilterFactory::class,
+            User\Model\InputFilter\RegisterInputFilter::class =>
+                User\Model\InputFilter\RegisterInputFilterFactory::class,
 
             User\Form\LoginForm::class =>
                 User\Form\LoginFormFactory::class,
+            User\Form\RegisterForm::class =>
+                User\Form\RegisterFormFactory::class,
         ],
     ],
 
@@ -27,7 +33,7 @@ return [
         [
             'name'            => 'user-login',
             'path'            => '/:lang/user',
-            'middleware'      => User\Action\ShowLoginAction::class,
+            'middleware'      => User\Action\ShowIntroAction::class,
             'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
@@ -38,7 +44,24 @@ return [
         [
             'name'            => 'user-handle-login',
             'path'            => '/:lang/user/login',
-            'middleware'      => User\Action\HandleLoginAction::class,
+            'middleware'      => [
+                User\Action\HandleLoginAction::class,
+                User\Action\ShowIntroAction::class,
+            ],
+            'allowed_methods' => ['POST'],
+            'options'         => [
+                'constraints' => [
+                    'lang' => '(de|en)',
+                ],
+            ],
+        ],
+        [
+            'name'            => 'user-handle-register',
+            'path'            => '/:lang/user/register',
+            'middleware'      => [
+                User\Action\HandleRegisterAction::class,
+                User\Action\ShowIntroAction::class,
+            ],
             'allowed_methods' => ['POST'],
             'options'         => [
                 'constraints' => [

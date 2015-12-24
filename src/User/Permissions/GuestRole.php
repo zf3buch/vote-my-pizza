@@ -19,11 +19,6 @@ use Zend\Permissions\Rbac\AbstractRole;
 class GuestRole extends AbstractRole
 {
     /**
-     * @var string
-     */
-    protected $name = 'guest';
-
-    /**
      * GuestRole constructor.
      */
     public function __construct()
@@ -32,4 +27,8 @@ class GuestRole extends AbstractRole
         $this->addPermission('pizza-intro');
         $this->addPermission('pizza-show');
     }
+    /**
+     * @var string
+     */
+    protected $name = 'guest';
 }
