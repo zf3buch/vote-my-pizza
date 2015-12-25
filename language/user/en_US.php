@@ -14,7 +14,7 @@ return [
     'user_heading_registered'        => 'You successfully registered for Vote My Pizza!',
     'user_heading_registration_done' => 'Registration completed!',
 
-    'user_navigation_login' => 'Login',
+    'user_navigation_intro' => 'Login',
 
     'user_action_login'    => 'Login user',
     'user_action_register' => 'Register user',

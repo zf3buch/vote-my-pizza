@@ -14,7 +14,7 @@ return [
     'user_heading_registered'        => 'Sie haben Sie erfolgreich bei Vote My Pizza registriert!',
     'user_heading_registration_done' => 'Registrierung abgeschlossen!',
 
-    'user_navigation_login' => 'Anmelden',
+    'user_navigation_intro' => 'Anmelden',
 
     'user_action_login'    => 'Benutzer anmelden',
     'user_action_register' => 'Benutzer registrieren',

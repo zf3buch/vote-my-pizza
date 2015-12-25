@@ -39,7 +39,7 @@ return [
 
     'routes' => [
         [
-            'name'            => 'user-login',
+            'name'            => 'user-intro',
             'path'            => '/:lang/user',
             'middleware'      => User\Action\ShowIntroAction::class,
             'allowed_methods' => ['GET'],
