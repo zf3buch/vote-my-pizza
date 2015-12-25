@@ -19,18 +19,20 @@ use Zend\Permissions\Rbac\AbstractRole;
 class MemberRole extends AbstractRole
 {
     /**
+     * @var string
+     */
+    protected $name = 'member';
+
+    /**
      * MemberRole constructor.
      */
     public function __construct()
     {
-        $this->addChild(new GuestRole());
-
+        $this->addPermission('home');
+        $this->addPermission('pizza-intro');
+        $this->addPermission('pizza-show');
         $this->addPermission('pizza-voting');
         $this->addPermission('pizza-handle-voting');
         $this->addPermission('pizza-handle-restaurant');
     }
-    /**
-     * @var string
-     */
-    protected $name = 'member';
 }

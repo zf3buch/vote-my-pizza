@@ -19,6 +19,11 @@ use Zend\Permissions\Rbac\AbstractRole;
 class GuestRole extends AbstractRole
 {
     /**
+     * @var string
+     */
+    protected $name = 'guest';
+
+    /**
      * GuestRole constructor.
      */
     public function __construct()
@@ -26,9 +31,9 @@ class GuestRole extends AbstractRole
         $this->addPermission('home');
         $this->addPermission('pizza-intro');
         $this->addPermission('pizza-show');
+        $this->addPermission('user-intro');
+        $this->addPermission('user-handle-login');
+        $this->addPermission('user-handle-register');
+        $this->addPermission('user-registered');
     }
-    /**
-     * @var string
-     */
-    protected $name = 'guest';
 }
