@@ -16,6 +16,14 @@ return [
                 User\Action\HandleLoginFactory::class,
             User\Action\HandleRegisterAction::class =>
                 User\Action\HandleRegisterFactory::class,
+            User\Action\ShowRegisteredAction::class   =>
+                User\Action\ShowRegisteredFactory::class,
+
+            User\Model\Table\UserTableInterface::class         =>
+                User\Model\Table\UserTableFactory::class,
+
+            User\Model\Repository\UserRepositoryInterface::class =>
+                User\Model\Repository\DbUserRepositoryFactory::class,
 
             User\Model\InputFilter\LoginInputFilter::class =>
                 User\Model\InputFilter\LoginInputFilterFactory::class,
@@ -63,6 +71,17 @@ return [
                 User\Action\ShowIntroAction::class,
             ],
             'allowed_methods' => ['POST'],
+            'options'         => [
+                'constraints' => [
+                    'lang' => '(de|en)',
+                ],
+            ],
+        ],
+        [
+            'name'            => 'user-registered',
+            'path'            => '/:lang/user/registered',
+            'middleware'      => User\Action\ShowRegisteredAction::class,
+            'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
                     'lang' => '(de|en)',

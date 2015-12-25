@@ -11,6 +11,7 @@ namespace User\Action;
 
 use Interop\Container\ContainerInterface;
 use User\Form\RegisterForm;
+use User\Model\Repository\UserRepositoryInterface;
 use Zend\Expressive\Router\RouterInterface;
 
 /**
@@ -27,11 +28,12 @@ class HandleRegisterFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $router = $container->get(RouterInterface::class);
-        $form   = $container->get(RegisterForm::class);
+        $router     = $container->get(RouterInterface::class);
+        $repository = $container->get(UserRepositoryInterface::class);
+        $form       = $container->get(RegisterForm::class);
 
         return new HandleRegisterAction(
-            $router, $form
+            $router, $repository, $form
         );
     }
 }

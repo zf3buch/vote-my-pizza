@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` enum('member','admin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'member',
@@ -15,8 +16,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
 INSERT INTO `user` (`id`, `email`, `password`, `role`, `first_name`, `last_name`) VALUES
-(1, 'member@vote-my-pizza.de', '$2y$10$LgI03AFI.lu5lB1t4Rfpy.ipppiAE79Xz1Dk6pi1RVIAW2./5at2.', 'member', 'Michael', 'Mitglied'),
-(2, 'admin@vote-my-pizza.de', '$2y$10$MNLzqwHkE4HNbjWIiF7i3e8aKvrBsPm8CRUF3aFbT9f1nAMeOmPDO', 'admin', 'Adonis', 'Admin');
+(1, '2015-12-25 06:33:06', 'member@vote-my-pizza.de', '$2y$10$LgI03AFI.lu5lB1t4Rfpy.ipppiAE79Xz1Dk6pi1RVIAW2./5at2.', 'member', 'Michael', 'Mitglied'),
+(2, '2015-12-25 06:35:39', 'admin@vote-my-pizza.de', '$2y$10$MNLzqwHkE4HNbjWIiF7i3e8aKvrBsPm8CRUF3aFbT9f1nAMeOmPDO', 'admin', 'Adonis', 'Admin');
 
 SET FOREIGN_KEY_CHECKS=1;
 

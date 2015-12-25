@@ -75,5 +75,65 @@ class RegisterInputFilter extends InputFilter
                 ],
             ]
         );
+
+        $this->add(
+            [
+                'name'       => 'first_name',
+                'required'   => true,
+                'filters'    => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+                'validators' => [
+                    [
+                        'name'                   => 'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options'                => [
+                            'message' => 'user_validator_first_name_notempty',
+                        ],
+                    ],
+                    [
+                        'name'    => 'StringLength',
+                        'options' => [
+                            'encoding' => 'UTF-8',
+                            'min'      => 2,
+                            'max'      => 64,
+                            'message' => 'user_validator_first_name_length',
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $this->add(
+            [
+                'name'       => 'last_name',
+                'required'   => true,
+                'filters'    => [
+                    [
+                        'name' => 'StringTrim',
+                    ],
+                ],
+                'validators' => [
+                    [
+                        'name'                   => 'NotEmpty',
+                        'break_chain_on_failure' => true,
+                        'options'                => [
+                            'message' => 'user_validator_last_name_notempty',
+                        ],
+                    ],
+                    [
+                        'name'    => 'StringLength',
+                        'options' => [
+                            'encoding' => 'UTF-8',
+                            'min'      => 2,
+                            'max'      => 64,
+                            'message' => 'user_validator_last_name_length',
+                        ],
+                    ],
+                ],
+            ]
+        );
     }
 }

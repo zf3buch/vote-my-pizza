@@ -8,19 +8,27 @@
  */
 
 return [
-    'user_heading_intro'        => 'Bei Vote My Pizza mitmachen!',
-    'user_heading_login_now'    => 'Jetzt anmelden!',
-    'user_heading_register_now' => 'Jetzt registrieren!',
+    'user_heading_intro'             => 'Bei Vote My Pizza mitmachen!',
+    'user_heading_login_now'         => 'Jetzt anmelden!',
+    'user_heading_register_now'      => 'Jetzt registrieren!',
+    'user_heading_registered'        => 'Sie haben Sie erfolgreich bei Vote My Pizza registriert!',
+    'user_heading_registration_done' => 'Registrierung abgeschlossen!',
 
     'user_navigation_login' => 'Anmelden',
 
     'user_action_login'    => 'Benutzer anmelden',
     'user_action_register' => 'Benutzer registrieren',
 
-    'user_validator_email_notempty'    => 'Bitte E-Mail-Adresse eingeben!',
-    'user_validator_email_format'      => 'Die E-Mail-Adresse ist ungültig!',
-    'user_validator_password_notempty' => 'Bitte Passwort eingeben!',
-    'user_validator_password_length'   => 'Nur %min%-%max% Zeichen erlaubt!',
+    'user_message_restaurant' => 'Sie können sich nun direkt anmelden.',
+
+    'user_validator_email_notempty'      => 'Bitte E-Mail-Adresse eingeben!',
+    'user_validator_email_format'        => 'Die E-Mail-Adresse ist ungültig!',
+    'user_validator_password_notempty'   => 'Bitte Passwort eingeben!',
+    'user_validator_password_length'     => 'Nur %min%-%max% Zeichen erlaubt!',
+    'user_validator_first_name_notempty' => 'Bitte Vornamen eingeben!',
+    'user_validator_first_name_length'   => 'Nur %min%-%max% Zeichen erlaubt!',
+    'user_validator_last_name_notempty'  => 'Bitte Nachnamen eingeben!',
+    'user_validator_last_name_length'    => 'Nur %min%-%max% Zeichen erlaubt!',
 
     'user_label_email'      => 'E-Mail-Adresse',
     'user_label_password'   => 'Passwort',

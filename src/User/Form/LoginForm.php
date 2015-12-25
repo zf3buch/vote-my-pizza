@@ -31,7 +31,7 @@ class LoginForm extends Form
         $this->add(
             [
                 'name'       => 'email',
-                'type'       => 'email',
+                'type'       => 'text',
                 'options'    => [
                     'label'            => 'user_label_email',
                     'label_attributes' => [

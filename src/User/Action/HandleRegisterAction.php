@@ -12,6 +12,7 @@ namespace User\Action;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use User\Form\RegisterForm;
+use User\Model\Repository\UserRepositoryInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router\RouterInterface;
@@ -29,22 +30,30 @@ class HandleRegisterAction
     private $router;
 
     /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
+
+    /**
      * @var RegisterForm
      */
-    private $loginFormForm;
+    private $registerForm;
 
     /**
      * HandleRegisterAction constructor.
      *
-     * @param RouterInterface $router
-     * @param RegisterForm    $loginFormForm
+     * @param RouterInterface         $router
+     * @param UserRepositoryInterface $userRepository
+     * @param RegisterForm            $registerForm
      */
     public function __construct(
         RouterInterface $router,
-        RegisterForm $loginFormForm
+        UserRepositoryInterface $userRepository,
+        RegisterForm $registerForm
     ) {
-        $this->router        = $router;
-        $this->loginFormForm = $loginFormForm;
+        $this->router         = $router;
+        $this->userRepository = $userRepository;
+        $this->registerForm   = $registerForm;
     }
 
     /**
@@ -59,12 +68,24 @@ class HandleRegisterAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        $routeParams = [
-            'lang' => $request->getAttribute('lang'),
-        ];
+        $postData = $request->getParsedBody();
 
-        return new RedirectResponse(
-            $this->router->generateUri('home', $routeParams)
-        );
+        $this->registerForm->setData($postData);
+
+        if ($this->registerForm->isValid()) {
+            $this->userRepository->registerUser(
+                $this->registerForm->getData()
+            );
+
+            $routeParams = [
+                'lang' => $request->getAttribute('lang'),
+            ];
+
+            return new RedirectResponse(
+                $this->router->generateUri('user-registered', $routeParams)
+            );
+        }
+
+        return $next($request, $response);
     }
 }
