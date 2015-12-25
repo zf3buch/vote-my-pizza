@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci AUTO_INCREMENT=3 ;
 
-INSERT INTO `user` (`id`, `email`, `password`, `role`, `first_name`, `last_name`) VALUES
+INSERT INTO `user` (`id`, `date`, `email`, `password`, `role`, `first_name`, `last_name`) VALUES
 (1, '2015-12-25 06:33:06', 'member@vote-my-pizza.de', '$2y$10$LgI03AFI.lu5lB1t4Rfpy.ipppiAE79Xz1Dk6pi1RVIAW2./5at2.', 'member', 'Michael', 'Mitglied'),
 (2, '2015-12-25 06:35:39', 'admin@vote-my-pizza.de', '$2y$10$MNLzqwHkE4HNbjWIiF7i3e8aKvrBsPm8CRUF3aFbT9f1nAMeOmPDO', 'admin', 'Adonis', 'Admin');
 
