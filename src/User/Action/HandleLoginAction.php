@@ -12,6 +12,12 @@ namespace User\Action;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use User\Form\LoginForm;
+use Zend\Authentication\Adapter\AdapterInterface;
+use Zend\Authentication\Adapter\DbTable\Exception\RuntimeException;
+use Zend\Authentication\Adapter\ValidatableAdapterInterface;
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\AuthenticationServiceInterface;
+use Zend\Authentication\Result;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router\RouterInterface;
@@ -31,20 +37,36 @@ class HandleLoginAction
     /**
      * @var LoginForm
      */
-    private $loginFormForm;
+    private $loginForm;
+
+    /**
+     * @var AuthenticationServiceInterface|AuthenticationService
+     */
+    private $authenticationService;
+
+    /**
+     * @var ValidatableAdapterInterface
+     */
+    private $authenticationAdapter;
 
     /**
      * HandleLoginAction constructor.
      *
-     * @param RouterInterface $router
-     * @param LoginForm       $loginFormForm
+     * @param RouterInterface                $router
+     * @param LoginForm                      $loginForm
+     * @param AuthenticationServiceInterface $authenticationService
      */
     public function __construct(
         RouterInterface $router,
-        LoginForm $loginFormForm
+        LoginForm $loginForm,
+        AuthenticationServiceInterface $authenticationService
     ) {
-        $this->router        = $router;
-        $this->loginFormForm = $loginFormForm;
+        $this->router    = $router;
+        $this->loginForm = $loginForm;
+
+        $this->authenticationService = $authenticationService;
+        $this->authenticationAdapter
+             = $this->authenticationService->getAdapter();
     }
 
     /**
@@ -59,6 +81,45 @@ class HandleLoginAction
         ResponseInterface $response,
         callable $next = null
     ) {
+        $postData = $request->getParsedBody();
+
+        $this->loginForm->setData($postData);
+
+        if (!$this->loginForm->isValid()) {
+            return $next($request, $response);
+        }
+
+        $this->authenticationAdapter->setIdentity($postData['email']);
+        $this->authenticationAdapter->setCredential($postData['password']);
+
+        try {
+            $result = $this->authenticationService->authenticate();
+        } catch (RuntimeException $e) {
+            return $next($request, $response);
+        }
+
+        if (!$result->isValid()) {
+            switch ($result->getCode()) {
+                case Result::FAILURE_CREDENTIAL_INVALID:
+                    $this->loginForm->get('password')->setMessages([
+                        'user_authentication_password_invalid'
+                    ]);
+                    break;
+
+                case Result::FAILURE_IDENTITY_NOT_FOUND:
+                    $this->loginForm->get('email')->setMessages([
+                        'user_authentication_email_unknown'
+                    ]);
+                    break;
+
+                default:
+                    var_dump($result);
+                    exit;
+            }
+
+            return $next($request, $response);
+        }
+
         $routeParams = [
             'lang' => $request->getAttribute('lang'),
         ];
