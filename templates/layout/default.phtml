@@ -94,12 +94,22 @@ $this->inlineScript()->prependFile(
                         <?php echo $this->translate('pizza_navigation_vote'); ?>
                     </a>
                 </li>
+                <?php if ($this->userAllowed('user-intro')): ?>
                 <li>
                     <a href="<?php echo $this->url('user-intro') ?>">
                         <i class="fa fa-user"></i>
                         <?php echo $this->translate('user_navigation_intro'); ?>
                     </a>
                 </li>
+                <?php else: ?>
+                    <li>
+                        <a href="<?php echo $this->url('user-handle-logout') ?>">
+                            <i class="fa fa-user"></i>
+                            <?php echo $this->translate('user_navigation_logout'); ?>
+                            (<?php echo $this->userIdentity()->email ?>)
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

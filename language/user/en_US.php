@@ -13,8 +13,10 @@ return [
     'user_heading_register_now'      => 'Register now!',
     'user_heading_registered'        => 'You successfully registered for Vote My Pizza!',
     'user_heading_registration_done' => 'Registration completed!',
+    'user_heading_not_allowed'       => 'You are not allowed to access this page!',
 
-    'user_navigation_intro' => 'Login',
+    'user_navigation_intro'  => 'Login',
+    'user_navigation_logout' => 'Logout',
 
     'user_action_login'    => 'Login user',
     'user_action_register' => 'Register user',

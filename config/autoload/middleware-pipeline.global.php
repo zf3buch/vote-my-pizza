@@ -21,6 +21,8 @@ return [
                 Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
             Application\I18n\Middleware\InjectTranslator::class =>
                 Application\I18n\Middleware\InjectTranslatorFactory::class,
+            User\Authorization\AuthorizationMiddleware::class =>
+                User\Authorization\AuthorizationMiddlewareFactory::class,
         ],
     ],
 
@@ -32,6 +34,7 @@ return [
                     Zend\Expressive\Helper\ServerUrlMiddleware::class,
                     Zend\Expressive\Helper\UrlHelperMiddleware::class,
                     Application\I18n\Middleware\InjectTranslator::class,
+                    User\Authorization\AuthorizationMiddleware::class,
                 ],
             ],
         ],

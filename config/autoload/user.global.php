@@ -9,38 +9,44 @@
 
 return [
     'dependencies' => [
-        'factories' => [
-            User\Action\ShowIntroAction::class   =>
+        'invokables' => [
+            User\Permissions\Rbac::class => User\Permissions\Rbac::class,
+        ],
+        'factories'  => [
+            User\Action\ShowIntroAction::class      =>
                 User\Action\ShowIntroFactory::class,
-            User\Action\HandleLoginAction::class =>
+            User\Action\HandleLoginAction::class    =>
                 User\Action\HandleLoginFactory::class,
             User\Action\HandleRegisterAction::class =>
                 User\Action\HandleRegisterFactory::class,
-            User\Action\ShowRegisteredAction::class   =>
+            User\Action\ShowRegisteredAction::class =>
                 User\Action\ShowRegisteredFactory::class,
-            User\Action\HandleLogoutAction::class =>
+            User\Action\HandleLogoutAction::class   =>
                 User\Action\HandleLogoutFactory::class,
 
-            User\Model\Table\UserTableInterface::class         =>
+            User\Model\Table\UserTableInterface::class =>
                 User\Model\Table\UserTableFactory::class,
 
             User\Model\Repository\UserRepositoryInterface::class =>
                 User\Model\Repository\DbUserRepositoryFactory::class,
 
-            User\Model\InputFilter\LoginInputFilter::class =>
+            User\Model\InputFilter\LoginInputFilter::class    =>
                 User\Model\InputFilter\LoginInputFilterFactory::class,
             User\Model\InputFilter\RegisterInputFilter::class =>
                 User\Model\InputFilter\RegisterInputFilterFactory::class,
 
-            User\Form\LoginForm::class =>
+            User\Form\LoginForm::class    =>
                 User\Form\LoginFormFactory::class,
             User\Form\RegisterForm::class =>
                 User\Form\RegisterFormFactory::class,
 
-            Zend\Authentication\Adapter\AdapterInterface::class =>
+            Zend\Authentication\Adapter\AdapterInterface::class       =>
                 User\Authentication\Adapter\AdapterFactory::class,
             Zend\Authentication\AuthenticationServiceInterface::class =>
                 User\Authentication\AuthenticationServiceFactory::class,
+
+            User\Authorization\AuthorizationObserver::class =>
+                User\Authorization\AuthorizationObserverFactory::class,
         ],
     ],
 
@@ -124,6 +130,13 @@ return [
                 'pattern'     => '%s.php',
                 'text_domain' => 'default',
             ],
+        ],
+    ],
+
+    'view_helpers' => [
+        'factories' => [
+            'userIdentity' => User\View\Helper\IdentityFactory::class,
+            'userAllowed'  => User\View\Helper\AllowedFactory::class,
         ],
     ],
 ];
