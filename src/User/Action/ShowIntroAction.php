@@ -70,6 +70,7 @@ class ShowIntroAction
         $data = [
             'loginForm'    => $this->loginForm,
             'registerForm' => $this->registerForm,
+            'authError'    => $request->getAttribute('auth_error'),
         ];
 
         return new HtmlResponse(

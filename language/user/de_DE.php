@@ -31,6 +31,7 @@ return [
     'user_validator_last_name_length'    => 'Nur %min%-%max% Zeichen erlaubt!',
 
     'user_authentication_password_invalid' => 'Das Passwort ist falsch!',
+    'user_authentication_email_unknown'    => 'Es gibt kein Mitglied mit dieser E-Mail Adresse!',
 
     'user_label_email'      => 'E-Mail-Adresse',
     'user_label_password'   => 'Passwort',

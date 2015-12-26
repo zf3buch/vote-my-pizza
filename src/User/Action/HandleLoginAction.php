@@ -12,7 +12,7 @@ namespace User\Action;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use User\Form\LoginForm;
-use Zend\Authentication\Adapter\AdapterInterface;
+use Zend\Authentication\Adapter\DbTable\AbstractAdapter;
 use Zend\Authentication\Adapter\DbTable\Exception\RuntimeException;
 use Zend\Authentication\Adapter\ValidatableAdapterInterface;
 use Zend\Authentication\AuthenticationService;
@@ -45,7 +45,7 @@ class HandleLoginAction
     private $authenticationService;
 
     /**
-     * @var ValidatableAdapterInterface
+     * @var ValidatableAdapterInterface|AbstractAdapter
      */
     private $authenticationAdapter;
 
@@ -66,7 +66,8 @@ class HandleLoginAction
 
         $this->authenticationService = $authenticationService;
         $this->authenticationAdapter
-             = $this->authenticationService->getAdapter();
+                                     = $this->authenticationService->getAdapter(
+        );
     }
 
     /**
@@ -101,15 +102,17 @@ class HandleLoginAction
         if (!$result->isValid()) {
             switch ($result->getCode()) {
                 case Result::FAILURE_CREDENTIAL_INVALID:
-                    $this->loginForm->get('password')->setMessages([
+                    $request = $request->withAttribute(
+                        'auth_error',
                         'user_authentication_password_invalid'
-                    ]);
+                    );
                     break;
 
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
-                    $this->loginForm->get('email')->setMessages([
+                    $request = $request->withAttribute(
+                        'auth_error',
                         'user_authentication_email_unknown'
-                    ]);
+                    );
                     break;
 
                 default:
@@ -119,6 +122,12 @@ class HandleLoginAction
 
             return $next($request, $response);
         }
+
+        $this->authenticationService->getStorage()->write(
+            $this->authenticationAdapter->getResultRowObject(
+                null, ['password']
+            )
+        );
 
         $routeParams = [
             'lang' => $request->getAttribute('lang'),

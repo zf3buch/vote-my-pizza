@@ -19,56 +19,82 @@ $loginForm->setAttribute('action', $this->url('user-handle-login'));
 
 ?>
 <h1><?php echo $this->translate('user_heading_intro'); ?></h1>
-<?php echo $this->translate('user_authentication_password_invalid') ?>
-
 <div class="row">
     <div class="col-md-6">
         <div class="panel panel-success">
             <div class="panel-heading">
-                <?php echo $this->translate('user_heading_register_now'); ?>
+                <?php echo $this->translate(
+                    'user_heading_register_now'
+                ); ?>
             </div>
             <div class="panel-body">
                 <?php echo $this->form()->openTag($registerForm); ?>
                 <div class="form-group">
-                    <?php echo $this->formLabel($registerForm->get('email')); ?>
+                    <?php echo $this->formLabel(
+                        $registerForm->get('email')
+                    ); ?>
                     <div class="col-sm-8">
                         <?php
-                        echo $this->formElement($registerForm->get('email'));
-                        echo $this->formElementErrors($registerForm->get('email'));
+                        echo $this->formElement(
+                            $registerForm->get('email')
+                        );
+                        echo $this->formElementErrors(
+                            $registerForm->get('email')
+                        );
                         ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->formLabel($registerForm->get('password')); ?>
+                    <?php echo $this->formLabel(
+                        $registerForm->get('password')
+                    ); ?>
                     <div class="col-sm-8">
                         <?php
-                        echo $this->formElement($registerForm->get('password'));
-                        echo $this->formElementErrors($registerForm->get('password'));
+                        echo $this->formElement(
+                            $registerForm->get('password')
+                        );
+                        echo $this->formElementErrors(
+                            $registerForm->get('password')
+                        );
                         ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->formLabel($registerForm->get('first_name')); ?>
+                    <?php echo $this->formLabel(
+                        $registerForm->get('first_name')
+                    ); ?>
                     <div class="col-sm-8">
                         <?php
-                        echo $this->formElement($registerForm->get('first_name'));
-                        echo $this->formElementErrors($registerForm->get('first_name'));
+                        echo $this->formElement(
+                            $registerForm->get('first_name')
+                        );
+                        echo $this->formElementErrors(
+                            $registerForm->get('first_name')
+                        );
                         ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->formLabel($registerForm->get('last_name')); ?>
+                    <?php echo $this->formLabel(
+                        $registerForm->get('last_name')
+                    ); ?>
                     <div class="col-sm-8">
                         <?php
-                        echo $this->formElement($registerForm->get('last_name'));
-                        echo $this->formElementErrors($registerForm->get('last_name'));
+                        echo $this->formElement(
+                            $registerForm->get('last_name')
+                        );
+                        echo $this->formElementErrors(
+                            $registerForm->get('last_name')
+                        );
                         ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-8">
                         <?php
-                        echo $this->formElement($registerForm->get('register_user'));
+                        echo $this->formElement(
+                            $registerForm->get('register_user')
+                        );
                         ?>
                     </div>
                 </div>
@@ -82,29 +108,50 @@ $loginForm->setAttribute('action', $this->url('user-handle-login'));
                 <?php echo $this->translate('user_heading_login_now'); ?>
             </div>
             <div class="panel-body">
+                <?php if ($this->authError) : ?>
+                    <div class="alert alert-danger">
+                        <p>
+                            <?php echo $this->translate(
+                                $this->authError
+                            ); ?>
+                        </p>
+                    </div>
+                <?php endif; ?>
                 <?php echo $this->form()->openTag($loginForm); ?>
                 <div class="form-group">
-                    <?php echo $this->formLabel($loginForm->get('email')); ?>
+                    <?php echo $this->formLabel(
+                        $loginForm->get('email')
+                    ); ?>
                     <div class="col-sm-8">
                         <?php
                         echo $this->formElement($loginForm->get('email'));
-                        echo $this->formElementErrors($loginForm->get('email'));
+                        echo $this->formElementErrors(
+                            $loginForm->get('email')
+                        );
                         ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->formLabel($loginForm->get('password')); ?>
+                    <?php echo $this->formLabel(
+                        $loginForm->get('password')
+                    ); ?>
                     <div class="col-sm-8">
                         <?php
-                        echo $this->formElement($loginForm->get('password'));
-                        echo $this->formElementErrors($loginForm->get('password'));
+                        echo $this->formElement(
+                            $loginForm->get('password')
+                        );
+                        echo $this->formElementErrors(
+                            $loginForm->get('password')
+                        );
                         ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-8">
                         <?php
-                        echo $this->formElement($loginForm->get('login_user'));
+                        echo $this->formElement(
+                            $loginForm->get('login_user')
+                        );
                         ?>
                     </div>
                 </div>
