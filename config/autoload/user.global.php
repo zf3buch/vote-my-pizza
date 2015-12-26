@@ -18,6 +18,8 @@ return [
                 User\Action\HandleRegisterFactory::class,
             User\Action\ShowRegisteredAction::class   =>
                 User\Action\ShowRegisteredFactory::class,
+            User\Action\HandleLogoutAction::class =>
+                User\Action\HandleLogoutFactory::class,
 
             User\Model\Table\UserTableInterface::class         =>
                 User\Model\Table\UserTableFactory::class,
@@ -86,6 +88,19 @@ return [
             'name'            => 'user-registered',
             'path'            => '/:lang/user/registered',
             'middleware'      => User\Action\ShowRegisteredAction::class,
+            'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'lang' => '(de|en)',
+                ],
+            ],
+        ],
+        [
+            'name'            => 'user-handle-logout',
+            'path'            => '/:lang/user/logout',
+            'middleware'      => [
+                User\Action\HandleLogoutAction::class,
+            ],
             'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
