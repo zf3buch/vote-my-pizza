@@ -13,14 +13,24 @@ use Pizza\Model\Table\PizzaTableInterface;
 use Pizza\Model\Table\RestaurantTableInterface;
 
 /**
- * Class DbPizzaRepository
+ * Class PizzaRepository
  *
  * @package Pizza\Model\Repository
  */
-class DbPizzaRepository implements PizzaRepositoryInterface
+class PizzaRepository implements PizzaRepositoryInterface
 {
     /**
-     * DbPizzaRepository constructor.
+     * @var PizzaTableInterface
+     */
+    private $pizzaTable;
+
+    /**
+     * @var RestaurantTableInterface
+     */
+    private $restaurantTable;
+
+    /**
+     * PizzaRepository constructor.
      *
      * @param PizzaTableInterface      $pizzaTable
      * @param RestaurantTableInterface $restaurantTable
@@ -135,12 +145,4 @@ class DbPizzaRepository implements PizzaRepositoryInterface
 
         return $this->restaurantTable->insert($insertData);
     }
-    /**
-     * @var PizzaTableInterface
-     */
-    private $pizzaTable;
-    /**
-     * @var RestaurantTableInterface
-     */
-    private $restaurantTable;
 }
