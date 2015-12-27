@@ -18,10 +18,11 @@ return [
     'pizza_navigation_intro' => 'Pizza Intro',
     'pizza_navigation_vote'  => 'Abstimmen',
 
-    'pizza_action_vote'       => 'Abstimmen',
-    'pizza_action_show_pizza' => 'Pizza anzeigen',
-    'pizza_action_back_intro' => 'Zurück zur Pizza-Seite',
-    'pizza_action_new_price'  => 'Neuen Restaurant Preis speichern',
+    'pizza_action_vote'         => 'Abstimmen',
+    'pizza_action_show_pizza'   => 'Pizza anzeigen',
+    'pizza_action_back_intro'   => 'Zurück zur Pizza-Seite',
+    'pizza_action_new_price'    => 'Neuen Restaurant Preis speichern',
+    'pizza_action_delete_price' => 'Restaurant Preis löschen',
 
     'pizza_message_restaurant' => 'Restaurant %1$s',
     'pizza_message_costs'      => '%1$s kostet nur <strong>%2$s</strong> (Stand: %3$s)',

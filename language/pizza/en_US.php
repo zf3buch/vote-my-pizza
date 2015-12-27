@@ -18,10 +18,11 @@ return [
     'pizza_navigation_intro' => 'Pizza intro',
     'pizza_navigation_vote'  => 'Pizza vote',
 
-    'pizza_action_vote'       => 'Vote',
-    'pizza_action_show_pizza' => 'Show pizza',
-    'pizza_action_back_intro' => 'Back to pizza intro',
-    'pizza_action_new_price'  => 'Save new restaurant price',
+    'pizza_action_vote'         => 'Vote',
+    'pizza_action_show_pizza'   => 'Show pizza',
+    'pizza_action_back_intro'   => 'Back to pizza intro',
+    'pizza_action_new_price'    => 'Save new restaurant price',
+    'pizza_action_delete_price' => 'Delete restaurant price',
 
     'pizza_message_restaurant' => 'Restaurant %1$s',
     'pizza_message_costs'      => '%1$s costs only <strong>%2$s</strong> (Date: %3$s)',

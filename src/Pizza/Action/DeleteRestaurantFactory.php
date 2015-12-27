@@ -12,6 +12,7 @@ namespace Pizza\Action;
 use Interop\Container\ContainerInterface;
 use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\Repository\PizzaRepositoryInterface;
+use Pizza\Model\Repository\RestaurantRepositoryInterface;
 use Zend\Expressive\Router\RouterInterface;
 
 /**
@@ -29,7 +30,7 @@ class DeleteRestaurantFactory
     public function __invoke(ContainerInterface $container)
     {
         $router     = $container->get(RouterInterface::class);
-        $repository = $container->get(PizzaRepositoryInterface::class);
+        $repository = $container->get(RestaurantRepositoryInterface::class);
 
         return new DeleteRestaurantAction(
             $router, $repository
