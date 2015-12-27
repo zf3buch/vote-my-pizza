@@ -8,18 +8,22 @@
  */
 
 return [
+    'application_title_404' => 'Seite nicht gefunden',
+    'application_title_500' => 'Fehler aufgetreten',
+
     'application_heading_welcome' => 'Willkommen zu Vote My Pizza!',
-    'application_heading_oops'    => 'Huch!',
-    'application_heading_awkward' => 'Das ist echt unangenehm.',
+    'application_heading_404'     => '404 - Seite wurde nicht gefunden',
+    'application_heading_500'     => '%1$s - Es ist ein Fehler aufgetreten',
+    'application_heading_awkward' => 'Das ist uns echt unangenehm.',
 
     'application_navigation_home'    => 'Startseite',
     'application_navigation_german'  => 'Deutsch',
     'application_navigation_english' => 'Englisch',
 
     'application_action_toggle_navigation' => 'Navigation umschalten',
+    'application_action_back_home'         => 'Zurück zur Startseite',
 
-    'application_message_soon_more'       => 'In Kürze mehr...',
-    'application_message_encountered_404' => 'Wir sind auf einen "404 Not Found" Fehler gestossen.',
-    'application_message_encountered_500' => 'Wir sind auf einen "%1$s" Fehler gestossen.',
-    'application_message_not_found_404'   => 'Du suchst etwas, das hier nicht existiert oder verschoben wurde. Du kannst gerne zurück auf die <a href="%1$s">Startseite</a> wechseln.',
+    'application_message_soon_more'     => 'In Kürze mehr...',
+    'application_message_not_found_404' => 'Die angeforderte Seite wurde nicht gefunden. Du suchst etwas, das hier nicht existiert oder verschoben wurde.',
+    'application_message_error_500'     => 'Wir sind auf einen "%1$s %2$s" Fehler gestossen.',
 ];
