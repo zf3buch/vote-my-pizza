@@ -118,14 +118,10 @@ class HandleLoginAction
         }
 
         $this->authService->getStorage()->write(
-            $this->authAdapter->getResultRowObject(
-                null, ['password']
-            )
+            $this->authAdapter->getResultRowObject(null, ['password'])
         );
 
-        $routeParams = [
-            'lang' => $request->getAttribute('lang'),
-        ];
+        $routeParams = ['lang' => $request->getAttribute('lang'),];
 
         return new RedirectResponse(
             $this->router->generateUri('home', $routeParams)
