@@ -65,9 +65,8 @@ class HandleLoginAction
         $this->loginForm = $loginForm;
 
         $this->authenticationService = $authenticationService;
-        $this->authenticationAdapter
-                                     = $this->authenticationService->getAdapter(
-        );
+        $this->authenticationAdapter =
+            $this->authenticationService->getAdapter();
     }
 
     /**
