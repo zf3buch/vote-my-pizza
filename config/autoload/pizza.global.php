@@ -28,6 +28,8 @@ return [
 
             Pizza\Model\Repository\PizzaRepositoryInterface::class =>
                 Pizza\Model\Repository\PizzaRepositoryFactory::class,
+            Pizza\Model\Repository\RestaurantRepositoryInterface::class =>
+                Pizza\Model\Repository\RestaurantRepositoryFactory::class,
 
             Pizza\Model\InputFilter\RestaurantInputFilter::class =>
                 Pizza\Model\InputFilter\RestaurantInputFilterFactory::class,
@@ -105,7 +107,7 @@ return [
     'templates'    => [
         'paths' => [
             'pizza' => ['templates/pizza'],
-        ]
+        ],
     ],
 
     'translate' => [
