@@ -9,7 +9,7 @@
 
 namespace Pizza\Action;
 
-use Pizza\Model\Repository\PizzaRepositoryInterface;
+use Pizza\Model\Repository\RestaurantRepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -29,22 +29,22 @@ class HandleRestaurantAction
     private $router;
 
     /**
-     * @var PizzaRepositoryInterface
+     * @var RestaurantRepositoryInterface
      */
-    private $pizzaRepository;
+    private $restaurantRepository;
 
     /**
      * HandleRestaurantAction constructor.
      *
-     * @param RouterInterface          $router
-     * @param PizzaRepositoryInterface $pizzaRepository
+     * @param RouterInterface               $router
+     * @param RestaurantRepositoryInterface $restaurantRepository
      */
     public function __construct(
         RouterInterface $router,
-        PizzaRepositoryInterface $pizzaRepository
+        RestaurantRepositoryInterface $restaurantRepository
     ) {
-        $this->router          = $router;
-        $this->pizzaRepository = $pizzaRepository;
+        $this->router               = $router;
+        $this->restaurantRepository = $restaurantRepository;
     }
 
     /**
@@ -63,7 +63,7 @@ class HandleRestaurantAction
 
         $restaurantData = [];
 
-        $this->pizzaRepository->saveRestaurant($id, $restaurantData);
+        $this->restaurantRepository->saveRestaurant($id, $restaurantData);
 
         return new RedirectResponse(
             $this->router->generateUri('pizza-show', ['id' => $id])

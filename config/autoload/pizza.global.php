@@ -21,9 +21,11 @@ return [
             Pizza\Action\HandleRestaurantAction::class =>
                 Pizza\Action\HandleRestaurantFactory::class,
 
-            Pizza\Model\Repository\PizzaRepositoryInterface::class =>
+            Pizza\Model\Repository\PizzaRepositoryInterface::class      =>
                 Pizza\Model\Repository\StaticPizzaRepositoryFactory::class,
-        ]
+            Pizza\Model\Repository\RestaurantRepositoryInterface::class =>
+                Pizza\Model\Repository\StaticRestaurantRepositoryFactory::class,
+        ],
     ],
 
     'routes' => [
@@ -78,6 +80,6 @@ return [
     'templates' => [
         'paths' => [
             'pizza' => ['templates/pizza'],
-        ]
-    ]
+        ],
+    ],
 ];
