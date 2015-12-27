@@ -28,16 +28,15 @@ class HandleLoginFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-
         $router = $container->get(RouterInterface::class);
         $form   = $container->get(LoginForm::class);
 
-        $authenticationService = $container->get(
+        $authService = $container->get(
             AuthenticationServiceInterface::class
         );
 
         return new HandleLoginAction(
-            $router, $form, $authenticationService
+            $router, $form, $authService
         );
     }
 }

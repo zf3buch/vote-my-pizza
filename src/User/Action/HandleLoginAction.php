@@ -42,31 +42,30 @@ class HandleLoginAction
     /**
      * @var AuthenticationServiceInterface|AuthenticationService
      */
-    private $authenticationService;
+    private $authService;
 
     /**
      * @var ValidatableAdapterInterface|AbstractAdapter
      */
-    private $authenticationAdapter;
+    private $authAdapter;
 
     /**
      * HandleLoginAction constructor.
      *
      * @param RouterInterface                $router
      * @param LoginForm                      $loginForm
-     * @param AuthenticationServiceInterface $authenticationService
+     * @param AuthenticationServiceInterface $authService
      */
     public function __construct(
         RouterInterface $router,
         LoginForm $loginForm,
-        AuthenticationServiceInterface $authenticationService
+        AuthenticationServiceInterface $authService
     ) {
         $this->router    = $router;
         $this->loginForm = $loginForm;
 
-        $this->authenticationService = $authenticationService;
-        $this->authenticationAdapter =
-            $this->authenticationService->getAdapter();
+        $this->authService = $authService;
+        $this->authAdapter = $this->authService->getAdapter();
     }
 
     /**
@@ -89,11 +88,11 @@ class HandleLoginAction
             return $next($request, $response);
         }
 
-        $this->authenticationAdapter->setIdentity($postData['email']);
-        $this->authenticationAdapter->setCredential($postData['password']);
+        $this->authAdapter->setIdentity($postData['email']);
+        $this->authAdapter->setCredential($postData['password']);
 
         try {
-            $result = $this->authenticationService->authenticate();
+            $result = $this->authService->authenticate();
         } catch (RuntimeException $e) {
             return $next($request, $response);
         }
@@ -103,14 +102,14 @@ class HandleLoginAction
                 case Result::FAILURE_CREDENTIAL_INVALID:
                     $request = $request->withAttribute(
                         'auth_error',
-                        'user_authentication_password_invalid'
+                        'user_auth_password_invalid'
                     );
                     break;
 
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
                     $request = $request->withAttribute(
                         'auth_error',
-                        'user_authentication_email_unknown'
+                        'user_auth_email_unknown'
                     );
                     break;
             }
@@ -118,8 +117,8 @@ class HandleLoginAction
             return $next($request, $response);
         }
 
-        $this->authenticationService->getStorage()->write(
-            $this->authenticationAdapter->getResultRowObject(
+        $this->authService->getStorage()->write(
+            $this->authAdapter->getResultRowObject(
                 null, ['password']
             )
         );
