@@ -55,14 +55,4 @@ interface PizzaRepositoryInterface
      * @return boolean
      */
     public function saveVoting($pos, $neg);
-
-    /**
-     * Save restaurant
-     *
-     * @param integer $id
-     * @param array   $data
-     *
-     * @return boolean
-     */
-    public function saveRestaurant($id, $data);
 }
