@@ -14,16 +14,16 @@ use Pizza\Model\Table\PizzaTableInterface;
 use Pizza\Model\Table\RestaurantTableInterface;
 
 /**
- * Class DbPizzaRepositoryFactory
+ * Class PizzaRepositoryFactory
  *
  * @package Pizza\Model\Repository
  */
-class DbPizzaRepositoryFactory
+class PizzaRepositoryFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return DbPizzaRepository
+     * @return PizzaRepository
      */
     public function __invoke(ContainerInterface $container)
     {
@@ -33,6 +33,6 @@ class DbPizzaRepositoryFactory
             RestaurantTableInterface::class
         );
 
-        return new DbPizzaRepository($pizzaTable, $restaurantTable);
+        return new PizzaRepository($pizzaTable, $restaurantTable);
     }
 }
