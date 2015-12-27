@@ -10,25 +10,25 @@
 return [
     'dependencies' => [
         'factories' => [
-            Pizza\Action\ShowIntroAction::class                  =>
+            Pizza\Action\ShowIntroAction::class        =>
                 Pizza\Action\ShowIntroFactory::class,
-            Pizza\Action\ShowVotingAction::class                 =>
+            Pizza\Action\ShowVotingAction::class       =>
                 Pizza\Action\ShowVotingFactory::class,
-            Pizza\Action\ShowPizzaAction::class                  =>
+            Pizza\Action\ShowPizzaAction::class        =>
                 Pizza\Action\ShowPizzaFactory::class,
-            Pizza\Action\HandleVotingAction::class               =>
+            Pizza\Action\HandleVotingAction::class     =>
                 Pizza\Action\HandleVotingFactory::class,
-            Pizza\Action\HandleRestaurantAction::class           =>
+            Pizza\Action\HandleRestaurantAction::class =>
                 Pizza\Action\HandleRestaurantFactory::class,
-            Pizza\Action\DeleteRestaurantAction::class           =>
+            Pizza\Action\DeleteRestaurantAction::class =>
                 Pizza\Action\DeleteRestaurantFactory::class,
 
-            Pizza\Model\Table\PizzaTableInterface::class         =>
+            Pizza\Model\Table\PizzaTableInterface::class      =>
                 Pizza\Model\Table\PizzaTableFactory::class,
-            Pizza\Model\Table\RestaurantTableInterface::class    =>
+            Pizza\Model\Table\RestaurantTableInterface::class =>
                 Pizza\Model\Table\RestaurantTableFactory::class,
 
-            Pizza\Model\Repository\PizzaRepositoryInterface::class =>
+            Pizza\Model\Repository\PizzaRepositoryInterface::class      =>
                 Pizza\Model\Repository\PizzaRepositoryFactory::class,
             Pizza\Model\Repository\RestaurantRepositoryInterface::class =>
                 Pizza\Model\Repository\RestaurantRepositoryFactory::class,
@@ -36,12 +36,12 @@ return [
             Pizza\Model\InputFilter\RestaurantInputFilter::class =>
                 Pizza\Model\InputFilter\RestaurantInputFilterFactory::class,
 
-            Pizza\Form\RestaurantPriceForm::class                =>
+            Pizza\Form\RestaurantPriceForm::class =>
                 Pizza\Form\RestaurantPriceFactory::class,
-        ]
+        ],
     ],
 
-    'routes'       => [
+    'routes' => [
         [
             'name'            => 'pizza-intro',
             'path'            => '/:lang/pizza',
@@ -106,19 +106,20 @@ return [
         ],
         [
             'name'            => 'pizza-delete-restaurant',
-            'path'            => '/:lang/pizza/restaurant/:id/delete',
+            'path'            => '/:lang/pizza/restaurant/:id/delete/:priceId',
             'middleware'      => Pizza\Action\DeleteRestaurantAction::class,
             'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
-                    'id'   => '[1-9][0-9]*',
-                    'lang' => '(de|en)',
+                    'id'      => '[1-9][0-9]*',
+                    'priceId' => '[1-9][0-9]*',
+                    'lang'    => '(de|en)',
                 ],
             ],
         ],
     ],
 
-    'templates'    => [
+    'templates' => [
         'paths' => [
             'pizza' => ['templates/pizza'],
         ],
@@ -127,10 +128,10 @@ return [
     'translate' => [
         'translation_file_patterns' => [
             [
-                'type'         => 'phpArray',
-                'base_dir'     => APPLICATION_ROOT . '/language/pizza',
-                'pattern'      => '%s.php',
-                'text_domain'  => 'default',
+                'type'        => 'phpArray',
+                'base_dir'    => APPLICATION_ROOT . '/language/pizza',
+                'pattern'     => '%s.php',
+                'text_domain' => 'default',
             ],
         ],
     ],

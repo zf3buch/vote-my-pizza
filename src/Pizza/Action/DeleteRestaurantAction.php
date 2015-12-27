@@ -59,9 +59,10 @@ class DeleteRestaurantAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        $id = $request->getAttribute('id');
+        $id      = $request->getAttribute('id');
+        $priceId = $request->getAttribute('priceId');
 
-        $this->restaurantRepository->deleteRestaurant($id);
+        $this->restaurantRepository->deleteRestaurant($priceId);
 
         $routeParams = [
             'id'   => $id,

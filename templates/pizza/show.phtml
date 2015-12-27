@@ -87,16 +87,19 @@ $form->setAttribute('action', $urlRestaurant);
                         <?php
                         $urlDelete = $this->url(
                             'pizza-delete-restaurant',
-                            ['id' => $restaurant['id']]
+                            [
+                                'id'      => $this->pizza['id'],
+                                'priceId' => $restaurant['id'],
+                            ]
                         );
                         ?>
                         <p>
-                        <a href="<?php echo $urlDelete; ?>"
-                           class="btn btn-danger">
-                            <?php echo $this->translate(
-                                'pizza_action_delete_price'
-                            ); ?>
-                        </a>
+                            <a href="<?php echo $urlDelete; ?>"
+                               class="btn btn-danger">
+                                <?php echo $this->translate(
+                                    'pizza_action_delete_price'
+                                ); ?>
+                            </a>
                         </p>
                     <?php endif; ?>
                 </div>
