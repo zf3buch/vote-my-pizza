@@ -114,10 +114,6 @@ class HandleLoginAction
                         'user_authentication_email_unknown'
                     );
                     break;
-
-                default:
-                    var_dump($result);
-                    exit;
             }
 
             return $next($request, $response);
