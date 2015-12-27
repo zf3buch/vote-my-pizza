@@ -13,11 +13,11 @@ use Pizza\Model\Table\PizzaTableInterface;
 use Pizza\Model\Table\RestaurantTableInterface;
 
 /**
- * Class DbPizzaRepository
+ * Class PizzaRepository
  *
  * @package Pizza\Model\Repository
  */
-class DbPizzaRepository implements PizzaRepositoryInterface
+class PizzaRepository implements PizzaRepositoryInterface
 {
     /**
      * @var PizzaTableInterface
@@ -30,7 +30,7 @@ class DbPizzaRepository implements PizzaRepositoryInterface
     private $restaurantTable;
 
     /**
-     * DbPizzaRepository constructor.
+     * PizzaRepository constructor.
      *
      * @param PizzaTableInterface      $pizzaTable
      * @param RestaurantTableInterface $restaurantTable
