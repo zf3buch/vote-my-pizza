@@ -29,7 +29,12 @@ class UrlHelper extends ExpressiveUrlHelper
     /**
      * @var string
      */
-    private $default = 'de';
+    private $defaultLang = 'de';
+
+    /**
+     * @var string
+     */
+    private $defaultRoute = 'home';
 
     /**
      * {@inheritDoc}
@@ -58,7 +63,7 @@ class UrlHelper extends ExpressiveUrlHelper
     public function __invoke($route = null, array $params = [])
     {
         if (!$route && $this->result->isFailure()) {
-            $route = 'home';
+            $route = $this->defaultRoute;
         }
 
         $matchedParams = $this->result->getMatchedParams();
@@ -66,7 +71,7 @@ class UrlHelper extends ExpressiveUrlHelper
         if (isset($matchedParams['lang'])) {
             $lang = $matchedParams['lang'];
         } else {
-            $lang = $this->default;
+            $lang = $this->defaultLang;
         }
 
         $params = array_merge(
