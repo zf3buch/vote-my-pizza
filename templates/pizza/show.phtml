@@ -83,6 +83,7 @@ $form->setAttribute('action', $urlRestaurant);
                 </div>
             </div>
         <?php endforeach ?>
+        <?php if ($this->userAllowed('pizza-handle-restaurant')): ?>
         <div class="panel panel-success">
             <div class="panel-heading">
                 <?php
@@ -122,6 +123,7 @@ $form->setAttribute('action', $urlRestaurant);
             </div>
             <?php echo $this->form()->closeTag(); ?>
         </div>
+        <?php endif; ?>
     </div>
 </div>
 <div class="row">

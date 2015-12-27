@@ -20,6 +20,8 @@ return [
                 Pizza\Action\HandleVotingFactory::class,
             Pizza\Action\HandleRestaurantAction::class           =>
                 Pizza\Action\HandleRestaurantFactory::class,
+            Pizza\Action\DeleteRestaurantAction::class           =>
+                Pizza\Action\DeleteRestaurantFactory::class,
 
             Pizza\Model\Table\PizzaTableInterface::class         =>
                 Pizza\Model\Table\PizzaTableFactory::class,
@@ -93,6 +95,18 @@ return [
                 Pizza\Action\ShowPizzaAction::class,
             ],
             'allowed_methods' => ['POST'],
+            'options'         => [
+                'constraints' => [
+                    'id'   => '[1-9][0-9]*',
+                    'lang' => '(de|en)',
+                ],
+            ],
+        ],
+        [
+            'name'            => 'pizza-delete-restaurant',
+            'path'            => '/:lang/pizza/restaurant/:id/delete',
+            'middleware'      => Pizza\Action\DeleteRestaurantAction::class,
+            'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [
                     'id'   => '[1-9][0-9]*',

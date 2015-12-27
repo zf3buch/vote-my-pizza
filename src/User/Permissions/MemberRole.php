@@ -34,5 +34,6 @@ class MemberRole extends AbstractRole
         $this->addPermission('pizza-voting');
         $this->addPermission('pizza-handle-voting');
         $this->addPermission('pizza-handle-restaurant');
+        $this->addPermission('user-handle-logout');
     }
 }

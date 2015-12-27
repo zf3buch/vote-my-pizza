@@ -88,12 +88,14 @@ $this->inlineScript()->prependFile(
                         <?php echo $this->translate('pizza_navigation_intro'); ?>
                     </a>
                 </li>
+                <?php if ($this->userAllowed('pizza-voting')): ?>
                 <li>
                     <a href="<?php echo $this->url('pizza-voting') ?>">
                         <i class="fa fa-star"></i>
                         <?php echo $this->translate('pizza_navigation_vote'); ?>
                     </a>
                 </li>
+                <?php endif; ?>
                 <?php if ($this->userAllowed('user-intro')): ?>
                 <li>
                     <a href="<?php echo $this->url('user-intro') ?>">

@@ -114,6 +114,7 @@
         </div>
     </div>
 </div>
+<?php if ($this->userAllowed('pizza-voting')): ?>
 <div class="well text-center">
     <h2>
         <?php echo $this->translate('pizza_heading_vote_now') ?>
@@ -125,3 +126,4 @@
         </a>
     </p>
 </div>
+<?php endif; ?>
