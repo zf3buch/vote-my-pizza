@@ -125,24 +125,4 @@ class PizzaRepository implements PizzaRepositoryInterface
 
         return true;
     }
-
-    /**
-     * Save restaurant
-     *
-     * @param integer $id
-     * @param array   $data
-     *
-     * @return boolean
-     */
-    public function saveRestaurant($id, $data)
-    {
-        $insertData = [
-            'pizza' => $id,
-            'date'  => date('Y-m-d H:i:s'),
-            'name'  => isset($data['name']) ? $data['name'] : 'unbekannt',
-            'price' => isset($data['price']) ? $data['price'] : 0.00,
-        ];
-
-        return $this->restaurantTable->insert($insertData);
-    }
 }
