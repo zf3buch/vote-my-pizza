@@ -97,12 +97,12 @@ $this->inlineScript()->prependFile(
                 </li>
                 <?php endif; ?>
                 <?php if ($this->userAllowed('user-intro')): ?>
-                <li>
-                    <a href="<?php echo $this->url('user-intro') ?>">
-                        <i class="fa fa-user"></i>
-                        <?php echo $this->translate('user_navigation_intro'); ?>
-                    </a>
-                </li>
+                    <li>
+                        <a href="<?php echo $this->url('user-intro') ?>">
+                            <i class="fa fa-user"></i>
+                            <?php echo $this->translate('user_navigation_intro'); ?>
+                        </a>
+                    </li>
                 <?php else: ?>
                     <li>
                         <a href="<?php echo $this->url('user-handle-logout') ?>">
