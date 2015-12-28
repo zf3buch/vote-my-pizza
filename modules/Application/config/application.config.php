@@ -7,8 +7,6 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-use Application\ApplicationConfig;
-
 return [
     'dependencies' => [
         'invokables' => [
@@ -51,14 +49,14 @@ return [
     'templates' => [
         'layout' => 'layout/default',
         'map'    => [
-            'layout/default' => ApplicationConfig::ROOT . '/templates/layout/default.phtml',
-            'error/error'    => ApplicationConfig::ROOT . '/templates/error/error.phtml',
-            'error/404'      => ApplicationConfig::ROOT . '/templates/error/404.phtml',
+            'layout/default' => APPLICATION_ROOT . '/templates/layout/default.phtml',
+            'error/error'    => APPLICATION_ROOT . '/templates/error/error.phtml',
+            'error/404'      => APPLICATION_ROOT . '/templates/error/404.phtml',
         ],
         'paths'  => [
-            'application' => [ApplicationConfig::ROOT . '/templates/application'],
-            'layout'      => [ApplicationConfig::ROOT . '/templates/layout'],
-            'error'       => [ApplicationConfig::ROOT . '/templates/error'],
+            'application' => [APPLICATION_ROOT . '/templates/application'],
+            'layout'      => [APPLICATION_ROOT . '/templates/layout'],
+            'error'       => [APPLICATION_ROOT . '/templates/error'],
         ],
     ],
 
@@ -66,7 +64,7 @@ return [
         'translation_file_patterns' => [
             [
                 'type'        => 'phpArray',
-                'base_dir'    => ApplicationConfig::ROOT . '/language',
+                'base_dir'    => APPLICATION_ROOT . '/language',
                 'pattern'     => '%s.php',
                 'text_domain' => 'default',
             ],
@@ -74,7 +72,7 @@ return [
     ],
 
     'session_config' => [
-        'save_path'       => realpath(APPLICATION_ROOT . '/data/session'),
+        'save_path'       => realpath(PROJECT_ROOT . '/data/session'),
         'name'            => 'MY_SESSION',
         'cookie_lifetime' => 365 * 24 * 60 * 60,
         'gc_maxlifetime'  => 720,

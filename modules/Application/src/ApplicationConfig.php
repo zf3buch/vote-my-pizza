@@ -11,6 +11,8 @@ namespace Application;
 
 use Zend\Config\Factory;
 
+define('APPLICATION_ROOT', __DIR__ . '/..');
+
 /**
  * Class ApplicationConfig
  *
@@ -19,11 +21,6 @@ use Zend\Config\Factory;
 class ApplicationConfig
 {
     /**
-     * Root path for pizza module
-     */
-    const ROOT = __DIR__ . '/..';
-
-    /**
      * Read configuration
      *
      * @return array|\Zend\Config\Config
@@ -31,7 +28,7 @@ class ApplicationConfig
     public function __invoke()
     {
         return Factory::fromFile(
-            self::ROOT . '/config/application.config.php'
+            APPLICATION_ROOT . '/config/application.config.php'
         );
     }
 }
