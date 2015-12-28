@@ -42,7 +42,7 @@ class HomePageActionTest extends \PHPUnit_Framework_TestCase
         $this->template
             ->render(
                 'application::home-page',
-                ['welcome' => 'Willkommen zu Vote My Pizza!']
+                ['welcome' => 'application_heading_welcome']
             )
             ->willReturn('Whatever');
 
