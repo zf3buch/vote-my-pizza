@@ -21,7 +21,7 @@ return [
     'user_action_login'    => 'Benutzer anmelden',
     'user_action_register' => 'Benutzer registrieren',
 
-    'user_message_restaurant' => 'Sie können sich nun direkt anmelden.',
+    'user_message_login' => 'Sie können sich nun direkt anmelden.',
 
     'user_validator_email_notempty'      => 'Bitte E-Mail-Adresse eingeben!',
     'user_validator_email_format'        => 'Die E-Mail-Adresse ist ungültig!',

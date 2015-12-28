@@ -21,7 +21,7 @@ return [
     'user_action_login'    => 'Login user',
     'user_action_register' => 'Register user',
 
-    'user_message_restaurant' => 'You can login now.',
+    'user_message_login' => 'You can login now.',
 
     'user_validator_email_notempty'      => 'Please enter email address!',
     'user_validator_email_format'        => 'Email address is invalid!',
