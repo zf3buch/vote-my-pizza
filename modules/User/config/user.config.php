@@ -7,6 +7,8 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+use User\UserConfig;
+
 return [
     'dependencies' => [
         'invokables' => [
@@ -118,7 +120,7 @@ return [
 
     'templates' => [
         'paths' => [
-            'user' => ['templates/user'],
+            'user' => [UserConfig::ROOT . '/templates/user'],
         ],
     ],
 
@@ -126,7 +128,7 @@ return [
         'translation_file_patterns' => [
             [
                 'type'        => 'phpArray',
-                'base_dir'    => APPLICATION_ROOT . '/language/user',
+                'base_dir'    => UserConfig::ROOT . '/language',
                 'pattern'     => '%s.php',
                 'text_domain' => 'default',
             ],

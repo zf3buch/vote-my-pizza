@@ -7,6 +7,8 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+use Pizza\PizzaConfig;
+
 return [
     'dependencies' => [
         'factories' => [
@@ -121,7 +123,7 @@ return [
 
     'templates' => [
         'paths' => [
-            'pizza' => ['templates/pizza'],
+            'pizza' => [PizzaConfig::ROOT . '/templates/pizza'],
         ],
     ],
 
@@ -129,7 +131,7 @@ return [
         'translation_file_patterns' => [
             [
                 'type'        => 'phpArray',
-                'base_dir'    => APPLICATION_ROOT . '/language/pizza',
+                'base_dir'    => PizzaConfig::ROOT . '/language',
                 'pattern'     => '%s.php',
                 'text_domain' => 'default',
             ],
