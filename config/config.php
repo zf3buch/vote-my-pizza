@@ -11,7 +11,7 @@ use Zend\Expressive\ConfigManager\ConfigManager;
 use Zend\Expressive\ConfigManager\PhpFileProvider;
 use Zend\Stdlib\ArrayUtils;
 
-$cachedConfigFile = APPLICATION_ROOT . '/data/cache/app_config.php';
+$cachedConfigFile = PROJECT_ROOT . '/data/cache/app_config.php';
 
 $pattern = '{{,*.}global,{,*.}' . APPLICATION_ENV . ',{,*.}local}.php';
 

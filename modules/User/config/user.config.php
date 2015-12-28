@@ -7,8 +7,6 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-use User\UserConfig;
-
 return [
     'dependencies' => [
         'invokables' => [
@@ -49,7 +47,7 @@ return [
 
             User\Authorization\AuthorizationMiddleware::class =>
                 User\Authorization\AuthorizationMiddlewareFactory::class,
-            User\Authorization\AuthorizationObserver::class =>
+            User\Authorization\AuthorizationObserver::class   =>
                 User\Authorization\AuthorizationObserverFactory::class,
         ],
     ],
