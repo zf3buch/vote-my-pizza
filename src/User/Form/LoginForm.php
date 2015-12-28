@@ -25,7 +25,7 @@ class LoginForm extends Form
      */
     public function init()
     {
-        $this->setName('restaurant_price_form');
+        $this->setName('user_login_form');
         $this->setAttribute('class', 'form-horizontal');
 
         $this->add(

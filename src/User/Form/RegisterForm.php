@@ -25,7 +25,7 @@ class RegisterForm extends Form
      */
     public function init()
     {
-        $this->setName('restaurant_price_form');
+        $this->setName('user_register_form');
         $this->setAttribute('class', 'form-horizontal');
 
         $this->add(
