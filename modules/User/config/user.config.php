@@ -122,7 +122,7 @@ return [
 
     'templates' => [
         'paths' => [
-            'user' => [UserConfig::ROOT . '/templates/user'],
+            'user' => [USER_ROOT . '/templates/user'],
         ],
     ],
 
@@ -130,7 +130,7 @@ return [
         'translation_file_patterns' => [
             [
                 'type'        => 'phpArray',
-                'base_dir'    => UserConfig::ROOT . '/language',
+                'base_dir'    => USER_ROOT . '/language',
                 'pattern'     => '%s.php',
                 'text_domain' => 'default',
             ],

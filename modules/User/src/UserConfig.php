@@ -11,6 +11,8 @@ namespace User;
 
 use Zend\Config\Factory;
 
+define('USER_ROOT', __DIR__ . '/..');
+
 /**
  * Class UserConfig
  *
@@ -19,17 +21,12 @@ use Zend\Config\Factory;
 class UserConfig
 {
     /**
-     * Root path for pizza module
-     */
-    const ROOT = __DIR__ . '/..';
-
-    /**
      * Read configuration
      *
      * @return array|\Zend\Config\Config
      */
     public function __invoke()
     {
-        return Factory::fromFile(self::ROOT . '/config/user.config.php');
+        return Factory::fromFile(USER_ROOT . '/config/user.config.php');
     }
 }

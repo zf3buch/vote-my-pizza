@@ -123,7 +123,7 @@ return [
 
     'templates' => [
         'paths' => [
-            'pizza' => [PizzaConfig::ROOT . '/templates/pizza'],
+            'pizza' => [PIZZA_ROOT . '/templates/pizza'],
         ],
     ],
 
@@ -131,7 +131,7 @@ return [
         'translation_file_patterns' => [
             [
                 'type'        => 'phpArray',
-                'base_dir'    => PizzaConfig::ROOT . '/language',
+                'base_dir'    => PIZZA_ROOT . '/language',
                 'pattern'     => '%s.php',
                 'text_domain' => 'default',
             ],
