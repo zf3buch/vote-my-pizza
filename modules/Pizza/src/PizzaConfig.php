@@ -11,6 +11,8 @@ namespace Pizza;
 
 use Zend\Config\Factory;
 
+define('PIZZA_ROOT', __DIR__ . '/..');
+
 /**
  * Class PizzaConfig
  *
@@ -19,17 +21,12 @@ use Zend\Config\Factory;
 class PizzaConfig
 {
     /**
-     * Root path for pizza module
-     */
-    const ROOT = __DIR__ . '/..';
-
-    /**
      * Read configuration
      *
      * @return array|\Zend\Config\Config
      */
     public function __invoke()
     {
-        return Factory::fromFile(self::ROOT . '/config/pizza.config.php');
+        return Factory::fromFile(PIZZA_ROOT . '/config/pizza.config.php');
     }
 }
