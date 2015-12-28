@@ -16,22 +16,11 @@ return [
             Zend\Expressive\Router\RouterInterface::class =>
                 Zend\Expressive\Router\ZendRouter::class,
 
-            Zend\Session\Config\SessionConfig::class =>
-                Zend\Session\Service\SessionConfigFactory::class,
-
-            Application\I18n\Middleware\CheckLanguage::class =>
-                Application\I18n\Middleware\CheckLanguage::class,
         ],
 
         'factories' => [
             Zend\Expressive\Application::class =>
                 Application\Expressive\ApplicationFactory::class,
-            Zend\Expressive\Helper\UrlHelper::class =>
-                Application\View\Helper\UrlHelperFactory::class,
-            Zend\Expressive\Helper\ServerUrlMiddleware::class  =>
-                Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
-            Zend\Expressive\Helper\UrlHelperMiddleware::class  =>
-                Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
 
             'Zend\Expressive\FinalHandler' =>
                 Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
@@ -42,16 +31,14 @@ return [
             Zend\View\HelperPluginManager::class =>
                 Application\View\HelperPluginManagerFactory::class,
 
-            Zend\I18n\Translator\Translator::class =>
-                Application\I18n\Translator\TranslatorFactory::class,
+            Zend\Expressive\Helper\UrlHelper::class =>
+                Application\View\Helper\UrlHelperFactory::class,
 
-            Application\I18n\Observer\SetLanguageObserver::class =>
-                Application\I18n\Observer\SetLanguageObserverFactory::class,
+            Zend\Expressive\Helper\ServerUrlMiddleware::class  =>
+                Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
 
-            Application\I18n\Middleware\InjectTranslator::class =>
-                Application\I18n\Middleware\InjectTranslatorFactory::class,
-            User\Authorization\AuthorizationMiddleware::class =>
-                User\Authorization\AuthorizationMiddlewareFactory::class,
+            Zend\Expressive\Helper\UrlHelperMiddleware::class  =>
+                Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
         ],
     ],
 ];

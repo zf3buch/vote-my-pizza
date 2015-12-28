@@ -8,13 +8,29 @@
  */
 
 use Application\ApplicationConfig;
-use Pizza\PizzaConfig;
 
 return [
     'dependencies' => [
+        'invokables' => [
+            Application\I18n\Middleware\CheckLanguage::class =>
+                Application\I18n\Middleware\CheckLanguage::class,
+        ],
+
         'factories' => [
+            Zend\Session\Config\SessionConfig::class =>
+                Zend\Session\Service\SessionConfigFactory::class,
+
+            Zend\I18n\Translator\Translator::class =>
+                Application\I18n\Translator\TranslatorFactory::class,
+
             Application\Action\HomePageAction::class =>
                 Application\Action\HomePageFactory::class,
+
+            Application\I18n\Observer\SetLanguageObserver::class =>
+                Application\I18n\Observer\SetLanguageObserverFactory::class,
+
+            Application\I18n\Middleware\InjectTranslator::class =>
+                Application\I18n\Middleware\InjectTranslatorFactory::class,
         ],
     ],
 
@@ -50,7 +66,7 @@ return [
         'translation_file_patterns' => [
             [
                 'type'        => 'phpArray',
-                'base_dir'    => PizzaConfig::ROOT . '/language',
+                'base_dir'    => ApplicationConfig::ROOT . '/language',
                 'pattern'     => '%s.php',
                 'text_domain' => 'default',
             ],
@@ -63,5 +79,4 @@ return [
         'cookie_lifetime' => 365 * 24 * 60 * 60,
         'gc_maxlifetime'  => 720,
     ],
-
 ];

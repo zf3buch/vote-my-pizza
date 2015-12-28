@@ -30,6 +30,8 @@ class ApplicationConfig
      */
     public function __invoke()
     {
-        return Factory::fromFile(self::ROOT . '/config/application.config.php');
+        return Factory::fromFile(
+            self::ROOT . '/config/application.config.php'
+        );
     }
 }

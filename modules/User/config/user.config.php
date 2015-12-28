@@ -47,6 +47,8 @@ return [
             Zend\Authentication\AuthenticationServiceInterface::class =>
                 User\Authentication\AuthenticationServiceFactory::class,
 
+            User\Authorization\AuthorizationMiddleware::class =>
+                User\Authorization\AuthorizationMiddlewareFactory::class,
             User\Authorization\AuthorizationObserver::class =>
                 User\Authorization\AuthorizationObserverFactory::class,
         ],
