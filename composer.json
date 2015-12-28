@@ -41,14 +41,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "src/Application/",
+            "Application\\": "modules/Application/src/",
             "Pizza\\": "modules/Pizza/src/",
             "User\\": "modules/User/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ApplicationTest\\": "test/ApplicationTest/"
+            "ApplicationTest\\": "modules/Application/test/"
         }
     },
     "scripts": {
