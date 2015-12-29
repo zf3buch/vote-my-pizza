@@ -7,8 +7,6 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-use Pizza\PizzaConfig;
-
 return [
     'dependencies' => [
         'factories' => [
