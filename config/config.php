@@ -20,6 +20,7 @@ $configManager = new ConfigManager(
         Application\ApplicationConfig::class,
         Pizza\PizzaConfig::class,
         User\UserConfig::class,
+        Bootstrap\BootstrapConfig::class,
         new PhpFileProvider('config/autoload/' . $pattern),
     ],
     $cachedConfigFile

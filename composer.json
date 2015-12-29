@@ -42,6 +42,7 @@
     "autoload": {
         "psr-4": {
             "Application\\": "modules/Application/src/",
+            "Bootstrap\\": "modules/Bootstrap/src/",
             "Pizza\\": "modules/Pizza/src/",
             "User\\": "modules/User/src/"
         }

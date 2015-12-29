@@ -116,42 +116,8 @@ $form->setAttribute('action', $urlRestaurant);
                     ?>
                 </div>
                 <div class="panel-body">
-                    <?php echo $this->form()->openTag($form); ?>
-                    <div class="form-group">
-                        <?php echo $this->formLabel($form->get('name')); ?>
-                        <div class="col-sm-8">
-                            <?php
-                            echo $this->formElement($form->get('name'));
-                            echo $this->formElementErrors(
-                                $form->get('name')
-                            );
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <?php echo $this->formLabel(
-                            $form->get('price')
-                        ); ?>
-                        <div class="col-sm-8">
-                            <?php
-                            echo $this->formElement($form->get('price'));
-                            echo $this->formElementErrors(
-                                $form->get('price')
-                            );
-                            ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-8">
-                            <?php
-                            echo $this->formElement(
-                                $form->get('save_price')
-                            );
-                            ?>
-                        </div>
-                    </div>
+                    <?php echo $this->bootstrapForm($form); ?>
                 </div>
-                <?php echo $this->form()->closeTag(); ?>
             </div>
         <?php endif; ?>
     </div>
