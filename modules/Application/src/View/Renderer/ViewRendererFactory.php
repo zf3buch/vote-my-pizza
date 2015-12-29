@@ -7,7 +7,7 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Expressive;
+namespace Application\View\Renderer;
 
 use Application\View\Model\LayoutModel;
 use Interop\Container\ContainerInterface;
@@ -18,7 +18,7 @@ use Zend\ServiceManager\ServiceManager;
 /**
  * Class ViewRendererFactory
  *
- * @package Application\Expressive
+ * @package Application\View\Renderer
  */
 class ViewRendererFactory extends ZendViewRendererFactory
 {
