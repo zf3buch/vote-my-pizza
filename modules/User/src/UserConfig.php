@@ -11,8 +11,6 @@ namespace User;
 
 use Zend\Config\Factory;
 
-define('USER_ROOT', __DIR__ . '/..');
-
 /**
  * Class UserConfig
  *
@@ -20,6 +18,14 @@ define('USER_ROOT', __DIR__ . '/..');
  */
 class UserConfig
 {
+    /**
+     * Define constant
+     */
+    public function __construct()
+    {
+        define('USER_ROOT', __DIR__ . '/..');
+    }
+
     /**
      * Read configuration
      *
