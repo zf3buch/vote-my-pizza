@@ -11,8 +11,6 @@ namespace Pizza;
 
 use Zend\Config\Factory;
 
-define('PIZZA_ROOT', __DIR__ . '/..');
-
 /**
  * Class PizzaConfig
  *
@@ -20,6 +18,14 @@ define('PIZZA_ROOT', __DIR__ . '/..');
  */
 class PizzaConfig
 {
+    /**
+     * Define constant
+     */
+    public function __construct()
+    {
+        define('PIZZA_ROOT', __DIR__ . '/..');
+    }
+
     /**
      * Read configuration
      *
