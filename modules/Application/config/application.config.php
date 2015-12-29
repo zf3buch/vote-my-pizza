@@ -15,6 +15,9 @@ return [
         ],
 
         'factories' => [
+            Zend\Db\Adapter\AdapterInterface::class =>
+                Zend\Db\Adapter\AdapterServiceFactory::class,
+
             Zend\Session\Config\SessionConfig::class =>
                 Zend\Session\Service\SessionConfigFactory::class,
 
