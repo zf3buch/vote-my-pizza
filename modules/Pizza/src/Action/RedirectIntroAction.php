@@ -7,34 +7,35 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\Action;
+namespace Pizza\Action;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
- * Class HomePageAction
+ * Class RedirectIntroAction
  *
- * @package Application\Action
+ * @package Pizza\Action
  */
-class HomePageAction
+class RedirectIntroAction
 {
     /**
-     * @var TemplateRendererInterface
+     * @var RouterInterface
      */
-    private $template;
+    private $router;
 
     /**
-     * HomePageAction constructor.
+     * RedirectIntroAction constructor.
      *
-     * @param TemplateRendererInterface $template
+     * @param RouterInterface $router
      */
     public function __construct(
-        TemplateRendererInterface $template = null
+        RouterInterface $router
     ) {
-        $this->template = $template;
+        $this->router = $router;
     }
 
     /**
@@ -49,12 +50,12 @@ class HomePageAction
         ResponseInterface $response,
         callable $next = null
     ) {
-        $data = [
-            'welcome' => 'application_heading_welcome',
+        $routeParams = [
+            'lang' => $request->getAttribute('lang'),
         ];
 
-        return new HtmlResponse(
-            $this->template->render('application::home-page', $data)
+        return new RedirectResponse(
+            $this->router->generateUri('home', $routeParams)
         );
     }
 }

@@ -22,6 +22,8 @@ return [
                 Pizza\Action\HandleRestaurantFactory::class,
             Pizza\Action\DeleteRestaurantAction::class =>
                 Pizza\Action\DeleteRestaurantFactory::class,
+            Pizza\Action\RedirectIntroAction::class =>
+                Pizza\Action\RedirectIntroFactory::class,
 
             Pizza\Model\Table\PizzaTableInterface::class      =>
                 Pizza\Model\Table\PizzaTableFactory::class,
@@ -43,9 +45,20 @@ return [
 
     'routes' => [
         [
+            'name'            => 'home',
+            'path'            => '/:lang',
+            'middleware'      => Pizza\Action\ShowIntroAction::class,
+            'allowed_methods' => ['GET'],
+            'options'         => [
+                'constraints' => [
+                    'lang' => '(de|en)',
+                ],
+            ],
+        ],
+        [
             'name'            => 'pizza-intro',
             'path'            => '/:lang/pizza',
-            'middleware'      => Pizza\Action\ShowIntroAction::class,
+            'middleware'      => Pizza\Action\RedirectIntroAction::class,
             'allowed_methods' => ['GET'],
             'options'         => [
                 'constraints' => [

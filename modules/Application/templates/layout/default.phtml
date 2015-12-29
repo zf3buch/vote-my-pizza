@@ -82,12 +82,6 @@ $this->inlineScript()->prependFile(
                         <?php echo $this->translate('application_navigation_home'); ?>
                     </a>
                 </li>
-                <li>
-                    <a href="<?php echo $this->url('pizza-intro') ?>">
-                        <i class="fa fa-thumbs-up"></i>
-                        <?php echo $this->translate('pizza_navigation_intro'); ?>
-                    </a>
-                </li>
                 <?php if ($this->userAllowed('pizza-voting')): ?>
                 <li>
                     <a href="<?php echo $this->url('pizza-voting') ?>">

@@ -24,28 +24,11 @@ return [
             Zend\I18n\Translator\Translator::class =>
                 Application\I18n\Translator\TranslatorFactory::class,
 
-            Application\Action\HomePageAction::class =>
-                Application\Action\HomePageFactory::class,
-
             Application\I18n\Observer\SetLanguageObserver::class =>
                 Application\I18n\Observer\SetLanguageObserverFactory::class,
 
             Application\I18n\Middleware\InjectTranslator::class =>
                 Application\I18n\Middleware\InjectTranslatorFactory::class,
-        ],
-    ],
-
-    'routes' => [
-        [
-            'name'            => 'home',
-            'path'            => '/:lang',
-            'middleware'      => Application\Action\HomePageAction::class,
-            'allowed_methods' => ['GET'],
-            'options'         => [
-                'constraints' => [
-                    'lang' => '(de|en)',
-                ],
-            ],
         ],
     ],
 
@@ -57,7 +40,6 @@ return [
             'error/404'      => APPLICATION_ROOT . '/templates/error/404.phtml',
         ],
         'paths'  => [
-            'application' => [APPLICATION_ROOT . '/templates/application'],
             'layout'      => [APPLICATION_ROOT . '/templates/layout'],
             'error'       => [APPLICATION_ROOT . '/templates/error'],
         ],
