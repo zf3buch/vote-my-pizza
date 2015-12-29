@@ -29,19 +29,28 @@ return [
 
             Application\I18n\Middleware\InjectTranslator::class =>
                 Application\I18n\Middleware\InjectTranslatorFactory::class,
+
+            Application\View\Model\LayoutModel::class =>
+                Application\View\Model\LayoutFactory::class,
         ],
     ],
 
     'templates' => [
-        'layout' => 'layout/default',
-        'map'    => [
+        'layout'          => 'layout/default',
+        'layout_segments' => [
+            'layout/header',
+            'layout/footer',
+        ],
+        'map'             => [
             'layout/default' => APPLICATION_ROOT . '/templates/layout/default.phtml',
+            'layout/header'  => APPLICATION_ROOT . '/templates/layout/header.phtml',
+            'layout/footer'  => APPLICATION_ROOT . '/templates/layout/footer.phtml',
             'error/error'    => APPLICATION_ROOT . '/templates/error/error.phtml',
             'error/404'      => APPLICATION_ROOT . '/templates/error/404.phtml',
         ],
-        'paths'  => [
-            'layout'      => [APPLICATION_ROOT . '/templates/layout'],
-            'error'       => [APPLICATION_ROOT . '/templates/error'],
+        'paths'           => [
+            'layout' => [APPLICATION_ROOT . '/templates/layout'],
+            'error'  => [APPLICATION_ROOT . '/templates/error'],
         ],
     ],
 
