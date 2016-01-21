@@ -7,8 +7,6 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-use Application\I18n\Middleware\CheckLanguage;
-use Application\I18n\Middleware\InjectTranslator;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\ServerUrlMiddlewareFactory;
@@ -22,6 +20,8 @@ return [
                 Application\I18n\Middleware\CheckLanguage::class,
         ],
         'factories' => [
+            Application\I18n\Middleware\InjectTranslator::class =>
+                Application\I18n\Middleware\InjectTranslatorFactory::class,
             ServerUrlMiddleware::class =>
                 ServerUrlMiddlewareFactory::class,
             UrlHelperMiddleware::class =>
@@ -33,7 +33,7 @@ return [
         'always' => [
             'middleware' => [
                 ServerUrlMiddleware::class,
-                CheckLanguage::class,
+                Application\I18n\Middleware\CheckLanguage::class,
             ],
             'priority' => 10000,
         ],
@@ -42,7 +42,7 @@ return [
             'middleware' => [
                 ApplicationFactory::ROUTING_MIDDLEWARE,
                 UrlHelperMiddleware::class,
-                InjectTranslator::class,
+                Application\I18n\Middleware\InjectTranslator::class,
                 ApplicationFactory::DISPATCH_MIDDLEWARE,
             ],
             'priority' => 1,
