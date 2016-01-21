@@ -7,28 +7,45 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+use Zend\Expressive\Container\ApplicationFactory;
+use Zend\Expressive\Helper\ServerUrlMiddleware;
+use Zend\Expressive\Helper\ServerUrlMiddlewareFactory;
+use Zend\Expressive\Helper\UrlHelperMiddleware;
+use Zend\Expressive\Helper\UrlHelperMiddlewareFactory;
 
 return [
     'dependencies' => [
-        'factories'  => [
-            Zend\Expressive\Helper\ServerUrlMiddleware::class =>
-                Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
-            Zend\Expressive\Helper\UrlHelperMiddleware::class =>
-                Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
+        'factories' => [
+            ServerUrlMiddleware::class =>
+                ServerUrlMiddlewareFactory::class,
+            UrlHelperMiddleware::class =>
+                UrlHelperMiddlewareFactory::class,
         ],
     ],
 
     'middleware_pipeline' => [
-        'pre_routing' => [
-            [
-                'middleware' => [
-                    Zend\Expressive\Helper\ServerUrlMiddleware::class,
-                    Zend\Expressive\Helper\UrlHelperMiddleware::class,
-                ],
+        'always' => [
+            'middleware' => [
+                ServerUrlMiddleware::class,
             ],
+            'priority' => 10000,
         ],
 
-        'post_routing' => [
+        'routing' => [
+            'middleware' => [
+                ApplicationFactory::ROUTING_MIDDLEWARE,
+                UrlHelperMiddleware::class,
+                ApplicationFactory::DISPATCH_MIDDLEWARE,
+            ],
+            'priority' => 1,
+        ],
+
+        'error' => [
+            'middleware' => [
+                // Add error middleware here.
+            ],
+            'error'    => true,
+            'priority' => -10000,
         ],
     ],
 ];
