@@ -7,6 +7,13 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+use Application\I18n\Middleware\CheckLanguage;
+use Application\I18n\Middleware\InjectTranslator;
+use Zend\Expressive\Container\ApplicationFactory;
+use Zend\Expressive\Helper\ServerUrlMiddleware;
+use Zend\Expressive\Helper\ServerUrlMiddlewareFactory;
+use Zend\Expressive\Helper\UrlHelperMiddleware;
+use Zend\Expressive\Helper\UrlHelperMiddlewareFactory;
 
 return [
     'dependencies' => [
@@ -14,29 +21,39 @@ return [
             Application\I18n\Middleware\CheckLanguage::class =>
                 Application\I18n\Middleware\CheckLanguage::class,
         ],
-        'factories'  => [
-            Zend\Expressive\Helper\ServerUrlMiddleware::class  =>
-                Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
-            Zend\Expressive\Helper\UrlHelperMiddleware::class  =>
-                Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
-            Application\I18n\Middleware\InjectTranslator::class =>
-                Application\I18n\Middleware\InjectTranslatorFactory::class,
+        'factories' => [
+            ServerUrlMiddleware::class =>
+                ServerUrlMiddlewareFactory::class,
+            UrlHelperMiddleware::class =>
+                UrlHelperMiddlewareFactory::class,
         ],
     ],
 
     'middleware_pipeline' => [
-        'pre_routing' => [
-            [
-                'middleware' => [
-                    Application\I18n\Middleware\CheckLanguage::class,
-                    Zend\Expressive\Helper\ServerUrlMiddleware::class,
-                    Zend\Expressive\Helper\UrlHelperMiddleware::class,
-                    Application\I18n\Middleware\InjectTranslator::class,
-                ],
+        'always' => [
+            'middleware' => [
+                ServerUrlMiddleware::class,
+                CheckLanguage::class,
             ],
+            'priority' => 10000,
         ],
 
-        'post_routing' => [
+        'routing' => [
+            'middleware' => [
+                ApplicationFactory::ROUTING_MIDDLEWARE,
+                UrlHelperMiddleware::class,
+                InjectTranslator::class,
+                ApplicationFactory::DISPATCH_MIDDLEWARE,
+            ],
+            'priority' => 1,
+        ],
+
+        'error' => [
+            'middleware' => [
+                // Add error middleware here.
+            ],
+            'error'    => true,
+            'priority' => -10000,
         ],
     ],
 ];
