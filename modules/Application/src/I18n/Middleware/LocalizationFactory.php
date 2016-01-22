@@ -7,27 +7,27 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\I18n\Observer;
+namespace Application\I18n\Middleware;
 
 use Interop\Container\ContainerInterface;
 use Zend\I18n\Translator\Translator;
 
 /**
- * Class SetLanguageObserverFactory
+ * Class LocalizationFactory
  *
- * @package Application\I18n\Observer
+ * @package Application\I18n\Middleware
  */
-class SetLanguageObserverFactory
+class LocalizationFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return SetLanguageObserver
+     * @return LocalizationMiddleware
      */
     public function __invoke(ContainerInterface $container)
     {
         $translator = $container->get(Translator::class);
 
-        return new SetLanguageObserver($translator);
+        return new LocalizationMiddleware($translator);
     }
 }
