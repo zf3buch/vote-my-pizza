@@ -10,8 +10,8 @@
 return [
     'dependencies' => [
         'invokables' => [
-            Application\I18n\Middleware\CheckLanguageMiddleware::class =>
-                Application\I18n\Middleware\CheckLanguageMiddleware::class,
+            Application\I18n\Middleware\CheckRootUriMiddleware::class =>
+                Application\I18n\Middleware\CheckRootUriMiddleware::class,
         ],
         'factories' => [
             Application\I18n\Middleware\InjectTranslatorMiddleware::class =>
@@ -29,7 +29,7 @@ return [
         'always' => [
             'middleware' => [
                 Zend\Expressive\Helper\ServerUrlMiddleware::class,
-                Application\I18n\Middleware\CheckLanguageMiddleware::class,
+                Application\I18n\Middleware\CheckRootUriMiddleware::class,
             ],
             'priority'   => 10000,
         ],

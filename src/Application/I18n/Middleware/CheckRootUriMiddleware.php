@@ -14,11 +14,11 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\RedirectResponse;
 
 /**
- * Class CheckLanguageMiddleware
+ * Class CheckRootUriMiddleware
  *
  * @package Application\I18n\Middleware
  */
-class CheckLanguageMiddleware
+class CheckRootUriMiddleware
 {
     /**
      * @param ServerRequestInterface $request
