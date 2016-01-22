@@ -7,19 +7,22 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-
 return [
     'dependencies' => [
         'invokables' => [
-            Application\I18n\Middleware\CheckLanguage::class =>
-                Application\I18n\Middleware\CheckLanguage::class,
+            Application\I18n\Middleware\CheckLanguageMiddleware::class =>
+                Application\I18n\Middleware\CheckLanguageMiddleware::class,
         ],
-        'factories'  => [
-            Zend\Expressive\Helper\ServerUrlMiddleware::class  =>
+        'factories' => [
+            Application\I18n\Middleware\InjectTranslatorMiddleware::class =>
+                Application\I18n\Middleware\InjectTranslatorFactory::class,
+            Application\I18n\Middleware\LocalizationMiddleware::class =>
+                Application\I18n\Middleware\LocalizationFactory::class,
+            Zend\Expressive\Helper\ServerUrlMiddleware::class =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
-            Zend\Expressive\Helper\UrlHelperMiddleware::class  =>
+            Zend\Expressive\Helper\UrlHelperMiddleware::class =>
                 Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
-            Application\I18n\Middleware\InjectTranslator::class =>
+            Application\I18n\Middleware\InjectTranslatorMiddleware::class =>
                 Application\I18n\Middleware\InjectTranslatorFactory::class,
             User\Authorization\AuthorizationMiddleware::class =>
                 User\Authorization\AuthorizationMiddlewareFactory::class,
@@ -27,19 +30,32 @@ return [
     ],
 
     'middleware_pipeline' => [
-        'pre_routing' => [
-            [
-                'middleware' => [
-                    Application\I18n\Middleware\CheckLanguage::class,
-                    Zend\Expressive\Helper\ServerUrlMiddleware::class,
-                    Zend\Expressive\Helper\UrlHelperMiddleware::class,
-                    Application\I18n\Middleware\InjectTranslator::class,
-                    User\Authorization\AuthorizationMiddleware::class,
-                ],
+        'always' => [
+            'middleware' => [
+                Zend\Expressive\Helper\ServerUrlMiddleware::class,
+                Application\I18n\Middleware\CheckLanguageMiddleware::class,
             ],
+            'priority'   => 10000,
         ],
 
-        'post_routing' => [
+        'routing' => [
+            'middleware' => [
+                Zend\Expressive\Container\ApplicationFactory::ROUTING_MIDDLEWARE,
+                Zend\Expressive\Helper\UrlHelperMiddleware::class,
+                Application\I18n\Middleware\LocalizationMiddleware::class,
+                Application\I18n\Middleware\InjectTranslatorMiddleware::class,
+                User\Authorization\AuthorizationMiddleware::class,
+                Zend\Expressive\Container\ApplicationFactory::DISPATCH_MIDDLEWARE,
+            ],
+            'priority'   => 1,
+        ],
+
+        'error' => [
+            'middleware' => [
+                // Add error middleware here.
+            ],
+            'error'      => true,
+            'priority'   => -10000,
         ],
     ],
 ];
