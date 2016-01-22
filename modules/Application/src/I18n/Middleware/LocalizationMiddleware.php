@@ -7,19 +7,20 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\I18n\Observer;
+namespace Application\I18n\Middleware;
 
 use Locale;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Router\RouteResult;
-use Zend\Expressive\Router\RouteResultObserverInterface;
 use Zend\I18n\Translator\Translator;
 
 /**
- * Class SetLanguageObserver
+ * Class LocalizationMiddleware
  *
- * @package Application\I18n\Observer
+ * @package Application\I18n\Middleware
  */
-class SetLanguageObserver implements RouteResultObserverInterface
+class LocalizationMiddleware
 {
     /**
      * @var Translator
@@ -40,7 +41,7 @@ class SetLanguageObserver implements RouteResultObserverInterface
     ];
 
     /**
-     * SetLanguageObserver constructor.
+     * LocalizationMiddleware constructor.
      *
      * @param Translator $translator
      */
@@ -50,10 +51,19 @@ class SetLanguageObserver implements RouteResultObserverInterface
     }
 
     /**
-     * @param RouteResult $result
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface      $response
+     * @param callable|null          $next
+     *
+     * @return callable|null
      */
-    public function update(RouteResult $result)
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response,
+        callable $next = null
+    ) {
+        $result = $request->getAttribute(RouteResult::class, false);
+
         if ($result->isFailure()) {
             $lang = $this->default;
         } else {
@@ -67,5 +77,7 @@ class SetLanguageObserver implements RouteResultObserverInterface
         Locale::setDefault($locale);
 
         $this->translator->setLocale($locale);
+
+        return $next($request, $response);
     }
 }
