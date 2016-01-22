@@ -47,7 +47,6 @@ class RestaurantInputFilter extends InputFilter
                     [
                         'name'    => 'StringLength',
                         'options' => [
-                            'encoding' => 'UTF-8',
                             'min'      => 3,
                             'max'      => 64,
                             'message'  => 'Nur %min%-%max% Zeichen erlaubt!',
