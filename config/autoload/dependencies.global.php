@@ -16,13 +16,13 @@ return [
 
         'factories' => [
             Zend\Expressive\Application::class =>
-                Application\Expressive\ApplicationFactory::class,
+                Zend\Expressive\Container\ApplicationFactory::class,
             Zend\Expressive\Helper\UrlHelper::class =>
                 Application\View\Helper\UrlHelperFactory::class,
             Zend\I18n\Translator\Translator::class =>
                 Application\I18n\Translator\TranslatorFactory::class,
-            Application\I18n\Observer\SetLanguageObserver::class =>
-                Application\I18n\Observer\SetLanguageObserverFactory::class,
+            Application\I18n\Middleware\LocalizationMiddleware::class =>
+                Application\I18n\Middleware\LocalizationFactory::class,
         ],
     ],
 
