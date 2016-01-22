@@ -37,13 +37,18 @@ class UrlHelper extends ExpressiveUrlHelper
     private $defaultRoute = 'home';
 
     /**
-     * {@inheritDoc}
+     * Inject a route result.
+     *
+     * When the route result is injected, the helper will use it to seed default
+     * parameters if the URL being generated is for the route that was matched.
+     *
+     * @param RouteResult $result
      */
-    public function update(RouteResult $result)
+    public function setRouteResult(RouteResult $result)
     {
         $this->result = $result;
 
-        parent::update($result);
+        parent::setRouteResult($result);
     }
 
     /**

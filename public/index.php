@@ -37,4 +37,4 @@ chdir(dirname(__DIR__));
 $container = require PROJECT_ROOT . '/config/container.php';
 
 // run the application
-$app = $container->get('Zend\Expressive\Application')->run();
+$app = $container->get(Zend\Expressive\Application::class)->run();
