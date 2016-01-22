@@ -10,12 +10,14 @@
 return [
     'dependencies' => [
         'invokables' => [
-            Application\I18n\Middleware\CheckLanguage::class =>
-                Application\I18n\Middleware\CheckLanguage::class,
+            Application\I18n\Middleware\CheckLanguageMiddleware::class =>
+                Application\I18n\Middleware\CheckLanguageMiddleware::class,
         ],
         'factories' => [
-            Application\I18n\Middleware\InjectTranslator::class =>
+            Application\I18n\Middleware\InjectTranslatorMiddleware::class =>
                 Application\I18n\Middleware\InjectTranslatorFactory::class,
+            Application\I18n\Middleware\LocalizationMiddleware::class =>
+                Application\I18n\Middleware\LocalizationFactory::class,
             Zend\Expressive\Helper\ServerUrlMiddleware::class =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
             Zend\Expressive\Helper\UrlHelperMiddleware::class =>
@@ -27,7 +29,7 @@ return [
         'always' => [
             'middleware' => [
                 Zend\Expressive\Helper\ServerUrlMiddleware::class,
-                Application\I18n\Middleware\CheckLanguage::class,
+                Application\I18n\Middleware\CheckLanguageMiddleware::class,
             ],
             'priority'   => 10000,
         ],
@@ -36,7 +38,8 @@ return [
             'middleware' => [
                 Zend\Expressive\Container\ApplicationFactory::ROUTING_MIDDLEWARE,
                 Zend\Expressive\Helper\UrlHelperMiddleware::class,
-                Application\I18n\Middleware\InjectTranslator::class,
+                Application\I18n\Middleware\LocalizationMiddleware::class,
+                Application\I18n\Middleware\InjectTranslatorMiddleware::class,
                 Zend\Expressive\Container\ApplicationFactory::DISPATCH_MIDDLEWARE,
             ],
             'priority'   => 1,
