@@ -64,7 +64,7 @@ class LocalizationMiddleware
     ) {
         $result = $request->getAttribute(RouteResult::class, false);
 
-        if ($result->isFailure()) {
+        if ($result === false || $result->isFailure()) {
             $lang = $this->default;
         } else {
             $matchedParams = $result->getMatchedParams();
