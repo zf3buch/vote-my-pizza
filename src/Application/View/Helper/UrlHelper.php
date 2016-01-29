@@ -67,25 +67,25 @@ class UrlHelper extends ExpressiveUrlHelper
      */
     public function __invoke($route = null, array $params = [])
     {
-        if (!$route && $this->result->isFailure()) {
+        if (!$route && !$this->result) {
+            $route = $this->defaultRoute;
+        } elseif (!$route && $this->result->isFailure()) {
             $route = $this->defaultRoute;
         }
 
-        $matchedParams = $this->result->getMatchedParams();
+        $lang = $this->defaultLang;
 
-        if (isset($matchedParams['lang'])) {
-            $lang = $matchedParams['lang'];
-        } else {
-            $lang = $this->defaultLang;
+        if ($this->result) {
+            $matchedParams = $this->result->getMatchedParams();
+
+            if (isset($matchedParams['lang'])) {
+                $lang = $matchedParams['lang'];
+            }
         }
 
-        $params = array_merge(
-            ['lang' => $lang], $params
-        );
+        $params = array_merge(['lang' => $lang], $params);
 
-        return parent::__invoke(
-            $route, $params
-        );
+        return parent::__invoke($route, $params);
     }
 
 }
