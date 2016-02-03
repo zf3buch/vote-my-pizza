@@ -7,27 +7,31 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Application\I18n\Middleware;
+namespace I18n\Middleware;
 
 use Interop\Container\ContainerInterface;
 use Zend\I18n\Translator\Translator;
+use Zend\View\HelperPluginManager;
 
 /**
- * Class LocalizationFactory
+ * Class InjectTranslatorFactory
  *
- * @package Application\I18n\Middleware
+ * @package I18n\Middleware
  */
-class LocalizationFactory
+class InjectTranslatorFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return LocalizationMiddleware
+     * @return InjectTranslatorMiddleware
      */
     public function __invoke(ContainerInterface $container)
     {
-        $translator = $container->get(Translator::class);
+        $translator          = $container->get(Translator::class);
+        $helperPluginManager = $container->get(HelperPluginManager::class);
 
-        return new LocalizationMiddleware($translator);
+        return new InjectTranslatorMiddleware(
+            $translator, $helperPluginManager
+        );
     }
 }

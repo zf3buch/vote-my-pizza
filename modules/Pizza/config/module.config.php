@@ -141,10 +141,10 @@ return [
     'translate' => [
         'translation_file_patterns' => [
             [
-                'type'        => 'phpArray',
-                'base_dir'    => PIZZA_ROOT . '/language',
-                'pattern'     => '%s.php',
-                'text_domain' => 'default',
+                'type'         => 'phpArray',
+                'base_dir'     => PIZZA_ROOT . '/language',
+                'pattern'      => '%s.php',
+                'text_domain'  => 'default',
             ],
         ],
     ],

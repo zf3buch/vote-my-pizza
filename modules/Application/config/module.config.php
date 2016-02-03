@@ -9,11 +9,6 @@
 
 return [
     'dependencies' => [
-        'invokables' => [
-            Application\I18n\Middleware\CheckRootUriMiddleware::class =>
-                Application\I18n\Middleware\CheckRootUriMiddleware::class,
-        ],
-
         'factories' => [
             Zend\Db\Adapter\AdapterInterface::class =>
                 Zend\Db\Adapter\AdapterServiceFactory::class,
@@ -21,32 +16,28 @@ return [
             Zend\Session\Config\SessionConfig::class =>
                 Zend\Session\Service\SessionConfigFactory::class,
 
-            Zend\I18n\Translator\Translator::class =>
-                Application\I18n\Translator\TranslatorFactory::class,
-
-            Application\I18n\Middleware\LocalizationMiddleware::class =>
-                Application\I18n\Middleware\LocalizationFactory::class,
-
-            Application\I18n\Middleware\InjectTranslatorMiddleware::class =>
-                Application\I18n\Middleware\InjectTranslatorFactory::class,
-
             Application\View\Model\LayoutModel::class =>
                 Application\View\Model\LayoutFactory::class,
         ],
     ],
 
     'templates' => [
-        'layout'          => 'layout/default',
+        'layout' => 'layout/default',
         'layout_segments' => [
             'layout/header',
             'layout/footer',
         ],
-        'map'             => [
-            'layout/default' => APPLICATION_ROOT . '/templates/layout/default.phtml',
-            'layout/header'  => APPLICATION_ROOT . '/templates/layout/header.phtml',
-            'layout/footer'  => APPLICATION_ROOT . '/templates/layout/footer.phtml',
-            'error/error'    => APPLICATION_ROOT . '/templates/error/error.phtml',
-            'error/404'      => APPLICATION_ROOT . '/templates/error/404.phtml',
+        'map'    => [
+            'layout/default' => APPLICATION_ROOT
+                . '/templates/layout/default.phtml',
+            'layout/header'  => APPLICATION_ROOT
+                . '/templates/layout/header.phtml',
+            'layout/footer'  => APPLICATION_ROOT
+                . '/templates/layout/footer.phtml',
+            'error/error'    => APPLICATION_ROOT
+                . '/templates/error/error.phtml',
+            'error/404'      => APPLICATION_ROOT
+                . '/templates/error/404.phtml',
         ],
         'paths'           => [
             'layout' => [APPLICATION_ROOT . '/templates/layout'],
@@ -54,13 +45,15 @@ return [
         ],
     ],
 
+    'view_helpers' => [],
+
     'translate' => [
         'translation_file_patterns' => [
             [
-                'type'        => 'phpArray',
-                'base_dir'    => APPLICATION_ROOT . '/language',
-                'pattern'     => '%s.php',
-                'text_domain' => 'default',
+                'type'         => 'phpArray',
+                'base_dir'     => APPLICATION_ROOT . '/language',
+                'pattern'      => '%s.php',
+                'text_domain'  => 'default',
             ],
         ],
     ],

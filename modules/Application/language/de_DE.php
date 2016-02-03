@@ -6,7 +6,6 @@
  * @link       https://github.com/zf3buch/vote-my-pizza
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-
 return [
     'application_title_404' => 'Seite nicht gefunden',
     'application_title_403' => 'Zugriff verboten',
