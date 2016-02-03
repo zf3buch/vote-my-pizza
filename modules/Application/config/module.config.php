@@ -13,6 +13,9 @@ return [
             Application\Action\HomePageAction::class =>
                 Application\Action\HomePageFactory::class,
 
+            Zend\Db\Adapter\AdapterInterface::class =>
+                Zend\Db\Adapter\AdapterServiceFactory::class,
+
             Zend\Session\Config\SessionConfig::class =>
                 Zend\Session\Service\SessionConfigFactory::class,
         ],
