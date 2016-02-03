@@ -39,5 +39,5 @@ return [
             Zend\Expressive\Helper\UrlHelperMiddleware::class =>
                 Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
         ],
-    ]
+    ],
 ];
