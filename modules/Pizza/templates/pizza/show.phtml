@@ -18,11 +18,10 @@ $form = $this->restaurantPriceForm;
 $form->setAttribute('action', $urlRestaurant);
 
 ?>
-<h1><?php echo $this->pizza['name']; ?></h1>
+<h1><?= $this->pizza['name']; ?></h1>
 <div class="row">
-    <?php
-    $this->inlineScript()->appendScript(
-        "
+  <?php
+  $this->inlineScript()->appendScript("
     $('#stars-" . $this->pizza['id'] . "').raty({
         readOnly: true,
         score   : " . round($this->pizza['rate'], 1) * 5 . ",
@@ -31,102 +30,92 @@ $form->setAttribute('action', $urlRestaurant);
         starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
-    "
-    ); ?>
-    <div class="col-md-6">
-        <div class="thumbnail text-center">
-            <img src="<?php echo $this->pizza['image'] ?>"
-                 title="<?php echo $this->pizza['name'] ?>">
-
-            <div class="caption">
-                <h4><?php echo $this->pizza['name'] ?></h4>
-
-                <div class="label label-success pull-left">
-                    <i class="fa fa-thumbs-up"></i>
-                    <?php echo $this->pizza['pos'] ?>
-                </div>
-                <div class="label label-danger pull-right">
-                    <i class="fa fa-thumbs-down"></i>
-                    <?php echo $this->pizza['neg'] ?>
-                </div>
-                <div id="stars-<?php echo $this->pizza['id'] ?>"></div>
-            </div>
+  "); ?>
+  <div class="col-md-6">
+    <div class="thumbnail text-center">
+      <img src="<?= $this->pizza['image'] ?>"
+           title="<?= $this->pizza['name'] ?>">
+      <div class="caption">
+        <h4><?= $this->pizza['name'] ?></h4>
+        <div class="label label-success pull-left">
+          <i class="fa fa-thumbs-up"></i><?= $this->pizza['pos'] ?>
         </div>
+        <div class="label label-danger pull-right">
+          <i class="fa fa-thumbs-down"></i><?= $this->pizza['neg'] ?>
+        </div>
+        <div id="stars-<?= $this->pizza['id'] ?>"></div>
+      </div>
     </div>
-    <div class="col-md-6">
-        <?php foreach ($this->pizza['restaurants'] as $restaurant) : ?>
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <?php
-                    echo sprintf(
-                        $this->translate('pizza_message_restaurant'),
-                        $restaurant['name']
-                    );
-                    ?>
-                </div>
-                <div class="panel-body">
-                    <?php
-                    echo sprintf(
-                        $this->translate('pizza_message_costs'),
-                        $this->pizza['name'],
-                        $this->currencyFormat(
-                            $restaurant['price'],
-                            'EUR'
-                        ),
-                        $this->dateFormat(
-                            strtotime($restaurant['date']),
-                            IntlDateFormatter::LONG,
-                            IntlDateFormatter::MEDIUM
-                        )
-                    );
-                    ?>
-                    <?php if ($this->userAllowed(
-                        'pizza-delete-restaurant'
-                    )
-                    ): ?>
-                        <?php
-                        $urlDelete = $this->url(
-                            'pizza-delete-restaurant',
-                            [
-                                'id'      => $this->pizza['id'],
-                                'priceId' => $restaurant['id'],
-                            ]
-                        );
-                        ?>
-                        <p>
-                            <a href="<?php echo $urlDelete; ?>"
-                               class="btn btn-danger">
-                                <?php echo $this->translate(
-                                    'pizza_action_delete_price'
-                                ); ?>
-                            </a>
-                        </p>
-                    <?php endif; ?>
-                </div>
-            </div>
-        <?php endforeach ?>
-        <?php if ($this->userAllowed('pizza-handle-restaurant')): ?>
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <?php
-                    echo sprintf(
-                        $this->translate('pizza_heading_new_price'),
-                        $this->pizza['name']
-                    );
-                    ?>
-                </div>
-                <div class="panel-body">
-                    <?php echo $this->bootstrapForm($form); ?>
-                </div>
-            </div>
-        <?php endif; ?>
-    </div>
+  </div>
+  <div class="col-md-6">
+    <?php foreach ($this->pizza['restaurants'] as $restaurant) : ?>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <?php
+          echo sprintf(
+              $this->translate('pizza_message_restaurant'),
+              $restaurant['name']
+          );
+          ?>
+        </div>
+        <div class="panel-body">
+          <?php
+          echo sprintf(
+              $this->translate('pizza_message_costs'),
+              $this->pizza['name'],
+              $this->currencyFormat($restaurant['price'], 'EUR'),
+              $this->dateFormat(
+                  strtotime($restaurant['date']),
+                  IntlDateFormatter::LONG,
+                  IntlDateFormatter::MEDIUM
+              )
+          );
+          ?>
+          <?php if ($this->userAllowed(
+              'pizza-delete-restaurant'
+          )
+          ): ?>
+            <?php
+            $urlDelete = $this->url(
+                'pizza-delete-restaurant',
+                [
+                    'id'      => $this->pizza['id'],
+                    'priceId' => $restaurant['id'],
+                ]
+            );
+            ?>
+            <p>
+              <a href="<?= $urlDelete; ?>"
+                 class="btn btn-danger">
+                <?= $this->translate(
+                    'pizza_action_delete_price'
+                ); ?>
+              </a>
+            </p>
+          <?php endif; ?>
+        </div>
+      </div>
+    <?php endforeach ?>
+    <?php if ($this->userAllowed('pizza-handle-restaurant')): ?>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <?php
+          echo sprintf(
+              $this->translate('pizza_heading_new_price'),
+              $this->pizza['name']
+          );
+          ?>
+        </div>
+        <div class="panel-body">
+            <?= $this->bootstrapForm($form); ?>
+      </div>
+    <?php endif; ?>
+  </div>
 </div>
 <div class="row">
-    <p class="text-center">
-        <a href="<?php echo $this->url('home') ?>"
-           class="btn btn-success">
-            <?php echo $this->translate('pizza_action_back_intro'); ?>
-        </a>
-    </p>
+  <p class="text-center">
+    <a href="<?= $this->url('home') ?>" class="btn btn-success">
+      <?= $this->translate('pizza_action_back_intro'); ?>
+    </a>
+  </p>
 </div>

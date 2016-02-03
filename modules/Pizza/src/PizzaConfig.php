@@ -9,6 +9,7 @@
 
 namespace Pizza;
 
+use Zend\Config\Config;
 use Zend\Config\Factory;
 
 /**
@@ -29,10 +30,12 @@ class PizzaConfig
     /**
      * Read configuration
      *
-     * @return array|\Zend\Config\Config
+     * @return array|Config
      */
     public function __invoke()
     {
-        return Factory::fromFile(PIZZA_ROOT . '/config/pizza.config.php');
+        return Factory::fromFile(
+            PIZZA_ROOT . '/config/module.config.php'
+        );
     }
 }
