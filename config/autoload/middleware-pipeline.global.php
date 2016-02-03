@@ -12,7 +12,7 @@ return [
         'always' => [
             'middleware' => [
                 Zend\Expressive\Helper\ServerUrlMiddleware::class,
-                Application\I18n\Middleware\CheckRootUriMiddleware::class,
+                I18n\Middleware\CheckRootUriMiddleware::class,
             ],
             'priority'   => 10000,
         ],
@@ -21,8 +21,8 @@ return [
             'middleware' => [
                 Zend\Expressive\Container\ApplicationFactory::ROUTING_MIDDLEWARE,
                 Zend\Expressive\Helper\UrlHelperMiddleware::class,
-                Application\I18n\Middleware\LocalizationMiddleware::class,
-                Application\I18n\Middleware\InjectTranslatorMiddleware::class,
+                I18n\Middleware\LocalizationMiddleware::class,
+                I18n\Middleware\InjectTranslatorMiddleware::class,
                 User\Authorization\AuthorizationMiddleware::class,
                 Zend\Expressive\Container\ApplicationFactory::DISPATCH_MIDDLEWARE,
             ],

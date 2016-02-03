@@ -10,6 +10,9 @@
 return [
     'dependencies' => [
         'invokables' => [
+            Zend\Expressive\Router\RouterInterface::class =>
+                Zend\Expressive\Router\ZendRouter::class,
+
             Zend\Expressive\Helper\ServerUrlHelper::class =>
                 Zend\Expressive\Helper\ServerUrlHelper::class,
 
@@ -32,12 +35,12 @@ return [
                 Application\View\HelperPluginManagerFactory::class,
 
             Zend\Expressive\Helper\UrlHelper::class =>
-                Application\View\Helper\UrlHelperFactory::class,
+                I18n\View\Helper\UrlHelperFactory::class,
 
-            Zend\Expressive\Helper\ServerUrlMiddleware::class  =>
+            Zend\Expressive\Helper\ServerUrlMiddleware::class =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
 
-            Zend\Expressive\Helper\UrlHelperMiddleware::class  =>
+            Zend\Expressive\Helper\UrlHelperMiddleware::class =>
                 Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
         ],
     ],
