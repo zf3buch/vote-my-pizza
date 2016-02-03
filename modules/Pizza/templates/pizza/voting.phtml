@@ -55,120 +55,108 @@ $this->inlineScript()->appendScript(
     "
 );
 ?>
-<h1><?php echo $this->translate($this->title); ?></h1>
+<h1><?= $this->translate($this->title); ?></h1>
 <div class="row">
-    <div class="col-sm-6">
-        <div class="thumbnail text-center">
-            <a href="<?php echo $urlVoteLeft; ?>">
-                <img src="<?php echo $this->pizzas['left']['image'] ?>"
-                     title="<?php echo $this->pizzas['left']['name'] ?>">
-            </a>
-
-            <div class="caption">
-                <h4><?php echo $this->pizzas['left']['name'] ?></h4>
-
-                <div class="label label-success pull-left">
-                    <i class="fa fa-thumbs-up"></i>
-                    <?php echo $this->pizzas['left']['pos'] ?>
-                </div>
-                <div class="label label-danger pull-right">
-                    <i class="fa fa-thumbs-down"></i>
-                    <?php echo $this->pizzas['left']['neg'] ?>
-                </div>
-                <div id="stars-left"></div>
-            </div>
+  <div class="col-sm-6">
+    <div class="thumbnail text-center">
+      <a href="<?= $urlVoteLeft; ?>">
+        <img src="<?= $this->pizzas['left']['image'] ?>"
+             title="<?= $this->pizzas['left']['name'] ?>">
+      </a>
+      <div class="caption">
+        <h4><?= $this->pizzas['left']['name'] ?></h4>
+        <div class="label label-success pull-left">
+          <i class="fa fa-thumbs-up"></i>
+          <?= $this->pizzas['left']['pos'] ?>
         </div>
-        <p class="text-center">
-            <a href="<?php echo $urlShowLeft; ?>" class="btn btn-success">
-                <?php echo $this->translate('pizza_action_show_pizza'); ?>
-            </a>
-        </p>
-        <?php foreach ($this->pizzas['left']['restaurants'] as $restaurant)
-            : ?>
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <?php
-                    echo sprintf(
-                        $this->translate('pizza_message_restaurant'),
-                        $restaurant['name']
-                    );
-                    ?>
-                </div>
-                <div class="panel-body">
-                    <?php
-                    echo sprintf(
-                        $this->translate('pizza_message_costs'),
-                        $this->pizzas['left']['name'],
-                        $this->currencyFormat(
-                            $restaurant['price'],
-                            'EUR'
-                        ),
-                        $this->dateFormat(
-                            strtotime($restaurant['date']),
-                            IntlDateFormatter::LONG,
-                            IntlDateFormatter::MEDIUM
-                        )
-                    );
-                    ?>
-                </div>
-            </div>
-        <?php endforeach ?>
-    </div>
-    <div class="col-sm-6">
-        <div class="thumbnail text-center">
-            <a href="<?php echo $urlVoteRight; ?>">
-                <img src="<?php echo $this->pizzas['right']['image'] ?>"
-                     title="<?php echo $this->pizzas['right']['name'] ?>">
-            </a>
-
-            <div class="caption">
-                <h4><?php echo $this->pizzas['right']['name'] ?></h4>
-
-                <div class="label label-success pull-left">
-                    <i class="fa fa-thumbs-up"></i>
-                    <?php echo $this->pizzas['right']['pos'] ?>
-                </div>
-                <div class="label label-danger pull-right">
-                    <i class="fa fa-thumbs-down"></i>
-                    <?php echo $this->pizzas['right']['neg'] ?>
-                </div>
-                <div id="stars-right"></div>
-            </div>
+        <div class="label label-danger pull-right">
+          <i class="fa fa-thumbs-down"></i>
+          <?= $this->pizzas['left']['neg'] ?>
         </div>
-        <p class="text-center">
-            <a href="<?php echo $urlShowRight; ?>" class="btn btn-success">
-                <?php echo $this->translate('pizza_action_show_pizza'); ?>
-            </a>
-        </p>
-        <?php foreach ($this->pizzas['right']['restaurants'] as $restaurant)
-            : ?>
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <?php
-                    echo sprintf(
-                        $this->translate('pizza_message_restaurant'),
-                        $restaurant['name']
-                    );
-                    ?>
-                </div>
-                <div class="panel-body">
-                    <?php
-                    echo sprintf(
-                        $this->translate('pizza_message_costs'),
-                        $this->pizzas['right']['name'],
-                        $this->currencyFormat(
-                            $restaurant['price'],
-                            'EUR'
-                        ),
-                        $this->dateFormat(
-                            strtotime($restaurant['date']),
-                            IntlDateFormatter::LONG,
-                            IntlDateFormatter::MEDIUM
-                        )
-                    );
-                    ?>
-                </div>
-            </div>
-        <?php endforeach ?>
+        <div id="stars-left"></div>
+      </div>
     </div>
+    <p class="text-center">
+      <a href="<?= $urlShowLeft; ?>" class="btn btn-success">
+        <?= $this->translate('pizza_action_show_pizza'); ?>
+      </a>
+    </p>
+    <?php foreach ($this->pizzas['left']['restaurants'] as $restaurant): ?>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <?php
+          echo sprintf(
+              $this->translate('pizza_message_restaurant'),
+              $restaurant['name']
+          );
+          ?>
+        </div>
+        <div class="panel-body">
+          <?php
+          echo sprintf(
+              $this->translate('pizza_message_costs'),
+              $this->pizzas['left']['name'],
+              $this->currencyFormat($restaurant['price'], 'EUR'),
+              $this->dateFormat(
+                  strtotime($restaurant['date']),
+                  IntlDateFormatter::LONG,
+                  IntlDateFormatter::MEDIUM
+              )
+          );
+          ?>
+        </div>
+      </div>
+    <?php endforeach ?>
+  </div>
+  <div class="col-sm-6">
+    <div class="thumbnail text-center">
+      <a href="<?= $urlVoteRight; ?>">
+        <img src="<?= $this->pizzas['right']['image'] ?>"
+             title="<?= $this->pizzas['right']['name'] ?>">
+      </a>
+      <div class="caption">
+        <h4><?= $this->pizzas['right']['name'] ?></h4>
+        <div class="label label-success pull-left">
+          <i class="fa fa-thumbs-up"></i>
+          <?= $this->pizzas['right']['pos'] ?>
+        </div>
+        <div class="label label-danger pull-right">
+          <i class="fa fa-thumbs-down"></i>
+          <?= $this->pizzas['right']['neg'] ?>
+        </div>
+        <div id="stars-right"></div>
+      </div>
+    </div>
+    <p class="text-center">
+      <a href="<?= $urlShowRight; ?>" class="btn btn-success">
+          <?= $this->translate('pizza_action_show_pizza'); ?>
+      </a>
+    </p>
+    <?php foreach ($this->pizzas['right']['restaurants'] as $restaurant): ?>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <?php
+          echo sprintf(
+              $this->translate('pizza_message_restaurant'),
+              $restaurant['name']
+          );
+          ?>
+        </div>
+        <div class="panel-body">
+          <?php
+          echo sprintf(
+              $this->translate('pizza_message_costs'),
+              $this->pizzas['right']['name'],
+              $this->currencyFormat($restaurant['price'], 'EUR'),
+              $this->dateFormat(
+                  strtotime($restaurant['date']),
+                  IntlDateFormatter::LONG,
+                  IntlDateFormatter::MEDIUM
+              )
+          );
+          ?>
+        </div>
+      </div>
+    <?php endforeach ?>
+  </div>
 </div>
