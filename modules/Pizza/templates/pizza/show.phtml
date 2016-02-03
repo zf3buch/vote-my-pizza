@@ -16,11 +16,10 @@ $form = $this->restaurantPriceForm;
 $form->setAttribute('action', $urlRestaurant);
 
 ?>
-<h1><?php echo $this->pizza['name']; ?></h1>
+<h1><?= $this->pizza['name']; ?></h1>
 <div class="row">
-    <?php
-    $this->inlineScript()->appendScript(
-        "
+  <?php
+  $this->inlineScript()->appendScript("
     $('#stars-" . $this->pizza['id'] . "').raty({
         readOnly: true,
         score   : " . round($this->pizza['rate'], 1) * 5 . ",
@@ -29,87 +28,72 @@ $form->setAttribute('action', $urlRestaurant);
         starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
-    "
-    ); ?>
-    <div class="col-md-6">
-        <div class="thumbnail text-center">
-            <img src="<?php echo $this->pizza['image'] ?>"
-                 title="<?php echo $this->pizza['name'] ?>">
-
-            <div class="caption">
-                <h4><?php echo $this->pizza['name'] ?></h4>
-
-                <div class="label label-success pull-left">
-                    <i class="fa fa-thumbs-up"></i>
-                    <?php echo $this->pizza['pos'] ?>
-                </div>
-                <div class="label label-danger pull-right">
-                    <i class="fa fa-thumbs-down"></i>
-                    <?php echo $this->pizza['neg'] ?>
-                </div>
-                <div id="stars-<?php echo $this->pizza['id'] ?>"></div>
-            </div>
+  "); ?>
+  <div class="col-md-6">
+    <div class="thumbnail text-center">
+      <img src="<?= $this->pizza['image'] ?>"
+           title="<?= $this->pizza['name'] ?>">
+      <div class="caption">
+        <h4><?= $this->pizza['name'] ?></h4>
+        <div class="label label-success pull-left">
+          <i class="fa fa-thumbs-up"></i><?= $this->pizza['pos'] ?>
         </div>
-    </div>
-    <div class="col-md-6">
-        <?php foreach ($this->pizza['restaurants'] as $restaurant)
-            : ?>
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    Restaurant
-                    <?php echo $restaurant['name']; ?>
-                </div>
-                <div class="panel-body">
-                    <?php echo $this->pizza['name']; ?>
-                    kostet nur
-                    <strong><?php echo $restaurant['price']; ?></strong>
-                    Euro (Stand: <?php echo $restaurant['date']; ?>).
-                </div>
-            </div>
-        <?php endforeach ?>
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                Neuen Restaurant Preis für
-                <strong><?php echo $this->pizza['name'] ?></strong>
-                speichern
-            </div>
-            <div class="panel-body">
-                <?php echo $this->form()->openTag($form); ?>
-                <div class="form-group">
-                    <?php echo $this->formLabel($form->get('name')); ?>
-                    <div class="col-sm-8">
-                        <?php
-                        echo $this->formElement($form->get('name'));
-                        echo $this->formElementErrors($form->get('name'));
-                        ?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <?php echo $this->formLabel($form->get('price')); ?>
-                    <div class="col-sm-8">
-                        <?php
-                        echo $this->formElement($form->get('price'));
-                        echo $this->formElementErrors($form->get('price'));
-                        ?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-8">
-                        <?php
-                        echo $this->formElement($form->get('save_price'));
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <?php echo $this->form()->closeTag(); ?>
+        <div class="label label-danger pull-right">
+          <i class="fa fa-thumbs-down"></i><?= $this->pizza['neg'] ?>
         </div>
+        <div id="stars-<?= $this->pizza['id'] ?>"></div>
+      </div>
     </div>
+  </div>
+  <div class="col-md-6">
+    <?php foreach ($this->pizza['restaurants'] as $restaurant) : ?>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          Restaurant <?= $restaurant['name']; ?>
+        </div>
+        <div class="panel-body">
+          <?= $this->pizza['name']; ?> kostet nur
+          <strong><?= $restaurant['price']; ?></strong>
+          Euro (Stand: <?= $restaurant['date']; ?>).
+        </div>
+      </div>
+    <?php endforeach ?>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          Neuen Restaurant Preis für
+          <strong><?= $this->pizza['name'] ?></strong>
+          speichern
+        </div>
+        <div class="panel-body">
+          <?= $this->form()->openTag($form); ?>
+          <div class="form-group">
+            <?= $this->formLabel($form->get('name')); ?>
+            <div class="col-sm-8">
+              <?= $this->formElement($form->get('name')) ?>
+              <?= $this->formElementErrors($form->get('name')) ?>
+            </div>
+          </div>
+          <div class="form-group">
+            <?= $this->formLabel($form->get('price')); ?>
+            <div class="col-sm-8">
+              <?= $this->formElement($form->get('price')) ?>
+              <?= $this->formElementErrors($form->get('price')) ?>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <?= $this->formElement($form->get('save_price')); ?>
+            </div>
+          </div>
+        </div>
+        <?= $this->form()->closeTag(); ?>
+      </div>
+  </div>
 </div>
 <div class="row">
-    <p class="text-center">
-        <a href="<?php echo $this->url('pizza-intro') ?>"
-           class="btn btn-success">
-            Zurück zur Pizza-Seite
-        </a>
-    </p>
+  <p class="text-center">
+    <a href="<?= $this->url('pizza-intro') ?>" class="btn btn-success">
+      Zurück zur Pizza-Seite
+    </a>
+  </p>
 </div>
