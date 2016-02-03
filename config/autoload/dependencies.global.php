@@ -29,6 +29,15 @@ return [
 
             Zend\View\HelperPluginManager::class =>
                 Application\View\HelperPluginManagerFactory::class,
+
+            Zend\Expressive\Helper\UrlHelper::class =>
+                Zend\Expressive\Helper\UrlHelperFactory::class,
+
+            Zend\Expressive\Helper\ServerUrlMiddleware::class =>
+                Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
+
+            Zend\Expressive\Helper\UrlHelperMiddleware::class =>
+                Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
         ],
     ],
 ];
