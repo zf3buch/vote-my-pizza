@@ -7,18 +7,14 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 ?>
-<h1><?php echo $this->translate($this->welcome); ?></h1>
+<h1><?= $this->translate($this->welcome) ?></h1>
 <div class="row">
-    <div class="col-sm-6">
-        <h3>
-            <?php echo $this->translate('pizza_heading_best_pizzas') ?>
-        </h3>
-
-        <div class="row">
-            <?php foreach ($this->topPizzas as $pizza) : ?>
-                <?php
-                $this->inlineScript()->appendScript(
-                    "
+  <div class="col-sm-6">
+    <h3><?= $this->translate('pizza_heading_best_pizzas') ?></h3>
+    <div class="row">
+      <?php foreach ($this->topPizzas as $pizza) : ?>
+        <?php
+          $this->inlineScript()->appendScript("
     $('#stars-" . $pizza['id'] . "').raty({
         readOnly: true,
         score   : " . round($pizza['rate'], 1) * 5 . ",
@@ -27,50 +23,39 @@
         starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
-    "
-                );
-                $urlShow = $this->url(
-                    'pizza-show', ['id' => $pizza['id']]
-                );
-                ?>
-                <div class="col-md-4">
-                    <div class="thumbnail text-center">
-                        <a href="<?php echo $urlShow; ?>">
-                            <img src="<?php echo $pizza['image'] ?>"
-                                 title="<?php echo $pizza['name'] ?>">
-                        </a>
-
-                        <div class="caption">
-                            <p class="small">
-                                <?php echo $pizza['name'] ?>
-                            </p>
-
-                            <div class="label label-success">
-                                <i class="fa fa-thumbs-up"></i>
-                                <?php echo $pizza['pos'] ?>
-                            </div>
-                            &nbsp;
-                            <div class="label label-danger">
-                                <i class="fa fa-thumbs-down"></i>
-                                <?php echo $pizza['neg'] ?>
-                            </div>
-                            <div id="stars-<?php echo $pizza['id'] ?>"></div>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach ?>
+    ");
+          $urlShow = $this->url(
+            'pizza-show', ['id' => $pizza['id']]
+          );
+        ?>
+        <div class="col-md-4">
+          <div class="thumbnail text-center">
+            <a href="<?= $urlShow; ?>">
+              <img src="<?= $pizza['image'] ?>"
+                   title="<?= $pizza['name'] ?>">
+            </a>
+            <div class="caption">
+              <p class="small"><?= $pizza['name'] ?></p>
+              <div class="label label-success">
+                <i class="fa fa-thumbs-up"></i><?= $pizza['pos'] ?>
+              </div>
+              &nbsp;
+              <div class="label label-danger">
+                <i class="fa fa-thumbs-down"></i><?= $pizza['neg'] ?>
+              </div>
+              <div id="stars-<?= $pizza['id'] ?>"></div>
+            </div>
+          </div>
         </div>
+      <?php endforeach ?>
     </div>
-    <div class="col-sm-6">
-        <h3>
-            <?php echo $this->translate('pizza_heading_worst_pizzas') ?>
-        </h3>
-
-        <div class="row">
-            <?php foreach ($this->flopPizzas as $pizza) : ?>
-                <?php
-                $this->inlineScript()->appendScript(
-                    "
+  </div>
+  <div class="col-sm-6">
+    <h3><?= $this->translate('pizza_heading_worst_pizzas')?></h3>
+    <div class="row">
+      <?php foreach ($this->flopPizzas as $pizza) : ?>
+        <?php
+          $this->inlineScript()->appendScript("
     $('#stars-" . $pizza['id'] . "').raty({
         readOnly: true,
         score   : " . round($pizza['rate'], 1) * 5 . ",
@@ -79,49 +64,40 @@
         starOn  : '/assets/vendor/raty-2.7.0/images/star-on.png',
         starHalf: '/assets/vendor/raty-2.7.0/images/star-on.png'
     });
-    "
-                );
-                $urlShow = $this->url(
-                    'pizza-show', ['id' => $pizza['id']]
-                );
-                ?>
-                <div class="col-md-4">
-                    <div class="thumbnail text-center">
-                        <a href="<?php echo $urlShow; ?>">
-                            <img src="<?php echo $pizza['image'] ?>"
-                                 title="<?php echo $pizza['name'] ?>">
-                        </a>
-
-                        <div class="caption">
-                            <p class="small">
-                                <?php echo $pizza['name'] ?>
-                            </p>
-
-                            <div class="label label-success">
-                                <i class="fa fa-thumbs-up"></i>
-                                <?php echo $pizza['pos'] ?>
-                            </div>
-                            &nbsp;
-                            <div class="label label-danger">
-                                <i class="fa fa-thumbs-down"></i>
-                                <?php echo $pizza['neg'] ?>
-                            </div>
-                            <div id="stars-<?php echo $pizza['id'] ?>"></div>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach ?>
+    ");
+          $urlShow = $this->url(
+            'pizza-show', ['id' => $pizza['id']]
+          );
+        ?>
+        <div class="col-md-4">
+          <div class="thumbnail text-center">
+            <a href="<?= $urlShow; ?>">
+              <img src="<?= $pizza['image'] ?>"
+                   title="<?= $pizza['name'] ?>">
+            </a>
+            <div class="caption">
+              <p class="small"><?= $pizza['name'] ?></p>
+              <div class="label label-success">
+                <i class="fa fa-thumbs-up"></i><?= $pizza['pos'] ?>
+              </div>
+              &nbsp;
+              <div class="label label-danger">
+                <i class="fa fa-thumbs-down"></i><?= $pizza['neg'] ?>
+              </div>
+             <div id="stars-<?= $pizza['id'] ?>"></div>
+            </div>
+          </div>
         </div>
+      <?php endforeach ?>
     </div>
+  </div>
 </div>
 <div class="well text-center">
-    <h2>
-        <?php echo $this->translate('pizza_heading_vote_now') ?>
-    </h2>
-    <p>
-        <a href="<?php echo $this->url('pizza-voting') ?>" class="btn btn-success">
-            <i class="fa fa-star"></i>
-            <?php echo $this->translate('pizza_action_vote'); ?>
-        </a>
-    </p>
+  <h2><?= $this->translate('pizza_heading_vote_now') ?></h2>
+  <p>
+    <a href="<?= $this->url('pizza-voting') ?>" class="btn btn-success">
+      <i class="fa fa-star"></i>
+      <?= $this->translate('pizza_action_vote'); ?>
+    </a>
+  </p>
 </div>
