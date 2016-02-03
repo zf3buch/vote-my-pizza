@@ -31,7 +31,7 @@ return [
                 Application\View\HelperPluginManagerFactory::class,
 
             Zend\Expressive\Helper\UrlHelper::class =>
-                Zend\Expressive\Helper\UrlHelperFactory::class,
+                I18n\View\Helper\UrlHelperFactory::class,
 
             Zend\Expressive\Helper\ServerUrlMiddleware::class =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,

@@ -23,9 +23,6 @@ return [
 
             I18n\Middleware\InjectTranslatorMiddleware::class =>
                 I18n\Middleware\InjectTranslatorFactory::class,
-
-            Zend\Expressive\Helper\UrlHelper::class =>
-                I18n\View\Helper\UrlHelperFactory::class,
         ],
     ],
 ];
