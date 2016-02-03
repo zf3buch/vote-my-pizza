@@ -9,10 +9,6 @@
 
 return [
     'dependencies' => [
-        'invokables' => [
-            Zend\Expressive\Router\RouterInterface::class =>
-                Zend\Expressive\Router\ZendRouter::class,
-        ],
         'factories'  => [
             Application\Action\HomePageAction::class =>
                 Application\Action\HomePageFactory::class,
