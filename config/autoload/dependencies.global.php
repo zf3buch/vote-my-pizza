@@ -10,6 +10,9 @@
 return [
     'dependencies' => [
         'invokables' => [
+            Zend\Expressive\Router\RouterInterface::class =>
+                Zend\Expressive\Router\ZendRouter::class,
+
             Zend\Expressive\Helper\ServerUrlHelper::class =>
                 Zend\Expressive\Helper\ServerUrlHelper::class,
         ],
@@ -17,23 +20,15 @@ return [
         'factories' => [
             Zend\Expressive\Application::class =>
                 Zend\Expressive\Container\ApplicationFactory::class,
-            Zend\Expressive\Helper\UrlHelper::class =>
-                Application\View\Helper\UrlHelperFactory::class,
-            Zend\I18n\Translator\Translator::class =>
-                Application\I18n\Translator\TranslatorFactory::class,
-            Application\I18n\Middleware\LocalizationMiddleware::class =>
-                Application\I18n\Middleware\LocalizationFactory::class,
-        ],
-    ],
 
-    'translate' => [
-        'translation_file_patterns' => [
-            [
-                'type'         => 'phpArray',
-                'base_dir'     => PROJECT_ROOT . '/language/application',
-                'pattern'      => '%s.php',
-                'text_domain'  => 'default',
-            ],
+            'Zend\Expressive\FinalHandler' =>
+                Zend\Expressive\Container\TemplatedErrorHandlerFactory::class,
+
+            Zend\Expressive\Template\TemplateRendererInterface::class =>
+                Zend\Expressive\ZendView\ZendViewRendererFactory::class,
+
+            Zend\View\HelperPluginManager::class =>
+                Application\View\HelperPluginManagerFactory::class,
         ],
     ],
 ];
