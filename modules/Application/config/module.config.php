@@ -13,6 +13,9 @@ return [
             Application\Action\HomePageAction::class =>
                 Application\Action\HomePageFactory::class,
 
+            Zend\Db\Adapter\AdapterInterface::class =>
+                Zend\Db\Adapter\AdapterServiceFactory::class,
+
             Zend\Session\Config\SessionConfig::class =>
                 Zend\Session\Service\SessionConfigFactory::class,
         ],
@@ -60,12 +63,5 @@ return [
                 'text_domain'  => 'default',
             ],
         ],
-    ],
-
-    'session_config' => [
-        'save_path'       => realpath(PROJECT_ROOT . '/data/session'),
-        'name'            => 'MY_SESSION',
-        'cookie_lifetime' => 365 * 24 * 60 * 60,
-        'gc_maxlifetime'  => 720,
     ],
 ];
