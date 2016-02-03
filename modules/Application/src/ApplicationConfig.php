@@ -7,24 +7,24 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace User;
+namespace Application;
 
 use Zend\Config\Config;
 use Zend\Config\Factory;
 
 /**
- * Class UserConfig
+ * Class ApplicationConfig
  *
- * @package User
+ * @package Application
  */
-class UserConfig
+class ApplicationConfig
 {
     /**
      * Define constant
      */
     public function __construct()
     {
-        define('USER_ROOT', __DIR__ . '/..');
+        define('APPLICATION_ROOT', __DIR__ . '/..');
     }
 
     /**
@@ -35,7 +35,7 @@ class UserConfig
     public function __invoke()
     {
         return Factory::fromFile(
-            USER_ROOT . '/config/module.config.php'
+            APPLICATION_ROOT . '/config/module.config.php'
         );
     }
 }
