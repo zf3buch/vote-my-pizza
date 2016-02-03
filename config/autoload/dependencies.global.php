@@ -30,6 +30,9 @@ return [
             Zend\View\HelperPluginManager::class =>
                 Application\View\HelperPluginManagerFactory::class,
 
+            Zend\Expressive\Helper\UrlHelper::class =>
+                I18n\View\Helper\UrlHelperFactory::class,
+
             Zend\Expressive\Helper\ServerUrlMiddleware::class =>
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
 
