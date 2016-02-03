@@ -14,8 +14,6 @@ return [
                 Zend\Expressive\Helper\ServerUrlMiddlewareFactory::class,
             Zend\Expressive\Helper\UrlHelperMiddleware::class =>
                 Zend\Expressive\Helper\UrlHelperMiddlewareFactory::class,
-            User\Authorization\AuthorizationMiddleware::class =>
-                User\Authorization\AuthorizationMiddlewareFactory::class,
         ],
     ],
 

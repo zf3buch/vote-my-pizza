@@ -40,6 +40,9 @@ return [
             User\Form\RegisterForm::class =>
                 User\Form\RegisterFormFactory::class,
 
+            User\Authorization\AuthorizationMiddleware::class =>
+                User\Authorization\AuthorizationMiddlewareFactory::class,
+
             Zend\Authentication\Adapter\AdapterInterface::class       =>
                 User\Authentication\Adapter\AdapterFactory::class,
             Zend\Authentication\AuthenticationServiceInterface::class =>
@@ -115,17 +118,17 @@ return [
 
     'templates' => [
         'paths' => [
-            'user' => ['templates/user'],
+            'user' => [USER_ROOT . '/templates/user'],
         ],
     ],
 
     'translate' => [
         'translation_file_patterns' => [
             [
-                'type'        => 'phpArray',
-                'base_dir'    => PROJECT_ROOT . '/language/user',
-                'pattern'     => '%s.php',
-                'text_domain' => 'default',
+                'type'         => 'phpArray',
+                'base_dir'     => USER_ROOT . '/language',
+                'pattern'      => '%s.php',
+                'text_domain'  => 'default',
             ],
         ],
     ],
