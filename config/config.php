@@ -17,7 +17,11 @@ $pattern = '{{,*.}global,{,*.}' . APPLICATION_ENV . ',{,*.}local}.php';
 
 $configManager = new ConfigManager(
     [
-        new PhpFileProvider('config/autoload/' . $pattern),
+        Application\ApplicationConfig::class,
+        I18n\I18nConfig::class,
+        Pizza\PizzaConfig::class,
+        User\UserConfig::class,
+        new PhpFileProvider(PROJECT_ROOT . '/config/autoload/' . $pattern),
     ],
     $cachedConfigFile
 );
