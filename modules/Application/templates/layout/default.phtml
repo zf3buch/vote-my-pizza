@@ -76,17 +76,32 @@ $this->inlineScript()->prependFile(
       <ul class="nav navbar-nav">
         <li>
           <a href="<?= $this->url('home') ?>">
-            <i class="fa fa-home"></i> Home
+            <i class="fa fa-home"></i>
+            <?= $this->translate('application_navigation_home') ?>
           </a>
         </li>
         <li>
           <a href="<?= $this->url('pizza-intro') ?>">
-            <i class="fa fa-thumbs-up"></i> Pizza Intro
+            <i class="fa fa-thumbs-up"></i>
+            <?= $this->translate('pizza_navigation_intro') ?>
           </a>
         </li>
         <li>
           <a href="<?= $this->url('pizza-voting') ?>">
-            <i class="fa fa-star"></i> Abstimmen
+            <i class="fa fa-star"></i>
+            <?= $this->translate('pizza_navigation_vote') ?>
+          </a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="<?= $this->url(null, ['lang' => 'de']) ?>">
+            <?= $this->translate('application_navigation_german') ?>
+          </a>
+        </li>
+        <li>
+          <a href="<?= $this->url(null, ['lang' => 'en']) ?>">
+            <?= $this->translate('application_navigation_english') ?>
           </a>
         </li>
       </ul>
