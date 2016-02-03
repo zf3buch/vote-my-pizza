@@ -21,7 +21,7 @@ $configManager = new ConfigManager(
         I18n\I18nConfig::class,
         Pizza\PizzaConfig::class,
         User\UserConfig::class,
-        new PhpFileProvider('config/autoload/' . $pattern),
+        new PhpFileProvider(PROJECT_ROOT . '/config/autoload/' . $pattern),
     ],
     $cachedConfigFile
 );
