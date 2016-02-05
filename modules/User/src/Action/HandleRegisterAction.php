@@ -13,7 +13,7 @@ use Application\Router\RouterAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use User\Form\RegisterFormAwareTrait;
-use User\Model\Repository\DbUserRepositoryAwareTrait;
+use User\Model\Repository\UserRepositoryAwareTrait;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 
@@ -29,7 +29,7 @@ class HandleRegisterAction
      */
     use RouterAwareTrait;
     use RegisterFormAwareTrait;
-    use DbUserRepositoryAwareTrait;
+    use UserRepositoryAwareTrait;
 
     /**
      * @param ServerRequestInterface $request

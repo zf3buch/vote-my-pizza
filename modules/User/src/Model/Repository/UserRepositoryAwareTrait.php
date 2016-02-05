@@ -10,11 +10,11 @@
 namespace User\Model\Repository;
 
 /**
- * Trait DbUserRepositoryAwareTrait
+ * Trait UserRepositoryAwareTrait
  *
  * @package User\Model\Repository
  */
-trait DbUserRepositoryAwareTrait
+trait UserRepositoryAwareTrait
 {
     /**
      * @var UserRepositoryInterface
