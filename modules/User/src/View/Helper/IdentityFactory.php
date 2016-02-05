@@ -11,6 +11,7 @@ namespace User\View\Helper;
 
 use stdClass;
 use Interop\Container\ContainerInterface;
+use User\Permissions\GuestRole;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\View\HelperPluginManager;
 
@@ -39,7 +40,7 @@ class IdentityFactory
             $identity = $authenticationService->getIdentity();
         } else {
             $identity = new stdClass();
-            $identity->role = 'guest';
+            $identity->role = GuestRole::NAME;
         }
 
         $viewHelper = new Identity($identity);
