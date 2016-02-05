@@ -9,12 +9,12 @@
 
 namespace Pizza\Action;
 
-use Pizza\Form\RestaurantPriceForm;
-use Pizza\Model\Repository\PizzaRepositoryInterface;
+use Application\Template\TemplateRendererAwareTrait;
+use Pizza\Form\RestaurantPriceFormAwareTrait;
+use Pizza\Model\Repository\PizzaRepositoryAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
  * Class ShowPizzaAction
@@ -24,36 +24,11 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 class ShowPizzaAction
 {
     /**
-     * @var TemplateRendererInterface
+     * use traits
      */
-    private $template;
-
-    /**
-     * @var PizzaRepositoryInterface
-     */
-    private $pizzaRepository;
-
-    /**
-     * @var RestaurantPriceForm
-     */
-    private $restaurantPriceForm;
-
-    /**
-     * ShowPizzaAction constructor.
-     *
-     * @param TemplateRendererInterface $template
-     * @param PizzaRepositoryInterface  $pizzaRepository
-     * @param RestaurantPriceForm       $restaurantPriceForm
-     */
-    public function __construct(
-        TemplateRendererInterface $template,
-        PizzaRepositoryInterface $pizzaRepository,
-        RestaurantPriceForm $restaurantPriceForm
-    ) {
-        $this->template            = $template;
-        $this->pizzaRepository     = $pizzaRepository;
-        $this->restaurantPriceForm = $restaurantPriceForm;
-    }
+    use TemplateRendererAwareTrait;
+    use PizzaRepositoryAwareTrait;
+    use RestaurantPriceFormAwareTrait;
 
     /**
      * @param ServerRequestInterface $request

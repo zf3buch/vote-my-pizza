@@ -30,6 +30,10 @@ class ShowIntroFactory
         $template   = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(PizzaRepositoryInterface::class);
 
-        return new ShowIntroAction($template, $repository);
+        $action = new ShowIntroAction();
+        $action->setTemplateRenderer($template);
+        $action->setPizzaRepository($repository);
+
+        return $action;
     }
 }

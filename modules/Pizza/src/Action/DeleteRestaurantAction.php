@@ -9,7 +9,8 @@
 
 namespace Pizza\Action;
 
-use Pizza\Model\Repository\RestaurantRepositoryInterface;
+use Application\Router\RouterAwareTrait;
+use Pizza\Model\Repository\RestaurantRepositoryAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -24,28 +25,10 @@ use Zend\Expressive\Router\RouterInterface;
 class DeleteRestaurantAction
 {
     /**
-     * @var RouterInterface
+     * use traits
      */
-    private $router;
-
-    /**
-     * @var RestaurantRepositoryInterface
-     */
-    private $restaurantRepository;
-
-    /**
-     * DeleteRestaurantAction constructor.
-     *
-     * @param RouterInterface               $router
-     * @param RestaurantRepositoryInterface $restaurantRepository
-     */
-    public function __construct(
-        RouterInterface $router,
-        RestaurantRepositoryInterface $restaurantRepository
-    ) {
-        $this->router               = $router;
-        $this->restaurantRepository = $restaurantRepository;
-    }
+    use RouterAwareTrait;
+    use RestaurantRepositoryAwareTrait;
 
     /**
      * @param ServerRequestInterface $request

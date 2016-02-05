@@ -9,13 +9,13 @@
 
 namespace Pizza\Action;
 
-use Pizza\Form\RestaurantPriceForm;
-use Pizza\Model\Repository\RestaurantRepositoryInterface;
+use Application\Router\RouterAwareTrait;
+use Pizza\Form\RestaurantPriceFormAwareTrait;
+use Pizza\Model\Repository\RestaurantRepositoryAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * Class HandleRestaurantAction
@@ -25,36 +25,11 @@ use Zend\Expressive\Router\RouterInterface;
 class HandleRestaurantAction
 {
     /**
-     * @var RouterInterface
+     * use traits
      */
-    private $router;
-
-    /**
-     * @var RestaurantRepositoryInterface
-     */
-    private $restaurantRepository;
-
-    /**
-     * @var RestaurantPriceForm
-     */
-    private $restaurantPriceForm;
-
-    /**
-     * HandleRestaurantAction constructor.
-     *
-     * @param RouterInterface               $router
-     * @param RestaurantRepositoryInterface $restaurantRepository
-     * @param RestaurantPriceForm           $restaurantPriceForm
-     */
-    public function __construct(
-        RouterInterface $router,
-        RestaurantRepositoryInterface $restaurantRepository,
-        RestaurantPriceForm $restaurantPriceForm
-    ) {
-        $this->router               = $router;
-        $this->restaurantRepository = $restaurantRepository;
-        $this->restaurantPriceForm  = $restaurantPriceForm;
-    }
+    use RouterAwareTrait;
+    use RestaurantRepositoryAwareTrait;
+    use RestaurantPriceFormAwareTrait;
 
     /**
      * @param ServerRequestInterface $request

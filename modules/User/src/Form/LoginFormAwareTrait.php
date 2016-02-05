@@ -1,0 +1,31 @@
+<?php
+/**
+ * ZF3 book Vote my Pizza Example Application
+ *
+ * @author     Ralf Eggert <ralf@travello.de>
+ * @link       https://github.com/zf3buch/vote-my-pizza
+ * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+namespace User\Form;
+
+/**
+ * Trait LoginFormAwareTrait
+ *
+ * @package User\Form
+ */
+trait LoginFormAwareTrait
+{
+    /**
+     * @var LoginForm
+     */
+    private $loginForm;
+
+    /**
+     * @param LoginForm $loginForm
+     */
+    public function setLoginForm(LoginForm $loginForm)
+    {
+        $this->loginForm = $loginForm;
+    }
+}

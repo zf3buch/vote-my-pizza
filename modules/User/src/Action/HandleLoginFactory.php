@@ -35,8 +35,10 @@ class HandleLoginFactory
             AuthenticationServiceInterface::class
         );
 
-        return new HandleLoginAction(
-            $router, $form, $authService
-        );
+        $action = new HandleLoginAction($router);
+        $action->setRouter($router);
+        $action->setLoginForm($form);
+
+        return $action;
     }
 }

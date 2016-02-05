@@ -34,8 +34,11 @@ class HandleRestaurantFactory
         );
         $form       = $container->get(RestaurantPriceForm::class);
 
-        return new HandleRestaurantAction(
-            $router, $repository, $form
-        );
+        $action = new HandleRestaurantAction();
+        $action->setRouter($router);
+        $action->setRestaurantRepository($repository);
+        $action->setRestaurantPriceForm($form);
+
+        return $action;
     }
 }

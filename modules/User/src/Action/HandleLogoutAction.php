@@ -9,13 +9,12 @@
 
 namespace User\Action;
 
+use Application\Router\RouterAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\AuthenticationServiceInterface;
+use User\Authentication\AuthenticationServiceAwareTrait;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * Class HandleLogoutAction
@@ -25,28 +24,10 @@ use Zend\Expressive\Router\RouterInterface;
 class HandleLogoutAction
 {
     /**
-     * @var RouterInterface
+     * use traits
      */
-    private $router;
-
-    /**
-     * @var AuthenticationServiceInterface|AuthenticationService
-     */
-    private $authenticationService;
-
-    /**
-     * HandleLogoutAction constructor.
-     *
-     * @param RouterInterface                $router
-     * @param AuthenticationServiceInterface $authenticationService
-     */
-    public function __construct(
-        RouterInterface $router,
-        AuthenticationServiceInterface $authenticationService
-    ) {
-        $this->router                = $router;
-        $this->authenticationService = $authenticationService;
-    }
+    use AuthenticationServiceAwareTrait;
+    use RouterAwareTrait;
 
     /**
      * @param ServerRequestInterface $request

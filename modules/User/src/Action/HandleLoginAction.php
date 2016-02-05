@@ -9,18 +9,17 @@
 
 namespace User\Action;
 
+use Application\Router\RouterAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use User\Form\LoginForm;
+use User\Authentication\AuthenticationServiceAwareTrait;
+use User\Form\LoginFormAwareTrait;
 use Zend\Authentication\Adapter\DbTable\AbstractAdapter;
 use Zend\Authentication\Adapter\DbTable\Exception\RuntimeException;
 use Zend\Authentication\Adapter\ValidatableAdapterInterface;
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Authentication\Result;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * Class HandleLoginAction
@@ -30,43 +29,11 @@ use Zend\Expressive\Router\RouterInterface;
 class HandleLoginAction
 {
     /**
-     * @var RouterInterface
+     * use traits
      */
-    private $router;
-
-    /**
-     * @var LoginForm
-     */
-    private $loginForm;
-
-    /**
-     * @var AuthenticationServiceInterface|AuthenticationService
-     */
-    private $authService;
-
-    /**
-     * @var ValidatableAdapterInterface|AbstractAdapter
-     */
-    private $authAdapter;
-
-    /**
-     * HandleLoginAction constructor.
-     *
-     * @param RouterInterface                $router
-     * @param LoginForm                      $loginForm
-     * @param AuthenticationServiceInterface $authService
-     */
-    public function __construct(
-        RouterInterface $router,
-        LoginForm $loginForm,
-        AuthenticationServiceInterface $authService
-    ) {
-        $this->router    = $router;
-        $this->loginForm = $loginForm;
-
-        $this->authService = $authService;
-        $this->authAdapter = $this->authService->getAdapter();
-    }
+    use AuthenticationServiceAwareTrait;
+    use RouterAwareTrait;
+    use LoginFormAwareTrait;
 
     /**
      * @param ServerRequestInterface $request
@@ -88,11 +55,13 @@ class HandleLoginAction
             return $next($request, $response);
         }
 
-        $this->authAdapter->setIdentity($postData['email']);
-        $this->authAdapter->setCredential($postData['password']);
+        /* @var ValidatableAdapterInterface|AbstractAdapter $authAdapter */
+        $authAdapter = $this->authenticationService->getAdapter();
+        $authAdapter->setIdentity($postData['email']);
+        $authAdapter->setCredential($postData['password']);
 
         try {
-            $result = $this->authService->authenticate();
+            $result = $this->authenticationService->authenticate();
         } catch (RuntimeException $e) {
             return $next($request, $response);
         }
@@ -117,8 +86,8 @@ class HandleLoginAction
             return $next($request, $response);
         }
 
-        $this->authService->getStorage()->write(
-            $this->authAdapter->getResultRowObject(null, ['password'])
+        $this->authenticationService->getStorage()->write(
+            $authAdapter->getResultRowObject(null, ['password'])
         );
 
         $routeParams = ['lang' => $request->getAttribute('lang'),];

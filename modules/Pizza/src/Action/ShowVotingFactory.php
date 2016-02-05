@@ -30,6 +30,10 @@ class ShowVotingFactory
         $template   = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(PizzaRepositoryInterface::class);
 
-        return new ShowVotingAction($template, $repository);
+        $action = new ShowVotingAction();
+        $action->setTemplateRenderer($template);
+        $action->setPizzaRepository($repository);
+
+        return $action;
     }
 }
