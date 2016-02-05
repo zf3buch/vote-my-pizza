@@ -16,7 +16,6 @@ use User\Form\RegisterFormAwareTrait;
 use User\Model\Repository\DbUserRepositoryAwareTrait;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * Class HandleRegisterAction
