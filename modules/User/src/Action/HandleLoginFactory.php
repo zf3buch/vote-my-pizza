@@ -31,11 +31,12 @@ class HandleLoginFactory
         $router = $container->get(RouterInterface::class);
         $form   = $container->get(LoginForm::class);
 
-        $authService = $container->get(
+        $authenticationService = $container->get(
             AuthenticationServiceInterface::class
         );
 
-        $action = new HandleLoginAction($router);
+        $action = new HandleLoginAction();
+        $action->setAuthenticationService($authenticationService);
         $action->setRouter($router);
         $action->setLoginForm($form);
 
