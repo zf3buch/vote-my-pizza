@@ -10,6 +10,7 @@
 namespace User\View\Helper;
 
 use Interop\Container\ContainerInterface;
+use User\Permissions\GuestRole;
 use User\Permissions\Rbac;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\View\HelperPluginManager;
@@ -38,9 +39,10 @@ class AllowedFactory
         if ($authenticationService->hasIdentity()) {
             $role = $authenticationService->getIdentity()->role;
         } else {
-            $role = 'guest';
+            $role = GuestRole::NAME;
         }
 
+        /** @var Rbac $rbac */
         $rbac = $diContainer->get(Rbac::class);
 
         $viewHelper = new Allowed($role, $rbac);
