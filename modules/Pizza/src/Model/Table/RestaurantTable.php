@@ -9,28 +9,29 @@
 
 namespace Pizza\Model\Table;
 
-use Zend\Db\Adapter\AdapterInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\TableGateway\TableGatewayInterface;
 
 /**
  * Class RestaurantTable
  *
  * @package Pizza\Model\Table
  */
-class RestaurantTable extends TableGateway
-    implements RestaurantTableInterface
+class RestaurantTable implements RestaurantTableInterface
 {
+    /**
+     * @var TableGatewayInterface|AbstractTableGateway
+     */
+    private $tableGateway;
+
     /**
      * RestaurantTable constructor.
      *
-     * @param AdapterInterface $adapter
+     * @param TableGatewayInterface $tableGateway
      */
-    public function __construct(AdapterInterface $adapter)
+    public function __construct($tableGateway)
     {
-        $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
-
-        parent::__construct('restaurant', $adapter, null, $resultSet);
+        $this->tableGateway = $tableGateway;
     }
 
     /**
@@ -43,7 +44,7 @@ class RestaurantTable extends TableGateway
     public function fetchRestaurantsByPizza($pizzaId)
     {
         // select restaurants
-        $select = $this->getSql()->select();
+        $select = $this->tableGateway->getSql()->select();
         $select->where->equalTo('pizza', $pizzaId);
         $select->order(['date' => 'ASC']);
 
@@ -51,7 +52,7 @@ class RestaurantTable extends TableGateway
         $data = [];
 
         // loop through rows
-        foreach ($this->selectWith($select) as $row) {
+        foreach ($this->tableGateway->selectWith($select) as $row) {
             $data[] = $row;
         }
 
@@ -59,4 +60,27 @@ class RestaurantTable extends TableGateway
         return $data;
     }
 
+    /**
+     * Save a restaurant
+     *
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function saveRestaurant(array $data = [])
+    {
+        return $this->tableGateway->insert($data);
+    }
+
+    /**
+     * Delete a restaurant
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function deleteRestaurant($id)
+    {
+        return $this->tableGateway->delete(['id' => $id]);
+    }
 }
