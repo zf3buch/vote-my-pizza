@@ -9,28 +9,31 @@
 
 namespace Pizza\Model\Table;
 
-use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Sql\Expression;
-use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Db\TableGateway\TableGatewayInterface;
 
 /**
  * Class PizzaTable
  *
  * @package Pizza\Model\Table
  */
-class PizzaTable extends TableGateway implements PizzaTableInterface
+class PizzaTable implements PizzaTableInterface
 {
+    /**
+     * @var TableGatewayInterface|AbstractTableGateway
+     */
+    private $tableGateway;
+
     /**
      * PizzaTable constructor.
      *
-     * @param AdapterInterface $adapter
+     * @param TableGatewayInterface $tableGateway
      */
-    public function __construct(AdapterInterface $adapter)
+    public function __construct(TableGatewayInterface $tableGateway)
     {
-        $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
-
-        parent::__construct('pizza', $adapter, null, $resultSet);
+        $this->tableGateway = $tableGateway;
     }
 
     /**
@@ -43,7 +46,7 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
     public function fetchRandomPizzas($count)
     {
         // select pizzas
-        $select = $this->getSql()->select();
+        $select = $this->tableGateway->getSql()->select();
         $select->order(new Expression('RAND()'));
         $select->limit($count);
 
@@ -51,7 +54,7 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
         $data = [];
 
         // loop through rows
-        foreach ($this->selectWith($select) as $row) {
+        foreach ($this->tableGateway->selectWith($select) as $row) {
             $data[] = $row;
         }
 
@@ -69,11 +72,11 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
     public function fetchPizzaById($id)
     {
         // select pizzas
-        $select = $this->getSql()->select();
+        $select = $this->tableGateway->getSql()->select();
         $select->where->equalTo('id', $id);
 
         /** @var ResultSet $resultSet */
-        $resultSet = $this->selectWith($select);
+        $resultSet = $this->tableGateway->selectWith($select);
 
         // return data
         return $resultSet->current();
@@ -90,7 +93,7 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
     public function fetchPizzasSortedByRate($count, $order = 'DESC')
     {
         // select pizzas
-        $select = $this->getSql()->select();
+        $select = $this->tableGateway->getSql()->select();
         $select->order(['rate' => $order]);
         $select->limit($count);
 
@@ -98,7 +101,7 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
         $data = [];
 
         // loop through rows
-        foreach ($this->selectWith($select) as $row) {
+        foreach ($this->tableGateway->selectWith($select) as $row) {
             $data[] = $row;
         }
 
@@ -140,12 +143,12 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
      */
     private function increaseAndRecalc($id, $recalcColumn)
     {
-        $platform  = $this->getAdapter()->getPlatform();
+        $platform  = $this->tableGateway->getAdapter()->getPlatform();
         $posColumn = $platform->quoteIdentifier('pos');
         $negColumn = $platform->quoteIdentifier('neg');
 
         // increase
-        $update = $this->getSql()->update();
+        $update = $this->tableGateway->getSql()->update();
         $update->set(
             [
                 $recalcColumn => new Expression($recalcColumn . ' + 1'),
@@ -153,10 +156,10 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
         );
         $update->where->equalTo('id', $id);
 
-        $this->updateWith($update);
+        $this->tableGateway->updateWith($update);
 
         // recalc
-        $update = $this->getSql()->update();
+        $update = $this->tableGateway->getSql()->update();
         $update->set(
             [
                 'rate' => new Expression(
@@ -166,9 +169,8 @@ class PizzaTable extends TableGateway implements PizzaTableInterface
         );
         $update->where->equalTo('id', $id);
 
-        $this->updateWith($update);
+        $this->tableGateway->updateWith($update);
 
         return true;
     }
-
 }
