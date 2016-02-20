@@ -64,11 +64,11 @@ class UserRepository implements UserRepositoryInterface
             unset($data['register_user']);
         }
 
-        $data['date']     = date('Y-m-d H:i:s');
+        $data['date'] = date('Y-m-d H:i:s');
         $data['password'] = password_hash(
             $data['password'], PASSWORD_BCRYPT
         );
 
-        return $this->userTable->insert($data);
+        return $this->userTable->insertUser($data);
     }
 }
