@@ -52,7 +52,7 @@ class RestaurantRepository implements RestaurantRepositoryInterface
             'price' => isset($data['price']) ? $data['price'] : 0.00,
         ];
 
-        return $this->restaurantTable->insert($insertData);
+        return $this->restaurantTable->saveRestaurant($insertData);
     }
 
     /**
@@ -64,6 +64,6 @@ class RestaurantRepository implements RestaurantRepositoryInterface
      */
     public function deleteRestaurant($id)
     {
-        return $this->restaurantTable->delete(['id' => $id]);
+        return $this->restaurantTable->deleteRestaurant($id);
     }
 }

@@ -9,14 +9,12 @@
 
 namespace Pizza\Model\Table;
 
-use Zend\Db\TableGateway\TableGatewayInterface;
-
 /**
  * Interface RestaurantTableInterface
  *
  * @package Pizza\Model\Table
  */
-interface RestaurantTableInterface extends TableGatewayInterface
+interface RestaurantTableInterface
 {
     /**
      * Fetch restaurants by pizza id
@@ -26,4 +24,22 @@ interface RestaurantTableInterface extends TableGatewayInterface
      * @return array
      */
     public function fetchRestaurantsByPizza($pizzaId);
+
+    /**
+     * Save a restaurant
+     *
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function saveRestaurant(array $data = array());
+
+    /**
+     * Delete a restaurant
+     *
+     * @param integer $id
+     *
+     * @return mixed
+     */
+    public function deleteRestaurant($id);
 }
