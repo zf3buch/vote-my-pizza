@@ -34,7 +34,7 @@ class BootstrapConfig
     public function __invoke()
     {
         return Factory::fromFile(
-            BOOTSTRAP_ROOT . '/config/bootstrap.config.php'
+            BOOTSTRAP_ROOT . '/config/module.config.php'
         );
     }
 }
