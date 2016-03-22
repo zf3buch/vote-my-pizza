@@ -50,7 +50,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ApplicationTest\\": "modules/Application/test/"
+            "ApplicationTest\\": "modules/Application/test/",
+            "I18nTest\\": "modules/I18n/test/",
+            "BootstrapTest\\": "modules/Bootstrap/test/",
+            "PizzaTest\\": "modules/Pizza/test/",
+            "UserTest\\": "modules/User/test/"
         }
     },
     "scripts": {
