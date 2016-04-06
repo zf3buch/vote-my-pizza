@@ -15,6 +15,7 @@ use Pizza\Action\ShowIntroAction;
 use Pizza\Action\ShowIntroFactory;
 use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Prophecy\Exception\Call\UnexpectedCallException;
+use Prophecy\Prophecy\MethodProphecy;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
@@ -60,15 +61,25 @@ class ShowIntroFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactoryWithAllDependencies()
     {
-        $this->container->get(TemplateRendererInterface::class)
-            ->willReturn($this->template);
-        $this->container->get(PizzaRepositoryInterface::class)
-            ->willReturn($this->pizzaRepository);
+        /** @var MethodProphecy $getTemplateMethod */
+        $getTemplateMethod = $this->container->get(
+            TemplateRendererInterface::class
+        );
+        $getTemplateMethod->willReturn($this->template);
+        $getTemplateMethod->shouldBeCalled();
+
+        /** @var MethodProphecy $getRepositoryMethod */
+        $getRepositoryMethod = $this->container->get(
+            PizzaRepositoryInterface::class
+        );
+        $getRepositoryMethod->willReturn($this->pizzaRepository);
+        $getRepositoryMethod->shouldBeCalled();
 
         $factory = new ShowIntroFactory();
 
         $this->assertTrue($factory instanceof ShowIntroFactory);
 
+        /** @var ShowIntroAction $action */
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof ShowIntroAction);
@@ -79,8 +90,12 @@ class ShowIntroFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactoryWithTemplateOnly()
     {
-        $this->container->get(TemplateRendererInterface::class)
-            ->willReturn($this->template);
+        /** @var MethodProphecy $getTemplateMethod */
+        $getTemplateMethod = $this->container->get(
+            TemplateRendererInterface::class
+        );
+        $getTemplateMethod->willReturn($this->template);
+        $getTemplateMethod->shouldBeCalled();
 
         $factory = new ShowIntroFactory();
 
@@ -100,8 +115,12 @@ class ShowIntroFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactoryWithRepositoryOnly()
     {
-        $this->container->get(PizzaRepositoryInterface::class)
-            ->willReturn($this->pizzaRepository);
+        /** @var MethodProphecy $getRepositoryMethod */
+        $getRepositoryMethod = $this->container->get(
+            PizzaRepositoryInterface::class
+        );
+        $getRepositoryMethod->willReturn($this->pizzaRepository);
+        $getRepositoryMethod->shouldNotBeCalled();
 
         $factory = new ShowIntroFactory();
 

@@ -74,10 +74,12 @@ class ShowPizzaActionTest extends PHPUnit_Framework_TestCase
         /** @var MethodProphecy $renderMethod */
         $renderMethod = $this->template->render('pizza::show', $data);
         $renderMethod->willReturn('Whatever');
+        $renderMethod->shouldBeCalled();
 
         /** @var MethodProphecy $getSinglePizza */
         $getSinglePizza = $this->pizzaRepository->getSinglePizza($id);
         $getSinglePizza->willReturn($pizza);
+        $getSinglePizza->shouldBeCalled();
 
         $action = new ShowPizzaAction();
         $action->setTemplateRenderer($this->template->reveal());
@@ -89,6 +91,7 @@ class ShowPizzaActionTest extends PHPUnit_Framework_TestCase
         $serverRequest = new ServerRequest(['/de/pizza/show/' . $id]);
         $serverRequest = $serverRequest->withAttribute('id', $id);
 
+        /** @var HtmlResponse $response */
         $response = $action(
             $serverRequest, new Response()
         );

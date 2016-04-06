@@ -11,20 +11,20 @@ namespace PizzaTest\Action;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Pizza\Action\ShowPizzaAction;
-use Pizza\Action\ShowPizzaFactory;
+use Pizza\Action\HandleRestaurantAction;
+use Pizza\Action\HandleRestaurantFactory;
 use Pizza\Form\RestaurantPriceForm;
-use Pizza\Model\Repository\PizzaRepositoryInterface;
+use Pizza\Model\Repository\RestaurantRepositoryInterface;
 use Prophecy\Exception\Call\UnexpectedCallException;
 use Prophecy\Prophecy\MethodProphecy;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
- * Class ShowPizzaFactoryTest
+ * Class HandleRestaurantFactoryTest
  *
  * @package PizzaTest\Action
  */
-class ShowPizzaFactoryTest extends PHPUnit_Framework_TestCase
+class HandleRestaurantFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var ContainerInterface
@@ -32,14 +32,14 @@ class ShowPizzaFactoryTest extends PHPUnit_Framework_TestCase
     private $container;
 
     /**
-     * @var TemplateRendererInterface
+     * @var RouterInterface
      */
-    private $template;
+    private $router;
 
     /**
-     * @var PizzaRepositoryInterface
+     * @var RestaurantRepositoryInterface
      */
-    private $pizzaRepository;
+    private $restaurantRepository;
 
     /**
      * @var RestaurantPriceForm
@@ -51,12 +51,12 @@ class ShowPizzaFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->template = $this->prophesize(
-            TemplateRendererInterface::class
+        $this->router = $this->prophesize(
+            RouterInterface::class
         );
 
-        $this->pizzaRepository = $this->prophesize(
-            PizzaRepositoryInterface::class
+        $this->restaurantRepository = $this->prophesize(
+            RestaurantRepositoryInterface::class
         );
 
         $this->restaurantPriceForm = $this->prophesize(
@@ -71,18 +71,16 @@ class ShowPizzaFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactoryWithAllDependencies()
     {
-        /** @var MethodProphecy $getTemplateMethod */
-        $getTemplateMethod = $this->container->get(
-            TemplateRendererInterface::class
-        );
-        $getTemplateMethod->willReturn($this->template);
-        $getTemplateMethod->shouldBeCalled();
+        /** @var MethodProphecy $getRouterMethod */
+        $getRouterMethod = $this->container->get(RouterInterface::class);
+        $getRouterMethod->willReturn($this->router);
+        $getRouterMethod->shouldBeCalled();
 
         /** @var MethodProphecy $getRepositoryMethod */
         $getRepositoryMethod = $this->container->get(
-            PizzaRepositoryInterface::class
+            RestaurantRepositoryInterface::class
         );
-        $getRepositoryMethod->willReturn($this->pizzaRepository);
+        $getRepositoryMethod->willReturn($this->restaurantRepository);
         $getRepositoryMethod->shouldBeCalled();
 
         /** @var MethodProphecy $getFormMethod */
@@ -90,31 +88,29 @@ class ShowPizzaFactoryTest extends PHPUnit_Framework_TestCase
         $getFormMethod->willReturn($this->restaurantPriceForm);
         $getFormMethod->shouldBeCalled();
 
-        $factory = new ShowPizzaFactory();
+        $factory = new HandleRestaurantFactory();
 
-        $this->assertTrue($factory instanceof ShowPizzaFactory);
+        $this->assertTrue($factory instanceof HandleRestaurantFactory);
 
-        /** @var ShowPizzaAction $action */
+        /** @var HandleRestaurantAction $action */
         $action = $factory($this->container->reveal());
 
-        $this->assertTrue($action instanceof ShowPizzaAction);
+        $this->assertTrue($action instanceof HandleRestaurantAction);
     }
 
     /**
-     * Test factory with template dependency only
+     * Test factory with router dependency only
      */
-    public function testFactoryWithTemplateOnly()
+    public function testFactoryWithRouterOnly()
     {
-        /** @var MethodProphecy $getTemplateMethod */
-        $getTemplateMethod = $this->container->get(
-            TemplateRendererInterface::class
-        );
-        $getTemplateMethod->willReturn($this->template);
-        $getTemplateMethod->shouldBeCalled();
+        /** @var MethodProphecy $getRouterMethod */
+        $getRouterMethod = $this->container->get(RouterInterface::class);
+        $getRouterMethod->willReturn($this->router);
+        $getRouterMethod->shouldBeCalled();
 
-        $factory = new ShowPizzaFactory();
+        $factory = new HandleRestaurantFactory();
 
-        $this->assertTrue($factory instanceof ShowPizzaFactory);
+        $this->assertTrue($factory instanceof HandleRestaurantFactory);
 
         $this->setExpectedException(UnexpectedCallException::class);
 
@@ -132,14 +128,14 @@ class ShowPizzaFactoryTest extends PHPUnit_Framework_TestCase
     {
         /** @var MethodProphecy $getRepositoryMethod */
         $getRepositoryMethod = $this->container->get(
-            PizzaRepositoryInterface::class
+            RestaurantRepositoryInterface::class
         );
-        $getRepositoryMethod->willReturn($this->pizzaRepository);
+        $getRepositoryMethod->willReturn($this->restaurantRepository);
         $getRepositoryMethod->shouldNotBeCalled();
 
-        $factory = new ShowPizzaFactory();
+        $factory = new HandleRestaurantFactory();
 
-        $this->assertTrue($factory instanceof ShowPizzaFactory);
+        $this->assertTrue($factory instanceof HandleRestaurantFactory);
 
         $this->setExpectedException(UnexpectedCallException::class);
 
@@ -160,9 +156,9 @@ class ShowPizzaFactoryTest extends PHPUnit_Framework_TestCase
         $getFormMethod->willReturn($this->restaurantPriceForm);
         $getFormMethod->shouldNotBeCalled();
 
-        $factory = new ShowPizzaFactory();
+        $factory = new HandleRestaurantFactory();
 
-        $this->assertTrue($factory instanceof ShowPizzaFactory);
+        $this->assertTrue($factory instanceof HandleRestaurantFactory);
 
         $this->setExpectedException(UnexpectedCallException::class);
 

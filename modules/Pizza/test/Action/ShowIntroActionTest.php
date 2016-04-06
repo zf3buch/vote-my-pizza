@@ -65,19 +65,23 @@ class ShowIntroActionTest extends PHPUnit_Framework_TestCase
         /** @var MethodProphecy $renderMethod */
         $renderMethod = $this->template->render('pizza::intro', $data);
         $renderMethod->willReturn('Whatever');
+        $renderMethod->shouldBeCalled();
 
         /** @var MethodProphecy $getTopPizzasMethod */
         $getTopPizzasMethod = $this->pizzaRepository->getTopPizzas();
         $getTopPizzasMethod->willReturn($topPizzas);
+        $getTopPizzasMethod->shouldBeCalled();
 
         /** @var MethodProphecy $getFlopPizzasMethod */
         $getFlopPizzasMethod = $this->pizzaRepository->getFlopPizzas();
         $getFlopPizzasMethod->willReturn($flopPizzas);
+        $getFlopPizzasMethod->shouldBeCalled();
 
         $action = new ShowIntroAction();
         $action->setTemplateRenderer($this->template->reveal());
         $action->setPizzaRepository($this->pizzaRepository->reveal());
 
+        /** @var HtmlResponse $response */
         $response = $action(
             new ServerRequest(['/de']), new Response()
         );

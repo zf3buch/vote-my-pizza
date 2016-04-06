@@ -11,19 +11,19 @@ namespace PizzaTest\Action;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Pizza\Action\ShowVotingAction;
-use Pizza\Action\ShowVotingFactory;
-use Pizza\Model\Repository\PizzaRepositoryInterface;
+use Pizza\Action\DeleteRestaurantAction;
+use Pizza\Action\DeleteRestaurantFactory;
+use Pizza\Model\Repository\RestaurantRepositoryInterface;
 use Prophecy\Exception\Call\UnexpectedCallException;
 use Prophecy\Prophecy\MethodProphecy;
-use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
- * Class ShowVotingFactoryTest
+ * Class DeleteRestaurantFactoryTest
  *
  * @package PizzaTest\Action
  */
-class ShowVotingFactoryTest extends PHPUnit_Framework_TestCase
+class DeleteRestaurantFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var ContainerInterface
@@ -31,26 +31,26 @@ class ShowVotingFactoryTest extends PHPUnit_Framework_TestCase
     private $container;
 
     /**
-     * @var TemplateRendererInterface
+     * @var RouterInterface
      */
-    private $template;
+    private $router;
 
     /**
-     * @var PizzaRepositoryInterface
+     * @var RestaurantRepositoryInterface
      */
-    private $pizzaRepository;
+    private $restaurantRepository;
 
     /**
      * Setup test cases
      */
     public function setUp()
     {
-        $this->template = $this->prophesize(
-            TemplateRendererInterface::class
+        $this->router = $this->prophesize(
+            RouterInterface::class
         );
 
-        $this->pizzaRepository = $this->prophesize(
-            PizzaRepositoryInterface::class
+        $this->restaurantRepository = $this->prophesize(
+            RestaurantRepositoryInterface::class
         );
 
         $this->container = $this->prophesize(ContainerInterface::class);
@@ -61,45 +61,41 @@ class ShowVotingFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactoryWithAllDependencies()
     {
-        /** @var MethodProphecy $getTemplateMethod */
-        $getTemplateMethod = $this->container->get(
-            TemplateRendererInterface::class
-        );
-        $getTemplateMethod->willReturn($this->template);
-        $getTemplateMethod->shouldBeCalled();
+        /** @var MethodProphecy $getRouterMethod */
+        $getRouterMethod = $this->container->get(RouterInterface::class);
+        $getRouterMethod->willReturn($this->router);
+        $getRouterMethod->shouldBeCalled();
 
         /** @var MethodProphecy $getRepositoryMethod */
         $getRepositoryMethod = $this->container->get(
-            PizzaRepositoryInterface::class
+            RestaurantRepositoryInterface::class
         );
-        $getRepositoryMethod->willReturn($this->pizzaRepository);
+        $getRepositoryMethod->willReturn($this->restaurantRepository);
         $getRepositoryMethod->shouldBeCalled();
 
-        $factory = new ShowVotingFactory();
+        $factory = new DeleteRestaurantFactory();
 
-        $this->assertTrue($factory instanceof ShowVotingFactory);
+        $this->assertTrue($factory instanceof DeleteRestaurantFactory);
 
-        /** @var ShowVotingAction $action */
+        /** @var DeleteRestaurantAction $action */
         $action = $factory($this->container->reveal());
 
-        $this->assertTrue($action instanceof ShowVotingAction);
+        $this->assertTrue($action instanceof DeleteRestaurantAction);
     }
 
     /**
-     * Test factory with template dependency only
+     * Test factory with router dependency only
      */
-    public function testFactoryWithTemplateOnly()
+    public function testFactoryWithRouterOnly()
     {
-        /** @var MethodProphecy $getTemplateMethod */
-        $getTemplateMethod = $this->container->get(
-            TemplateRendererInterface::class
-        );
-        $getTemplateMethod->willReturn($this->template);
-        $getTemplateMethod->shouldBeCalled();
+        /** @var MethodProphecy $getRouterMethod */
+        $getRouterMethod = $this->container->get(RouterInterface::class);
+        $getRouterMethod->willReturn($this->router);
+        $getRouterMethod->shouldBeCalled();
 
-        $factory = new ShowVotingFactory();
+        $factory = new DeleteRestaurantFactory();
 
-        $this->assertTrue($factory instanceof ShowVotingFactory);
+        $this->assertTrue($factory instanceof DeleteRestaurantFactory);
 
         $this->setExpectedException(UnexpectedCallException::class);
 
@@ -117,14 +113,14 @@ class ShowVotingFactoryTest extends PHPUnit_Framework_TestCase
     {
         /** @var MethodProphecy $getRepositoryMethod */
         $getRepositoryMethod = $this->container->get(
-            PizzaRepositoryInterface::class
+            RestaurantRepositoryInterface::class
         );
-        $getRepositoryMethod->willReturn($this->pizzaRepository);
+        $getRepositoryMethod->willReturn($this->restaurantRepository);
         $getRepositoryMethod->shouldNotBeCalled();
 
-        $factory = new ShowVotingFactory();
+        $factory = new DeleteRestaurantFactory();
 
-        $this->assertTrue($factory instanceof ShowVotingFactory);
+        $this->assertTrue($factory instanceof DeleteRestaurantFactory);
 
         $this->setExpectedException(UnexpectedCallException::class);
 

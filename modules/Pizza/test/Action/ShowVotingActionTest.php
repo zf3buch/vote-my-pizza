@@ -63,15 +63,19 @@ class ShowVotingActionTest extends PHPUnit_Framework_TestCase
         /** @var MethodProphecy $renderMethod */
         $renderMethod = $this->template->render('pizza::voting', $data);
         $renderMethod->willReturn('Whatever');
+        $renderMethod->shouldBeCalled();
 
         /** @var MethodProphecy $getVotingPizzasMethod */
-        $getVotingPizzasMethod = $this->pizzaRepository->getPizzasForVoting();
+        $getVotingPizzasMethod = $this->pizzaRepository->getPizzasForVoting(
+        );
         $getVotingPizzasMethod->willReturn($votingPizzas);
+        $getVotingPizzasMethod->shouldBeCalled();
 
         $action = new ShowVotingAction();
         $action->setTemplateRenderer($this->template->reveal());
         $action->setPizzaRepository($this->pizzaRepository->reveal());
 
+        /** @var HtmlResponse $response */
         $response = $action(
             new ServerRequest(['/de/pizza/voting']), new Response()
         );
