@@ -12,7 +12,6 @@ namespace Application\View;
 use Interop\Container\ContainerInterface;
 use Zend\Form\View\HelperConfig as FormHelperConfig;
 use Zend\I18n\View\HelperConfig as I18nHelperConfig;
-use Zend\ServiceManager\Config;
 use Zend\View\HelperPluginManager;
 
 /**
@@ -36,8 +35,7 @@ class HelperPluginManagerFactory
             ? $config['view_helpers']
             : [];
 
-        $manager = new HelperPluginManager(new Config($config));
-        $manager->setServiceLocator($container);
+        $manager = new HelperPluginManager($container, $config);
 
         $formConfig = new FormHelperConfig();
         $formConfig->configureServiceManager($manager);
