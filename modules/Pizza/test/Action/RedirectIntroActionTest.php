@@ -9,34 +9,24 @@
 
 namespace PizzaTest\Action;
 
-use PHPUnit_Framework_TestCase;
 use Pizza\Action\RedirectIntroAction;
-use Prophecy\Prophecy\MethodProphecy;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\ServerRequest;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * Class RedirectIntroActionTest
  *
  * @package PizzaTest\Action
  */
-class RedirectIntroActionTest extends PHPUnit_Framework_TestCase
+class RedirectIntroActionTest extends AbstractTest
 {
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
     /**
      * Setup test cases
      */
     public function setUp()
     {
-        $this->router = $this->prophesize(
-            RouterInterface::class
-        );
+        $this->mockRouter();
     }
 
     /**
@@ -44,27 +34,26 @@ class RedirectIntroActionTest extends PHPUnit_Framework_TestCase
      */
     public function testResponse()
     {
-        $lang = 'de';
-        $uri  = '/de';
-        $data = [
+        $lang        = 'de';
+        $uri         = '/de';
+        $routeParams = [
             'lang' => $lang,
         ];
+        $routeName   = 'home';
+        $requestUri  = '/';
 
-        /** @var MethodProphecy $generateUriMethod */
-        $generateUriMethod = $this->router->generateUri('home', $data);
-        $generateUriMethod->willReturn($uri);
-        $generateUriMethod->shouldBeCalled();
+        $this->prepareRouter($routeName, $routeParams, $uri);
 
         $action = new RedirectIntroAction();
         $action->setRouter($this->router->reveal());
 
-        $serverRequest = new ServerRequest(['/']);
+        $serverRequest = new ServerRequest([$requestUri]);
         $serverRequest = $serverRequest->withAttribute('lang', $lang);
 
+        $serverResponse = new Response();
+
         /** @var RedirectResponse $response */
-        $response = $action(
-            $serverRequest, new Response()
-        );
+        $response = $action($serverRequest, $serverResponse);
 
         $this->assertTrue($response instanceof RedirectResponse);
         $this->assertEquals([$uri], $response->getHeader('location'));

@@ -9,54 +9,41 @@
 
 namespace PizzaTest\Action;
 
-use PHPUnit_Framework_TestCase;
 use Pizza\Action\ShowPizzaAction;
-use Pizza\Form\RestaurantPriceForm;
-use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Prophecy\Prophecy\MethodProphecy;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\ServerRequest;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
  * Class ShowPizzaActionTest
  *
  * @package PizzaTest\Action
  */
-class ShowPizzaActionTest extends PHPUnit_Framework_TestCase
+class ShowPizzaActionTest extends AbstractTest
 {
     /**
-     * @var TemplateRendererInterface
+     * Prepare pizza repository
+     *
+     * @param $id
+     * @param $pizza
      */
-    private $template;
+    protected function preparePizzaRepository($id, $pizza)
+    {
+        /** @var MethodProphecy $method */
+        $method = $this->pizzaRepository->getSinglePizza($id);
+        $method->willReturn($pizza);
+        $method->shouldBeCalled();
+    }
 
     /**
-     * @var PizzaRepositoryInterface
-     */
-    private $pizzaRepository;
-
-    /**
-     * @var RestaurantPriceForm
-     */
-    private $restaurantPriceForm;
-
-    /**
-     * Setup test cases
+     * Sets up the test
      */
     public function setUp()
     {
-        $this->template = $this->prophesize(
-            TemplateRendererInterface::class
-        );
-
-        $this->pizzaRepository = $this->prophesize(
-            PizzaRepositoryInterface::class
-        );
-
-        $this->restaurantPriceForm = $this->prophesize(
-            RestaurantPriceForm::class
-        );
+        $this->mockTemplate();
+        $this->mockPizzaRepository();
+        $this->mockRestaurantPriceForm();
     }
 
     /**
@@ -64,22 +51,18 @@ class ShowPizzaActionTest extends PHPUnit_Framework_TestCase
      */
     public function testResponse()
     {
-        $id    = '1';
-        $pizza = [$id => 'Pizza A'];
-        $data  = [
+        $lang         = 'de';
+        $id           = '1';
+        $pizza        = [$id => 'Pizza A'];
+        $templateVars = [
             'pizza'               => $pizza,
             'restaurantPriceForm' => $this->restaurantPriceForm,
         ];
+        $templateName = 'pizza::show';
+        $requestUri   = '/' . $lang . '/pizza/show/' . $id;
 
-        /** @var MethodProphecy $renderMethod */
-        $renderMethod = $this->template->render('pizza::show', $data);
-        $renderMethod->willReturn('Whatever');
-        $renderMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $getSinglePizza */
-        $getSinglePizza = $this->pizzaRepository->getSinglePizza($id);
-        $getSinglePizza->willReturn($pizza);
-        $getSinglePizza->shouldBeCalled();
+        $this->prepareTemplate($templateName, $templateVars);
+        $this->preparePizzaRepository($id, $pizza);
 
         $action = new ShowPizzaAction();
         $action->setTemplateRenderer($this->template->reveal());
@@ -88,13 +71,13 @@ class ShowPizzaActionTest extends PHPUnit_Framework_TestCase
             $this->restaurantPriceForm->reveal()
         );
 
-        $serverRequest = new ServerRequest(['/de/pizza/show/' . $id]);
+        $serverRequest = new ServerRequest([$requestUri]);
         $serverRequest = $serverRequest->withAttribute('id', $id);
 
+        $serverResponse = new Response();
+
         /** @var HtmlResponse $response */
-        $response = $action(
-            $serverRequest, new Response()
-        );
+        $response = $action($serverRequest, $serverResponse);
 
         $this->assertTrue($response instanceof HtmlResponse);
     }

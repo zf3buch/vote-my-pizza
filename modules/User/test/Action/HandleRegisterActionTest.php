@@ -7,39 +7,40 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Action;
+namespace UserTest\Action;
 
-use Pizza\Action\HandleRestaurantAction;
 use Prophecy\Prophecy\MethodProphecy;
+use User\Action\HandleRegisterAction;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\ServerRequest;
 
 /**
- * Class HandleRestaurantActionTest
+ * Class HandleRegisterActionTest
  *
- * @package PizzaTest\Action
+ * @package UserTest\Action
  */
-class HandleRestaurantActionTest extends AbstractTest
+class HandleRegisterActionTest extends AbstractTest
 {
     /**
-     * Prepare restaurant price form
+     * Prepare register form
      *
      * @param array      $setData
      * @param array|bool $getData
      * @param bool       $isValidReturn
      */
-    protected function prepareRestaurantPriceForm(
+    protected function prepareRegisterForm(
         $setData,
         $getData,
         $isValidReturn = true
-    ) {
+    )
+    {
         /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->setData($setData);
+        $method = $this->registerForm->setData($setData);
         $method->shouldBeCalled();
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->getData();
+        $method = $this->registerForm->getData();
 
         if ($getData) {
             $method->willReturn($getData);
@@ -49,27 +50,21 @@ class HandleRestaurantActionTest extends AbstractTest
         }
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->isValid();
+        $method = $this->registerForm->isValid();
         $method->willReturn($isValidReturn);
         $method->shouldBeCalled();
     }
 
     /**
-     * Prepare restaurant repository
+     * Prepare user repository
      *
-     * @param string $id
-     * @param array  $postData
-     * @param bool   $called
+     * @param array $postData
+     * @param bool  $called
      */
-    protected function prepareRestaurantRepository(
-        $id,
-        $postData,
-        $called = true
-    ) {
+    protected function prepareUserRepository($postData, $called = true)
+    {
         /** @var MethodProphecy $method */
-        $method = $this->restaurantRepository->saveRestaurant(
-            $id, $postData
-        );
+        $method = $this->userRepository->registerUser($postData);
 
         if ($called) {
             $method->shouldBeCalled();
@@ -82,8 +77,8 @@ class HandleRestaurantActionTest extends AbstractTest
     public function setUp()
     {
         $this->mockRouter();
-        $this->mockRestaurantRepository();
-        $this->mockRestaurantPriceForm();
+        $this->mockUserRepository();
+        $this->mockRegisterForm();
     }
 
     /**
@@ -92,42 +87,39 @@ class HandleRestaurantActionTest extends AbstractTest
     public function testResponseWithValidData()
     {
         $lang        = 'de';
-        $id          = 1;
-        $uri         = '/' . $lang . '/pizza/show/' . $id;
+        $uri         = '/' . $lang . '/user/login';
         $routeParams = [
-            'id'   => $id,
             'lang' => $lang,
         ];
-        $routeName   = 'pizza-show';
-        $requestUri  = '/';
+        $routeName   = 'user-registered';
         $postData    = [
-            'name'       => 'Name',
-            'price'      => 'price',
-            'save_price' => 'save_price',
+            'email'      => 'Email',
+            'password'   => 'password',
+            'login_user' => 'login_user',
         ];
+        $requestUri  = $uri;
 
         $this->prepareRouter($routeName, $routeParams, $uri);
-        $this->prepareRestaurantPriceForm($postData, $postData, true);
-        $this->prepareRestaurantRepository($id, $postData);
+        $this->prepareRegisterForm($postData, $postData, true);
+        $this->prepareUserRepository($postData, true);
 
-        $action = new HandleRestaurantAction();
+        $action = new HandleRegisterAction();
         $action->setRouter($this->router->reveal());
-        $action->setRestaurantRepository(
-            $this->restaurantRepository->reveal()
+        $action->setUserRepository(
+            $this->userRepository->reveal()
         );
-        $action->setRestaurantPriceForm(
-            $this->restaurantPriceForm->reveal()
+        $action->setRegisterForm(
+            $this->registerForm->reveal()
         );
 
         $serverRequest = new ServerRequest([$requestUri]);
         $serverRequest = $serverRequest->withParsedBody($postData);
         $serverRequest = $serverRequest->withAttribute('lang', $lang);
-        $serverRequest = $serverRequest->withAttribute('id', $id);
+
+        $serverResponse = new Response();
 
         /** @var RedirectResponse $response */
-        $response = $action(
-            $serverRequest, new Response()
-        );
+        $response = $action($serverRequest, $serverResponse);
 
         $this->assertTrue($response instanceof RedirectResponse);
         $this->assertEquals([$uri], $response->getHeader('location'));
@@ -139,46 +131,34 @@ class HandleRestaurantActionTest extends AbstractTest
     public function testResponseWithInvalidData()
     {
         $lang        = 'de';
-        $id          = 1;
-        $uri         = '/' . $lang . '/pizza/show/' . $id;
+        $uri         = '/' . $lang . '/user/register';
         $routeParams = [
-            'id'   => $id,
             'lang' => $lang,
         ];
-        $routeName   = 'pizza-show';
+        $routeName   = 'user-registered';
         $postData    = [
-            'name'       => 'Name',
-            'price'      => 'price',
-            'save_price' => 'save_price',
+            'email'         => 'Email',
+            'password'      => 'password',
+            'register_user' => 'register_user',
         ];
-        $requestUri  = '/' . $lang . '/pizza/restaurant/' . $id;
+        $requestUri  = $uri;
 
         $this->prepareRouter($routeName, $routeParams, $uri, false);
-        $this->prepareRestaurantPriceForm($postData, false, false);
-        $this->prepareRestaurantRepository($id, $postData, false);
+        $this->prepareRegisterForm($postData, false, false);
+        $this->prepareUserRepository($postData, false);
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->getData();
-        $method->shouldNotBeCalled();
-
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->isValid();
-        $method->willReturn(false);
-        $method->shouldBeCalled();
-
-        $action = new HandleRestaurantAction();
+        $action = new HandleRegisterAction();
         $action->setRouter($this->router->reveal());
-        $action->setRestaurantRepository(
-            $this->restaurantRepository->reveal()
+        $action->setUserRepository(
+            $this->userRepository->reveal()
         );
-        $action->setRestaurantPriceForm(
-            $this->restaurantPriceForm->reveal()
+        $action->setRegisterForm(
+            $this->registerForm->reveal()
         );
 
         $serverRequest = new ServerRequest([$requestUri]);
         $serverRequest = $serverRequest->withParsedBody($postData);
         $serverRequest = $serverRequest->withAttribute('lang', $lang);
-        $serverRequest = $serverRequest->withAttribute('id', $id);
 
         $serverResponse = new Response();
 

@@ -7,31 +7,28 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Action;
+namespace UserTest\Action;
 
-use Pizza\Action\HandleVotingAction;
 use Prophecy\Prophecy\MethodProphecy;
+use User\Action\HandleLogoutAction;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\ServerRequest;
 
 /**
- * Class HandleVotingActionTest
+ * Class HandleLogoutActionTest
  *
- * @package PizzaTest\Action
+ * @package UserTest\Action
  */
-class HandleVotingActionTest extends AbstractTest
+class HandleLogoutActionTest extends AbstractTest
 {
     /**
-     * Prepare pizza repository
-     *
-     * @param $pos
-     * @param $neg
+     * Prepare authentication service
      */
-    protected function preparePizzaRepository($pos, $neg)
+    protected function prepareAuthService()
     {
         /** @var MethodProphecy $method */
-        $method = $this->pizzaRepository->saveVoting($pos, $neg);
+        $method = $this->authService->clearIdentity();
         $method->shouldBeCalled();
     }
 
@@ -41,37 +38,33 @@ class HandleVotingActionTest extends AbstractTest
     public function setUp()
     {
         $this->mockRouter();
-        $this->mockPizzaRepository();
+        $this->mockAuthService();
     }
 
     /**
      * Test Response object
      */
-    public function testResponse()
+    public function testResponseWithValidData()
     {
         $lang        = 'de';
-        $pos         = 1;
-        $neg         = 2;
-        $uri         = '/' . $lang . '/pizza/voting';
+        $uri         = '/' . $lang . '/user/logout';
         $routeParams = [
             'lang' => $lang,
         ];
-        $routeName   = 'pizza-voting';
-        $requestUri  = '/' . $lang . '/pizza/voting/' . $pos . '/' . $neg;
+        $routeName   = 'user-intro';
+        $requestUri  = $uri;
 
         $this->prepareRouter($routeName, $routeParams, $uri);
-        $this->preparePizzaRepository($pos, $neg);
+        $this->prepareAuthService();
 
-        $action = new HandleVotingAction();
+        $action = new HandleLogoutAction();
         $action->setRouter($this->router->reveal());
-        $action->setPizzaRepository(
-            $this->pizzaRepository->reveal()
+        $action->setAuthenticationService(
+            $this->authService->reveal()
         );
 
         $serverRequest = new ServerRequest([$requestUri]);
         $serverRequest = $serverRequest->withAttribute('lang', $lang);
-        $serverRequest = $serverRequest->withAttribute('pos', $pos);
-        $serverRequest = $serverRequest->withAttribute('neg', $neg);
 
         $serverResponse = new Response();
 

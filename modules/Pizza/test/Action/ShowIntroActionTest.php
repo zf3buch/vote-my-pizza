@@ -9,44 +9,45 @@
 
 namespace PizzaTest\Action;
 
-use PHPUnit_Framework_TestCase;
 use Pizza\Action\ShowIntroAction;
-use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Prophecy\Prophecy\MethodProphecy;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\ServerRequest;
-use Zend\Expressive\Template\TemplateRendererInterface;
 
 /**
  * Class ShowIntroActionTest
  *
  * @package PizzaTest\Action
  */
-class ShowIntroActionTest extends PHPUnit_Framework_TestCase
+class ShowIntroActionTest extends AbstractTest
 {
     /**
-     * @var TemplateRendererInterface
+     * Prepare pizza repository
+     *
+     * @param $topPizzas
+     * @param $flopPizzas
      */
-    private $template;
+    protected function preparePizzaRepostory($topPizzas, $flopPizzas)
+    {
+        /** @var MethodProphecy $method */
+        $method = $this->pizzaRepository->getTopPizzas();
+        $method->willReturn($topPizzas);
+        $method->shouldBeCalled();
 
-    /**
-     * @var PizzaRepositoryInterface
-     */
-    private $pizzaRepository;
+        /** @var MethodProphecy $method */
+        $method = $this->pizzaRepository->getFlopPizzas();
+        $method->willReturn($flopPizzas);
+        $method->shouldBeCalled();
+    }
 
     /**
      * Setup test cases
      */
     public function setUp()
     {
-        $this->template = $this->prophesize(
-            TemplateRendererInterface::class
-        );
-
-        $this->pizzaRepository = $this->prophesize(
-            PizzaRepositoryInterface::class
-        );
+        $this->mockTemplate();
+        $this->mockPizzaRepository();
     }
 
     /**
@@ -54,37 +55,30 @@ class ShowIntroActionTest extends PHPUnit_Framework_TestCase
      */
     public function testResponse()
     {
-        $topPizzas  = ['1' => 'Pizza A', '2' => 'Pizza B'];
-        $flopPizzas = ['3' => 'Pizza C', '4' => 'Pizza D'];
-        $data       = [
+        $lang         = 'de';
+        $topPizzas    = ['1' => 'Pizza A', '2' => 'Pizza B'];
+        $flopPizzas   = ['3' => 'Pizza C', '4' => 'Pizza D'];
+        $templateVars = [
             'welcome'    => 'pizza_heading_welcome',
             'topPizzas'  => $topPizzas,
             'flopPizzas' => $flopPizzas,
         ];
+        $templateName = 'pizza::intro';
+        $requestUri   = '/' . $lang;
 
-        /** @var MethodProphecy $renderMethod */
-        $renderMethod = $this->template->render('pizza::intro', $data);
-        $renderMethod->willReturn('Whatever');
-        $renderMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $getTopPizzasMethod */
-        $getTopPizzasMethod = $this->pizzaRepository->getTopPizzas();
-        $getTopPizzasMethod->willReturn($topPizzas);
-        $getTopPizzasMethod->shouldBeCalled();
-
-        /** @var MethodProphecy $getFlopPizzasMethod */
-        $getFlopPizzasMethod = $this->pizzaRepository->getFlopPizzas();
-        $getFlopPizzasMethod->willReturn($flopPizzas);
-        $getFlopPizzasMethod->shouldBeCalled();
+        $this->prepareTemplate($templateName, $templateVars);
+        $this->preparePizzaRepostory($topPizzas, $flopPizzas);
 
         $action = new ShowIntroAction();
         $action->setTemplateRenderer($this->template->reveal());
         $action->setPizzaRepository($this->pizzaRepository->reveal());
 
+        $serverRequest = new ServerRequest([$requestUri]);
+
+        $serverResponse = new Response();
+
         /** @var HtmlResponse $response */
-        $response = $action(
-            new ServerRequest(['/de']), new Response()
-        );
+        $response = $action($serverRequest, $serverResponse);
 
         $this->assertTrue($response instanceof HtmlResponse);
     }

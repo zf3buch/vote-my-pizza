@@ -7,17 +7,17 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Action;
+namespace UserTest\Action;
 
-use Pizza\Action\ShowVotingAction;
-use Pizza\Action\ShowVotingFactory;
+use User\Action\ShowIntroAction;
+use User\Action\ShowIntroFactory;
 
 /**
- * Class ShowVotingFactoryTest
+ * Class ShowIntroFactoryTest
  *
- * @package PizzaTest\Action
+ * @package UserTest\Action
  */
-class ShowVotingFactoryTest extends AbstractTest
+class ShowIntroFactoryTest extends AbstractTest
 {
     /**
      * Setup test cases
@@ -25,7 +25,8 @@ class ShowVotingFactoryTest extends AbstractTest
     public function setUp()
     {
         $this->mockTemplate();
-        $this->mockPizzaRepository();
+        $this->mockLoginForm();
+        $this->mockRegisterForm();
         $this->mockDiContainer();
     }
 
@@ -34,15 +35,17 @@ class ShowVotingFactoryTest extends AbstractTest
      */
     public function testFactoryWithAllDependencies()
     {
-        $this->prepareDiContainer(['template', 'pizzaRepository']);
+        $this->prepareDiContainer(
+            ['template', 'loginForm', 'registerForm']
+        );
 
-        $factory = new ShowVotingFactory();
+        $factory = new ShowIntroFactory();
 
-        $this->assertTrue($factory instanceof ShowVotingFactory);
+        $this->assertTrue($factory instanceof ShowIntroFactory);
 
-        /** @var ShowVotingAction $action */
+        /** @var ShowIntroAction $action */
         $action = $factory($this->container->reveal());
 
-        $this->assertTrue($action instanceof ShowVotingAction);
+        $this->assertTrue($action instanceof ShowIntroAction);
     }
 }

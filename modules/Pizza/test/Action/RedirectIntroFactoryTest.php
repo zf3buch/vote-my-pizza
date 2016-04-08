@@ -9,40 +9,23 @@
 
 namespace PizzaTest\Action;
 
-use Interop\Container\ContainerInterface;
-use PHPUnit_Framework_TestCase;
 use Pizza\Action\RedirectIntroAction;
 use Pizza\Action\RedirectIntroFactory;
-use Prophecy\Prophecy\MethodProphecy;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * Class RedirectIntroFactoryTest
  *
  * @package PizzaTest\Action
  */
-class RedirectIntroFactoryTest extends PHPUnit_Framework_TestCase
+class RedirectIntroFactoryTest extends AbstractTest
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
     /**
      * Setup test cases
      */
     public function setUp()
     {
-        $this->router = $this->prophesize(
-            RouterInterface::class
-        );
-
-        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->mockRouter();
+        $this->mockDiContainer();
     }
 
     /**
@@ -50,10 +33,7 @@ class RedirectIntroFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactoryWithAllDependencies()
     {
-        /** @var MethodProphecy $getRouterMethod */
-        $getRouterMethod = $this->container->get(RouterInterface::class);
-        $getRouterMethod->willReturn($this->router);
-        $getRouterMethod->shouldBeCalled();
+        $this->prepareDiContainer(['router']);
 
         $factory = new RedirectIntroFactory();
 

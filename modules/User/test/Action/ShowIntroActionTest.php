@@ -7,42 +7,29 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Action;
+namespace UserTest\Action;
 
-use Pizza\Action\ShowVotingAction;
-use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Prophecy\Prophecy\MethodProphecy;
+use User\Action\ShowIntroAction;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\ServerRequest;
 
 /**
- * Class ShowVotingActionTest
+ * Class ShowIntroActionTest
  *
- * @package PizzaTest\Action
+ * @package UserTest\Action
  */
-class ShowVotingActionTest extends AbstractTest
+class ShowIntroActionTest extends AbstractTest
 {
     /**
-     * Prepare pizza repository
-     *
-     * @param $votingPizzas
-     */
-    protected function preparePizzaRepository($votingPizzas)
-    {
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaRepository->getPizzasForVoting();
-        $method->willReturn($votingPizzas);
-        $method->shouldBeCalled();
-    }
-
-    /**
-     * Sets up the test
+     * Setup test cases
      */
     public function setUp()
     {
         $this->mockTemplate();
-        $this->mockPizzaRepository();
+        $this->mockLoginForm();
+        $this->mockRegisterForm();
     }
 
     /**
@@ -51,22 +38,26 @@ class ShowVotingActionTest extends AbstractTest
     public function testResponse()
     {
         $lang         = 'de';
-        $votingPizzas = ['1' => 'Pizza A', '2' => 'Pizza B'];
+        $authError    = 'Authentication failed';
         $templateVars = [
-            'title'  => 'pizza_heading_voting',
-            'pizzas' => $votingPizzas,
+            'loginForm'    => $this->loginForm,
+            'registerForm' => $this->registerForm,
+            'authError'    => $authError,
         ];
-        $templateName = 'pizza::voting';
-        $requestUri   = '/' . $lang . '/pizza/voting';
+        $templateName = 'user::intro';
+        $requestUri   = '/' . $lang . '/user';
 
         $this->prepareTemplate($templateName, $templateVars);
-        $this->preparePizzaRepository($votingPizzas);
 
-        $action = new ShowVotingAction();
+        $action = new ShowIntroAction();
         $action->setTemplateRenderer($this->template->reveal());
-        $action->setPizzaRepository($this->pizzaRepository->reveal());
+        $action->setLoginForm($this->loginForm->reveal());
+        $action->setRegisterForm($this->registerForm->reveal());
 
         $serverRequest = new ServerRequest([$requestUri]);
+        $serverRequest = $serverRequest->withAttribute(
+            'auth_error', $authError
+        );
 
         $serverResponse = new Response();
 

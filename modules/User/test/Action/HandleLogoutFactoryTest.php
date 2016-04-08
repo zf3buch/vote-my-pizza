@@ -7,26 +7,25 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Action;
+namespace UserTest\Action;
 
-use Pizza\Action\ShowPizzaAction;
-use Pizza\Action\ShowPizzaFactory;
+use User\Action\HandleLogoutAction;
+use User\Action\HandleLogoutFactory;
 
 /**
- * Class ShowPizzaFactoryTest
+ * Class HandleLogoutFactoryTest
  *
- * @package PizzaTest\Action
+ * @package UserTest\Action
  */
-class ShowPizzaFactoryTest extends AbstractTest
+class HandleLogoutFactoryTest extends AbstractTest
 {
     /**
      * Setup test cases
      */
     public function setUp()
     {
-        $this->mockTemplate();
-        $this->mockPizzaRepository();
-        $this->mockRestaurantPriceForm();
+        $this->mockRouter();
+        $this->mockAuthService();
         $this->mockDiContainer();
     }
 
@@ -36,16 +35,16 @@ class ShowPizzaFactoryTest extends AbstractTest
     public function testFactoryWithAllDependencies()
     {
         $this->prepareDiContainer(
-            ['template', 'pizzaRepository', 'restaurantPriceForm']
+            ['router', 'authService']
         );
 
-        $factory = new ShowPizzaFactory();
+        $factory = new HandleLogoutFactory();
 
-        $this->assertTrue($factory instanceof ShowPizzaFactory);
+        $this->assertTrue($factory instanceof HandleLogoutFactory);
 
-        /** @var ShowPizzaAction $action */
+        /** @var HandleLogoutAction $action */
         $action = $factory($this->container->reveal());
 
-        $this->assertTrue($action instanceof ShowPizzaAction);
+        $this->assertTrue($action instanceof HandleLogoutAction);
     }
 }
