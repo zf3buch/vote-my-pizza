@@ -46,9 +46,9 @@ class RestaurantTableFactoryTest extends PHPUnit_Framework_TestCase
             $factory instanceof RestaurantTableFactory
         );
 
-        /** @var RestaurantTable $Table */
-        $Table = $factory($container->reveal());
+        /** @var RestaurantTable $table */
+        $table = $factory($container->reveal());
 
-        $this->assertTrue($Table instanceof RestaurantTable);
+        $this->assertTrue($table instanceof RestaurantTable);
     }
 }

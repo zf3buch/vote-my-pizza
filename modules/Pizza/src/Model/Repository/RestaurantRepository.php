@@ -9,7 +9,6 @@
 
 namespace Pizza\Model\Repository;
 
-use Pizza\Model\Table\PizzaTableInterface;
 use Pizza\Model\Table\RestaurantTableInterface;
 
 /**

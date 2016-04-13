@@ -7,6 +7,20 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+namespace Pizza\Model\Repository;
+
+/**
+ * Overwrite date
+ *
+ * @param string $format
+ *
+ * @return string
+ */
+function date($format)
+{
+    return \date($format, mktime(15,39,33,4,13,2016));
+}
+
 namespace PizzaTest\Model\Repository;
 
 use PHPUnit_Framework_TestCase;
@@ -59,7 +73,7 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
 
         $insertData = [
             'pizza' => $id,
-            'date'  => date('Y-m-d H:i:s'),
+            'date'  => date('Y-m-d H:i:s', mktime(15,39,33,4,13,2016)),
             'name'  => $data['name'],
             'price' => $data['price'],
         ];
@@ -84,7 +98,7 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
 
         $insertData = [
             'pizza' => $id,
-            'date'  => date('Y-m-d H:i:s'),
+            'date'  => date('Y-m-d H:i:s', mktime(15,39,33,4,13,2016)),
             'name'  => 'unbekannt',
             'price' => 0.00,
         ];
@@ -109,7 +123,7 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
 
         $insertData = [
             'pizza' => $id,
-            'date'  => date('Y-m-d H:i:s'),
+            'date'  => date('Y-m-d H:i:s', mktime(15,39,33,4,13,2016)),
             'name'  => 'unbekannt',
             'price' => 0.00,
         ];
