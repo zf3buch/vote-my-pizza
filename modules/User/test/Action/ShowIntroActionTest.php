@@ -47,7 +47,7 @@ class ShowIntroActionTest extends AbstractTest
         $templateName = 'user::intro';
         $requestUri   = '/' . $lang . '/user';
 
-        $this->prepareTemplate($templateName, $templateVars);
+        $this->prepareRenderer($templateName, $templateVars);
 
         $action = new ShowIntroAction();
         $action->setTemplateRenderer($this->template->reveal());

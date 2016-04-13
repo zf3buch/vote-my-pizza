@@ -193,7 +193,7 @@ abstract class AbstractTest extends PHPUnit_Framework_TestCase
      * @param string $templateName
      * @param array  $templateVars
      */
-    protected function prepareTemplate($templateName, $templateVars)
+    protected function prepareRenderer($templateName, $templateVars)
     {
         /** @var MethodProphecy $method */
         $method = $this->template->render($templateName, $templateVars);

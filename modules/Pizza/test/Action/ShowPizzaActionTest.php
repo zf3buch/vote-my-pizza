@@ -61,7 +61,7 @@ class ShowPizzaActionTest extends AbstractTest
         $templateName = 'pizza::show';
         $requestUri   = '/' . $lang . '/pizza/show/' . $id;
 
-        $this->prepareTemplate($templateName, $templateVars);
+        $this->prepareRenderer($templateName, $templateVars);
         $this->preparePizzaRepository($id, $pizza);
 
         $action = new ShowPizzaAction();
