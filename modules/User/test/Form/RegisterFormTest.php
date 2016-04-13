@@ -7,17 +7,17 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Form;
+namespace UserTest\Form;
 
 use PHPUnit_Framework_TestCase;
-use Pizza\Form\RestaurantPriceForm;
+use User\Form\RegisterForm;
 
 /**
- * Class RestaurantPriceFormTest
+ * Class RegisterFormTest
  *
- * @package PizzaTest\Form
+ * @package UserTest\Form
  */
-class RestaurantPriceFormTest extends PHPUnit_Framework_TestCase
+class RegisterFormTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test if expected elements exits
@@ -25,27 +25,39 @@ class RestaurantPriceFormTest extends PHPUnit_Framework_TestCase
     public function testElementsExistence()
     {
         $expectedElements = [
-            'name'       => [
+            'email'         => [
                 'type'  => 'text',
-                'name'  => 'name',
-                'label' => 'pizza_label_restaurant',
+                'name'  => 'email',
+                'label' => 'user_label_email',
                 'value' => null,
             ],
-            'price'      => [
-                'type'  => 'text',
-                'name'  => 'price',
-                'label' => 'pizza_label_price',
+            'password'      => [
+                'type'  => 'password',
+                'name'  => 'password',
+                'label' => 'user_label_password',
                 'value' => null,
             ],
-            'save_price' => [
+            'first_name'    => [
+                'type'  => 'text',
+                'name'  => 'first_name',
+                'label' => 'user_label_first_name',
+                'value' => null,
+            ],
+            'last_name'     => [
+                'type'  => 'text',
+                'name'  => 'last_name',
+                'label' => 'user_label_last_name',
+                'value' => null,
+            ],
+            'register_user' => [
                 'type'  => 'submit',
-                'name'  => 'save_price',
+                'name'  => 'register_user',
                 'label' => null,
-                'value' => 'pizza_action_new_price',
+                'value' => 'user_action_register',
             ],
         ];
 
-        $form = new RestaurantPriceForm();
+        $form = new RegisterForm();
         $form->init();
 
         foreach ($expectedElements as $elementName => $elementData) {
@@ -72,11 +84,13 @@ class RestaurantPriceFormTest extends PHPUnit_Framework_TestCase
     public function testElementsValues()
     {
         $elementValues = [
-            'name'  => 'Test Restaurant',
-            'price' => '2',
+            'email'      => 'test@test.de',
+            'password'   => 'Test1234',
+            'first_name' => 'Theo',
+            'last_name'  => 'Tester',
         ];
 
-        $form = new RestaurantPriceForm();
+        $form = new RegisterForm();
         $form->init();
         $form->setData($elementValues);
 
