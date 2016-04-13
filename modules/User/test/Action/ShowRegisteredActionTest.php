@@ -42,7 +42,7 @@ class ShowRegisteredActionTest extends AbstractTest
         $templateName = 'user::registered';
         $requestUri   = '/' . $lang . '/user';
 
-        $this->prepareTemplate($templateName, $templateVars);
+        $this->prepareRenderer($templateName, $templateVars);
 
         $action = new ShowRegisteredAction();
         $action->setTemplateRenderer($this->template->reveal());

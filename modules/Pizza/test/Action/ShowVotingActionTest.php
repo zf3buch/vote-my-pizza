@@ -59,7 +59,7 @@ class ShowVotingActionTest extends AbstractTest
         $templateName = 'pizza::voting';
         $requestUri   = '/' . $lang . '/pizza/voting';
 
-        $this->prepareTemplate($templateName, $templateVars);
+        $this->prepareRenderer($templateName, $templateVars);
         $this->preparePizzaRepository($votingPizzas);
 
         $action = new ShowVotingAction();

@@ -66,7 +66,7 @@ class ShowIntroActionTest extends AbstractTest
         $templateName = 'pizza::intro';
         $requestUri   = '/' . $lang;
 
-        $this->prepareTemplate($templateName, $templateVars);
+        $this->prepareRenderer($templateName, $templateVars);
         $this->preparePizzaRepostory($topPizzas, $flopPizzas);
 
         $action = new ShowIntroAction();
