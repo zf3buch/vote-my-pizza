@@ -51,5 +51,15 @@ class ShowRegisteredFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof ShowRegisteredAction);
+
+        $this->assertAttributeEquals(
+            $this->template->reveal(), 'template', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->loginForm->reveal(),
+            'loginForm',
+            $action
+        );
     }
 }

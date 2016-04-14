@@ -46,5 +46,15 @@ class HandleVotingFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof HandleVotingAction);
+
+        $this->assertAttributeEquals(
+            $this->router->reveal(), 'router', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->pizzaRepository->reveal(),
+            'pizzaRepository',
+            $action
+        );
     }
 }

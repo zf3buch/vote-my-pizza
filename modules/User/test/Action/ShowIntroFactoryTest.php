@@ -47,5 +47,21 @@ class ShowIntroFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof ShowIntroAction);
+
+        $this->assertAttributeEquals(
+            $this->template->reveal(), 'template', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->loginForm->reveal(),
+            'loginForm',
+            $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->registerForm->reveal(),
+            'registerForm',
+            $action
+        );
     }
 }
