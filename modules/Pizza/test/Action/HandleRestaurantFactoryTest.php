@@ -47,5 +47,21 @@ class HandleRestaurantFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof HandleRestaurantAction);
+
+        $this->assertAttributeEquals(
+            $this->router->reveal(), 'router', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->restaurantRepository->reveal(),
+            'restaurantRepository',
+            $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->restaurantPriceForm->reveal(),
+            'restaurantPriceForm',
+            $action
+        );
     }
 }

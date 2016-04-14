@@ -47,5 +47,21 @@ class ShowPizzaFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof ShowPizzaAction);
+
+        $this->assertAttributeEquals(
+            $this->template->reveal(), 'template', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->pizzaRepository->reveal(),
+            'pizzaRepository',
+            $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->restaurantPriceForm->reveal(),
+            'restaurantPriceForm',
+            $action
+        );
     }
 }
