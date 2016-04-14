@@ -163,7 +163,7 @@ class RestaurantInputFilterTest extends PHPUnit_Framework_TestCase
     {
         $inputData        = [
             'name'  => ' Test <b>Name</b> ',
-            'price' => '2,99',
+            'price' => '2.99',
         ];
         $expectedValues   = [
             'name'  => 'Test Name',
