@@ -46,5 +46,15 @@ class HandleLogoutFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof HandleLogoutAction);
+
+        $this->assertAttributeEquals(
+            $this->router->reveal(), 'router', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->authService->reveal(),
+            'authenticationService',
+            $action
+        );
     }
 }

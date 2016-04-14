@@ -47,5 +47,21 @@ class HandleRegisterFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof HandleRegisterAction);
+
+        $this->assertAttributeEquals(
+            $this->router->reveal(), 'router', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->userRepository->reveal(),
+            'userRepository',
+            $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->registerForm->reveal(),
+            'registerForm',
+            $action
+        );
     }
 }

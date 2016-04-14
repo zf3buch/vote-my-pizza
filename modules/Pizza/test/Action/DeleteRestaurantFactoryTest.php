@@ -44,5 +44,15 @@ class DeleteRestaurantFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof DeleteRestaurantAction);
+
+        $this->assertAttributeEquals(
+            $this->router->reveal(), 'router', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->restaurantRepository->reveal(),
+            'restaurantRepository',
+            $action
+        );
     }
 }

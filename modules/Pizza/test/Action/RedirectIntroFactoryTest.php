@@ -43,5 +43,9 @@ class RedirectIntroFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof RedirectIntroAction);
+
+        $this->assertAttributeEquals(
+            $this->router->reveal(), 'router', $action
+        );
     }
 }

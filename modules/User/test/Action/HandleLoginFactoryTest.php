@@ -47,5 +47,21 @@ class HandleLoginFactoryTest extends AbstractTest
         $action = $factory($this->container->reveal());
 
         $this->assertTrue($action instanceof HandleLoginAction);
+
+        $this->assertAttributeEquals(
+            $this->router->reveal(), 'router', $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->authService->reveal(),
+            'authenticationService',
+            $action
+        );
+
+        $this->assertAttributeEquals(
+            $this->loginForm->reveal(),
+            'loginForm',
+            $action
+        );
     }
 }
