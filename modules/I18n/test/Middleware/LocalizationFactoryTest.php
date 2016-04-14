@@ -16,7 +16,6 @@ use PHPUnit_Framework_TestCase;
 use Prophecy\Prophecy\MethodProphecy;
 use Zend\Diactoros\Response;
 use Zend\I18n\Translator\Translator;
-use Zend\View\HelperPluginManager;
 
 /**
  * Class LocalizationFactoryTest
@@ -59,9 +58,13 @@ class LocalizationFactoryTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($factory instanceof LocalizationFactory);
 
-        /** @var LocalizationMiddleware $action */
-        $action = $factory($this->container->reveal());
+        /** @var LocalizationMiddleware $middleware */
+        $middleware = $factory($this->container->reveal());
 
-        $this->assertTrue($action instanceof LocalizationMiddleware);
+        $this->assertTrue($middleware instanceof LocalizationMiddleware);
+
+        $this->assertAttributeEquals(
+            $this->translator->reveal(), 'translator', $middleware
+        );
     }
 }

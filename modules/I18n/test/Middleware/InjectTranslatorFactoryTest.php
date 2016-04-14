@@ -73,9 +73,21 @@ class InjectTranslatorFactoryTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($factory instanceof InjectTranslatorFactory);
 
-        /** @var InjectTranslatorMiddleware $action */
-        $action = $factory($this->container->reveal());
+        /** @var InjectTranslatorMiddleware $middleware */
+        $middleware = $factory($this->container->reveal());
 
-        $this->assertTrue($action instanceof InjectTranslatorMiddleware);
+        $this->assertTrue(
+            $middleware instanceof InjectTranslatorMiddleware
+        );
+
+        $this->assertAttributeEquals(
+            $this->translator->reveal(), 'translator', $middleware
+        );
+
+        $this->assertAttributeEquals(
+            $this->helperPluginManager->reveal(),
+            'helperPluginManager',
+            $middleware
+        );
     }
 }
