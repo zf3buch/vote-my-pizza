@@ -7,35 +7,34 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Pizza;
+namespace Bootstrap;
 
-use Zend\Config\Config;
 use Zend\Config\Factory;
 
 /**
- * Class PizzaConfig
+ * Class ConfigProvider
  *
- * @package Pizza
+ * @package Bootstrap
  */
-class PizzaConfig
+class ConfigProvider
 {
     /**
      * Define constant
      */
     public function __construct()
     {
-        define('PIZZA_ROOT', __DIR__ . '/..');
+        define('BOOTSTRAP_ROOT', __DIR__ . '/..');
     }
 
     /**
      * Read configuration
      *
-     * @return array|Config
+     * @return array|\Zend\Config\Config
      */
     public function __invoke()
     {
         return Factory::fromFile(
-            PIZZA_ROOT . '/config/module.config.php'
+            BOOTSTRAP_ROOT . '/config/module.config.php'
         );
     }
 }
