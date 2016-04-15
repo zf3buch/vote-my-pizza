@@ -13,11 +13,11 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 
 /**
- * Class I18nConfig
+ * Class ConfigProvider
  *
  * @package I18n
  */
-class I18nConfig
+class ConfigProvider
 {
     /**
      * Define constant
