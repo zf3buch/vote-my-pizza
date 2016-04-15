@@ -7,34 +7,35 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Bootstrap;
+namespace User;
 
+use Zend\Config\Config;
 use Zend\Config\Factory;
 
 /**
- * Class BootstrapConfig
+ * Class ConfigProvider
  *
- * @package Bootstrap
+ * @package User
  */
-class BootstrapConfig
+class ConfigProvider
 {
     /**
      * Define constant
      */
     public function __construct()
     {
-        define('BOOTSTRAP_ROOT', __DIR__ . '/..');
+        define('USER_ROOT', __DIR__ . '/..');
     }
 
     /**
      * Read configuration
      *
-     * @return array|\Zend\Config\Config
+     * @return array|Config
      */
     public function __invoke()
     {
         return Factory::fromFile(
-            BOOTSTRAP_ROOT . '/config/module.config.php'
+            USER_ROOT . '/config/module.config.php'
         );
     }
 }
