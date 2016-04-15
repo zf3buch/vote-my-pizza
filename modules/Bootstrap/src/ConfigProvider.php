@@ -11,6 +11,8 @@ namespace Bootstrap;
 
 use Zend\Config\Factory;
 
+define('BOOTSTRAP_ROOT', __DIR__ . '/..');
+
 /**
  * Class ConfigProvider
  *
@@ -18,14 +20,6 @@ use Zend\Config\Factory;
  */
 class ConfigProvider
 {
-    /**
-     * Define constant
-     */
-    public function __construct()
-    {
-        define('BOOTSTRAP_ROOT', __DIR__ . '/..');
-    }
-
     /**
      * Read configuration
      *
