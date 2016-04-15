@@ -24,7 +24,9 @@ class ConfigProvider
      */
     public function __construct()
     {
-        define('PIZZA_ROOT', __DIR__ . '/..');
+        if (!defined('PIZZA_ROOT')) {
+            define('PIZZA_ROOT', __DIR__ . '/..');
+        }
     }
 
     /**
