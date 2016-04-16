@@ -7,15 +7,15 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest;
+namespace I18nTest;
 
 use PHPUnit_Framework_TestCase;
-use Pizza\ConfigProvider;
+use I18n\ConfigProvider;
 
 /**
  * Class ConfigProviderTest
  *
- * @package PizzaTest
+ * @package I18nTest
  */
 class ConfigProviderTest extends PHPUnit_Framework_TestCase
 {
@@ -39,8 +39,8 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue(class_exists(ConfigProvider::class));
 
-        $this->assertTrue(defined('PIZZA_ROOT'));
-        $this->assertEquals($this->moduleRoot, realpath(PIZZA_ROOT));
+        $this->assertTrue(defined('I18N_ROOT'));
+        $this->assertEquals($this->moduleRoot, realpath(I18N_ROOT));
     }
 
     /**
