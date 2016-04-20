@@ -23,14 +23,14 @@ use Zend\View\HelperPluginManager;
 class IdentityFactory
 {
     /**
-     * @param ContainerInterface|HelperPluginManager $diContainer
+     * @param ContainerInterface|HelperPluginManager $container
      *
      * @return Identity
      */
-    public function __invoke(ContainerInterface $diContainer)
+    public function __invoke(ContainerInterface $container)
     {
         /** @var AuthenticationServiceInterface $authenticationService */
-        $authenticationService = $diContainer->get(
+        $authenticationService = $container->get(
             AuthenticationServiceInterface::class
         );
 
