@@ -24,6 +24,34 @@ use Zend\Validator\StringLength;
 class RegisterInputFilterTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Do the input filter test
+     *
+     * @param $inputData
+     * @param $expectedResult
+     * @param $expectedValues
+     * @param $expectedMessages
+     */
+    protected function doInputFilterTest(
+        $inputData,
+        $expectedResult,
+        $expectedValues,
+        $expectedMessages
+    ) {
+        $inputFilter = new RegisterInputFilter();
+        $inputFilter->init();
+
+        $inputFilter->setData($inputData);
+
+        $result = $inputFilter->isValid();
+
+        $this->assertEquals($expectedResult, $result);
+        $this->assertEquals($expectedValues, $inputFilter->getValues());
+        $this->assertEquals(
+            $expectedMessages, $inputFilter->getMessages()
+        );
+    }
+
+    /**
      * Test input filter with empty data
      */
     public function testWithEmptyData()
@@ -49,18 +77,10 @@ class RegisterInputFilterTest extends PHPUnit_Framework_TestCase
                 NotEmpty::IS_EMPTY => 'user_validator_last_name_notempty',
             ],
         ];
+        $expectedResult   = false;
 
-        $inputFilter = new RegisterInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertFalse($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 
@@ -95,18 +115,10 @@ class RegisterInputFilterTest extends PHPUnit_Framework_TestCase
                 NotEmpty::IS_EMPTY => 'user_validator_last_name_notempty',
             ],
         ];
+        $expectedResult   = false;
 
-        $inputFilter = new RegisterInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertFalse($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 
@@ -141,18 +153,10 @@ class RegisterInputFilterTest extends PHPUnit_Framework_TestCase
                 StringLength::TOO_SHORT => 'user_validator_last_name_length',
             ],
         ];
+        $expectedResult   = false;
 
-        $inputFilter = new RegisterInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertFalse($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 
@@ -174,21 +178,12 @@ class RegisterInputFilterTest extends PHPUnit_Framework_TestCase
             'last_name'  => 'Test',
         ];
         $expectedMessages = [];
+        $expectedResult   = true;
 
-        $inputFilter = new RegisterInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertTrue($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
-
     /**
      * Test input filter with filtered values
      */
@@ -207,18 +202,10 @@ class RegisterInputFilterTest extends PHPUnit_Framework_TestCase
             'last_name'  => 'Test Name',
         ];
         $expectedMessages = [];
+        $expectedResult   = true;
 
-        $inputFilter = new RegisterInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertTrue($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 }

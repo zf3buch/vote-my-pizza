@@ -23,6 +23,34 @@ use Zend\Validator\StringLength;
 class RestaurantInputFilterTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Do the input filter test
+     *
+     * @param $inputData
+     * @param $expectedResult
+     * @param $expectedValues
+     * @param $expectedMessages
+     */
+    protected function doInputFilterTest(
+        $inputData,
+        $expectedResult,
+        $expectedValues,
+        $expectedMessages
+    ) {
+        $inputFilter = new RestaurantInputFilter();
+        $inputFilter->init();
+
+        $inputFilter->setData($inputData);
+
+        $result = $inputFilter->isValid();
+
+        $this->assertEquals($expectedResult, $result);
+        $this->assertEquals($expectedValues, $inputFilter->getValues());
+        $this->assertEquals(
+            $expectedMessages, $inputFilter->getMessages()
+        );
+    }
+
+    /**
      * Test input filter with empty data
      */
     public function testWithEmptyData()
@@ -40,18 +68,10 @@ class RestaurantInputFilterTest extends PHPUnit_Framework_TestCase
                 NotEmpty::IS_EMPTY => 'pizza_validator_price_notempty',
             ],
         ];
+        $expectedResult = false;
 
-        $inputFilter = new RestaurantInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertFalse($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 
@@ -76,18 +96,10 @@ class RestaurantInputFilterTest extends PHPUnit_Framework_TestCase
                 NotEmpty::IS_EMPTY => 'pizza_validator_price_notempty',
             ],
         ];
+        $expectedResult = false;
 
-        $inputFilter = new RestaurantInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertFalse($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 
@@ -112,18 +124,10 @@ class RestaurantInputFilterTest extends PHPUnit_Framework_TestCase
                 IsFloat::NOT_FLOAT => 'pizza_validator_price_float',
             ],
         ];
+        $expectedResult = false;
 
-        $inputFilter = new RestaurantInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertFalse($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 
@@ -141,18 +145,10 @@ class RestaurantInputFilterTest extends PHPUnit_Framework_TestCase
             'price' => 2,
         ];
         $expectedMessages = [];
+        $expectedResult = true;
 
-        $inputFilter = new RestaurantInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertTrue($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 
@@ -163,25 +159,17 @@ class RestaurantInputFilterTest extends PHPUnit_Framework_TestCase
     {
         $inputData        = [
             'name'  => ' Test <b>Name</b> ',
-            'price' => '2.99',
+            'price' => 2,
         ];
         $expectedValues   = [
             'name'  => 'Test Name',
-            'price' => 2.99,
+            'price' => 2.00,
         ];
         $expectedMessages = [];
+        $expectedResult = true;
 
-        $inputFilter = new RestaurantInputFilter();
-        $inputFilter->init();
-
-        $inputFilter->setData($inputData);
-
-        $result = $inputFilter->isValid();
-
-        $this->assertTrue($result);
-        $this->assertEquals($expectedValues, $inputFilter->getValues());
-        $this->assertEquals(
-            $expectedMessages, $inputFilter->getMessages()
+        $this->doInputFilterTest(
+            $inputData, $expectedResult, $expectedValues, $expectedMessages
         );
     }
 }
