@@ -42,6 +42,29 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
     private $connection = null;
 
     /**
+     * Sets up the test
+     */
+    protected function setUp()
+    {
+        if (!$this->restaurantTable) {
+            $dbConfig = include __DIR__
+                . '/../../../../../config/autoload/database.test.php';
+
+            $this->adapter = new Adapter($dbConfig['db']);
+
+            $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
+
+            $tableGateway = new TableGateway(
+                'restaurant', $this->adapter, null, $resultSet
+            );
+
+            $this->restaurantTable = new RestaurantTable($tableGateway);
+        }
+
+        parent::setUp();
+    }
+
+    /**
      * Returns the test database connection.
      *
      * @return PHPUnit_Extensions_Database_DB_IDatabaseConnection
@@ -49,10 +72,6 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
     protected function getConnection()
     {
         if (!$this->connection) {
-            $dbConfig = include __DIR__
-                . '/../../../../../config/autoload/database.test.php';
-
-            $this->adapter    = new Adapter($dbConfig['db']);
             $this->connection = $this->createDefaultDBConnection(
                 $this->adapter->getDriver()->getConnection()->getResource(
                 ),
@@ -76,20 +95,6 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
     }
 
     /**
-     * Sets up the test
-     */
-    protected function setUpRestaurantTable()
-    {
-        $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
-
-        $tableGateway = new TableGateway(
-            'restaurant', $this->adapter, null, $resultSet
-        );
-
-        $this->restaurantTable = new RestaurantTable($tableGateway);
-    }
-
-    /**
      * Test fetch restaurants by pizza
      *
      * @param $pizzaId
@@ -98,8 +103,6 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testFetchRestaurantsByPizza($pizzaId)
     {
-        $this->setUpRestaurantTable();
-
         $restaurants = $this->restaurantTable->fetchRestaurantsByPizza(
             $pizzaId
         );
@@ -147,8 +150,6 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testSaveRestaurant($data)
     {
-        $this->setUpRestaurantTable();
-
         $result = $this->restaurantTable->saveRestaurant($data);
 
         $queryTable = $this->getConnection()->createQueryTable(
@@ -200,8 +201,6 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testDeleteRestaurant($id)
     {
-        $this->setUpRestaurantTable();
-
         $queryTable = $this->getConnection()->createQueryTable(
             'fetchPizzaById',
             'SELECT * FROM restaurant WHERE id = "' . $id . '";'

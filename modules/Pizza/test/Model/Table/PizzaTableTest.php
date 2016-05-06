@@ -42,6 +42,29 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
     private $connection = null;
 
     /**
+     * Sets up the test
+     */
+    protected function setUp()
+    {
+        if (!$this->pizzaTable) {
+            $dbConfig = include __DIR__
+                . '/../../../../../config/autoload/database.test.php';
+
+            $this->adapter = new Adapter($dbConfig['db']);
+
+            $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
+
+            $tableGateway = new TableGateway(
+                'pizza', $this->adapter, null, $resultSet
+            );
+
+            $this->pizzaTable = new PizzaTable($tableGateway);
+        }
+
+        parent::setUp();
+    }
+
+    /**
      * Returns the test database connection.
      *
      * @return PHPUnit_Extensions_Database_DB_IDatabaseConnection
@@ -49,10 +72,6 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
     protected function getConnection()
     {
         if (!$this->connection) {
-            $dbConfig = include __DIR__
-                . '/../../../../../config/autoload/database.test.php';
-
-            $this->adapter    = new Adapter($dbConfig['db']);
             $this->connection = $this->createDefaultDBConnection(
                 $this->adapter->getDriver()->getConnection()->getResource(
                 ),
@@ -76,26 +95,10 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
     }
 
     /**
-     * Sets up the test
-     */
-    protected function setUpPizzaTable()
-    {
-        $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
-
-        $tableGateway = new TableGateway(
-            'pizza', $this->adapter, null, $resultSet
-        );
-
-        $this->pizzaTable = new PizzaTable($tableGateway);
-    }
-
-    /**
      * Test fetch random pizzas
      */
     public function testFetchRandomPizzas()
     {
-        $this->setUpPizzaTable();
-
         $randomPizzas = $this->pizzaTable->fetchRandomPizzas(3);
 
         $queryTable = $this->getConnection()->createQueryTable(
@@ -126,8 +129,6 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testFetchPizzaById($id)
     {
-        $this->setUpPizzaTable();
-
         $pizzaById = $this->pizzaTable->fetchPizzaById($id);
 
         $queryTable = $this->getConnection()->createQueryTable(
@@ -164,8 +165,6 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testPizzasSortedByRate($count, $order)
     {
-        $this->setUpPizzaTable();
-
         $sortedPizzas = $this->pizzaTable->fetchPizzasSortedByRate(
             $count, $order
         );
@@ -209,8 +208,6 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testIncreasePos($id, $pos, $neg, $rate)
     {
-        $this->setUpPizzaTable();
-
         $result = $this->pizzaTable->increasePos($id);
 
         $queryTable = $this->getConnection()->createQueryTable(
@@ -254,8 +251,6 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testIncreaseNeg($id, $pos, $neg, $rate)
     {
-        $this->setUpPizzaTable();
-
         $result = $this->pizzaTable->increaseNeg($id);
 
         $queryTable = $this->getConnection()->createQueryTable(
