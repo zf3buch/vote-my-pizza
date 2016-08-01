@@ -7,7 +7,7 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Pizza\Model\Table;
+namespace User\Model\Storage\Db;
 
 use Interop\Container\ContainerInterface;
 use Zend\Db\Adapter\AdapterInterface;
@@ -15,16 +15,16 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
 /**
- * Class PizzaTableFactory
+ * Class UserDbStorageFactory
  *
- * @package Pizza\Model\Table
+ * @package User\Model\Storage\Db
  */
-class PizzaTableFactory
+class UserDbStorageFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return PizzaTable
+     * @return UserDbStorage
      */
     public function __invoke(ContainerInterface $container)
     {
@@ -33,9 +33,9 @@ class PizzaTableFactory
         $resultSet = new ResultSet(ResultSet::TYPE_ARRAY);
 
         $tableGateway = new TableGateway(
-            'pizza', $adapter, null, $resultSet
+            'user', $adapter, null, $resultSet
         );
 
-        return new PizzaTable($tableGateway);
+        return new UserDbStorage($tableGateway);
     }
 }

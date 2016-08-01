@@ -7,29 +7,29 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Model\Table;
+namespace PizzaTest\Model\Storage\Db;
 
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection;
 use PHPUnit_Extensions_Database_DB_IDatabaseConnection;
 use PHPUnit_Extensions_Database_TestCase;
-use Pizza\Model\Table\RestaurantTable;
-use Pizza\Model\Table\RestaurantTableInterface;
+use Pizza\Model\Storage\Db\RestaurantDbStorage;
+use Pizza\Model\Storage\RestaurantStorageInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
 /**
- * Class RestaurantTableTest
+ * Class RestaurantDbStorageTest
  *
- * @package PizzaTest\Model\Table
+ * @package PizzaTest\Model\Storage
  */
-class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
+class RestaurantDbStorageTest extends PHPUnit_Extensions_Database_TestCase
 {
     /**
-     * @var RestaurantTableInterface
+     * @var RestaurantStorageInterface
      */
-    private $restaurantTable;
+    private $restaurantStorage;
 
     /**
      * @var Adapter
@@ -46,9 +46,9 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     protected function setUp()
     {
-        if (!$this->restaurantTable) {
+        if (!$this->restaurantStorage) {
             $dbConfig = include __DIR__
-                . '/../../../../../config/autoload/database.test.php';
+                . '/../../../../../../config/autoload/database.test.php';
 
             $this->adapter = new Adapter($dbConfig['db']);
 
@@ -58,7 +58,7 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
                 'restaurant', $this->adapter, null, $resultSet
             );
 
-            $this->restaurantTable = new RestaurantTable($tableGateway);
+            $this->restaurantStorage = new RestaurantDbStorage($tableGateway);
         }
 
         parent::setUp();
@@ -103,7 +103,7 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testFetchRestaurantsByPizza($pizzaId)
     {
-        $restaurants = $this->restaurantTable->fetchRestaurantsByPizza(
+        $restaurants = $this->restaurantStorage->fetchRestaurantsByPizza(
             $pizzaId
         );
 
@@ -150,7 +150,7 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testSaveRestaurant($data)
     {
-        $result = $this->restaurantTable->saveRestaurant($data);
+        $result = $this->restaurantStorage->saveRestaurant($data);
 
         $queryTable = $this->getConnection()->createQueryTable(
             'fetchPizzaById',
@@ -208,7 +208,7 @@ class RestaurantTableTest extends PHPUnit_Extensions_Database_TestCase
 
         $this->assertEquals(1, $queryTable->getRowCount());
 
-        $result = $this->restaurantTable->deleteRestaurant($id);
+        $result = $this->restaurantStorage->deleteRestaurant($id);
 
         $this->assertEquals(1, $result);
 

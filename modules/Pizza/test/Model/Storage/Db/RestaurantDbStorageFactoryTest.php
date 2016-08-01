@@ -7,22 +7,22 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Model\Table;
+namespace PizzaTest\Model\Storage\Db;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Pizza\Model\Table\RestaurantTable;
-use Pizza\Model\Table\RestaurantTableFactory;
-use Pizza\Model\Table\RestaurantTableInterface;
+use Pizza\Model\Storage\Db\RestaurantDbStorage;
+use Pizza\Model\Storage\Db\RestaurantDbStorageFactory;
+use Pizza\Model\Storage\RestaurantStorageInterface;
 use Prophecy\Prophecy\MethodProphecy;
 use Zend\Db\Adapter\AdapterInterface;
 
 /**
- * Class RestaurantTableFactoryTest
+ * Class RestaurantDbStorageFactoryTest
  *
- * @package PizzaTest\Model\Table
+ * @package PizzaTest\Model\Storage
  */
-class RestaurantTableFactoryTest extends PHPUnit_Framework_TestCase
+class RestaurantDbStorageFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test input filter factory
@@ -32,7 +32,7 @@ class RestaurantTableFactoryTest extends PHPUnit_Framework_TestCase
         /** @var ContainerInterface $container */
         $container = $this->prophesize(ContainerInterface::class);
 
-        /** @var RestaurantTableInterface $RestaurantTable */
+        /** @var RestaurantStorageInterface $RestaurantDbStorage */
         $dbAdapter = $this->prophesize(AdapterInterface::class);
 
         /** @var MethodProphecy $method */
@@ -40,15 +40,15 @@ class RestaurantTableFactoryTest extends PHPUnit_Framework_TestCase
         $method->willReturn($dbAdapter);
         $method->shouldBeCalled();
 
-        $factory = new RestaurantTableFactory();
+        $factory = new RestaurantDbStorageFactory();
 
         $this->assertTrue(
-            $factory instanceof RestaurantTableFactory
+            $factory instanceof RestaurantDbStorageFactory
         );
 
-        /** @var RestaurantTable $table */
+        /** @var RestaurantDbStorage $table */
         $table = $factory($container->reveal());
 
-        $this->assertTrue($table instanceof RestaurantTable);
+        $this->assertTrue($table instanceof RestaurantDbStorage);
     }
 }

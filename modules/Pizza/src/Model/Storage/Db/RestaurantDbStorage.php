@@ -7,17 +7,18 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace Pizza\Model\Table;
+namespace Pizza\Model\Storage\Db;
 
+use Pizza\Model\Storage\RestaurantStorageInterface;
 use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
 /**
- * Class RestaurantTable
+ * Class RestaurantDbStorage
  *
- * @package Pizza\Model\Table
+ * @package Pizza\Model\Storage\Db
  */
-class RestaurantTable implements RestaurantTableInterface
+class RestaurantDbStorage implements RestaurantStorageInterface
 {
     /**
      * @var TableGatewayInterface|AbstractTableGateway
@@ -25,7 +26,7 @@ class RestaurantTable implements RestaurantTableInterface
     private $tableGateway;
 
     /**
-     * RestaurantTable constructor.
+     * RestaurantDbStorage constructor.
      *
      * @param TableGatewayInterface $tableGateway
      */

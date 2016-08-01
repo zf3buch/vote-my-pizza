@@ -7,22 +7,22 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Model\Table;
+namespace UserTest\Model\Storage\Db;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Pizza\Model\Table\PizzaTable;
-use Pizza\Model\Table\PizzaTableFactory;
-use Pizza\Model\Table\PizzaTableInterface;
+use User\Model\Storage\Db\UserDbStorage;
+use User\Model\Storage\Db\UserDbStorageFactory;
+use User\Model\Storage\UserStorageInterface;
 use Prophecy\Prophecy\MethodProphecy;
 use Zend\Db\Adapter\AdapterInterface;
 
 /**
- * Class PizzaTableFactoryTest
+ * Class UserDbStorageFactoryTest
  *
- * @package PizzaTest\Model\Table
+ * @package UserTest\Model\Storage\Db
  */
-class PizzaTableFactoryTest extends PHPUnit_Framework_TestCase
+class UserDbStorageFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test input filter factory
@@ -32,7 +32,7 @@ class PizzaTableFactoryTest extends PHPUnit_Framework_TestCase
         /** @var ContainerInterface $container */
         $container = $this->prophesize(ContainerInterface::class);
 
-        /** @var PizzaTableInterface $pizzaTable */
+        /** @var UserStorageInterface $userStorage */
         $dbAdapter = $this->prophesize(AdapterInterface::class);
 
         /** @var MethodProphecy $method */
@@ -40,15 +40,15 @@ class PizzaTableFactoryTest extends PHPUnit_Framework_TestCase
         $method->willReturn($dbAdapter);
         $method->shouldBeCalled();
 
-        $factory = new PizzaTableFactory();
+        $factory = new UserDbStorageFactory();
 
         $this->assertTrue(
-            $factory instanceof PizzaTableFactory
+            $factory instanceof UserDbStorageFactory
         );
 
-        /** @var PizzaTable $table */
+        /** @var UserDbStorage $table */
         $table = $factory($container->reveal());
 
-        $this->assertTrue($table instanceof PizzaTable);
+        $this->assertTrue($table instanceof UserDbStorage);
     }
 }

@@ -12,8 +12,8 @@ namespace PizzaTest\Model\Repository;
 use PHPUnit_Framework_TestCase;
 use Pizza\Model\Repository\PizzaRepository;
 use Pizza\Model\Repository\PizzaRepositoryInterface;
-use Pizza\Model\Table\PizzaTableInterface;
-use Pizza\Model\Table\RestaurantTableInterface;
+use Pizza\Model\Storage\PizzaStorageInterface;
+use Pizza\Model\Storage\RestaurantStorageInterface;
 use Prophecy\Prophecy\MethodProphecy;
 
 /**
@@ -29,14 +29,14 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
     private $pizzaRepository;
 
     /**
-     * @var PizzaTableInterface
+     * @var PizzaStorageInterface
      */
-    private $pizzaTable;
+    private $pizzaStorage;
 
     /**
-     * @var RestaurantTableInterface
+     * @var RestaurantStorageInterface
      */
-    private $restaurantTable;
+    private $restaurantStorage;
 
     /**
      * @var array
@@ -104,16 +104,16 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->pizzaTable = $this->prophesize(
-            PizzaTableInterface::class
+        $this->pizzaStorage = $this->prophesize(
+            PizzaStorageInterface::class
         );
 
-        $this->restaurantTable = $this->prophesize(
-            RestaurantTableInterface::class
+        $this->restaurantStorage = $this->prophesize(
+            RestaurantStorageInterface::class
         );
 
         $this->pizzaRepository = new PizzaRepository(
-            $this->pizzaTable->reveal(), $this->restaurantTable->reveal()
+            $this->pizzaStorage->reveal(), $this->restaurantStorage->reveal()
         );
     }
 
@@ -135,17 +135,17 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         $expectedData['right']['restaurants'] = $restaurantData2;
 
         /** @var MethodProphecy $method */
-        $method = $this->pizzaTable->fetchRandomPizzas(2);
+        $method = $this->pizzaStorage->fetchRandomPizzas(2);
         $method->willReturn($pizzaData);
         $method->shouldBeCalled();
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantTable->fetchRestaurantsByPizza('1');
+        $method = $this->restaurantStorage->fetchRestaurantsByPizza('1');
         $method->willReturn($restaurantData1);
         $method->shouldBeCalled();
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantTable->fetchRestaurantsByPizza('2');
+        $method = $this->restaurantStorage->fetchRestaurantsByPizza('2');
         $method->willReturn($restaurantData2);
         $method->shouldBeCalled();
 
@@ -166,12 +166,12 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         $expectedData['restaurants'] = $restaurantData;
 
         /** @var MethodProphecy $method */
-        $method = $this->pizzaTable->fetchPizzaById($pizzaData['id']);
+        $method = $this->pizzaStorage->fetchPizzaById($pizzaData['id']);
         $method->willReturn($pizzaData);
         $method->shouldBeCalled();
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantTable->fetchRestaurantsByPizza(
+        $method = $this->restaurantStorage->fetchRestaurantsByPizza(
             $pizzaData['id']
         );
         $method->willReturn($restaurantData);
@@ -194,7 +194,7 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         $expectedData = $pizzaData;
 
         /** @var MethodProphecy $method */
-        $method = $this->pizzaTable->fetchPizzasSortedByRate(3, 'DESC');
+        $method = $this->pizzaStorage->fetchPizzasSortedByRate(3, 'DESC');
         $method->willReturn($pizzaData);
         $method->shouldBeCalled();
 
@@ -215,7 +215,7 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         $expectedData = $pizzaData;
 
         /** @var MethodProphecy $method */
-        $method = $this->pizzaTable->fetchPizzasSortedByRate(3, 'ASC');
+        $method = $this->pizzaStorage->fetchPizzasSortedByRate(3, 'ASC');
         $method->willReturn($pizzaData);
         $method->shouldBeCalled();
 
@@ -234,11 +234,11 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         $neg = $this->pizzaData[1];
 
         /** @var MethodProphecy $method */
-        $method = $this->pizzaTable->increasePos($pos);
+        $method = $this->pizzaStorage->increasePos($pos);
         $method->shouldBeCalled();
 
         /** @var MethodProphecy $method */
-        $method = $this->pizzaTable->increaseNeg($neg);
+        $method = $this->pizzaStorage->increaseNeg($neg);
         $method->shouldBeCalled();
 
         $this->assertTrue($this->pizzaRepository->saveVoting($pos, $neg));
