@@ -21,10 +21,10 @@ return [
             Pizza\Action\HandleRestaurantAction::class =>
                 Pizza\Action\HandleRestaurantFactory::class,
 
-            Pizza\Model\Table\PizzaTableInterface::class      =>
-                Pizza\Model\Table\PizzaTableFactory::class,
-            Pizza\Model\Table\RestaurantTableInterface::class =>
-                Pizza\Model\Table\RestaurantTableFactory::class,
+            Pizza\Model\Storage\PizzaStorageInterface::class =>
+                Pizza\Model\Storage\Db\PizzaDbStorageFactory::class,
+            Pizza\Model\Storage\RestaurantStorageInterface::class =>
+                Pizza\Model\Storage\Db\RestaurantDbStorageFactory::class,
 
             Pizza\Model\Repository\PizzaRepositoryInterface::class =>
                 Pizza\Model\Repository\PizzaRepositoryFactory::class,
