@@ -7,29 +7,29 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Model\Table;
+namespace PizzaTest\Model\Storage\Db;
 
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection;
 use PHPUnit_Extensions_Database_DB_IDatabaseConnection;
 use PHPUnit_Extensions_Database_TestCase;
-use Pizza\Model\Table\PizzaTable;
-use Pizza\Model\Table\PizzaTableInterface;
+use Pizza\Model\Storage\Db\PizzaDbStorage;
+use Pizza\Model\Storage\PizzaStorageInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
 /**
- * Class PizzaTableTest
+ * Class PizzaDbStorageTest
  *
- * @package PizzaTest\Model\Table
+ * @package PizzaTest\Model\Storage
  */
-class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
+class PizzaDbStorageTest extends PHPUnit_Extensions_Database_TestCase
 {
     /**
-     * @var PizzaTableInterface
+     * @var PizzaStorageInterface
      */
-    private $pizzaTable;
+    private $pizzaStorage;
 
     /**
      * @var Adapter
@@ -46,9 +46,9 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     protected function setUp()
     {
-        if (!$this->pizzaTable) {
+        if (!$this->pizzaStorage) {
             $dbConfig = include __DIR__
-                . '/../../../../../config/autoload/database.test.php';
+                . '/../../../../../../config/autoload/database.test.php';
 
             $this->adapter = new Adapter($dbConfig['db']);
 
@@ -58,7 +58,7 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
                 'pizza', $this->adapter, null, $resultSet
             );
 
-            $this->pizzaTable = new PizzaTable($tableGateway);
+            $this->pizzaStorage = new PizzaDbStorage($tableGateway);
         }
 
         parent::setUp();
@@ -99,7 +99,7 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testFetchRandomPizzas()
     {
-        $randomPizzas = $this->pizzaTable->fetchRandomPizzas(3);
+        $randomPizzas = $this->pizzaStorage->fetchRandomPizzas(3);
 
         $queryTable = $this->getConnection()->createQueryTable(
             'fetchAllPizzas', 'SELECT * FROM pizza ORDER BY id;'
@@ -129,7 +129,7 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testFetchPizzaById($id)
     {
-        $pizzaById = $this->pizzaTable->fetchPizzaById($id);
+        $pizzaById = $this->pizzaStorage->fetchPizzaById($id);
 
         $queryTable = $this->getConnection()->createQueryTable(
             'fetchPizzaById',
@@ -165,7 +165,7 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testPizzasSortedByRate($count, $order)
     {
-        $sortedPizzas = $this->pizzaTable->fetchPizzasSortedByRate(
+        $sortedPizzas = $this->pizzaStorage->fetchPizzasSortedByRate(
             $count, $order
         );
 
@@ -208,7 +208,7 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testIncreasePos($id, $pos, $neg, $rate)
     {
-        $result = $this->pizzaTable->increasePos($id);
+        $result = $this->pizzaStorage->increasePos($id);
 
         $queryTable = $this->getConnection()->createQueryTable(
             'fetchPizzaById',
@@ -251,7 +251,7 @@ class PizzaTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testIncreaseNeg($id, $pos, $neg, $rate)
     {
-        $result = $this->pizzaTable->increaseNeg($id);
+        $result = $this->pizzaStorage->increaseNeg($id);
 
         $queryTable = $this->getConnection()->createQueryTable(
             'fetchPizzaById',

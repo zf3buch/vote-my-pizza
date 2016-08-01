@@ -40,7 +40,7 @@ use PHPUnit_Framework_TestCase;
 use Prophecy\Prophecy\MethodProphecy;
 use User\Model\Repository\UserRepository;
 use User\Model\Repository\UserRepositoryInterface;
-use User\Model\Table\UserTableInterface;
+use User\Model\Storage\Db\UserTableInterface;
 
 /**
  * Class UserRepositoryTest

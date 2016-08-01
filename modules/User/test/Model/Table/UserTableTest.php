@@ -7,14 +7,14 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace UserTest\Model\Table;
+namespace UserTest\Model\Storage\Db;
 
 use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection;
 use PHPUnit_Extensions_Database_DB_IDatabaseConnection;
 use PHPUnit_Extensions_Database_TestCase;
-use User\Model\Table\UserTable;
-use User\Model\Table\UserTableInterface;
+use User\Model\Storage\Db\UserTable;
+use User\Model\Storage\Db\UserTableInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -22,7 +22,7 @@ use Zend\Db\TableGateway\TableGateway;
 /**
  * Class UserTableTest
  *
- * @package UserTest\Model\Table
+ * @package UserTest\Model\Storage\Db
  */
 class UserTableTest extends PHPUnit_Extensions_Database_TestCase
 {

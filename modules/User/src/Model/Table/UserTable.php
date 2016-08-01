@@ -7,7 +7,7 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace User\Model\Table;
+namespace User\Model\Storage\Db;
 
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\AbstractTableGateway;
@@ -16,7 +16,7 @@ use Zend\Db\TableGateway\TableGatewayInterface;
 /**
  * Class UserTable
  *
- * @package User\Model\Table
+ * @package User\Model\Storage\Db
  */
 class UserTable implements UserTableInterface
 {

@@ -9,7 +9,7 @@
 
 namespace User\Model\Repository;
 
-use User\Model\Table\UserTableInterface;
+use User\Model\Storage\Db\UserTableInterface;
 
 /**
  * Class UserRepository

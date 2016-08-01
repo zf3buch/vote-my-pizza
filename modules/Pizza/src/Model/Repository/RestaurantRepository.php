@@ -9,7 +9,7 @@
 
 namespace Pizza\Model\Repository;
 
-use Pizza\Model\Table\RestaurantTableInterface;
+use Pizza\Model\Storage\RestaurantStorageInterface;
 
 /**
  * Class RestaurantRepository
@@ -19,19 +19,19 @@ use Pizza\Model\Table\RestaurantTableInterface;
 class RestaurantRepository implements RestaurantRepositoryInterface
 {
     /**
-     * @var RestaurantTableInterface
+     * @var RestaurantStorageInterface
      */
-    private $restaurantTable;
+    private $restaurantStorage;
 
     /**
      * RestaurantRepository constructor.
      *
-     * @param RestaurantTableInterface $restaurantTable
+     * @param RestaurantStorageInterface $restaurantStorage
      */
     public function __construct(
-        RestaurantTableInterface $restaurantTable
+        RestaurantStorageInterface $restaurantStorage
     ) {
-        $this->restaurantTable = $restaurantTable;
+        $this->restaurantStorage = $restaurantStorage;
     }
 
     /**
@@ -51,7 +51,7 @@ class RestaurantRepository implements RestaurantRepositoryInterface
             'price' => isset($data['price']) ? $data['price'] : 0.00,
         ];
 
-        return $this->restaurantTable->saveRestaurant($insertData);
+        return $this->restaurantStorage->saveRestaurant($insertData);
     }
 
     /**
@@ -63,6 +63,6 @@ class RestaurantRepository implements RestaurantRepositoryInterface
      */
     public function deleteRestaurant($id)
     {
-        return $this->restaurantTable->deleteRestaurant($id);
+        return $this->restaurantStorage->deleteRestaurant($id);
     }
 }

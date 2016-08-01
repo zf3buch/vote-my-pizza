@@ -26,7 +26,7 @@ namespace PizzaTest\Model\Repository;
 use PHPUnit_Framework_TestCase;
 use Pizza\Model\Repository\RestaurantRepository;
 use Pizza\Model\Repository\RestaurantRepositoryInterface;
-use Pizza\Model\Table\RestaurantTableInterface;
+use Pizza\Model\Storage\RestaurantStorageInterface;
 use Prophecy\Prophecy\MethodProphecy;
 
 /**
@@ -42,21 +42,21 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
     private $restaurantRepository;
 
     /**
-     * @var RestaurantTableInterface
+     * @var RestaurantStorageInterface
      */
-    private $restaurantTable;
+    private $restaurantStorage;
 
     /**
      * Sets up the test
      */
     protected function setUp()
     {
-        $this->restaurantTable = $this->prophesize(
-            RestaurantTableInterface::class
+        $this->restaurantStorage = $this->prophesize(
+            RestaurantStorageInterface::class
         );
 
         $this->restaurantRepository = new RestaurantRepository(
-            $this->restaurantTable->reveal()
+            $this->restaurantStorage->reveal()
         );
     }
 
@@ -79,7 +79,7 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
         ];
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantTable->saveRestaurant($insertData);
+        $method = $this->restaurantStorage->saveRestaurant($insertData);
         $method->willReturn(true);
         $method->shouldBeCalled();
 
@@ -104,7 +104,7 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
         ];
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantTable->saveRestaurant($insertData);
+        $method = $this->restaurantStorage->saveRestaurant($insertData);
         $method->willReturn(true);
         $method->shouldBeCalled();
 
@@ -129,7 +129,7 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
         ];
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantTable->saveRestaurant($insertData);
+        $method = $this->restaurantStorage->saveRestaurant($insertData);
         $method->willReturn(false);
         $method->shouldBeCalled();
 
@@ -146,7 +146,7 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
         $id = '1';
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantTable->deleteRestaurant($id);
+        $method = $this->restaurantStorage->deleteRestaurant($id);
         $method->willReturn(true);
         $method->shouldBeCalled();
 
@@ -163,7 +163,7 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
         $id = '1';
 
         /** @var MethodProphecy $method */
-        $method = $this->restaurantTable->deleteRestaurant($id);
+        $method = $this->restaurantStorage->deleteRestaurant($id);
         $method->willReturn(false);
         $method->shouldBeCalled();
 

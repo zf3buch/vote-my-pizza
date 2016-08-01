@@ -7,7 +7,7 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace User\Model\Table;
+namespace User\Model\Storage\Db;
 
 use Interop\Container\ContainerInterface;
 use Zend\Db\Adapter\AdapterInterface;
@@ -17,7 +17,7 @@ use Zend\Db\TableGateway\TableGateway;
 /**
  * Class UserTableFactory
  *
- * @package User\Model\Table
+ * @package User\Model\Storage\Db
  */
 class UserTableFactory
 {

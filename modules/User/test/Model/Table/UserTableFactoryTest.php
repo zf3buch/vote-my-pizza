@@ -7,20 +7,20 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace UserTest\Model\Table;
+namespace UserTest\Model\Storage\Db;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use User\Model\Table\UserTable;
-use User\Model\Table\UserTableFactory;
-use User\Model\Table\UserTableInterface;
+use User\Model\Storage\Db\UserTable;
+use User\Model\Storage\Db\UserTableFactory;
+use User\Model\Storage\Db\UserTableInterface;
 use Prophecy\Prophecy\MethodProphecy;
 use Zend\Db\Adapter\AdapterInterface;
 
 /**
  * Class UserTableFactoryTest
  *
- * @package UserTest\Model\Table
+ * @package UserTest\Model\Storage\Db
  */
 class UserTableFactoryTest extends PHPUnit_Framework_TestCase
 {

@@ -13,7 +13,7 @@ use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
 use User\Model\Repository\UserRepository;
 use User\Model\Repository\UserRepositoryFactory;
-use User\Model\Table\UserTableInterface;
+use User\Model\Storage\Db\UserTableInterface;
 use Prophecy\Prophecy\MethodProphecy;
 
 /**

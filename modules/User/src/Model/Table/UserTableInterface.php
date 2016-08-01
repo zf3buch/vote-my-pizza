@@ -7,12 +7,12 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace User\Model\Table;
+namespace User\Model\Storage\Db;
 
 /**
  * Interface UserTableInterface
  *
- * @package User\Model\Table
+ * @package User\Model\Storage\Db
  */
 interface UserTableInterface
 {

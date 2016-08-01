@@ -7,22 +7,22 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace PizzaTest\Model\Table;
+namespace PizzaTest\Model\Storage\Db;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Pizza\Model\Table\PizzaTable;
-use Pizza\Model\Table\PizzaTableFactory;
-use Pizza\Model\Table\PizzaTableInterface;
+use Pizza\Model\Storage\Db\RestaurantDbStorage;
+use Pizza\Model\Storage\Db\RestaurantDbStorageFactory;
+use Pizza\Model\Storage\RestaurantStorageInterface;
 use Prophecy\Prophecy\MethodProphecy;
 use Zend\Db\Adapter\AdapterInterface;
 
 /**
- * Class PizzaTableFactoryTest
+ * Class RestaurantDbStorageFactoryTest
  *
- * @package PizzaTest\Model\Table
+ * @package PizzaTest\Model\Storage
  */
-class PizzaTableFactoryTest extends PHPUnit_Framework_TestCase
+class RestaurantDbStorageFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test input filter factory
@@ -32,7 +32,7 @@ class PizzaTableFactoryTest extends PHPUnit_Framework_TestCase
         /** @var ContainerInterface $container */
         $container = $this->prophesize(ContainerInterface::class);
 
-        /** @var PizzaTableInterface $pizzaTable */
+        /** @var RestaurantStorageInterface $RestaurantDbStorage */
         $dbAdapter = $this->prophesize(AdapterInterface::class);
 
         /** @var MethodProphecy $method */
@@ -40,15 +40,15 @@ class PizzaTableFactoryTest extends PHPUnit_Framework_TestCase
         $method->willReturn($dbAdapter);
         $method->shouldBeCalled();
 
-        $factory = new PizzaTableFactory();
+        $factory = new RestaurantDbStorageFactory();
 
         $this->assertTrue(
-            $factory instanceof PizzaTableFactory
+            $factory instanceof RestaurantDbStorageFactory
         );
 
-        /** @var PizzaTable $table */
+        /** @var RestaurantDbStorage $table */
         $table = $factory($container->reveal());
 
-        $this->assertTrue($table instanceof PizzaTable);
+        $this->assertTrue($table instanceof RestaurantDbStorage);
     }
 }

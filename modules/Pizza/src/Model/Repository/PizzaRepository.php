@@ -9,8 +9,8 @@
 
 namespace Pizza\Model\Repository;
 
-use Pizza\Model\Table\PizzaTableInterface;
-use Pizza\Model\Table\RestaurantTableInterface;
+use Pizza\Model\Storage\PizzaStorageInterface;
+use Pizza\Model\Storage\RestaurantStorageInterface;
 
 /**
  * Class PizzaRepository
@@ -20,27 +20,27 @@ use Pizza\Model\Table\RestaurantTableInterface;
 class PizzaRepository implements PizzaRepositoryInterface
 {
     /**
-     * @var PizzaTableInterface
+     * @var PizzaStorageInterface
      */
-    private $pizzaTable;
+    private $pizzaStorage;
 
     /**
-     * @var RestaurantTableInterface
+     * @var RestaurantStorageInterface
      */
-    private $restaurantTable;
+    private $restaurantStorage;
 
     /**
      * PizzaRepository constructor.
      *
-     * @param PizzaTableInterface      $pizzaTable
-     * @param RestaurantTableInterface $restaurantTable
+     * @param PizzaStorageInterface      $pizzaStorage
+     * @param RestaurantStorageInterface $restaurantStorage
      */
     public function __construct(
-        PizzaTableInterface $pizzaTable,
-        RestaurantTableInterface $restaurantTable
+        PizzaStorageInterface $pizzaStorage,
+        RestaurantStorageInterface $restaurantStorage
     ) {
-        $this->pizzaTable      = $pizzaTable;
-        $this->restaurantTable = $restaurantTable;
+        $this->pizzaStorage      = $pizzaStorage;
+        $this->restaurantStorage = $restaurantStorage;
     }
 
     /**
@@ -50,10 +50,10 @@ class PizzaRepository implements PizzaRepositoryInterface
      */
     public function getPizzasForVoting()
     {
-        $pizzas = $this->pizzaTable->fetchRandomPizzas(2);
+        $pizzas = $this->pizzaStorage->fetchRandomPizzas(2);
 
         foreach ($pizzas as $key => $pizza) {
-            $restaurants = $this->restaurantTable->fetchRestaurantsByPizza(
+            $restaurants = $this->restaurantStorage->fetchRestaurantsByPizza(
                 $pizza['id']
             );
 
@@ -75,13 +75,13 @@ class PizzaRepository implements PizzaRepositoryInterface
      */
     public function getSinglePizza($id)
     {
-        $pizza = $this->pizzaTable->fetchPizzaById($id);
+        $pizza = $this->pizzaStorage->fetchPizzaById($id);
 
         if (!$pizza) {
             return false;
         }
 
-        $pizza['restaurants'] = $this->restaurantTable->fetchRestaurantsByPizza(
+        $pizza['restaurants'] = $this->restaurantStorage->fetchRestaurantsByPizza(
             $id
         );
 
@@ -95,7 +95,7 @@ class PizzaRepository implements PizzaRepositoryInterface
      */
     public function getTopPizzas()
     {
-        return $this->pizzaTable->fetchPizzasSortedByRate(
+        return $this->pizzaStorage->fetchPizzasSortedByRate(
             3, 'DESC'
         );
     }
@@ -107,7 +107,7 @@ class PizzaRepository implements PizzaRepositoryInterface
      */
     public function getFlopPizzas()
     {
-        return $this->pizzaTable->fetchPizzasSortedByRate(3, 'ASC');
+        return $this->pizzaStorage->fetchPizzasSortedByRate(3, 'ASC');
     }
 
     /**
@@ -120,8 +120,8 @@ class PizzaRepository implements PizzaRepositoryInterface
      */
     public function saveVoting($pos, $neg)
     {
-        $this->pizzaTable->increasePos($pos);
-        $this->pizzaTable->increaseNeg($neg);
+        $this->pizzaStorage->increasePos($pos);
+        $this->pizzaStorage->increaseNeg($neg);
 
         return true;
     }
