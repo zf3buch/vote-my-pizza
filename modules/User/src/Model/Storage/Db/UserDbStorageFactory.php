@@ -15,16 +15,16 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
 /**
- * Class UserTableFactory
+ * Class UserDbStorageFactory
  *
  * @package User\Model\Storage\Db
  */
-class UserTableFactory
+class UserDbStorageFactory
 {
     /**
      * @param ContainerInterface $container
      *
-     * @return UserTable
+     * @return UserDbStorage
      */
     public function __invoke(ContainerInterface $container)
     {
@@ -36,6 +36,6 @@ class UserTableFactory
             'user', $adapter, null, $resultSet
         );
 
-        return new UserTable($tableGateway);
+        return new UserDbStorage($tableGateway);
     }
 }

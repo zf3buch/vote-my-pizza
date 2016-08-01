@@ -7,14 +7,14 @@
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-namespace User\Model\Storage\Db;
+namespace User\Model\Storage;
 
 /**
- * Interface UserTableInterface
+ * Interface UserStorageInterface
  *
- * @package User\Model\Storage\Db
+ * @package User\Model\Storage
  */
-interface UserTableInterface
+interface UserStorageInterface
 {
     /**
      * Fetch user by id
