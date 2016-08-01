@@ -10,8 +10,8 @@
 namespace Pizza\Model\Repository;
 
 use Interop\Container\ContainerInterface;
-use Pizza\Model\Table\PizzaTableInterface;
-use Pizza\Model\Table\RestaurantTableInterface;
+use Pizza\Model\Storage\PizzaStorageInterface;
+use Pizza\Model\Storage\RestaurantStorageInterface;
 
 /**
  * Class PizzaRepositoryFactory
@@ -27,12 +27,12 @@ class PizzaRepositoryFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $pizzaTable = $container->get(PizzaTableInterface::class);
+        $pizzaStorage = $container->get(PizzaStorageInterface::class);
 
-        $restaurantTable = $container->get(
-            RestaurantTableInterface::class
+        $restaurantStorage = $container->get(
+            RestaurantStorageInterface::class
         );
 
-        return new PizzaRepository($pizzaTable, $restaurantTable);
+        return new PizzaRepository($pizzaStorage, $restaurantStorage);
     }
 }
