@@ -13,23 +13,23 @@ use PHPUnit_Extensions_Database_DataSet_IDataSet;
 use PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection;
 use PHPUnit_Extensions_Database_DB_IDatabaseConnection;
 use PHPUnit_Extensions_Database_TestCase;
-use User\Model\Storage\Db\UserTable;
-use User\Model\Storage\Db\UserTableInterface;
+use User\Model\Storage\Db\UserDbStorage;
+use User\Model\Storage\UserStorageInterface;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
 /**
- * Class UserTableTest
+ * Class UserDbStorageTest
  *
  * @package UserTest\Model\Storage\Db
  */
-class UserTableTest extends PHPUnit_Extensions_Database_TestCase
+class UserDbStorageTest extends PHPUnit_Extensions_Database_TestCase
 {
     /**
-     * @var UserTableInterface
+     * @var UserStorageInterface
      */
-    private $userTable;
+    private $userStorage;
 
     /**
      * @var Adapter
@@ -46,9 +46,9 @@ class UserTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     protected function setUp()
     {
-        if (!$this->userTable) {
+        if (!$this->userStorage) {
             $dbConfig = include __DIR__
-                . '/../../../../../config/autoload/database.test.php';
+                . '/../../../../../../config/autoload/database.test.php';
 
             $this->adapter = new Adapter($dbConfig['db']);
 
@@ -58,7 +58,7 @@ class UserTableTest extends PHPUnit_Extensions_Database_TestCase
                 'user', $this->adapter, null, $resultSet
             );
 
-            $this->userTable = new UserTable($tableGateway);
+            $this->userStorage = new UserDbStorage($tableGateway);
         }
 
         parent::setUp();
@@ -103,7 +103,7 @@ class UserTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testFetchUserById($id)
     {
-        $userById = $this->userTable->fetchUserById($id);
+        $userById = $this->userStorage->fetchUserById($id);
 
         $queryTable = $this->getConnection()->createQueryTable(
             'fetchUserById',
@@ -135,7 +135,7 @@ class UserTableTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function testInsertUser($data)
     {
-        $result = $this->userTable->insertUser($data);
+        $result = $this->userStorage->insertUser($data);
 
         $queryTable = $this->getConnection()->createQueryTable(
             'fetchUserById',

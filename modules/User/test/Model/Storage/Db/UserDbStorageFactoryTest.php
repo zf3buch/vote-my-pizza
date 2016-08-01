@@ -11,18 +11,18 @@ namespace UserTest\Model\Storage\Db;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use User\Model\Storage\Db\UserTable;
-use User\Model\Storage\Db\UserTableFactory;
-use User\Model\Storage\Db\UserTableInterface;
+use User\Model\Storage\Db\UserDbStorage;
+use User\Model\Storage\Db\UserDbStorageFactory;
+use User\Model\Storage\UserStorageInterface;
 use Prophecy\Prophecy\MethodProphecy;
 use Zend\Db\Adapter\AdapterInterface;
 
 /**
- * Class UserTableFactoryTest
+ * Class UserDbStorageFactoryTest
  *
  * @package UserTest\Model\Storage\Db
  */
-class UserTableFactoryTest extends PHPUnit_Framework_TestCase
+class UserDbStorageFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Test input filter factory
@@ -32,7 +32,7 @@ class UserTableFactoryTest extends PHPUnit_Framework_TestCase
         /** @var ContainerInterface $container */
         $container = $this->prophesize(ContainerInterface::class);
 
-        /** @var UserTableInterface $userTable */
+        /** @var UserStorageInterface $userStorage */
         $dbAdapter = $this->prophesize(AdapterInterface::class);
 
         /** @var MethodProphecy $method */
@@ -40,15 +40,15 @@ class UserTableFactoryTest extends PHPUnit_Framework_TestCase
         $method->willReturn($dbAdapter);
         $method->shouldBeCalled();
 
-        $factory = new UserTableFactory();
+        $factory = new UserDbStorageFactory();
 
         $this->assertTrue(
-            $factory instanceof UserTableFactory
+            $factory instanceof UserDbStorageFactory
         );
 
-        /** @var UserTable $table */
+        /** @var UserDbStorage $table */
         $table = $factory($container->reveal());
 
-        $this->assertTrue($table instanceof UserTable);
+        $this->assertTrue($table instanceof UserDbStorage);
     }
 }
