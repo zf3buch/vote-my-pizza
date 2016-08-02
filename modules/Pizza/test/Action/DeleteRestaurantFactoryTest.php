@@ -38,8 +38,6 @@ class DeleteRestaurantFactoryTest extends AbstractTest
 
         $factory = new DeleteRestaurantFactory();
 
-        $this->assertTrue($factory instanceof DeleteRestaurantFactory);
-
         /** @var DeleteRestaurantAction $action */
         $action = $factory($this->container->reveal());
 

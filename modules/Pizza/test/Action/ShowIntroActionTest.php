@@ -30,15 +30,11 @@ class ShowIntroActionTest extends AbstractTest
      */
     protected function preparePizzaRepostory($topPizzas, $flopPizzas)
     {
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaRepository->getTopPizzas();
-        $method->willReturn($topPizzas);
-        $method->shouldBeCalled();
+        $this->pizzaRepository->getTopPizzas()->willReturn($topPizzas)
+            ->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaRepository->getFlopPizzas();
-        $method->willReturn($flopPizzas);
-        $method->shouldBeCalled();
+        $this->pizzaRepository->getFlopPizzas()->willReturn($flopPizzas)
+            ->shouldBeCalled();
     }
 
     /**

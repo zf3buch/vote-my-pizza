@@ -41,8 +41,6 @@ class HandleRestaurantFactoryTest extends AbstractTest
 
         $factory = new HandleRestaurantFactory();
 
-        $this->assertTrue($factory instanceof HandleRestaurantFactory);
-
         /** @var HandleRestaurantAction $action */
         $action = $factory($this->container->reveal());
 

@@ -30,9 +30,7 @@ class HandleVotingActionTest extends AbstractTest
      */
     protected function preparePizzaRepository($pos, $neg)
     {
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaRepository->saveVoting($pos, $neg);
-        $method->shouldBeCalled();
+        $this->pizzaRepository->saveVoting($pos, $neg)->shouldBeCalled();
     }
 
     /**

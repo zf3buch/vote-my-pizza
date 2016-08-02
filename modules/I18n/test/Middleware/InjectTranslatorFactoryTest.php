@@ -13,8 +13,6 @@ use I18n\Middleware\InjectTranslatorFactory;
 use I18n\Middleware\InjectTranslatorMiddleware;
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
-use Zend\Diactoros\Response;
 use Zend\I18n\Translator\Translator;
 use Zend\View\HelperPluginManager;
 
@@ -59,15 +57,11 @@ class InjectTranslatorFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testTranslatorInjection()
     {
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(Translator::class);
-        $method->willReturn($this->translator);
-        $method->shouldBeCalled();
+        $this->container->get(Translator::class)
+            ->willReturn($this->translator)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(HelperPluginManager::class);
-        $method->willReturn($this->helperPluginManager);
-        $method->shouldBeCalled();
+        $this->container->get(HelperPluginManager::class)
+            ->willReturn($this->helperPluginManager)->shouldBeCalled();
 
         $factory = new InjectTranslatorFactory();
 
