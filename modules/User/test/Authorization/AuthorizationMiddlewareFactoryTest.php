@@ -11,12 +11,10 @@ namespace UserTest\Action;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
 use User\Authorization\AuthorizationMiddleware;
 use User\Authorization\AuthorizationMiddlewareFactory;
 use User\Permissions\Rbac;
 use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Diactoros\Response;
 
 /**
  * Class AuthorizationMiddlewareFactoryTest
@@ -53,17 +51,11 @@ class AuthorizationMiddlewareFactoryTest extends PHPUnit_Framework_TestCase
 
         $this->container = $this->prophesize(ContainerInterface::class);
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(
-            AuthenticationServiceInterface::class
-        );
-        $method->willReturn($this->authService);
-        $method->shouldBeCalled();
+        $this->container->get(AuthenticationServiceInterface::class)
+            ->willReturn($this->authService)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(Rbac::class);
-        $method->willReturn($this->rbac);
-        $method->shouldBeCalled();
+        $this->container->get(Rbac::class)->willReturn($this->rbac)
+            ->shouldBeCalled();
     }
 
     /**
@@ -75,15 +67,11 @@ class AuthorizationMiddlewareFactoryTest extends PHPUnit_Framework_TestCase
 
         $identity = (object)['role' => $role];
 
-        /** @var MethodProphecy $method */
-        $method = $this->authService->hasIdentity();
-        $method->willReturn(true);
-        $method->shouldBeCalled();
+        $this->authService->hasIdentity()->willReturn(true)
+            ->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->authService->getIdentity();
-        $method->willReturn($identity);
-        $method->shouldBeCalled();
+        $this->authService->getIdentity()->willReturn($identity)
+            ->shouldBeCalled();
 
         $factory = new AuthorizationMiddlewareFactory();
 
@@ -109,10 +97,8 @@ class AuthorizationMiddlewareFactoryTest extends PHPUnit_Framework_TestCase
     {
         $role = 'guest';
 
-        /** @var MethodProphecy $method */
-        $method = $this->authService->hasIdentity();
-        $method->willReturn(false);
-        $method->shouldBeCalled();
+        $this->authService->hasIdentity()->willReturn(false)
+            ->shouldBeCalled();
 
         $factory = new AuthorizationMiddlewareFactory();
 

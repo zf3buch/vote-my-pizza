@@ -13,8 +13,6 @@ use I18n\Middleware\LocalizationFactory;
 use I18n\Middleware\LocalizationMiddleware;
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
-use Zend\Diactoros\Response;
 use Zend\I18n\Translator\Translator;
 
 /**
@@ -49,10 +47,8 @@ class LocalizationFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testTranslatorInjection()
     {
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(Translator::class);
-        $method->willReturn($this->translator);
-        $method->shouldBeCalled();
+        $this->container->get(Translator::class)
+            ->willReturn($this->translator)->shouldBeCalled();
 
         $factory = new LocalizationFactory();
 

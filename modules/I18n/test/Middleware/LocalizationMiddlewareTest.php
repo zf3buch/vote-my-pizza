@@ -12,7 +12,6 @@ namespace I18nTest\Action;
 use I18n\Middleware\LocalizationMiddleware;
 use Locale;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\ServerRequest;
@@ -42,10 +41,7 @@ class LocalizationMiddlewareTest extends PHPUnit_Framework_TestCase
 
         /** @var Translator $translator */
         $translator = $this->prophesize(Translator::class);
-
-        /** @var MethodProphecy $method */
-        $method = $translator->setLocale($expectedLocale);
-        $method->shouldBeCalled();
+        $translator->setLocale($expectedLocale)->shouldBeCalled();
 
         $middleware = new LocalizationMiddleware(
             $translator->reveal()
@@ -80,10 +76,6 @@ class LocalizationMiddlewareTest extends PHPUnit_Framework_TestCase
 
         /** @var Translator $translator */
         $translator = $this->prophesize(Translator::class);
-
-        /** @var MethodProphecy $method */
-        $method = $translator->setLocale($expectedLocale);
-        $method->shouldBeCalled();
 
         $middleware = new LocalizationMiddleware(
             $translator->reveal()
@@ -124,10 +116,7 @@ class LocalizationMiddlewareTest extends PHPUnit_Framework_TestCase
 
         /** @var Translator $translator */
         $translator = $this->prophesize(Translator::class);
-
-        /** @var MethodProphecy $method */
-        $method = $translator->setLocale($expectedLocale);
-        $method->shouldBeCalled();
+        $translator->setLocale($expectedLocale)->shouldBeCalled();
 
         $middleware = new LocalizationMiddleware(
             $translator->reveal()
@@ -174,10 +163,7 @@ class LocalizationMiddlewareTest extends PHPUnit_Framework_TestCase
 
         /** @var Translator $translator */
         $translator = $this->prophesize(Translator::class);
-
-        /** @var MethodProphecy $method */
-        $method = $translator->setLocale($expectedLocale);
-        $method->shouldBeCalled();
+        $translator->setLocale($expectedLocale)->shouldBeCalled();
 
         $middleware = new LocalizationMiddleware(
             $translator->reveal()
