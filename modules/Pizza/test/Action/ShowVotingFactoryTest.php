@@ -38,8 +38,6 @@ class ShowVotingFactoryTest extends AbstractTest
 
         $factory = new ShowVotingFactory();
 
-        $this->assertTrue($factory instanceof ShowVotingFactory);
-
         /** @var ShowVotingAction $action */
         $action = $factory($this->container->reveal());
 

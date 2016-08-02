@@ -40,8 +40,6 @@ class HandleVotingFactoryTest extends AbstractTest
 
         $factory = new HandleVotingFactory();
 
-        $this->assertTrue($factory instanceof HandleVotingFactory);
-
         /** @var HandleVotingAction $action */
         $action = $factory($this->container->reveal());
 
