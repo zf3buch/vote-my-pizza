@@ -12,7 +12,6 @@ namespace ApplicationTest\View\Model;
 use Application\View\Model\LayoutFactory;
 use Application\View\Model\LayoutModel;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\Model\ViewModel;
 
@@ -46,10 +45,8 @@ class LayoutFactoryTest extends PHPUnit_Framework_TestCase
 
         $config = [];
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get('config');
-        $method->willReturn($config);
-        $method->shouldBeCalled();
+        $this->container->get('config')->willReturn($config)
+            ->shouldBeCalled();
 
         $factory = new LayoutFactory();
 
@@ -79,10 +76,8 @@ class LayoutFactoryTest extends PHPUnit_Framework_TestCase
             ],
         ];
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get('config');
-        $method->willReturn($config);
-        $method->shouldBeCalled();
+        $this->container->get('config')->willReturn($config)
+            ->shouldBeCalled();
 
         $factory = new LayoutFactory();
 

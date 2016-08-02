@@ -12,7 +12,6 @@ namespace ApplicationTest\View\Renderer;
 use Application\View\Model\LayoutModel;
 use Application\View\Renderer\ViewRendererFactory;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
 use Zend\Expressive\ZendView\ZendViewRenderer;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager;
@@ -51,25 +50,17 @@ class ViewRendererFactoryTest extends PHPUnit_Framework_TestCase
     {
         $config = [];
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->has('config');
-        $method->willReturn(true);
-        $method->shouldBeCalled();
+        $this->container->has('config')->willReturn(true)
+            ->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get('config');
-        $method->willReturn($config);
-        $method->shouldBeCalled();
+        $this->container->get('config')->willReturn($config)
+            ->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(LayoutModel::class);
-        $method->willReturn($this->layoutModel);
-        $method->shouldBeCalled();
+        $this->container->get(LayoutModel::class)
+            ->willReturn($this->layoutModel)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->has(HelperPluginManager::class);
-        $method->willReturn(false);
-        $method->shouldBeCalled();
+        $this->container->has(HelperPluginManager::class)
+            ->willReturn(false)->shouldBeCalled();
 
         $factory = new ViewRendererFactory();
 
@@ -96,41 +87,28 @@ class ViewRendererFactoryTest extends PHPUnit_Framework_TestCase
 
         $extendedConfig = [
             'templates' => [
-                'layout'    => $this->layoutModel->reveal(),
+                'layout' => $this->layoutModel->reveal(),
             ],
         ];
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->has('config');
-        $method->willReturn(true);
-        $method->shouldBeCalled();
+        $this->container->has('config')->willReturn(true)
+            ->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get('config');
-        $method->willReturn($config);
-        $method->shouldBeCalled();
+        $this->container->get('config')->willReturn($config)
+            ->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(LayoutModel::class);
-        $method->willReturn($this->layoutModel);
-        $method->shouldBeCalled();
+        $this->container->get(LayoutModel::class)
+            ->willReturn($this->layoutModel)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->setAllowOverride(true);
-        $method->shouldBeCalled();
+        $this->container->setAllowOverride(true)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->setService('config', $extendedConfig);
-        $method->shouldBeCalled();
+        $this->container->setService('config', $extendedConfig)
+            ->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->setAllowOverride(false);
-        $method->shouldBeCalled();
+        $this->container->setAllowOverride(false)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->has(HelperPluginManager::class);
-        $method->willReturn(false);
-        $method->shouldBeCalled();
+        $this->container->has(HelperPluginManager::class)
+            ->willReturn(false)->shouldBeCalled();
 
         $factory = new ViewRendererFactory();
 

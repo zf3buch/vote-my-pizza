@@ -12,7 +12,6 @@ namespace ApplicationTest\View;
 use Application\View\HelperPluginManagerFactory;
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
 use Zend\View\HelperPluginManager;
 
 /**
@@ -39,15 +38,11 @@ class HelperPluginManagerFactoryTest extends PHPUnit_Framework_TestCase
     {
         $this->container = $this->prophesize(ContainerInterface::class);
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->has('config');
-        $method->willReturn(true);
-        $method->shouldBeCalled();
+        $this->container->has('config')->willReturn(true)
+            ->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->container->get('config');
-        $method->willReturn($this->config);
-        $method->shouldBeCalled();
+        $this->container->get('config')->willReturn($this->config)
+            ->shouldBeCalled();
     }
 
     /**
@@ -64,7 +59,9 @@ class HelperPluginManagerFactoryTest extends PHPUnit_Framework_TestCase
         /** @var HelperPluginManager $helperPluginManager */
         $helperPluginManager = $factory($this->container->reveal());
 
-        $this->assertTrue($helperPluginManager instanceof HelperPluginManager);
+        $this->assertTrue(
+            $helperPluginManager instanceof HelperPluginManager
+        );
 
         $this->assertTrue($helperPluginManager->has('ServerUrl'));
         $this->assertTrue($helperPluginManager->has('FormCaptchaImage'));

@@ -41,11 +41,8 @@ class AuthenticationServiceFactoryTest extends PHPUnit_Framework_TestCase
         $this->adapter = $this->prophesize(AdapterInterface::class);
 
         $this->container = $this->prophesize(ContainerInterface::class);
-
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(AdapterInterface::class);
-        $method->willReturn($this->adapter);
-        $method->shouldBeCalled();
+        $this->container->get(AdapterInterface::class)
+            ->willReturn($this->adapter)->shouldBeCalled();
     }
 
     /**

@@ -45,11 +45,8 @@ class AdapterFactoryTest extends PHPUnit_Framework_TestCase
         $this->dbAdapter = new Adapter($dbConfig['db']);
 
         $this->container = $this->prophesize(ContainerInterface::class);
-
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(AdapterInterface::class);
-        $method->willReturn($this->dbAdapter);
-        $method->shouldBeCalled();
+        $this->container->get(AdapterInterface::class)
+            ->willReturn($this->dbAdapter)->shouldBeCalled();
     }
 
     /**

@@ -13,7 +13,6 @@ use I18n\View\Helper\UrlHelper;
 use I18n\View\Helper\UrlHelperFactory;
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
 use Zend\Expressive\Router\RouterInterface;
 
 /**
@@ -41,16 +40,10 @@ class UrlHelperFactoryTest extends PHPUnit_Framework_TestCase
         $this->router = $this->prophesize(RouterInterface::class);
 
         $this->container = $this->prophesize(ContainerInterface::class);
-
-        /** @var MethodProphecy $method */
-        $method = $this->container->has(RouterInterface::class);
-        $method->willReturn(true);
-        $method->shouldBeCalled();
-
-        /** @var MethodProphecy $method */
-        $method = $this->container->get(RouterInterface::class);
-        $method->willReturn($this->router);
-        $method->shouldBeCalled();
+        $this->container->has(RouterInterface::class)->willReturn(true)
+            ->shouldBeCalled();
+        $this->container->get(RouterInterface::class)
+            ->willReturn($this->router)->shouldBeCalled();
     }
 
     /**
