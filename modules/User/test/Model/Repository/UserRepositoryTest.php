@@ -31,13 +31,12 @@ function password_hash($password, $algo)
  */
 function date($format)
 {
-    return \date($format, mktime(15,39,33,4,13,2016));
+    return \date($format, mktime(15, 39, 33, 4, 13, 2016));
 }
 
 namespace UserTest\Model\Repository;
 
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
 use User\Model\Repository\UserRepository;
 use User\Model\Repository\UserRepositoryInterface;
 use User\Model\Storage\UserStorageInterface;
@@ -112,10 +111,8 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
 
         $expectedData = $userData;
 
-        /** @var MethodProphecy $method */
-        $method = $this->userStorage->fetchUserById($userData['id']);
-        $method->willReturn($userData);
-        $method->shouldBeCalled();
+        $this->userStorage->fetchUserById($userData['id'])
+            ->willReturn($userData)->shouldBeCalled();
 
         $this->assertEquals(
             $expectedData,
@@ -137,17 +134,17 @@ class UserRepositoryTest extends PHPUnit_Framework_TestCase
         ];
 
         $insertData = [
-            'date'       => date('Y-m-d H:i:s', mktime(15,39,33,4,13,2016)),
+            'date'       => date(
+                'Y-m-d H:i:s', mktime(15, 39, 33, 4, 13, 2016)
+            ),
             'email'      => $data['email'],
             'password'   => $data['password'],
             'first_name' => $data['first_name'],
             'last_name'  => $data['last_name'],
         ];
 
-        /** @var MethodProphecy $method */
-        $method = $this->userStorage->insertUser($insertData);
-        $method->willReturn(true);
-        $method->shouldBeCalled();
+        $this->userStorage->insertUser($insertData)->willReturn(true)
+            ->shouldBeCalled();
 
         $this->assertTrue(
             $this->userRepository->registerUser($data)

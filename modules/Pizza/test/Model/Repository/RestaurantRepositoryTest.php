@@ -18,7 +18,7 @@ namespace Pizza\Model\Repository;
  */
 function date($format)
 {
-    return \date($format, mktime(15,39,33,4,13,2016));
+    return \date($format, mktime(15, 39, 33, 4, 13, 2016));
 }
 
 namespace PizzaTest\Model\Repository;
@@ -27,7 +27,6 @@ use PHPUnit_Framework_TestCase;
 use Pizza\Model\Repository\RestaurantRepository;
 use Pizza\Model\Repository\RestaurantRepositoryInterface;
 use Pizza\Model\Storage\RestaurantStorageInterface;
-use Prophecy\Prophecy\MethodProphecy;
 
 /**
  * Class RestaurantRepositoryTest
@@ -73,15 +72,15 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
 
         $insertData = [
             'pizza' => $id,
-            'date'  => date('Y-m-d H:i:s', mktime(15,39,33,4,13,2016)),
+            'date'  => date(
+                'Y-m-d H:i:s', mktime(15, 39, 33, 4, 13, 2016)
+            ),
             'name'  => $data['name'],
             'price' => $data['price'],
         ];
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantStorage->saveRestaurant($insertData);
-        $method->willReturn(true);
-        $method->shouldBeCalled();
+        $this->restaurantStorage->saveRestaurant($insertData)
+            ->willReturn(true)->shouldBeCalled();
 
         $this->assertTrue(
             $this->restaurantRepository->saveRestaurant($id, $data)
@@ -98,15 +97,15 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
 
         $insertData = [
             'pizza' => $id,
-            'date'  => date('Y-m-d H:i:s', mktime(15,39,33,4,13,2016)),
+            'date'  => date(
+                'Y-m-d H:i:s', mktime(15, 39, 33, 4, 13, 2016)
+            ),
             'name'  => 'unbekannt',
             'price' => 0.00,
         ];
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantStorage->saveRestaurant($insertData);
-        $method->willReturn(true);
-        $method->shouldBeCalled();
+        $this->restaurantStorage->saveRestaurant($insertData)
+            ->willReturn(true)->shouldBeCalled();
 
         $this->assertTrue(
             $this->restaurantRepository->saveRestaurant($id, $data)
@@ -123,15 +122,15 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
 
         $insertData = [
             'pizza' => $id,
-            'date'  => date('Y-m-d H:i:s', mktime(15,39,33,4,13,2016)),
+            'date'  => date(
+                'Y-m-d H:i:s', mktime(15, 39, 33, 4, 13, 2016)
+            ),
             'name'  => 'unbekannt',
             'price' => 0.00,
         ];
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantStorage->saveRestaurant($insertData);
-        $method->willReturn(false);
-        $method->shouldBeCalled();
+        $this->restaurantStorage->saveRestaurant($insertData)
+            ->willReturn(false)->shouldBeCalled();
 
         $this->assertFalse(
             $this->restaurantRepository->saveRestaurant($id, $data)
@@ -145,10 +144,8 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $id = '1';
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantStorage->deleteRestaurant($id);
-        $method->willReturn(true);
-        $method->shouldBeCalled();
+        $this->restaurantStorage->deleteRestaurant($id)
+            ->willReturn(true)->shouldBeCalled();
 
         $this->assertTrue(
             $this->restaurantRepository->deleteRestaurant($id)
@@ -162,10 +159,8 @@ class RestaurantRepositoryTest extends PHPUnit_Framework_TestCase
     {
         $id = '1';
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantStorage->deleteRestaurant($id);
-        $method->willReturn(false);
-        $method->shouldBeCalled();
+        $this->restaurantStorage->deleteRestaurant($id)->willReturn(false)
+            ->shouldBeCalled();
 
         $this->assertFalse(
             $this->restaurantRepository->deleteRestaurant($id)

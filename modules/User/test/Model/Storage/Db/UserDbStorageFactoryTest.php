@@ -14,7 +14,6 @@ use PHPUnit_Framework_TestCase;
 use User\Model\Storage\Db\UserDbStorage;
 use User\Model\Storage\Db\UserDbStorageFactory;
 use User\Model\Storage\UserStorageInterface;
-use Prophecy\Prophecy\MethodProphecy;
 use Zend\Db\Adapter\AdapterInterface;
 
 /**
@@ -29,16 +28,13 @@ class UserDbStorageFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactory()
     {
-        /** @var ContainerInterface $container */
-        $container = $this->prophesize(ContainerInterface::class);
-
         /** @var UserStorageInterface $userStorage */
         $dbAdapter = $this->prophesize(AdapterInterface::class);
 
-        /** @var MethodProphecy $method */
-        $method = $container->get(AdapterInterface::class);
-        $method->willReturn($dbAdapter);
-        $method->shouldBeCalled();
+        /** @var ContainerInterface $container */
+        $container = $this->prophesize(ContainerInterface::class);
+        $container->get(AdapterInterface::class)->willReturn($dbAdapter)
+            ->shouldBeCalled();
 
         $factory = new UserDbStorageFactory();
 

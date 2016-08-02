@@ -14,7 +14,6 @@ use PHPUnit_Framework_TestCase;
 use Pizza\Form\RestaurantPriceFactory;
 use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\InputFilter\RestaurantInputFilter;
-use Prophecy\Prophecy\MethodProphecy;
 
 /**
  * Class RestaurantPriceFactoryTest
@@ -28,15 +27,12 @@ class RestaurantPriceFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactory()
     {
-        $container = $this->prophesize(ContainerInterface::class);
-
         /** @var RestaurantInputFilter $inputFilter */
         $inputFilter = $this->prophesize(RestaurantInputFilter::class);
 
-        /** @var MethodProphecy $method */
-        $method = $container->get(RestaurantInputFilter::class);
-        $method->willReturn($inputFilter);
-        $method->shouldBeCalled();
+        $container = $this->prophesize(ContainerInterface::class);
+        $container->get(RestaurantInputFilter::class)
+            ->willReturn($inputFilter)->shouldBeCalled();
 
         $expectedElementKeys = ['name', 'price', 'save_price'];
 
