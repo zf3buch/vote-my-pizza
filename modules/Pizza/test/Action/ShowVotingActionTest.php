@@ -30,10 +30,8 @@ class ShowVotingActionTest extends AbstractTest
      */
     protected function preparePizzaRepository($votingPizzas)
     {
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaRepository->getPizzasForVoting();
-        $method->willReturn($votingPizzas);
-        $method->shouldBeCalled();
+        $this->pizzaRepository->getPizzasForVoting()
+            ->willReturn($votingPizzas)->shouldBeCalled();
     }
 
     /**

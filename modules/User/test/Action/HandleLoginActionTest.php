@@ -63,14 +63,9 @@ class HandleLoginActionTest extends AbstractTest
      */
     protected function prepareLoginForm($postData, $isValid = true)
     {
-        /** @var MethodProphecy $method */
-        $method = $this->loginForm->setData($postData);
-        $method->shouldBeCalled();
-
-        /** @var MethodProphecy $method */
-        $method = $this->loginForm->isValid();
-        $method->willReturn($isValid);
-        $method->shouldBeCalled();
+        $this->loginForm->setData($postData)->shouldBeCalled();
+        $this->loginForm->isValid()->willReturn($isValid)
+            ->shouldBeCalled();
     }
 
     /**
@@ -85,14 +80,12 @@ class HandleLoginActionTest extends AbstractTest
         $calledStorage = true,
         $exception = null
     ) {
-        /** @var MethodProphecy $method */
-        $method = $this->authService->getAdapter();
-        $method->willReturn($this->authAdapter);
-
         if ($called) {
-            $method->shouldBeCalled();
+            $this->authService->getAdapter()
+                ->willReturn($this->authAdapter)->shouldBeCalled();
         } else {
-            $method->shouldNotBeCalled();
+            $this->authService->getAdapter()
+                ->willReturn($this->authAdapter)->shouldNotBeCalled();
         }
 
         /** @var MethodProphecy $method */
@@ -110,14 +103,12 @@ class HandleLoginActionTest extends AbstractTest
             $method->shouldNotBeCalled();
         }
 
-        /** @var MethodProphecy $method */
-        $method = $this->authService->getStorage();
-        $method->willReturn($this->authStorage);
-
         if ($calledStorage) {
-            $method->shouldBeCalled();
+            $this->authService->getStorage()
+                ->willReturn($this->authStorage)->shouldBeCalled();
         } else {
-            $method->shouldNotBeCalled();
+            $this->authService->getStorage()
+                ->willReturn($this->authStorage)->shouldNotBeCalled();
         }
     }
 
@@ -133,36 +124,28 @@ class HandleLoginActionTest extends AbstractTest
         $called = true,
         $calledResult = true
     ) {
-        /** @var MethodProphecy $method */
-        $method = $this->authAdapter->setIdentity($postData['email']);
-        $method->willReturn($this->authAdapter);
-
         if ($called) {
-            $method->shouldBeCalled();
+            $this->authAdapter->setIdentity($postData['email'])
+                ->willReturn($this->authAdapter)->shouldBeCalled();
         } else {
-            $method->shouldNotBeCalled();
+            $this->authAdapter->setIdentity($postData['email'])
+                ->willReturn($this->authAdapter)->shouldNotBeCalled();
         }
 
-        /** @var MethodProphecy $method */
-        $method = $this->authAdapter->setCredential($postData['password']);
-        $method->willReturn($this->authAdapter);
-
         if ($called) {
-            $method->shouldBeCalled();
+            $this->authAdapter->setCredential($postData['password'])
+                ->willReturn($this->authAdapter)->shouldBeCalled();
         } else {
-            $method->shouldNotBeCalled();
+            $this->authAdapter->setCredential($postData['password'])
+                ->willReturn($this->authAdapter)->shouldNotBeCalled();
         }
-
-        /** @var MethodProphecy $method */
-        $method = $this->authAdapter->getResultRowObject(
-            null, ['password']
-        );
-        $method->willReturn(new stdClass());
 
         if ($calledResult) {
-            $method->shouldBeCalled();
+            $this->authAdapter->getResultRowObject(null, ['password'])
+                ->willReturn(new stdClass())->shouldBeCalled();
         } else {
-            $method->shouldNotBeCalled();
+            $this->authAdapter->getResultRowObject(null, ['password'])
+                ->willReturn(new stdClass())->shouldNotBeCalled();
         }
     }
 
@@ -178,25 +161,19 @@ class HandleLoginActionTest extends AbstractTest
         $called = true,
         $code = null
     ) {
-        /** @var MethodProphecy $method */
-        $method = $this->authResult->isValid();
-        $method->willReturn($isValid);
-
         if ($called) {
-            $method->shouldBeCalled();
+            $this->authResult->isValid()->willReturn($isValid)
+                ->shouldBeCalled();
         } else {
-            $method->shouldNotBeCalled();
+            $this->authResult->isValid()->willReturn($isValid)
+                ->shouldNotBeCalled();
         }
 
         if ($isValid === false) {
-            /** @var MethodProphecy $method */
-            $method = $this->authResult->getCode();
-            $method->willReturn($code);
-            $method->shouldBeCalled();
+            $this->authResult->getCode()->willReturn($code)
+                ->shouldBeCalled();
         } else {
-            /** @var MethodProphecy $method */
-            $method = $this->authResult->getCode();
-            $method->shouldNotBeCalled();
+            $this->authResult->getCode()->shouldNotBeCalled();
         }
     }
 
