@@ -34,24 +34,17 @@ class HandleRestaurantActionTest extends AbstractTest
         $getData,
         $isValidReturn = true
     ) {
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->setData($setData);
-        $method->shouldBeCalled();
-
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->getData();
+        $this->restaurantPriceForm->setData($setData)->shouldBeCalled();
 
         if ($getData) {
-            $method->willReturn($getData);
-            $method->shouldBeCalled();
+            $this->restaurantPriceForm->getData()->willReturn($getData)
+                ->shouldBeCalled();
         } else {
-            $method->shouldNotBeCalled();
+            $this->restaurantPriceForm->getData()->shouldNotBeCalled();
         }
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->isValid();
-        $method->willReturn($isValidReturn);
-        $method->shouldBeCalled();
+        $this->restaurantPriceForm->isValid()
+            ->willReturn($isValidReturn)->shouldBeCalled();
     }
 
     /**
@@ -157,14 +150,9 @@ class HandleRestaurantActionTest extends AbstractTest
         $this->prepareRestaurantPriceForm($postData, false, false);
         $this->prepareRestaurantRepository($id, $postData, false);
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->getData();
-        $method->shouldNotBeCalled();
-
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantPriceForm->isValid();
-        $method->willReturn(false);
-        $method->shouldBeCalled();
+        $this->restaurantPriceForm->getData()->shouldNotBeCalled();
+        $this->restaurantPriceForm->isValid()->willReturn(false)
+            ->shouldBeCalled();
 
         $action = new HandleRestaurantAction();
         $action->setRouter($this->router->reveal());

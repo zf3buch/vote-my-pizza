@@ -35,24 +35,17 @@ class HandleRegisterActionTest extends AbstractTest
         $isValidReturn = true
     )
     {
-        /** @var MethodProphecy $method */
-        $method = $this->registerForm->setData($setData);
-        $method->shouldBeCalled();
-
-        /** @var MethodProphecy $method */
-        $method = $this->registerForm->getData();
+        $this->registerForm->setData($setData)->shouldBeCalled();
 
         if ($getData) {
-            $method->willReturn($getData);
-            $method->shouldBeCalled();
+            $this->registerForm->getData()->willReturn($getData)
+                ->shouldBeCalled();
         } else {
-            $method->shouldNotBeCalled();
+            $this->registerForm->getData()->shouldNotBeCalled();
         }
 
-        /** @var MethodProphecy $method */
-        $method = $this->registerForm->isValid();
-        $method->willReturn($isValidReturn);
-        $method->shouldBeCalled();
+        $this->registerForm->isValid()->willReturn($isValidReturn)
+            ->shouldBeCalled();
     }
 
     /**

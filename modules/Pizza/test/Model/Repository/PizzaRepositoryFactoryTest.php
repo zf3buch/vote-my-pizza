@@ -15,7 +15,6 @@ use Pizza\Model\Repository\PizzaRepository;
 use Pizza\Model\Repository\PizzaRepositoryFactory;
 use Pizza\Model\Storage\PizzaStorageInterface;
 use Pizza\Model\Storage\RestaurantStorageInterface;
-use Prophecy\Prophecy\MethodProphecy;
 
 /**
  * Class PizzaRepositoryFactoryTest
@@ -29,9 +28,6 @@ class PizzaRepositoryFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testFactory()
     {
-        /** @var ContainerInterface $container */
-        $container = $this->prophesize(ContainerInterface::class);
-
         /** @var PizzaStorageInterface $pizzaStorage */
         $pizzaStorage = $this->prophesize(PizzaStorageInterface::class);
 
@@ -40,15 +36,12 @@ class PizzaRepositoryFactoryTest extends PHPUnit_Framework_TestCase
             RestaurantStorageInterface::class
         );
 
-        /** @var MethodProphecy $method */
-        $method = $container->get(PizzaStorageInterface::class);
-        $method->willReturn($pizzaStorage);
-        $method->shouldBeCalled();
-
-        /** @var MethodProphecy $method */
-        $method = $container->get(RestaurantStorageInterface::class);
-        $method->willReturn($restaurantStorage);
-        $method->shouldBeCalled();
+        /** @var ContainerInterface $container */
+        $container = $this->prophesize(ContainerInterface::class);
+        $container->get(PizzaStorageInterface::class)
+            ->willReturn($pizzaStorage)->shouldBeCalled();
+        $container->get(RestaurantStorageInterface::class)
+            ->willReturn($restaurantStorage)->shouldBeCalled();
 
         $factory = new PizzaRepositoryFactory();
 

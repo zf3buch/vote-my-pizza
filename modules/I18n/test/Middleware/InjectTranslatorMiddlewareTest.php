@@ -11,7 +11,6 @@ namespace I18nTest\Action;
 
 use I18n\Middleware\InjectTranslatorMiddleware;
 use PHPUnit_Framework_TestCase;
-use Prophecy\Prophecy\MethodProphecy;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\ServerRequest;
@@ -86,16 +85,13 @@ class InjectTranslatorMiddlewareTest extends PHPUnit_Framework_TestCase
     /**
      * @param $translator
      *
-     * @return array
+     * @return Translate
      */
     protected function prepareTranslatorHelper($translator)
     {
         /** @var Translate $translatorHelper */
         $translatorHelper = $this->prophesize(Translate::class);
-
-        /** @var MethodProphecy $method */
-        $method = $translatorHelper->setTranslator($translator);
-        $method->shouldBeCalled();
+        $translatorHelper->setTranslator($translator)->shouldBeCalled();
 
         return $translatorHelper;
     }
@@ -103,16 +99,13 @@ class InjectTranslatorMiddlewareTest extends PHPUnit_Framework_TestCase
     /**
      * @param $translator
      *
-     * @return array
+     * @return FormSubmit
      */
     protected function prepareFormSubmitHelper($translator)
     {
         /** @var FormSubmit $formSubmitHelper */
         $formSubmitHelper = $this->prophesize(FormSubmit::class);
-
-        /** @var MethodProphecy $method */
-        $method = $formSubmitHelper->setTranslator($translator);
-        $method->shouldBeCalled();
+        $formSubmitHelper->setTranslator($translator)->shouldBeCalled();
 
         return $formSubmitHelper;
     }
@@ -120,16 +113,13 @@ class InjectTranslatorMiddlewareTest extends PHPUnit_Framework_TestCase
     /**
      * @param $translator
      *
-     * @return array
+     * @return FormLabel
      */
     protected function prepareFormLabelHelper($translator)
     {
         /** @var FormLabel $formLabelHelper */
         $formLabelHelper = $this->prophesize(FormLabel::class);
-
-        /** @var MethodProphecy $method */
-        $method = $formLabelHelper->setTranslator($translator);
-        $method->shouldBeCalled();
+        $formLabelHelper->setTranslator($translator)->shouldBeCalled();
 
         return $formLabelHelper;
     }
@@ -137,7 +127,7 @@ class InjectTranslatorMiddlewareTest extends PHPUnit_Framework_TestCase
     /**
      * @param $translator
      *
-     * @return array
+     * @return FormElementErrors
      */
     protected function prepareFormElementErrors($translator)
     {
@@ -145,10 +135,8 @@ class InjectTranslatorMiddlewareTest extends PHPUnit_Framework_TestCase
         $formElementErrorsHelper = $this->prophesize(
             FormElementErrors::class
         );
-
-        /** @var MethodProphecy $method */
-        $method = $formElementErrorsHelper->setTranslator($translator);
-        $method->shouldBeCalled();
+        $formElementErrorsHelper->setTranslator($translator)
+            ->shouldBeCalled();
 
         return $formElementErrorsHelper;
     }
@@ -172,25 +160,17 @@ class InjectTranslatorMiddlewareTest extends PHPUnit_Framework_TestCase
             HelperPluginManager::class
         );
 
-        /** @var MethodProphecy $method */
-        $method = $helperPluginManager->get('translate');
-        $method->willReturn($translatorHelper);
-        $method->shouldBeCalled();
+        $helperPluginManager->get('translate')
+            ->willReturn($translatorHelper)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $helperPluginManager->get('formSubmit');
-        $method->willReturn($formSubmitHelper);
-        $method->shouldBeCalled();
+        $helperPluginManager->get('formSubmit')
+            ->willReturn($formSubmitHelper)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $helperPluginManager->get('formLabel');
-        $method->willReturn($formLabelHelper);
-        $method->shouldBeCalled();
+        $helperPluginManager->get('formLabel')
+            ->willReturn($formLabelHelper)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $helperPluginManager->get('formElementErrors');
-        $method->willReturn($formElementErrorsHelper);
-        $method->shouldBeCalled();
+        $helperPluginManager->get('formElementErrors')
+            ->willReturn($formElementErrorsHelper)->shouldBeCalled();
 
         return $helperPluginManager;
     }

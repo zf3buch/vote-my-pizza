@@ -14,7 +14,6 @@ use Pizza\Model\Repository\PizzaRepository;
 use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Pizza\Model\Storage\PizzaStorageInterface;
 use Pizza\Model\Storage\RestaurantStorageInterface;
-use Prophecy\Prophecy\MethodProphecy;
 
 /**
  * Class PizzaRepositoryTest
@@ -113,7 +112,8 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         );
 
         $this->pizzaRepository = new PizzaRepository(
-            $this->pizzaStorage->reveal(), $this->restaurantStorage->reveal()
+            $this->pizzaStorage->reveal(),
+            $this->restaurantStorage->reveal()
         );
     }
 
@@ -134,20 +134,14 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         $expectedData['left']['restaurants']  = $restaurantData1;
         $expectedData['right']['restaurants'] = $restaurantData2;
 
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaStorage->fetchRandomPizzas(2);
-        $method->willReturn($pizzaData);
-        $method->shouldBeCalled();
+        $this->pizzaStorage->fetchRandomPizzas(2)
+            ->willReturn($pizzaData)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantStorage->fetchRestaurantsByPizza('1');
-        $method->willReturn($restaurantData1);
-        $method->shouldBeCalled();
+        $this->restaurantStorage->fetchRestaurantsByPizza('1')
+            ->willReturn($restaurantData1)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantStorage->fetchRestaurantsByPizza('2');
-        $method->willReturn($restaurantData2);
-        $method->shouldBeCalled();
+        $this->restaurantStorage->fetchRestaurantsByPizza('2')
+            ->willReturn($restaurantData2)->shouldBeCalled();
 
         $this->assertEquals(
             $expectedData, $this->pizzaRepository->getPizzasForVoting()
@@ -165,17 +159,11 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         $expectedData                = $pizzaData;
         $expectedData['restaurants'] = $restaurantData;
 
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaStorage->fetchPizzaById($pizzaData['id']);
-        $method->willReturn($pizzaData);
-        $method->shouldBeCalled();
+        $this->pizzaStorage->fetchPizzaById($pizzaData['id'])
+            ->willReturn($pizzaData)->shouldBeCalled();
 
-        /** @var MethodProphecy $method */
-        $method = $this->restaurantStorage->fetchRestaurantsByPizza(
-            $pizzaData['id']
-        );
-        $method->willReturn($restaurantData);
-        $method->shouldBeCalled();
+        $this->restaurantStorage->fetchRestaurantsByPizza($pizzaData['id'])
+            ->willReturn($restaurantData)->shouldBeCalled();
 
         $this->assertEquals(
             $expectedData,
@@ -193,10 +181,8 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
 
         $expectedData = $pizzaData;
 
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaStorage->fetchPizzasSortedByRate(3, 'DESC');
-        $method->willReturn($pizzaData);
-        $method->shouldBeCalled();
+        $this->pizzaStorage->fetchPizzasSortedByRate(3, 'DESC')
+            ->willReturn($pizzaData)->shouldBeCalled();
 
         $this->assertEquals(
             $expectedData,
@@ -214,10 +200,8 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
 
         $expectedData = $pizzaData;
 
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaStorage->fetchPizzasSortedByRate(3, 'ASC');
-        $method->willReturn($pizzaData);
-        $method->shouldBeCalled();
+        $this->pizzaStorage->fetchPizzasSortedByRate(3, 'ASC')
+            ->willReturn($pizzaData)->shouldBeCalled();
 
         $this->assertEquals(
             $expectedData,
@@ -233,13 +217,8 @@ class PizzaRepositoryTest extends PHPUnit_Framework_TestCase
         $pos = $this->pizzaData[0];
         $neg = $this->pizzaData[1];
 
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaStorage->increasePos($pos);
-        $method->shouldBeCalled();
-
-        /** @var MethodProphecy $method */
-        $method = $this->pizzaStorage->increaseNeg($neg);
-        $method->shouldBeCalled();
+        $this->pizzaStorage->increasePos($pos)->shouldBeCalled();
+        $this->pizzaStorage->increaseNeg($neg)->shouldBeCalled();
 
         $this->assertTrue($this->pizzaRepository->saveVoting($pos, $neg));
     }

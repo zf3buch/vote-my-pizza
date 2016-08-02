@@ -15,7 +15,6 @@ use Pizza\Form\RestaurantPriceForm;
 use Pizza\Model\Repository\PizzaRepositoryInterface;
 use Pizza\Model\Repository\RestaurantRepositoryInterface;
 use Prophecy\Prophecy\MethodProphecy;
-use Zend\Diactoros\Response;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
@@ -122,44 +121,30 @@ abstract class AbstractTest extends PHPUnit_Framework_TestCase
         $this->container = $this->prophesize(ContainerInterface::class);
 
         if (in_array('router', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(RouterInterface::class);
-            $method->willReturn($this->router);
-            $method->shouldBeCalled();
+            $this->container->get(RouterInterface::class)
+                ->willReturn($this->router)->shouldBeCalled();
         }
 
         if (in_array('template', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(
-                TemplateRendererInterface::class
-            );
-            $method->willReturn($this->template);
-            $method->shouldBeCalled();
+            $this->container->get(TemplateRendererInterface::class)
+                ->willReturn($this->template)->shouldBeCalled();
         }
 
         if (in_array('pizzaRepository', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(
-                PizzaRepositoryInterface::class
-            );
-            $method->willReturn($this->pizzaRepository);
-            $method->shouldBeCalled();
+            $this->container->get(PizzaRepositoryInterface::class)
+                ->willReturn($this->pizzaRepository)->shouldBeCalled();
         }
 
         if (in_array('restaurantRepository', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(
-                RestaurantRepositoryInterface::class
-            );
-            $method->willReturn($this->restaurantRepository);
-            $method->shouldBeCalled();
+            $this->container->get(RestaurantRepositoryInterface::class)
+                ->willReturn($this->restaurantRepository)
+                ->shouldBeCalled();
         }
 
         if (in_array('restaurantPriceForm', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(RestaurantPriceForm::class);
-            $method->willReturn($this->restaurantPriceForm);
-            $method->shouldBeCalled();
+            $this->container->get(RestaurantPriceForm::class)
+                ->willReturn($this->restaurantPriceForm)
+                ->shouldBeCalled();
         }
     }
 
@@ -171,10 +156,8 @@ abstract class AbstractTest extends PHPUnit_Framework_TestCase
      */
     protected function prepareRenderer($templateName, $templateVars)
     {
-        /** @var MethodProphecy $method */
-        $method = $this->template->render($templateName, $templateVars);
-        $method->willReturn('Whatever');
-        $method->shouldBeCalled();
+        $this->template->render($templateName, $templateVars)
+            ->willReturn('Whatever')->shouldBeCalled();
     }
 
     /**

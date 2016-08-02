@@ -139,51 +139,33 @@ abstract class AbstractTest extends PHPUnit_Framework_TestCase
         $this->container = $this->prophesize(ContainerInterface::class);
 
         if (in_array('router', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(RouterInterface::class);
-            $method->willReturn($this->router);
-            $method->shouldBeCalled();
+            $this->container->get(RouterInterface::class)
+                ->willReturn($this->router)->shouldBeCalled();
         }
 
         if (in_array('template', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(
-                TemplateRendererInterface::class
-            );
-            $method->willReturn($this->template);
-            $method->shouldBeCalled();
+            $this->container->get(TemplateRendererInterface::class)
+                ->willReturn($this->template)->shouldBeCalled();
         }
 
         if (in_array('authService', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(
-                AuthenticationServiceInterface::class
-            );
-            $method->willReturn($this->authService);
-            $method->shouldBeCalled();
+            $this->container->get(AuthenticationServiceInterface::class)
+                ->willReturn($this->authService)->shouldBeCalled();
         }
 
         if (in_array('userRepository', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(
-                UserRepositoryInterface::class
-            );
-            $method->willReturn($this->userRepository);
-            $method->shouldBeCalled();
+            $this->container->get(UserRepositoryInterface::class)
+                ->willReturn($this->userRepository)->shouldBeCalled();
         }
 
         if (in_array('registerForm', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(RegisterForm::class);
-            $method->willReturn($this->registerForm);
-            $method->shouldBeCalled();
+            $this->container->get(RegisterForm::class)
+                ->willReturn($this->registerForm)->shouldBeCalled();
         }
 
         if (in_array('loginForm', $map)) {
-            /** @var MethodProphecy $method */
-            $method = $this->container->get(LoginForm::class);
-            $method->willReturn($this->loginForm);
-            $method->shouldBeCalled();
+            $this->container->get(LoginForm::class)
+                ->willReturn($this->loginForm)->shouldBeCalled();
         }
     }
 
@@ -195,10 +177,8 @@ abstract class AbstractTest extends PHPUnit_Framework_TestCase
      */
     protected function prepareRenderer($templateName, $templateVars)
     {
-        /** @var MethodProphecy $method */
-        $method = $this->template->render($templateName, $templateVars);
-        $method->willReturn('Whatever');
-        $method->shouldBeCalled();
+        $this->template->render($templateName, $templateVars)
+            ->willReturn('Whatever')->shouldBeCalled();
     }
 
     /**
