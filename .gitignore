@@ -1,4 +1,3 @@
-.vagrant
 .idea
 phpunit.xml
 composer.lock
