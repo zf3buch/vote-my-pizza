@@ -25,7 +25,7 @@ class ShowIntroAction
     /**
      * @var TemplateRendererInterface
      */
-    private $template;
+    private $renderer;
 
     /**
      * @var PizzaRepositoryInterface
@@ -35,14 +35,14 @@ class ShowIntroAction
     /**
      * ShowIntroAction constructor.
      *
-     * @param TemplateRendererInterface $template
+     * @param TemplateRendererInterface $renderer
      * @param PizzaRepositoryInterface  $pizzaRepository
      */
     public function __construct(
-        TemplateRendererInterface $template,
+        TemplateRendererInterface $renderer,
         PizzaRepositoryInterface $pizzaRepository
     ) {
-        $this->template        = $template;
+        $this->renderer        = $renderer;
         $this->pizzaRepository = $pizzaRepository;
     }
 
@@ -68,7 +68,7 @@ class ShowIntroAction
         ];
 
         return new HtmlResponse(
-            $this->template->render('pizza::intro', $data)
+            $this->renderer->render('pizza::intro', $data)
         );
     }
 }

@@ -27,9 +27,9 @@ class ShowVotingFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $template   = $container->get(TemplateRendererInterface::class);
+        $renderer   = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(PizzaRepositoryInterface::class);
 
-        return new ShowVotingAction($template, $repository);
+        return new ShowVotingAction($renderer, $repository);
     }
 }
