@@ -25,7 +25,7 @@ class ShowVotingAction
     /**
      * @var TemplateRendererInterface
      */
-    private $template;
+    private $renderer;
 
     /**
      * @var PizzaRepositoryInterface
@@ -35,14 +35,14 @@ class ShowVotingAction
     /**
      * ShowVotingAction constructor.
      *
-     * @param TemplateRendererInterface $template
+     * @param TemplateRendererInterface $renderer
      * @param PizzaRepositoryInterface  $pizzaRepository
      */
     public function __construct(
-        TemplateRendererInterface $template,
+        TemplateRendererInterface $renderer,
         PizzaRepositoryInterface $pizzaRepository
     ) {
-        $this->template        = $template;
+        $this->renderer        = $renderer;
         $this->pizzaRepository = $pizzaRepository;
     }
 
@@ -66,7 +66,7 @@ class ShowVotingAction
         ];
 
         return new HtmlResponse(
-            $this->template->render('pizza::voting', $data)
+            $this->renderer->render('pizza::voting', $data)
         );
     }
 }
