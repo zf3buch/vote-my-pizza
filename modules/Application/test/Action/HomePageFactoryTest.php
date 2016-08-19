@@ -29,12 +29,11 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $template = $this->prophesize(TemplateRendererInterface::class);
+        $renderer = $this->prophesize(TemplateRendererInterface::class);
 
         $this->container = $this->prophesize(ContainerInterface::class);
-        $this->container
-            ->get(TemplateRendererInterface::class)
-            ->willReturn($template);
+        $this->container->get(TemplateRendererInterface::class)
+            ->willReturn($renderer);
     }
 
     /**
