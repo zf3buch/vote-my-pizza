@@ -39,7 +39,7 @@ class ShowVotingActionTest extends AbstractTest
      */
     public function setUp()
     {
-        $this->mockTemplate();
+        $this->mockRenderer();
         $this->mockPizzaRepository();
     }
 
@@ -61,7 +61,7 @@ class ShowVotingActionTest extends AbstractTest
         $this->preparePizzaRepository($votingPizzas);
 
         $action = new ShowVotingAction();
-        $action->setTemplateRenderer($this->template->reveal());
+        $action->setTemplateRenderer($this->renderer->reveal());
         $action->setPizzaRepository($this->pizzaRepository->reveal());
 
         $serverRequest = new ServerRequest([$requestUri]);

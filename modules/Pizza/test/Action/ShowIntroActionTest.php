@@ -28,7 +28,7 @@ class ShowIntroActionTest extends AbstractTest
      * @param $topPizzas
      * @param $flopPizzas
      */
-    protected function preparePizzaRepostory($topPizzas, $flopPizzas)
+    protected function preparePizzaRepository($topPizzas, $flopPizzas)
     {
         $this->pizzaRepository->getTopPizzas()->willReturn($topPizzas)
             ->shouldBeCalled();
@@ -42,7 +42,7 @@ class ShowIntroActionTest extends AbstractTest
      */
     public function setUp()
     {
-        $this->mockTemplate();
+        $this->mockRenderer();
         $this->mockPizzaRepository();
     }
 
@@ -63,10 +63,10 @@ class ShowIntroActionTest extends AbstractTest
         $requestUri   = '/' . $lang;
 
         $this->prepareRenderer($templateName, $templateVars);
-        $this->preparePizzaRepostory($topPizzas, $flopPizzas);
+        $this->preparePizzaRepository($topPizzas, $flopPizzas);
 
         $action = new ShowIntroAction();
-        $action->setTemplateRenderer($this->template->reveal());
+        $action->setTemplateRenderer($this->renderer->reveal());
         $action->setPizzaRepository($this->pizzaRepository->reveal());
 
         $serverRequest = new ServerRequest([$requestUri]);
