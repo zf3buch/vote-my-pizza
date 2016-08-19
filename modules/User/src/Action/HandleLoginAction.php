@@ -18,7 +18,6 @@ use Zend\Authentication\Adapter\DbTable\AbstractAdapter;
 use Zend\Authentication\Adapter\DbTable\Exception\RuntimeException;
 use Zend\Authentication\Adapter\ValidatableAdapterInterface;
 use Zend\Authentication\Result;
-use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 
 /**
@@ -40,7 +39,7 @@ class HandleLoginAction
      * @param ResponseInterface      $response
      * @param callable|null          $next
      *
-     * @return HtmlResponse
+     * @return RedirectResponse|callable
      */
     public function __invoke(
         ServerRequestInterface $request,
