@@ -27,9 +27,9 @@ class ShowIntroFactory
      */
     public function __invoke(ContainerInterface $container)
     {
-        $template   = $container->get(TemplateRendererInterface::class);
+        $renderer   = $container->get(TemplateRendererInterface::class);
         $repository = $container->get(PizzaRepositoryInterface::class);
 
-        return new ShowIntroAction($template, $repository);
+        return new ShowIntroAction($renderer, $repository);
     }
 }
