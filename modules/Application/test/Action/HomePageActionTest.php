@@ -22,14 +22,14 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 class HomePageActionTest extends \PHPUnit_Framework_TestCase
 {
     /** @var TemplateRendererInterface */
-    protected $template;
+    protected $renderer;
 
     /**
      * Setup test cases
      */
     public function setUp()
     {
-        $this->template = $this->prophesize(
+        $this->renderer = $this->prophesize(
             TemplateRendererInterface::class
         );
     }
@@ -39,14 +39,12 @@ class HomePageActionTest extends \PHPUnit_Framework_TestCase
      */
     public function testResponse()
     {
-        $this->template
-            ->render(
+        $this->renderer->render(
                 'application::home-page',
                 ['welcome' => 'Willkommen zu Vote My Pizza!']
-            )
-            ->willReturn('Whatever');
+            )->willReturn('Whatever');
 
-        $homePage = new HomePageAction($this->template->reveal());
+        $homePage = new HomePageAction($this->renderer->reveal());
 
         $response = $homePage(
             new ServerRequest(['/']), new Response()
