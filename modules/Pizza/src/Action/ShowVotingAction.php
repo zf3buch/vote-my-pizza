@@ -48,7 +48,7 @@ class ShowVotingAction
         ];
 
         return new HtmlResponse(
-            $this->template->render('pizza::voting', $data)
+            $this->renderer->render('pizza::voting', $data)
         );
     }
 }
