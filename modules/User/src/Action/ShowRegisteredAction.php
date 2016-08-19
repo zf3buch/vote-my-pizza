@@ -45,7 +45,7 @@ class ShowRegisteredAction
         ];
 
         return new HtmlResponse(
-            $this->template->render('user::registered', $data)
+            $this->renderer->render('user::registered', $data)
         );
     }
 }
