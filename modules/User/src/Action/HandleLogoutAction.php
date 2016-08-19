@@ -13,7 +13,6 @@ use Application\Router\RouterAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use User\Authentication\AuthenticationServiceAwareTrait;
-use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 
 /**
@@ -34,7 +33,7 @@ class HandleLogoutAction
      * @param ResponseInterface      $response
      * @param callable|null          $next
      *
-     * @return HtmlResponse
+     * @return RedirectResponse
      */
     public function __invoke(
         ServerRequestInterface $request,

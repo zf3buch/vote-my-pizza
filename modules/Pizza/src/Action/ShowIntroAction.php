@@ -50,7 +50,7 @@ class ShowIntroAction
         ];
 
         return new HtmlResponse(
-            $this->template->render('pizza::intro', $data)
+            $this->renderer->render('pizza::intro', $data)
         );
     }
 }
