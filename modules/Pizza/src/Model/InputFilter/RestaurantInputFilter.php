@@ -10,7 +10,13 @@
 namespace Pizza\Model\InputFilter;
 
 use NumberFormatter;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\I18n\Filter\NumberFormat;
+use Zend\I18n\Validator\IsFloat;
 use Zend\InputFilter\InputFilter;
+use Zend\Validator\NotEmpty;
+use Zend\Validator\StringLength;
 
 /**
  * Class RestaurantInputFilter
@@ -30,22 +36,22 @@ class RestaurantInputFilter extends InputFilter
                 'required'   => true,
                 'filters'    => [
                     [
-                        'name' => 'StripTags',
+                        'name' => StripTags::class,
                     ],
                     [
-                        'name' => 'StringTrim',
+                        'name' => StringTrim::class,
                     ],
                 ],
                 'validators' => [
                     [
-                        'name'                   => 'NotEmpty',
+                        'name'                   => NotEmpty::class,
                         'break_chain_on_failure' => true,
                         'options'                => [
                             'message' => 'Bitte Restaurantnamen eingeben!',
                         ],
                     ],
                     [
-                        'name'    => 'StringLength',
+                        'name'    => StringLength::class,
                         'options' => [
                             'min'      => 3,
                             'max'      => 64,
@@ -62,13 +68,13 @@ class RestaurantInputFilter extends InputFilter
                 'required'   => true,
                 'filters'    => [
                     [
-                        'name' => 'StripTags',
+                        'name' => StripTags::class,
                     ],
                     [
-                        'name' => 'StringTrim',
+                        'name' => StringTrim::class,
                     ],
                     [
-                        'name'    => 'NumberFormat',
+                        'name'    => NumberFormat::class,
                         'options' => [
                             'style' => NumberFormatter::DECIMAL,
                             'type'  => NumberFormatter::TYPE_DOUBLE,
@@ -77,14 +83,14 @@ class RestaurantInputFilter extends InputFilter
                 ],
                 'validators' => [
                     [
-                        'name'                   => 'NotEmpty',
+                        'name'                   => NotEmpty::class,
                         'break_chain_on_failure' => true,
                         'options'                => [
                             'message' => 'Bitte Pizzapreis eingeben!',
                         ],
                     ],
                     [
-                        'name'    => 'IsFloat',
+                        'name'    => IsFloat::class,
                         'options' => [
                             'min'     => 0,
                             'message' => 'Nur Preisangaben erlaubt!',

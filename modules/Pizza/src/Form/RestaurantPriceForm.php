@@ -9,6 +9,8 @@
 
 namespace Pizza\Form;
 
+use Zend\Form\Element\Submit;
+use Zend\Form\Element\Text;
 use Zend\Form\Form;
 
 /**
@@ -31,7 +33,7 @@ class RestaurantPriceForm extends Form
         $this->add(
             [
                 'name'       => 'name',
-                'type'       => 'text',
+                'type'       => Text::class,
                 'options'    => [
                     'label'            => 'Name des Restaurants',
                     'label_attributes' => [
@@ -47,7 +49,7 @@ class RestaurantPriceForm extends Form
         $this->add(
             [
                 'name'       => 'price',
-                'type'       => 'text',
+                'type'       => Text::class,
                 'options'    => [
                     'label'            => 'Preis der Pizza',
                     'label_attributes' => [
@@ -63,7 +65,7 @@ class RestaurantPriceForm extends Form
         $this->add(
             [
                 'name'       => 'save_price',
-                'type'       => 'submit',
+                'type'       => Submit::class,
                 'attributes' => [
                     'class' => 'btn btn-success',
                     'value' => 'Neuen Restaurant Preis speichern',
