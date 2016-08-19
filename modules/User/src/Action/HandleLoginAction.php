@@ -18,7 +18,6 @@ use Zend\Authentication\Adapter\ValidatableAdapterInterface;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Authentication\Result;
-use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router\RouterInterface;
 
@@ -73,7 +72,7 @@ class HandleLoginAction
      * @param ResponseInterface      $response
      * @param callable|null          $next
      *
-     * @return HtmlResponse
+     * @return RedirectResponse|callable
      */
     public function __invoke(
         ServerRequestInterface $request,
