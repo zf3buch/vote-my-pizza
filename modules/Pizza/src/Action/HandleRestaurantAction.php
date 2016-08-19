@@ -14,7 +14,6 @@ use Pizza\Form\RestaurantPriceFormAwareTrait;
 use Pizza\Model\Repository\RestaurantRepositoryAwareTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 
 /**
@@ -36,7 +35,7 @@ class HandleRestaurantAction
      * @param ResponseInterface      $response
      * @param callable|null          $next
      *
-     * @return HtmlResponse
+     * @return RedirectResponse
      */
     public function __invoke(
         ServerRequestInterface $request,
