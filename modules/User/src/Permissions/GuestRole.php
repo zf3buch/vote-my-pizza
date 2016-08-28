@@ -36,6 +36,9 @@ class GuestRole extends AbstractRole
         $this->addPermission('home');
         $this->addPermission('pizza-intro');
         $this->addPermission('pizza-show');
+        $this->addPermission('pizza-rest-get-id');
+        $this->addPermission('pizza-rest-get-list');
+        $this->addPermission('pizza-rest-post');
         $this->addPermission('user-intro');
         $this->addPermission('user-handle-login');
         $this->addPermission('user-handle-register');

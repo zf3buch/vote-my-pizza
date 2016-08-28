@@ -26,6 +26,7 @@ $configManager = new ConfigManager(
         Application\ConfigProvider::class,
         I18n\ConfigProvider::class,
         Pizza\ConfigProvider::class,
+        PizzaRest\ConfigProvider::class,
         User\ConfigProvider::class,
         Bootstrap\ConfigProvider::class,
         new PhpFileProvider($pattern),

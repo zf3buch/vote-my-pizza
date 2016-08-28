@@ -47,6 +47,7 @@
             "I18n\\": "modules/I18n/src/",
             "Bootstrap\\": "modules/Bootstrap/src/",
             "Pizza\\": "modules/Pizza/src/",
+            "PizzaRest\\": "modules/PizzaRest/src/",
             "User\\": "modules/User/src/"
         }
     },
