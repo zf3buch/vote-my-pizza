@@ -68,7 +68,7 @@ class RestaurantPriceForm extends Form
                 'type'       => Submit::class,
                 'attributes' => [
                     'class' => 'btn btn-success',
-                    'value' => 'Neuen Restaurant Preis speichern',
+                    'value' => 'Neuen Restaurantpreis speichern',
                     'id'    => 'save_price',
                 ],
             ]
