@@ -13,7 +13,7 @@ return [
     'pizza_heading_worst_pizzas' => 'Flop-Pizzen',
     'pizza_heading_voting'       => 'Welche Pizza gefällt dir besser?',
     'pizza_heading_vote_now'     => 'Jetzt selber abstimmen!',
-    'pizza_heading_new_price'    => 'Neuen Restaurant Preis für <strong>%1$s</strong> speichern',
+    'pizza_heading_new_price'    => 'Neuen Restaurantpreis für <strong>%1$s</strong> speichern',
 
     'pizza_navigation_intro' => 'Pizza Intro',
     'pizza_navigation_vote'  => 'Abstimmen',
@@ -21,7 +21,7 @@ return [
     'pizza_action_vote'       => 'Abstimmen',
     'pizza_action_show_pizza' => 'Pizza anzeigen',
     'pizza_action_back_intro' => 'Zurück zur Pizza-Seite',
-    'pizza_action_new_price'  => 'Neuen Restaurant Preis speichern',
+    'pizza_action_new_price'  => 'Neuen Restaurantpreis speichern',
 
     'pizza_message_restaurant' => 'Restaurant %1$s',
     'pizza_message_costs'      => '%1$s kostet nur <strong>%2$s</strong> (Stand: %3$s)',
