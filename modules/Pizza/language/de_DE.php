@@ -9,8 +9,8 @@
 
 return [
     'pizza_heading_welcome'      => 'Willkommen zu Vote My Pizza!',
-    'pizza_heading_best_pizzas'  => 'Top Pizzen',
-    'pizza_heading_worst_pizzas' => 'Flop Pizzen',
+    'pizza_heading_best_pizzas'  => 'Top-Pizzen',
+    'pizza_heading_worst_pizzas' => 'Flop-Pizzen',
     'pizza_heading_voting'       => 'Welche Pizza gefällt dir besser?',
     'pizza_heading_vote_now'     => 'Jetzt selber abstimmen!',
     'pizza_heading_new_price'    => 'Neuen Restaurant Preis für <strong>%1$s</strong> speichern',
